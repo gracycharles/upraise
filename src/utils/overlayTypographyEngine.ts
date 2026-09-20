@@ -157,9 +157,9 @@ export function computeOverlayTypography(
   * Orthographic Glyph Guarantee: Full OpenType complex script shaping enabled. Ensure glyphs like 'வு' (Va + U vowel sign U+0BB5 U+0BC1), 'ன' (U+0BA9), 'ளி' (U+0BB3 U+0BBF) are correctly rendered as unified conjunct ligatures, never split or unrendered.
   * Auto-Scaled (${tier.toUpperCase()} tier, -${reductionPercent}% reduced for safe fit with zero content loss).
 
-🎯 FINAL DELIVERABLE MANDATE (STRICTLY 10 SECONDS & 100% LIP SYNC):
+🎯 FINAL DELIVERABLE MANDATE (STRICTLY 10 SECONDS, 100% LIP SYNC & FULL-BLEED 1080x1920):
 Deliver ONE SINGLE 1080x1920 (9:16) MP4 file (STRICTLY 10.0 SECONDS DURATION) combining ALL 3 COMPONENTS:
-[1] 9:16 Vertical Portrait Video Footage (Strictly 10 seconds native)
+[1] 9:16 Vertical Portrait Video Footage (Strictly 10s native, 1080x1920 FULL-BLEED content — strictly NO letterboxing, NO pillarboxing, NO black borders/vignette; Lanczos upscale 720x1280 sources to fill 1080x1920 completely; subject in lower 1/3rd chest-up, centered horizontally with ~15% headroom above head for outdoor sky/stars; outdoor biblical background e.g. Bethlehem hillside at sunset→starry night, NOT interior/kitchen)
 [2] Synchronized Character Voiceover & Ambient Worship Pad Audio (100% even lip movement for every single spoken word)
 [3] Centered Transparent Subtitle PNG Overlay (Confined within 760px safe width, zero box glyphs)`;
   } else {
@@ -174,9 +174,9 @@ Deliver ONE SINGLE 1080x1920 (9:16) MP4 file (STRICTLY 10.0 SECONDS DURATION) co
   * Orthographic Glyph Guarantee: Full OpenType complex script shaping enabled. Ensure glyphs like 'வு' (Va + U vowel sign U+0BB5 U+0BC1), 'ன' (U+0BA9), 'ளி' (U+0BB3 U+0BBF) are correctly rendered as unified conjunct ligatures, never split or unrendered.
   * Standard Scale (~${tamilPx}px Tamil / ~${englishPx}px English centered, zero content loss).
 
-🎯 FINAL DELIVERABLE MANDATE (STRICTLY 10 SECONDS & 100% LIP SYNC):
+🎯 FINAL DELIVERABLE MANDATE (STRICTLY 10 SECONDS, 100% LIP SYNC & FULL-BLEED 1080x1920):
 Deliver ONE SINGLE 1080x1920 (9:16) MP4 file (STRICTLY 10.0 SECONDS DURATION) combining ALL 3 COMPONENTS:
-[1] 9:16 Vertical Portrait Video Footage (Strictly 10 seconds native)
+[1] 9:16 Vertical Portrait Video Footage (Strictly 10s native, 1080x1920 FULL-BLEED content — strictly NO letterboxing, NO pillarboxing, NO black borders/vignette; Lanczos upscale 720x1280 sources to fill 1080x1920 completely; subject in lower 1/3rd chest-up, centered horizontally with ~15% headroom above head for outdoor sky/stars; outdoor biblical background e.g. Bethlehem hillside at sunset→starry night, NOT interior/kitchen)
 [2] Synchronized Character Voiceover & Ambient Worship Pad Audio (100% even lip movement for every single spoken word)
 [3] Centered Transparent Subtitle PNG Overlay (Confined within 760px safe width, zero box glyphs)`;
   }

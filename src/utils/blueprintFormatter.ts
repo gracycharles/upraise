@@ -61,6 +61,15 @@ ${b.videoPrompt}
    - Exact Spoken Script (Strictly 10.0s): "${b.audioScript}"
    - Background Audio: ${b.backgroundAudio} (Mixed at -18dB)
 3. STRICT ZERO-HALLUCINATION AUDIO ENFORCEMENT: Speak ONLY the exact scripted text above: "${b.audioScript}". No other words, no intro/outro, no unscripted commentary. Zero hallucination.
+4. TRUE 1080x1920 CONTENT MANDATE (NO BLACK BARS / FULL-BLEED):
+   - Final MP4 pixels MUST BE 1080x1920 of actual video content, never 720x1280 centered inside a 1080x1920 canvas.
+   - Strictly forbid letterboxing, pillarboxing, or black borders of any kind.
+   - If source is 720x1280, upscale with Lanczos to 1080x1920 to fill the frame completely — full-bleed vertical portrait.
+   - Verify with ffprobe: width=1080, height=1920.
+5. SHORTS FRAMING MANDATE:
+   - Subject placed in lower 1/3rd to 2/3rds of vertical frame, with ~15% headroom above head for outdoor sky/background visibility.
+   - Medium close-up chest-up, centered horizontally, face clearly visible.
+   - Background must be outdoor authentic 1st-century biblical landscape, NOT interior/kitchen, with no black vignette borders.
 
 ${typo.promptAdditionDirective}
 - Verification: Exact Unicode codepoints: ${codepoints}`;
@@ -202,7 +211,7 @@ export function generateDynamicBlueprint(item: PraiseItem): ShortsBlueprint {
     subtitles: {
       line1Tamil: cleanTamil,
       line2English: `Praise to You, ${cleanTitle}`,
-      line3Ref: `📖 ${item.reference} | ${engRef} (NKJV)`
+      line3Ref: `📖 ${item.reference} | ${engRef}`
     },
     seo: {
       title: `Short #${item.id} | ${cleanTamil} | Praise to You, ${cleanTitle} | Gracy’s Biblical Echoes`,

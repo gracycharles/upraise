@@ -61,7 +61,7 @@ function enrichBlueprintWithExpressionsAndNKJV(raw: ShortsBlueprint): ShortsBlue
       ...raw.subtitles,
       line1Tamil: tamilTextClean,
       line2English: englishTextNKJV,
-      line3Ref: `${raw.tamilRef} | ${raw.englishRef} (NKJV)`
+      line3Ref: `${raw.tamilRef} | ${raw.englishRef}`
     },
     seo: {
       ...raw.seo,
