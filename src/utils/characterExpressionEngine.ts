@@ -256,12 +256,11 @@ export function generateCharacterExpression(blueprint: ShortsBlueprint): Charact
  * Weaves the character expression and scene direction seamlessly into the video prompt.
  */
 export function buildInculcatedVideoPrompt(blueprint: ShortsBlueprint, expr: CharacterExpression): string {
-  // If the prompt already has detailed emotional cues, we append the specific micro-expression direction
-  return `A cinematic 8k video set in 30 AD Judea/Galilee (9:16 vertical). A historical biblical character: ${blueprint.character}. 
-SCENE & CHARACTER DIRECTION:
+  return `A cinematic 8k video set in 30 AD Judea/Galilee (9:16 vertical, 10s native). Historical biblical character: ${blueprint.character}. 
+SCENE & DIRECTION:
 - Facial Expression: ${expr.expression}
 - Posture & Gesture: ${expr.gesturePosture}
+- Setting & Atmosphere: In ${blueprint.location}. ${expr.sceneAtmosphere}
 - Emotional & Theological Context: ${expr.theologicalMood}
-- Atmosphere & Setting: In ${blueprint.location}. ${expr.sceneAtmosphere}
-Historical authenticity: 1st-century coarse-weave linen and wool garments, natural skin textures, shallow depth of field, dramatic cinematic lighting, photorealistic, emotive storytelling, 8k resolution. --ar 9:16 --v 6.0`;
+Historical authenticity: 1st-century coarse-weave linen garments, natural skin textures, shallow depth of field, dramatic cinematic lighting, photorealistic.`;
 }

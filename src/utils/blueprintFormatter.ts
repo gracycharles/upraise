@@ -39,7 +39,7 @@ export function formatVideoGenerationOnlyText(b: ShortsBlueprint): string {
   return `Short #${b.id}: ${b.tamilTitle}
 Tamil Text: ${b.tamilText} (${b.tamilRef})
 Biblical English (NKJV): ${b.englishText} (${b.englishRef})
-${b.nkjvText ? `📖 Scripture Verse (NKJV): "${b.nkjvText}"\n` : ''}⏱ Target Duration: Strictly 11 seconds (9:16 Vertical Portrait - 1080x1920)
+${b.nkjvText ? `📖 Scripture Verse (NKJV): "${b.nkjvText}"\n` : ''}⏱ Target Duration: Strictly 10 seconds (9:16 Vertical Portrait - 1080x1920)
 
 On-Screen Biblical Character:
 ${b.character}
@@ -55,12 +55,12 @@ ${expr ? `Atmosphere: ${expr.sceneAtmosphere}\n` : ''}
 ${b.videoPrompt}
 
 🎬 KEY PRODUCTION MANDATES:
-1. STRICT 11-SECOND DURATION & 9:16 VERTICAL FORMAT: Video duration MUST be strictly 11.0 seconds in 9:16 vertical portrait format (1080x1920 resolution for YouTube Shorts).
-2. SIMULTANEOUS SYNCHRONIZED VIDEO & AUDIO (100% EVEN LIP SYNC): Generate video visuals and character spoken voiceover audio at the exact same time. The character's lip movements MUST be 100% synchronized and even throughout all 11 seconds — articulating every single word without skipping, lagging, or trailing off while audio sounds.
+1. STRICT 10-SECOND DURATION & 9:16 VERTICAL FORMAT: Video duration MUST be strictly 10.0 seconds in 9:16 vertical portrait format (1080x1920 resolution for YouTube Shorts).
+2. SIMULTANEOUS SYNCHRONIZED VIDEO & AUDIO (100% EVEN LIP SYNC): Generate video visuals and character spoken voiceover audio at the exact same time. The character's lip movements MUST be 100% synchronized and even throughout all 10 seconds — articulating every single word without skipping, lagging, or trailing off while audio sounds.
    - Voice Profile: ${b.voiceProfile}
-   - Exact Spoken Script (Strictly 11.0s): "${b.audioScript}"
+   - Exact Spoken Script (Strictly 10.0s): "${b.audioScript}"
    - Background Audio: ${b.backgroundAudio} (Mixed at -18dB)
-3. STRICT ZERO-HALLUCINATION AUDIO ENFORCEMENT: The spoken voiceover MUST read ONLY the exact scripted text above. Speak ONLY the exact Tamil praise followed by the exact English praise line. Absolutely NO extra words, NO intro/outro, NO unscripted theological commentary, NO spontaneous exegesis, NO reading unprompted background scripture. Zero hallucination.
+3. STRICT ZERO-HALLUCINATION AUDIO ENFORCEMENT: Speak ONLY the exact scripted text above: "${b.audioScript}". No other words, no intro/outro, no unscripted commentary. Zero hallucination.
 
 ${typo.promptAdditionDirective}
 - Verification: Exact Unicode codepoints: ${codepoints}`;
@@ -75,11 +75,12 @@ export function formatSubtitlesOnlyText(b: ShortsBlueprint): string {
 
   return `PROMPT ADDITION (ON-SCREEN TEXT OVERLAY - SEPARATE PNG GENERATION):
 Generate a separate 1080x1920 transparent PNG overlay:
-- Line 1 (Tamil, #FFC107, ~${typo.tamilPx}px, center): "${b.subtitles.line1Tamil}"
-- Line 2 (English, #F8F9FA, ~${typo.englishPx}px): "${b.subtitles.line2English}"
-- Line 3 (Ref, #A8A29E, ~${typo.refPx}px): "${b.subtitles.line3Ref}"
+- Line 1 (Tamil, Gold #FFC107, ~${typo.tamilPx}px, center): "${b.subtitles.line1Tamil}"
+- Line 2 (English, White #F8F9FA, ~${typo.englishPx}px): "${b.subtitles.line2English}"
+- Line 3 (Ref, Stone Gray #A8A29E, ~${typo.refPx}px): "${b.subtitles.line3Ref}" — DUAL RUN: Render Tamil ref part in Tamil font (DroidSansTamil/Noto Sans Tamil) and English part in Latin font (DejaVuSans) as one centered horizontal block. Prevents box glyphs (□□□□).
+- TTF Selection & Content Auto-Sizing: Generator selects TTF fonts freely (e.g. DroidSansTamil Bold for Tamil, DejaVuSans Bold for English) and auto-scales font sizes dynamically based on content length/density so all text fits cleanly inside 760px safe inner width with zero clipping or text loss.
 - Typography, Placement & Safe Bounds: Centered at Y:50% strictly within 760px safe inner width (160px horizontal padding on left & right). Confine all text strictly within this boundary so YouTube Shorts player UI and phone display edges NEVER clip or overlap the first or last letters.
-- Orthographic: Full OpenType complex script shaping enabled. Ensure glyphs like 'வு' (Va + U vowel sign U+0BB5 U+0BC1), 'ன' (U+0BA9), 'ளி' (U+0BB3 U+0BBF) render as unified conjunct ligatures, preserving all pulli (virama) dots and vowel modifiers.
+- Orthographic: Full OpenType complex script shaping enabled for 'வு', 'ன', 'ளி' ligatures.
 - Verification: Exact Unicode codepoints: ${codepoints}
 - Auto-Scaled Typography (${typo.tierLabel}):
   * Font Sizes: Tamil: ${typo.tamilFontSizeCanvas} | English: ${typo.englishFontSizeCanvas} | Ref: ${typo.refFontSizeCanvas}
@@ -112,8 +113,8 @@ ${typo.promptAdditionDirective}
 export function formatAudioOnlyText(b: ShortsBlueprint): string {
   return `🎙 AUDIO & VOICEOVER PROMPT (STRICT ZERO-HALLUCINATION SCRIPT & 100% EVEN LIP SYNC):
 - Voice Profile: ${b.voiceProfile}
-- Voiceover Script (Strictly 11.0s): "${b.audioScript}"
-- CRITICAL AUDIO & LIP SYNC DIRECTIVE: Read ONLY the exact scripted text above paced evenly across strictly 11 seconds. Lip movement MUST be 100% even and continuous for every single spoken syllable, articulating every word fully without leaving any word unarticulated or frozen while audio plays. NO EXTRA WORDS, NO INTRO/OUTRO, NO THEOLOGICAL COMMENTARY. Speak only the exact Tamil praise followed by the exact English praise line as scripted. Zero hallucinated sentences.
+- Voiceover Script (Strictly 10.0s): "${b.audioScript}"
+- CRITICAL AUDIO & LIP SYNC DIRECTIVE: Read ONLY the exact scripted text above paced evenly across strictly 10 seconds. Lip movement MUST be 100% even and continuous for every single spoken syllable, articulating every word fully without leaving any word unarticulated or frozen while audio plays. NO EXTRA WORDS, NO INTRO/OUTRO, NO THEOLOGICAL COMMENTARY. Speak only the exact Tamil praise followed by the exact English praise line as scripted. Zero hallucinated sentences.
 - Background Audio: ${b.backgroundAudio}`;
 }
 

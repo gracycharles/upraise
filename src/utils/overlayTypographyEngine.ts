@@ -151,32 +151,34 @@ export function computeOverlayTypography(
 - Composite a separate 1080x1920 transparent PNG text overlay onto the generated 9:16 MP4:
   * Line 1 (Tamil, Gold #FFC107, ~${tamilPx}px, center): "${line1Tamil}"
   * Line 2 (English, White #F8F9FA, ~${englishPx}px): "${line2English}"
-  * Line 3 (Ref, Stone Gray #A8A29E, ~${refPx}px): "${line3Ref}"
-  * Typography, Placement & Safe Bounds: Centered at Y:50% strictly within 760px safe inner width (160px left & right padding margins). Confine all text strictly within this boundary so YouTube Shorts player UI and phone display edges NEVER clip or overlap the first or last letters. Font styles and proportional scaling are automatically adjusted based on content size.
+  * Line 3 (Ref, Stone Gray #A8A29E, ~${refPx}px): "${line3Ref}" — DUAL RUN: Render Tamil ref part in Tamil font (DroidSansTamil/Noto Sans Tamil) and English part in Latin font (DejaVuSans) as one centered horizontal block. Prevents box glyphs (□□□□).
+  * TTF Selection & Content Auto-Sizing: Generator selects TTF fonts freely (e.g. DroidSansTamil Bold, DejaVuSans Bold) and auto-scales font sizes dynamically based on content size/length so all text fits cleanly inside 760px safe inner width with zero clipping or text loss.
+  * Typography, Placement & Safe Bounds: Centered at Y:50% strictly within 760px safe inner width (160px left & right padding margins) so YouTube Shorts player UI never overlaps text.
   * Orthographic Glyph Guarantee: Full OpenType complex script shaping enabled. Ensure glyphs like 'வு' (Va + U vowel sign U+0BB5 U+0BC1), 'ன' (U+0BA9), 'ளி' (U+0BB3 U+0BBF) are correctly rendered as unified conjunct ligatures, never split or unrendered.
   * Auto-Scaled (${tier.toUpperCase()} tier, -${reductionPercent}% reduced for safe fit with zero content loss).
 
-🎯 FINAL DELIVERABLE MANDATE (STRICTLY 11 SECONDS & 100% LIP SYNC):
-Deliver ONE SINGLE 1080x1920 (9:16) MP4 file (STRICTLY 11.0 SECONDS DURATION) combining ALL 3 COMPONENTS:
-[1] 9:16 Vertical Portrait Video Footage (Strictly 11 seconds)
+🎯 FINAL DELIVERABLE MANDATE (STRICTLY 10 SECONDS & 100% LIP SYNC):
+Deliver ONE SINGLE 1080x1920 (9:16) MP4 file (STRICTLY 10.0 SECONDS DURATION) combining ALL 3 COMPONENTS:
+[1] 9:16 Vertical Portrait Video Footage (Strictly 10 seconds native)
 [2] Synchronized Character Voiceover & Ambient Worship Pad Audio (100% even lip movement for every single spoken word)
-[3] Centered Transparent Subtitle PNG Overlay (Confined within 760px safe width)`;
+[3] Centered Transparent Subtitle PNG Overlay (Confined within 760px safe width, zero box glyphs)`;
   } else {
     promptAdditionDirective = `POST-PRODUCTION TEXT OVERLAY SPECIFICATION (CODE COMPOSITING):
 - DO NOT render or burn any text directly into the video pixels. Keep the generated 9:16 video plate clean.
 - Composite a separate 1080x1920 transparent PNG text overlay onto the generated 9:16 MP4:
   * Line 1 (Tamil, Gold #FFC107, ~${tamilPx}px, center): "${line1Tamil}"
   * Line 2 (English, White #F8F9FA, ~${englishPx}px): "${line2English}"
-  * Line 3 (Ref, Stone Gray #A8A29E, ~${refPx}px): "${line3Ref}"
-  * Typography, Placement & Safe Bounds: Centered at Y:50% strictly within 760px safe inner width (160px left & right padding margins). Confine all text strictly within this boundary so YouTube Shorts player UI and phone display edges NEVER clip or overlap the first or last letters. Font styles and proportional scaling are automatically adjusted based on content size.
+  * Line 3 (Ref, Stone Gray #A8A29E, ~${refPx}px): "${line3Ref}" — DUAL RUN: Render Tamil ref part in Tamil font (DroidSansTamil/Noto Sans Tamil) and English part in Latin font (DejaVuSans) as one centered horizontal block. Prevents box glyphs (□□□□).
+  * TTF Selection & Content Auto-Sizing: Generator selects TTF fonts freely (e.g. DroidSansTamil Bold, DejaVuSans Bold) and auto-scales font sizes dynamically based on content size/length so all text fits cleanly inside 760px safe inner width with zero clipping or text loss.
+  * Typography, Placement & Safe Bounds: Centered at Y:50% strictly within 760px safe inner width (160px left & right padding margins) so YouTube Shorts player UI never overlaps text.
   * Orthographic Glyph Guarantee: Full OpenType complex script shaping enabled. Ensure glyphs like 'வு' (Va + U vowel sign U+0BB5 U+0BC1), 'ன' (U+0BA9), 'ளி' (U+0BB3 U+0BBF) are correctly rendered as unified conjunct ligatures, never split or unrendered.
   * Standard Scale (~${tamilPx}px Tamil / ~${englishPx}px English centered, zero content loss).
 
-🎯 FINAL DELIVERABLE MANDATE (STRICTLY 11 SECONDS & 100% LIP SYNC):
-Deliver ONE SINGLE 1080x1920 (9:16) MP4 file (STRICTLY 11.0 SECONDS DURATION) combining ALL 3 COMPONENTS:
-[1] 9:16 Vertical Portrait Video Footage (Strictly 11 seconds)
+🎯 FINAL DELIVERABLE MANDATE (STRICTLY 10 SECONDS & 100% LIP SYNC):
+Deliver ONE SINGLE 1080x1920 (9:16) MP4 file (STRICTLY 10.0 SECONDS DURATION) combining ALL 3 COMPONENTS:
+[1] 9:16 Vertical Portrait Video Footage (Strictly 10 seconds native)
 [2] Synchronized Character Voiceover & Ambient Worship Pad Audio (100% even lip movement for every single spoken word)
-[3] Centered Transparent Subtitle PNG Overlay (Confined within 760px safe width)`;
+[3] Centered Transparent Subtitle PNG Overlay (Confined within 760px safe width, zero box glyphs)`;
   }
 
   // Compositing specs text

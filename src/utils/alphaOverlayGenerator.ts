@@ -118,10 +118,42 @@ export async function generateAlphaOverlayBlob(blueprint: ShortsBlueprint): Prom
 
   startY += gap2;
 
-  // 3. Render Ref (Muted Stone)
+  // 3. Render Ref (Muted Stone with Mixed-Script Dual-Run Fix)
   ctx.fillStyle = '#D6D3D1';
-  ctx.font = `600 ${typo.refPx}px monospace, sans-serif`;
-  ctx.fillText(refLine, 540, startY + (totalRefH / 2));
+  const latinFontStack = `600 ${typo.refPx}px "DejaVu Sans", monospace, sans-serif`;
+  const tamilRefFontStack = `600 ${typo.refPx}px ${tamilFontStack}`;
+
+  if (refLine.includes('|')) {
+    const parts = refLine.split('|');
+    const tamilPart = parts[0].trim() + ' | ';
+    const englishPart = parts.slice(1).join('|').trim();
+
+    ctx.font = tamilRefFontStack;
+    const wTamil = ctx.measureText(tamilPart).width;
+
+    ctx.font = latinFontStack;
+    const wEnglish = ctx.measureText(englishPart).width;
+
+    const totalWidth = wTamil + wEnglish;
+    const startX = 540 - (totalWidth / 2);
+
+    ctx.textAlign = 'left';
+
+    // Render Tamil part with Tamil font
+    ctx.font = tamilRefFontStack;
+    ctx.fillText(tamilPart, startX, startY + (totalRefH / 2));
+
+    // Render English part with Latin font
+    ctx.font = latinFontStack;
+    ctx.fillText(englishPart, startX + wTamil, startY + (totalRefH / 2));
+
+    ctx.textAlign = 'center'; // Reset alignment
+  } else {
+    // Single language fallback
+    const isTamil = /[\u0B80-\u0BFF]/.test(refLine);
+    ctx.font = isTamil ? tamilRefFontStack : latinFontStack;
+    ctx.fillText(refLine, 540, startY + (totalRefH / 2));
+  }
 
   return new Promise((resolve, reject) => {
     canvas.toBlob((blob) => {
