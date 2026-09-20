@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .font-tamil-overlay {
+    font-family: 'Droid Sans Tamil', 'Noto Sans Tamil', 'Mukta Malar', sans-serif;
+  }
+}

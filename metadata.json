@@ -1,0 +1,8 @@
+{
+  "name": "Gracy’s Biblical Echoes",
+  "description": "Welcome to Gracy’s Biblical Echoes (@GracysBiblicalEchoes), hosted by Gracy. Step back in time to 30 AD and experience the scriptures through cinematic, historically immersive visuals and heartfelt audio for Tamil and Biblical English praises.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
