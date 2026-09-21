@@ -157,28 +157,48 @@ export function computeOverlayTypography(
 
   const tamilSplit = computeSplitTamilLines(line1Tamil);
 
+  // Parse line3Ref into Tamil part, separator, and English part
+  const parseRefParts = (rawRef: string) => {
+    // rawRef might be "📖 வெளி. 1:8 | Revelation 1:8" or "வெளி. 1:8 | Revelation 1:8"
+    const cleaned = rawRef.replace(/^📖\s*/, '').trim();
+    const pipeIdx = cleaned.indexOf('|');
+    if (pipeIdx !== -1) {
+      return {
+        tamilPart: cleaned.slice(0, pipeIdx).trim(),
+        separator: ' | ',
+        englishPart: cleaned.slice(pipeIdx + 1).trim()
+      };
+    }
+    return {
+      tamilPart: cleaned,
+      separator: '',
+      englishPart: ''
+    };
+  };
+
+  const refParts = parseRefParts(line3Ref);
+
   // Specific directive for the Video Gen prompt addition (Text Overlay & Single Master Output)
   const buildOverlayDirective = (scaledNote: string) => {
-    const autoScaleInstruction = reductionPercent > 0
-      ? `Auto-scale: start Tamil ${tamilPx}px (-${reductionPercent}% reduced), min 32px. If width>760, wrap to 2 lines at space.${
-          tamilSplit ? ` Tamil line 1: "${tamilSplit.line1}" Line 2: "${tamilSplit.line2}"` : ''
-        }`
-      : `Auto-scale: start Tamil 48px (-17% reduced), min 32px. If width>760, wrap to 2 lines at space.${
-          tamilSplit ? ` Tamil line 1: "${tamilSplit.line1}" Line 2: "${tamilSplit.line2}"` : ''
-        }`;
+    const tamilLinesJson = tamilSplit
+      ? JSON.stringify([tamilSplit.line1, tamilSplit.line2])
+      : JSON.stringify([line1Tamil]);
 
-    return `SUBTITLE OVERLAY BURNING & COMPOSITING CONSTRAINTS:
-- Burn in subtitles centered at Y 50% within 9:16 portrait frame.
-- Overlay constraints:
-    * Safe width = 760px, left/right padding 160px — NO text outside safe zone.
-    * ${autoScaleInstruction}
-    * Clean typography with 2px shadow (0,0,0,180), NO solid black background box.
-    * Tamil font: DroidSansTamil-Bold, English: DejaVuSans-Bold, Ref: dual-font run.
-    * Center at Y 50%, X clamped to safe bounds.
-- Content to composite in final 1080x1920 video (${scaledNote}):
-    * Line 1 (Tamil, Gold #FFC107, ~${tamilPx}px, center): "${line1Tamil}"
-    * Line 2 (English, White #F8F9FA, ~${englishPx}px): "${line2English}"
-    * Line 3 (Ref, Stone Gray #A8A29E, ~${refPx}px): "${line3Ref}" — DUAL RUN: Render Tamil ref part in DroidSansTamil-Bold and English part in DejaVuSans-Bold as one centered horizontal block. Prevents box glyphs (□□□□).
+    return `SUBTITLE OVERLAY BURNING & COMPOSITING CONSTRAINTS (STRICT):
+- Render engine: Pillow with anchor="mm" (middle-middle) or anchor="lm" (left-middle) for dual-run. FORBID manual x = 540 - w/2 using textbbox width only (prevents font bearing offset).
+- For single-script lines (Tamil line 1-2 & English line 3): draw at (540, y_mid) with anchor="mm", fill + 2px shadow (0,0,0,180) at same anchor.
+- For dual-script reference line: MUST be a single centered block rendered with textlength (advance), NOT bbox width:
+    * Tamil part "${refParts.tamilPart}" in DroidSansTamil-Bold ${refPx}px
+    * Separator "${refParts.separator || ' | '}" + English "${refParts.englishPart}" in DejaVuSans-Bold ${refPx}px
+    * Calculation: total_advance = font_tamil.getlength(tamil_part) + font_eng.getlength(separator + eng_part). Start x = 540 - total_advance/2.
+    * Draw Tamil part with anchor="lm" at (x, y_ref). Then draw English part with anchor="lm" at (x + font_tamil.getlength(tamil_part), y_ref).
+    * Eliminates both box glyphs (□□□□) and bearing drift.
+- Symmetry mandate: After rendering, assert abs( (x_start) - (1080 - (x_start + total_advance)) ) < 2px. If fail, re-center.
+- Safe zone: 160px left/right padding (760px safe width), but optical centering takes precedence — never use max(160, ...) to shift left.
+- Typography & Content to composite (${scaledNote}):
+    * Tamil Lines (Gold #FFC107, ${tamilPx}px, anchor="mm"): split as ${tamilLinesJson}
+    * English Line (White #F8F9FA, ${englishPx}px, anchor="mm"): "${line2English}"
+    * Reference Line (Stone Gray #A8A29E, ${refPx}px, dual-run anchor="lm"): Tamil "${refParts.tamilPart}" + "${refParts.separator || ' | '}" + English "${refParts.englishPart}"
 - Final encode: H.264 via imageio_ffmpeg libx264 (width=1080, height=1920).`;
   };
 
