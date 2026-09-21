@@ -62,38 +62,24 @@ export default function App() {
     };
   }, []);
 
-  // Lock viewport: disable zoom-in, zoom-out, and horizontal shaking/drifting
+  // Prevent accidental multi-touch pinch-zoom and keyboard zoom shortcuts without blocking natural scrolling
   useEffect(() => {
-    // Prevent Safari/WebKit gesture zoom
-    const handleGesture = (e: Event) => {
-      e.preventDefault();
-    };
-
-    // Prevent desktop trackpad ctrl+wheel zoom
-    const handleWheel = (e: WheelEvent) => {
-      if (e.ctrlKey) {
-        e.preventDefault();
-      }
-    };
-
-    // Prevent multi-touch pinch zooming
+    // Prevent multi-touch pinch zoom
     const handleTouchMove = (e: TouchEvent) => {
       if (e.touches && e.touches.length > 1) {
-        e.preventDefault();
-      }
-    };
-
-    // Prevent double-tap zoom on mobile
-    let lastTouchTime = 0;
-    const handleTouchEnd = (e: TouchEvent) => {
-      const currentTime = Date.now();
-      if (currentTime - lastTouchTime <= 300) {
-        const target = e.target as HTMLElement;
-        if (!['INPUT', 'TEXTAREA', 'SELECT'].includes(target?.tagName || '')) {
+        if (e.cancelable) {
           e.preventDefault();
         }
       }
-      lastTouchTime = currentTime;
+    };
+
+    // Prevent trackpad / Ctrl+wheel zoom
+    const handleWheel = (e: WheelEvent) => {
+      if (e.ctrlKey) {
+        if (e.cancelable) {
+          e.preventDefault();
+        }
+      }
     };
 
     // Prevent zoom keyboard shortcuts (Ctrl/Cmd + '+', '-', '0', '=')
@@ -104,20 +90,12 @@ export default function App() {
     };
 
     window.addEventListener('wheel', handleWheel, { passive: false });
-    document.addEventListener('gesturestart', handleGesture);
-    document.addEventListener('gesturechange', handleGesture);
-    document.addEventListener('gestureend', handleGesture);
     document.addEventListener('touchmove', handleTouchMove, { passive: false });
-    document.addEventListener('touchend', handleTouchEnd, { passive: false });
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
       window.removeEventListener('wheel', handleWheel);
-      document.removeEventListener('gesturestart', handleGesture);
-      document.removeEventListener('gesturechange', handleGesture);
-      document.removeEventListener('gestureend', handleGesture);
       document.removeEventListener('touchmove', handleTouchMove);
-      document.removeEventListener('touchend', handleTouchEnd);
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);

@@ -41,7 +41,21 @@ export const BatchExportModal: React.FC<BatchExportModalProps> = ({
     return true;
   });
 
-  const exportHeader = exportMode === 'english-only' || exportMode === 'tamil-only' || exportMode === 'nkjv-only'
+  const getExportModeLabel = (mode: typeof exportMode): string => {
+    switch (mode) {
+      case 'all': return 'Full Blueprint (Video + YouTube)';
+      case 'video-only': return '1) Video Generation Alone';
+      case 'youtube-only': return '2) YouTube Alone (SEO & Tags)';
+      case 'expressions-only': return '3) Character Expressions & Inculcated Scene Prompts';
+      case 'nkjv-only': return '4) NKJV Canonical Verses & Titles';
+      case 'english-only': return 'English Titles Only';
+      case 'tamil-only': return 'Tamil Descriptions Only';
+      case 'verification-only': return 'Scripture Reference & Translation Verification';
+      default: return 'Full Blueprint';
+    }
+  };
+
+  const exportHeader = (exportMode === 'english-only' || exportMode === 'tamil-only' || exportMode === 'nkjv-only')
     ? ''
     : `================================================================================
 GRACY’S BIBLICAL ECHOES — YOUTUBE SHORTS PRODUCTION BLUEPRINTS
@@ -53,19 +67,7 @@ Atmosphere: 30 AD Authentic Judean & Galilean Cinematic Visuals
 Video Pipeline: 9:16 Clean Plate Video + Separate 1080x1920 Alpha Overlay PNG Pipeline (Zero Text in Video, Exact Unicode, No Drop-Shadow)
 Key Anchor: "Praise be to You, Abba, Father."
 Bible Translation: NKJV (New King James Version)
-Export Mode: ${
-  exportMode === 'all' 
-    ? 'Full Blueprint (Video + YouTube)' 
-    : exportMode === 'video-only' 
-    ? '1) Video Generation Alone' 
-    : exportMode === 'youtube-only'
-    ? '2) YouTube Alone (SEO & Tags)'
-    : exportMode === 'expressions-only'
-    ? '3) Character Expressions & Inculcated Scene Prompts'
-    : exportMode === 'nkjv-only'
-    ? '4) NKJV Canonical Verses & Titles'
-    : 'Scripture Reference & Translation Verification'
-}
+Export Mode: ${getExportModeLabel(exportMode)}
 Batch: ${selectedBatch} (${filteredBlueprints.length} Blueprints)
 ================================================================================\n\n`;
 
