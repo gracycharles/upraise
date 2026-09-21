@@ -143,14 +143,36 @@ export function computeOverlayTypography(
   const safeMarginWidth = 'Max-width 760px YouTube Shorts Safe Zone (160px horizontal padding on left & right to prevent UI overlay clipping)';
   const lineHeight = tier === 'compact' ? '1.30' : tier === 'medium' ? '1.25' : '1.22';
 
+  // Compute pre-split lines for Tamil if wrap is needed (split at natural space)
+  const computeSplitTamilLines = (text: string): { line1: string; line2: string } | null => {
+    const trimmed = text.trim();
+    const words = trimmed.split(/\s+/);
+    if (words.length <= 1) return null;
+    const mid = Math.ceil(words.length / 2);
+    return {
+      line1: words.slice(0, mid).join(' '),
+      line2: words.slice(mid).join(' ')
+    };
+  };
+
+  const tamilSplit = computeSplitTamilLines(line1Tamil);
+
   // Specific directive for the Video Gen prompt addition (Text Overlay & Single Master Output)
-  const buildOverlayDirective = (scaledNote: string) => `POST-PRODUCTION OVERLAY — DO NOT BURN IN VIDEO MODEL:
+  const buildOverlayDirective = (scaledNote: string) => {
+    const autoScaleInstruction = reductionPercent > 0
+      ? `Auto-scale: start Tamil ${tamilPx}px (-${reductionPercent}% reduced), min 32px. If width>760, wrap to 2 lines at space.${
+          tamilSplit ? ` Tamil line 1: "${tamilSplit.line1}" Line 2: "${tamilSplit.line2}"` : ''
+        }`
+      : `Auto-scale: start Tamil 48px (-17% reduced), min 32px. If width>760, wrap to 2 lines at space.${
+          tamilSplit ? ` Tamil line 1: "${tamilSplit.line1}" Line 2: "${tamilSplit.line2}"` : ''
+        }`;
+
+    return `POST-PRODUCTION OVERLAY — DO NOT BURN IN VIDEO MODEL:
 - Generate clean 9:16 plate ONLY, no text.
 - I will composite PNG in code with PIL.
 - Overlay constraints:
     * Safe width = 760px, left/right padding 160px — NO text outside.
-    * Auto-scale: start Tamil 58px, reduce until width <=760, min 28px.
-    * If still >760, wrap to 2 lines at natural word break.
+    * ${autoScaleInstruction}
     * No black box, only 2px shadow (0,0,0,180).
     * Tamil font: DroidSansTamil-Bold, English: DejaVuSans-Bold, Ref: split fonts.
     * Center at Y 50%, X clamped to safe bounds.
@@ -158,13 +180,8 @@ export function computeOverlayTypography(
     * Line 1 (Tamil, Gold #FFC107, ~${tamilPx}px, center): "${line1Tamil}"
     * Line 2 (English, White #F8F9FA, ~${englishPx}px): "${line2English}"
     * Line 3 (Ref, Stone Gray #A8A29E, ~${refPx}px): "${line3Ref}" — DUAL RUN: Render Tamil ref part in DroidSansTamil-Bold and English part in DejaVuSans-Bold as one centered horizontal block. Prevents box glyphs (□□□□).
-- Final encode: H.264 via imageio_ffmpeg libx264, not system ffmpeg libopenh264.
-
-🎯 FINAL DELIVERABLE MANDATE (STRICTLY 10 SECONDS, 100% LIP SYNC & FULL-BLEED 1080x1920):
-Deliver ONE SINGLE 1080x1920 (9:16) MP4 file (STRICTLY 10.0 SECONDS DURATION) combining ALL 3 COMPONENTS:
-[1] Clean 9:16 Vertical Portrait Video Footage (Strictly 10s native, 1080x1920 FULL-BLEED content — strictly NO letterboxing, NO pillarboxing, NO black borders/vignette; Lanczos upscale 720x1280 sources to fill 1080x1920 completely; subject in lower 1/3rd chest-up, centered horizontally with ~15% headroom above head for outdoor sky/stars; outdoor biblical background e.g. Bethlehem hillside at sunset→starry night, NOT interior/kitchen; CLEAN PLATE ONLY, NO TEXT BURNED IN)
-[2] Synchronized Character Voiceover & Ambient Worship Pad Audio (100% even lip movement for every single spoken word)
-[3] Centered Transparent Subtitle PNG Overlay (Composited via PIL inside 760px safe width, zero box glyphs, only 2px shadow (0,0,0,180), encoded with imageio_ffmpeg libx264)`;
+- Final encode: H.264 via imageio_ffmpeg libx264, not system ffmpeg libopenh264.`;
+  };
 
   let promptAdditionDirective: string;
   if (reductionPercent > 0) {

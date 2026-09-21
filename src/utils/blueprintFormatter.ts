@@ -56,17 +56,16 @@ ${b.videoPrompt}
 
 🎬 KEY PRODUCTION MANDATES:
 1. STRICT 10-SECOND DURATION & 9:16 VERTICAL FORMAT: Video duration MUST be strictly 10.0 seconds in 9:16 vertical portrait format (1080x1920 resolution for YouTube Shorts).
-2. SIMULTANEOUS SYNCHRONIZED VIDEO & AUDIO (100% EVEN LIP SYNC): Generate video visuals and character spoken voiceover audio at the exact same time. The character's lip movements MUST be 100% synchronized and even throughout all 10 seconds — articulating every single word without skipping, lagging, or trailing off while audio sounds.
+2. SIMULTANEOUS SYNCHRONIZED VIDEO & AUDIO (100% EVEN LIP SYNC & ZERO HALLUCINATION): Generate video visuals and character voiceover simultaneously. Lip movements MUST be 100% synchronized and even throughout all 10 seconds, articulating every single word. Speak ONLY the exact scripted text below (no intro/outro, no unscripted commentary):
    - Voice Profile: ${b.voiceProfile}
    - Exact Spoken Script (Strictly 10.0s): "${b.audioScript}"
    - Background Audio: ${b.backgroundAudio} (Mixed at -18dB)
-3. STRICT ZERO-HALLUCINATION AUDIO ENFORCEMENT: Speak ONLY the exact scripted text above: "${b.audioScript}". No other words, no intro/outro, no unscripted commentary. Zero hallucination.
-4. TRUE 1080x1920 CONTENT MANDATE (NO BLACK BARS / FULL-BLEED):
+3. TRUE 1080x1920 CONTENT MANDATE (NO BLACK BARS / FULL-BLEED):
    - Final MP4 pixels MUST BE 1080x1920 of actual video content, never 720x1280 centered inside a 1080x1920 canvas.
    - Strictly forbid letterboxing, pillarboxing, or black borders of any kind.
    - If source is 720x1280, upscale with Lanczos to 1080x1920 to fill the frame completely — full-bleed vertical portrait.
    - Verify with ffprobe: width=1080, height=1920.
-5. SHORTS FRAMING MANDATE:
+4. SHORTS FRAMING MANDATE:
    - Subject placed in lower 1/3rd to 2/3rds of vertical frame, with ~15% headroom above head for outdoor sky/background visibility.
    - Medium close-up chest-up, centered horizontally, face clearly visible.
    - Background must be outdoor authentic 1st-century biblical landscape, NOT interior/kitchen, with no black vignette borders.
@@ -82,21 +81,7 @@ export function formatSubtitlesOnlyText(b: ShortsBlueprint): string {
   const codepoints = getUnicodeCodepoints(b.subtitles.line1Tamil);
   const typo = computeOverlayTypography(b.subtitles.line1Tamil, b.subtitles.line2English, b.subtitles.line3Ref);
 
-  return `POST-PRODUCTION OVERLAY — DO NOT BURN IN VIDEO MODEL:
-- Generate clean 9:16 plate ONLY, no text.
-- I will composite PNG in code with PIL.
-- Overlay constraints:
-    * Safe width = 760px, left/right padding 160px — NO text outside.
-    * Auto-scale: start Tamil 58px, reduce until width <=760, min 28px.
-    * If still >760, wrap to 2 lines at natural word break.
-    * No black box, only 2px shadow (0,0,0,180).
-    * Tamil font: DroidSansTamil-Bold, English: DejaVuSans-Bold, Ref: split fonts.
-    * Center at Y 50%, X clamped to safe bounds.
-- Content to composite in PNG overlay (${typo.tierLabel}):
-    * Line 1 (Tamil, Gold #FFC107, ~${typo.tamilPx}px, center): "${b.subtitles.line1Tamil}"
-    * Line 2 (English, White #F8F9FA, ~${typo.englishPx}px): "${b.subtitles.line2English}"
-    * Line 3 (Ref, Stone Gray #A8A29E, ~${typo.refPx}px): "${b.subtitles.line3Ref}" — DUAL RUN: Render Tamil ref part in DroidSansTamil-Bold and English part in DejaVuSans-Bold as one centered horizontal block. Prevents box glyphs (□□□□).
-- Final encode: H.264 via imageio_ffmpeg libx264, not system ffmpeg libopenh264.
+  return `${typo.promptAdditionDirective}
 - Verification: Exact Unicode codepoints: ${codepoints}
 - Typography Specs:
     * Font Sizes: Tamil: ${typo.tamilFontSizeCanvas} | English: ${typo.englishFontSizeCanvas} | Ref: ${typo.refFontSizeCanvas}
