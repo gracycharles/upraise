@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { 
   Copy, 
   Check, 
@@ -48,7 +48,7 @@ interface BlueprintCardProps {
   onOpenNavigator?: () => void;
 }
 
-export const BlueprintCard: React.FC<BlueprintCardProps> = ({ 
+const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({ 
   blueprint,
   totalCount,
   prevId,
@@ -82,18 +82,18 @@ export const BlueprintCard: React.FC<BlueprintCardProps> = ({
     }
   };
 
-  const fullBlueprintText = formatBlueprintAsText(blueprint);
-  const englishTitleOnly = getEnglishTitleOnly(blueprint);
-  const tamilPraiseWithRef = getTamilPraiseWithRef(blueprint);
-  const formattedDescription = getFormattedYouTubeDescription(blueprint);
-  const verification = blueprint.verification || getScriptureVerification(blueprint);
-  const verificationText = getScriptureVerificationText(blueprint);
-  const codepoints = getUnicodeCodepoints(blueprint.subtitles.line1Tamil);
-  const typo = computeOverlayTypography(
+  const fullBlueprintText = useMemo(() => formatBlueprintAsText(blueprint), [blueprint]);
+  const englishTitleOnly = useMemo(() => getEnglishTitleOnly(blueprint), [blueprint]);
+  const tamilPraiseWithRef = useMemo(() => getTamilPraiseWithRef(blueprint), [blueprint]);
+  const formattedDescription = useMemo(() => getFormattedYouTubeDescription(blueprint), [blueprint]);
+  const verification = useMemo(() => blueprint.verification || getScriptureVerification(blueprint), [blueprint]);
+  const verificationText = useMemo(() => getScriptureVerificationText(blueprint), [blueprint]);
+  const codepoints = useMemo(() => getUnicodeCodepoints(blueprint.subtitles.line1Tamil), [blueprint.subtitles.line1Tamil]);
+  const typo = useMemo(() => computeOverlayTypography(
     blueprint.subtitles.line1Tamil,
     blueprint.subtitles.line2English,
     blueprint.subtitles.line3Ref
-  );
+  ), [blueprint.subtitles.line1Tamil, blueprint.subtitles.line2English, blueprint.subtitles.line3Ref]);
   const promptAddition = `${typo.promptAdditionDirective}
 - Verification: Exact Unicode codepoints: ${codepoints}`;
 
@@ -1054,3 +1054,5 @@ export const BlueprintCard: React.FC<BlueprintCardProps> = ({
     </article>
   );
 };
+
+export const BlueprintCard = React.memo(BlueprintCardComponent);

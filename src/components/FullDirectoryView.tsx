@@ -23,6 +23,7 @@ export const FullDirectoryView: React.FC<FullDirectoryViewProps> = ({
 }) => {
   const [filterQuery, setFilterQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [visibleCount, setVisibleCount] = useState<number>(48);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   const verifiedMap = new Map<number, ShortsBlueprint>();
@@ -46,6 +47,8 @@ export const FullDirectoryView: React.FC<FullDirectoryViewProps> = ({
       item.id.toString() === filterQuery.trim();
     return matchesCategory && matchesQuery;
   });
+
+  const displayedItems = filteredItems.slice(0, visibleCount);
 
   const handleItemClick = (item: PraiseItem) => {
     if (verifiedMap.has(item.id)) {
@@ -88,7 +91,10 @@ export const FullDirectoryView: React.FC<FullDirectoryViewProps> = ({
             type="text"
             placeholder="Filter by praise text, scripture reference (e.g. சங், யோவா), or #..."
             value={filterQuery}
-            onChange={(e) => setFilterQuery(e.target.value)}
+            onChange={(e) => {
+              setFilterQuery(e.target.value);
+              setVisibleCount(48);
+            }}
             className="w-full bg-stone-900 border border-stone-800 rounded-xl pl-9 pr-3 py-2 text-xs text-stone-200 placeholder-stone-500 focus:outline-none focus:border-amber-500"
           />
         </div>
@@ -96,7 +102,10 @@ export const FullDirectoryView: React.FC<FullDirectoryViewProps> = ({
         {/* Categories (Tamil Agara Letters) */}
         <div className="flex items-center gap-1 overflow-x-auto max-w-full pb-1 sm:pb-0">
           <button
-            onClick={() => setActiveCategory('all')}
+            onClick={() => {
+              setActiveCategory('all');
+              setVisibleCount(48);
+            }}
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors ${
               activeCategory === 'all'
                 ? 'bg-amber-600 text-stone-950'
@@ -108,7 +117,10 @@ export const FullDirectoryView: React.FC<FullDirectoryViewProps> = ({
           {categories.slice(0, 12).map((cat) => (
             <button
               key={cat}
-              onClick={() => setActiveCategory(cat)}
+              onClick={() => {
+                setActiveCategory(cat);
+                setVisibleCount(48);
+              }}
               className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors ${
                 activeCategory === cat
                   ? 'bg-amber-600 text-stone-950'
@@ -123,7 +135,7 @@ export const FullDirectoryView: React.FC<FullDirectoryViewProps> = ({
 
       {/* Grid of Praises */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        {filteredItems.map((item) => {
+        {displayedItems.map((item) => {
           const isVerified = verifiedMap.has(item.id);
           return (
             <div
@@ -299,6 +311,18 @@ export const FullDirectoryView: React.FC<FullDirectoryViewProps> = ({
           );
         })}
       </div>
+
+      {visibleCount < filteredItems.length && (
+        <div className="flex justify-center pt-2 pb-6">
+          <button
+            onClick={() => setVisibleCount(prev => prev + 48)}
+            className="px-6 py-2.5 rounded-xl bg-stone-850 hover:bg-stone-800 text-amber-400 hover:text-amber-300 font-medium text-xs border border-stone-700/80 transition-all shadow-md flex items-center gap-2"
+          >
+            <span>Load More Praises ({filteredItems.length - visibleCount} remaining)</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
 
       {filteredItems.length === 0 && (
         <div className="text-center py-12 text-stone-500 text-sm">

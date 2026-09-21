@@ -23,16 +23,21 @@ import {
   ChevronRight,
   Hash,
   Compass,
-  X
+  X,
+  Eye,
+  ListFilter
 } from 'lucide-react';
 
 type BatchFilter = 'all' | '1-50' | '51-100' | '101-150' | '151-200' | '201-250' | '251-300';
+type StudioViewMode = 'focus' | 'list';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<ViewTab>('studio');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBatch, setSelectedBatch] = useState<BatchFilter>('all');
   const [selectedBlueprint, setSelectedBlueprint] = useState<ShortsBlueprint>(INITIAL_BLUEPRINTS[0]);
+  const [studioViewMode, setStudioViewMode] = useState<StudioViewMode>('focus');
+  const [batchPage, setBatchPage] = useState<number>(1);
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
   const [isChannelModalOpen, setIsChannelModalOpen] = useState(false);
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false);
@@ -59,44 +64,6 @@ export default function App() {
       if (sentinel) {
         sentinel.release().catch(() => {});
       }
-    };
-  }, []);
-
-  // Prevent accidental multi-touch pinch-zoom and keyboard zoom shortcuts without blocking natural scrolling
-  useEffect(() => {
-    // Prevent multi-touch pinch zoom
-    const handleTouchMove = (e: TouchEvent) => {
-      if (e.touches && e.touches.length > 1) {
-        if (e.cancelable) {
-          e.preventDefault();
-        }
-      }
-    };
-
-    // Prevent trackpad / Ctrl+wheel zoom
-    const handleWheel = (e: WheelEvent) => {
-      if (e.ctrlKey) {
-        if (e.cancelable) {
-          e.preventDefault();
-        }
-      }
-    };
-
-    // Prevent zoom keyboard shortcuts (Ctrl/Cmd + '+', '-', '0', '=')
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && ['+', '-', '=', '0', '_'].includes(e.key)) {
-        e.preventDefault();
-      }
-    };
-
-    window.addEventListener('wheel', handleWheel, { passive: false });
-    document.addEventListener('touchmove', handleTouchMove, { passive: false });
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('wheel', handleWheel);
-      document.removeEventListener('touchmove', handleTouchMove);
-      window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
 
@@ -128,9 +95,18 @@ export default function App() {
     return list;
   }, [searchQuery, selectedBatch]);
 
+  const PAGE_SIZE = 10;
+  const totalBatchPages = Math.max(1, Math.ceil(filteredBlueprints.length / PAGE_SIZE));
+  const paginatedBlueprints = useMemo(() => {
+    const safePage = Math.min(batchPage, totalBatchPages);
+    const start = (safePage - 1) * PAGE_SIZE;
+    return filteredBlueprints.slice(start, start + PAGE_SIZE);
+  }, [filteredBlueprints, batchPage, totalBatchPages]);
+
   const handleSelectShort = (blueprint: ShortsBlueprint) => {
     setSelectedBlueprint(blueprint);
     setActiveTab('studio');
+    setStudioViewMode('focus');
 
     // Ensure batch filter includes this item
     if (selectedBatch !== 'all') {
@@ -144,24 +120,8 @@ export default function App() {
       setSelectedBatch(targetBatch);
     }
 
-    // Clear search query if it wouldn't match
-    if (searchQuery.trim()) {
-      setSearchQuery('');
-    }
-
-    // Scroll to the card smoothly with offset for sticky bars
-    setTimeout(() => {
-      const el = document.getElementById(`short-card-${blueprint.id}`);
-      if (el) {
-        const yOffset = -115;
-        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-        el.classList.add('ring-2', 'ring-amber-400');
-        setTimeout(() => el.classList.remove('ring-2', 'ring-amber-400'), 2500);
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    }, 120);
+    // Instant, fluid scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleDirectNumberJump = (e: React.FormEvent) => {
@@ -284,12 +244,46 @@ export default function App() {
 
                 {/* Right: Batch Dropdown + Direct # Jump + Browse All */}
                 <div className="flex items-center gap-2 sm:gap-2.5 flex-wrap">
+                  {/* View Mode Switcher (Single Focus vs Batch List) */}
+                  <div className="flex items-center bg-stone-950 p-0.5 rounded-lg border border-stone-800">
+                    <button
+                      onClick={() => setStudioViewMode('focus')}
+                      className={`px-2.5 py-1 rounded-md text-xs font-semibold flex items-center gap-1.5 transition-all ${
+                        studioViewMode === 'focus' && !searchQuery
+                          ? 'bg-amber-600/30 text-amber-300 border border-amber-500/40 font-bold'
+                          : 'text-stone-400 hover:text-stone-200'
+                      }`}
+                      title="Focused View: Instant 1-Short Production Mode"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline">Focus</span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        setStudioViewMode('list');
+                        setBatchPage(1);
+                      }}
+                      className={`px-2.5 py-1 rounded-md text-xs font-semibold flex items-center gap-1.5 transition-all ${
+                        studioViewMode === 'list' || searchQuery
+                          ? 'bg-amber-600/30 text-amber-300 border border-amber-500/40 font-bold'
+                          : 'text-stone-400 hover:text-stone-200'
+                      }`}
+                      title="List View: 10 Blueprints per page"
+                    >
+                      <ListFilter className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline">List</span>
+                    </button>
+                  </div>
+
                   {/* Batch Selector Dropdown */}
                   <div className="flex items-center gap-1.5 bg-stone-950 px-2 py-1 rounded-lg border border-stone-800">
                     <span className="text-xs text-stone-400 font-mono hidden md:inline">Batch:</span>
                     <select
                       value={selectedBatch}
-                      onChange={(e) => setSelectedBatch(e.target.value as BatchFilter)}
+                      onChange={(e) => {
+                        setSelectedBatch(e.target.value as BatchFilter);
+                        setBatchPage(1);
+                      }}
                       className="bg-transparent text-xs text-stone-200 font-semibold focus:outline-none cursor-pointer pr-1"
                     >
                       <option value="all" className="bg-stone-900 text-stone-100">All ({INITIAL_BLUEPRINTS.length})</option>
@@ -348,6 +342,7 @@ export default function App() {
                     onClick={() => {
                       setSelectedBatch('all');
                       setSearchQuery('');
+                      setBatchPage(1);
                     }}
                     className="text-amber-400 hover:text-amber-300 underline font-medium text-xs shrink-0 ml-2"
                   >
@@ -357,26 +352,92 @@ export default function App() {
               )}
             </div>
 
-            {/* Blueprints List */}
+            {/* Blueprints Display (Zero-Lag Single Focus or 10-Item Paginated List) */}
             <div className="space-y-6">
-              {filteredBlueprints.map((blueprint) => (
+              {studioViewMode === 'focus' && !searchQuery ? (
+                /* SINGLE FOCUSED SHORT: 0ms LATENCY, 60 FPS, NEVER HANGS */
                 <BlueprintCard
-                  key={blueprint.id}
-                  blueprint={blueprint}
+                  key={selectedBlueprint.id}
+                  blueprint={selectedBlueprint}
                   totalCount={INITIAL_BLUEPRINTS.length}
-                  prevId={blueprint.id > 1 ? blueprint.id - 1 : null}
-                  nextId={blueprint.id < INITIAL_BLUEPRINTS.length ? blueprint.id + 1 : null}
+                  prevId={selectedBlueprint.id > 1 ? selectedBlueprint.id - 1 : null}
+                  nextId={selectedBlueprint.id < INITIAL_BLUEPRINTS.length ? selectedBlueprint.id + 1 : null}
                   onNavigatePrev={() => {
-                    const prev = INITIAL_BLUEPRINTS.find(b => b.id === blueprint.id - 1);
+                    const prev = INITIAL_BLUEPRINTS.find(b => b.id === selectedBlueprint.id - 1);
                     if (prev) handleSelectShort(prev);
                   }}
                   onNavigateNext={() => {
-                    const next = INITIAL_BLUEPRINTS.find(b => b.id === blueprint.id + 1);
+                    const next = INITIAL_BLUEPRINTS.find(b => b.id === selectedBlueprint.id + 1);
                     if (next) handleSelectShort(next);
                   }}
                   onOpenNavigator={() => setIsNavigatorOpen(true)}
                 />
-              ))}
+              ) : (
+                /* PAGINATED LIST VIEW: RENDERS MAX 10 CARDS */
+                <>
+                  <div className="space-y-6">
+                    {paginatedBlueprints.map((blueprint) => (
+                      <BlueprintCard
+                        key={blueprint.id}
+                        blueprint={blueprint}
+                        totalCount={INITIAL_BLUEPRINTS.length}
+                        prevId={blueprint.id > 1 ? blueprint.id - 1 : null}
+                        nextId={blueprint.id < INITIAL_BLUEPRINTS.length ? blueprint.id + 1 : null}
+                        onNavigatePrev={() => {
+                          const prev = INITIAL_BLUEPRINTS.find(b => b.id === blueprint.id - 1);
+                          if (prev) handleSelectShort(prev);
+                        }}
+                        onNavigateNext={() => {
+                          const next = INITIAL_BLUEPRINTS.find(b => b.id === blueprint.id + 1);
+                          if (next) handleSelectShort(next);
+                        }}
+                        onOpenNavigator={() => setIsNavigatorOpen(true)}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Pagination Controls */}
+                  {totalBatchPages > 1 && (
+                    <div className="flex items-center justify-between p-3 bg-stone-900 border border-stone-800 rounded-xl">
+                      <button
+                        onClick={() => {
+                          setBatchPage(p => Math.max(1, p - 1));
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        disabled={batchPage <= 1}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all ${
+                          batchPage > 1
+                            ? 'bg-stone-800 hover:bg-stone-700 text-stone-200'
+                            : 'text-stone-600 cursor-not-allowed opacity-50'
+                        }`}
+                      >
+                        <ChevronLeft className="w-3.5 h-3.5" />
+                        <span>Previous 10</span>
+                      </button>
+
+                      <span className="text-xs font-mono text-amber-300">
+                        Page {batchPage} of {totalBatchPages} ({filteredBlueprints.length} total)
+                      </span>
+
+                      <button
+                        onClick={() => {
+                          setBatchPage(p => Math.min(totalBatchPages, p + 1));
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        disabled={batchPage >= totalBatchPages}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all ${
+                          batchPage < totalBatchPages
+                            ? 'bg-stone-800 hover:bg-stone-700 text-stone-200'
+                            : 'text-stone-600 cursor-not-allowed opacity-50'
+                        }`}
+                      >
+                        <span>Next 10</span>
+                        <ChevronRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  )}
+                </>
+              )}
 
               {filteredBlueprints.length === 0 && (
                 <div className="text-center py-16 bg-stone-900/50 rounded-2xl border border-stone-800 space-y-3">
@@ -387,6 +448,7 @@ export default function App() {
                     onClick={() => {
                       setSelectedBatch('all');
                       setSearchQuery('');
+                      setBatchPage(1);
                     }}
                     className="px-4 py-1.5 rounded-lg bg-amber-600 text-stone-950 font-bold text-xs"
                   >
