@@ -707,7 +707,7 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
               <div className="flex items-center justify-between border-b border-stone-800/80 pb-1.5 text-[10px] font-mono text-stone-400">
                 <span className="flex items-center gap-1.5 text-amber-400 font-semibold">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block animate-pulse"></span>
-                  9:16 Center Safe Zone Preview (Y: 50% • Clean Text, No Shadow)
+                  9:16 Center Safe Zone (Lifted Y: 900-1300px • 350px Bottom Clearance)
                 </span>
                 <span className="text-stone-300">
                   Canvas Auto-Fit: <strong className="text-amber-300 font-mono">~{typo.tamilPx}px</strong> ({typo.scalePercent}% scale)

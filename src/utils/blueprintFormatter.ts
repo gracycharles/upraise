@@ -60,15 +60,23 @@ ${b.videoPrompt}
    - Voice Profile: ${b.voiceProfile}
    - Exact Spoken Script (Strictly 10.0s): "${b.audioScript}"
    - Background Audio: ${b.backgroundAudio} (Mixed at -18dB)
-3. TRUE 1080x1920 CONTENT MANDATE (NO BLACK BARS / FULL-BLEED):
+3. TRUE 1080x1920 CONTENT & H.264 MANDATE (NO BLACK BARS / FULL-BLEED):
    - Final MP4 pixels MUST BE 1080x1920 of actual video content, never 720x1280 centered inside a 1080x1920 canvas.
    - Strictly forbid letterboxing, pillarboxing, or black borders of any kind.
    - If source is 720x1280, upscale with Lanczos to 1080x1920 to fill the frame completely — full-bleed vertical portrait.
-   - Verify with ffprobe: width=1080, height=1920.
+   - Encode with imageio_ffmpeg libx264 (pixel format yuv420p, CRF 18). FORBID mp4v codec (which fails preview in Shorts player).
+   - Verify with ffprobe: width=1080, height=1920, pix_fmt=yuv420p, codec_name=h264.
 4. SHORTS FRAMING MANDATE:
    - Subject placed in lower 1/3rd to 2/3rds of vertical frame, with ~15% headroom above head for outdoor sky/background visibility.
    - Medium close-up chest-up, centered horizontally, face clearly visible.
    - Background must be outdoor authentic 1st-century biblical landscape, NOT interior/kitchen, with no black vignette borders.
+5. YOUTUBE SHORTS SAFE-ZONE TEXT MANDATE (CRITICAL - NO OVERLAP):
+   - YouTube Shorts UI occludes: bottom 350px (title, description, channel info), right 180px (like, comment, share, subscribe), top 120px (search).
+   - SUBTITLE SAFE AREA = x: 160-900px (760px safe width), y: 750-1250px (center band only).
+   - Place ALL Tamil + English + Reference lines between y=900 and y=1300 MAX. FORBID y>1350.
+   - After rendering, assert y_max + text_height < 1350. If fail, shift up.
+   - Center horizontally at x=540 anchor="mm" for single lines.
+   - Background behind text must have 20% extra dark vignette if needed for readability, but text itself stays in safe zone.
 
 ${typo.promptAdditionDirective}
 - Verification: Exact Unicode codepoints: ${codepoints}`;
