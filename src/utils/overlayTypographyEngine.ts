@@ -167,20 +167,19 @@ export function computeOverlayTypography(
           tamilSplit ? ` Tamil line 1: "${tamilSplit.line1}" Line 2: "${tamilSplit.line2}"` : ''
         }`;
 
-    return `POST-PRODUCTION OVERLAY — DO NOT BURN IN VIDEO MODEL:
-- Generate clean 9:16 plate ONLY, no text.
-- I will composite PNG in code with PIL.
+    return `SUBTITLE OVERLAY BURNING & COMPOSITING CONSTRAINTS:
+- Burn in subtitles centered at Y 50% within 9:16 portrait frame.
 - Overlay constraints:
-    * Safe width = 760px, left/right padding 160px — NO text outside.
+    * Safe width = 760px, left/right padding 160px — NO text outside safe zone.
     * ${autoScaleInstruction}
-    * No black box, only 2px shadow (0,0,0,180).
-    * Tamil font: DroidSansTamil-Bold, English: DejaVuSans-Bold, Ref: split fonts.
+    * Clean typography with 2px shadow (0,0,0,180), NO solid black background box.
+    * Tamil font: DroidSansTamil-Bold, English: DejaVuSans-Bold, Ref: dual-font run.
     * Center at Y 50%, X clamped to safe bounds.
-- Content to composite in PNG overlay (${scaledNote}):
+- Content to composite in final 1080x1920 video (${scaledNote}):
     * Line 1 (Tamil, Gold #FFC107, ~${tamilPx}px, center): "${line1Tamil}"
     * Line 2 (English, White #F8F9FA, ~${englishPx}px): "${line2English}"
     * Line 3 (Ref, Stone Gray #A8A29E, ~${refPx}px): "${line3Ref}" — DUAL RUN: Render Tamil ref part in DroidSansTamil-Bold and English part in DejaVuSans-Bold as one centered horizontal block. Prevents box glyphs (□□□□).
-- Final encode: H.264 via imageio_ffmpeg libx264, not system ffmpeg libopenh264.`;
+- Final encode: H.264 via imageio_ffmpeg libx264 (width=1080, height=1920).`;
   };
 
   let promptAdditionDirective: string;

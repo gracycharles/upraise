@@ -550,7 +550,7 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
           <div className="bg-stone-950 p-4 rounded-xl border border-stone-800 space-y-3">
             <div>
               <div className="text-[10px] font-mono text-stone-400 uppercase tracking-wider mb-1 flex items-center justify-between">
-                <span>Clean 9:16 Background Plate (Zero Text):</span>
+                <span>9:16 Video Plate Prompt (Visuals & Scene Direction):</span>
                 <span className="text-amber-400 font-semibold">Scene & Character Direction • 8K 30 AD</span>
               </div>
               <p className="font-mono text-xs text-stone-200 select-all leading-relaxed bg-stone-900/90 p-3 rounded-lg border border-stone-800">
