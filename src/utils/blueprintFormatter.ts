@@ -82,24 +82,27 @@ export function formatSubtitlesOnlyText(b: ShortsBlueprint): string {
   const codepoints = getUnicodeCodepoints(b.subtitles.line1Tamil);
   const typo = computeOverlayTypography(b.subtitles.line1Tamil, b.subtitles.line2English, b.subtitles.line3Ref);
 
-  return `PROMPT ADDITION (ON-SCREEN TEXT OVERLAY - SEPARATE PNG GENERATION):
-Generate a separate 1080x1920 transparent PNG overlay:
-- Line 1 (Tamil, Gold #FFC107, ~${typo.tamilPx}px, center): "${b.subtitles.line1Tamil}"
-- Line 2 (English, White #F8F9FA, ~${typo.englishPx}px): "${b.subtitles.line2English}"
-- Line 3 (Ref, Stone Gray #A8A29E, ~${typo.refPx}px): "${b.subtitles.line3Ref}" — DUAL RUN: Render Tamil ref part in Tamil font (DroidSansTamil/Noto Sans Tamil) and English part in Latin font (DejaVuSans) as one centered horizontal block. Prevents box glyphs (□□□□).
-- TTF Selection & Content Auto-Sizing: Generator selects TTF fonts freely (e.g. DroidSansTamil Bold for Tamil, DejaVuSans Bold for English) and auto-scales font sizes dynamically based on content length/density so all text fits cleanly inside 760px safe inner width with zero clipping or text loss.
-- Typography, Placement & Safe Bounds: Centered at Y:50% strictly within 760px safe inner width (160px horizontal padding on left & right). Confine all text strictly within this boundary so YouTube Shorts player UI and phone display edges NEVER clip or overlap the first or last letters.
-- Orthographic: Full OpenType complex script shaping enabled for 'வு', 'ன', 'ளி' ligatures.
+  return `POST-PRODUCTION OVERLAY — DO NOT BURN IN VIDEO MODEL:
+- Generate clean 9:16 plate ONLY, no text.
+- I will composite PNG in code with PIL.
+- Overlay constraints:
+    * Safe width = 760px, left/right padding 160px — NO text outside.
+    * Auto-scale: start Tamil 58px, reduce until width <=760, min 28px.
+    * If still >760, wrap to 2 lines at natural word break.
+    * No black box, only 2px shadow (0,0,0,180).
+    * Tamil font: DroidSansTamil-Bold, English: DejaVuSans-Bold, Ref: split fonts.
+    * Center at Y 50%, X clamped to safe bounds.
+- Content to composite in PNG overlay (${typo.tierLabel}):
+    * Line 1 (Tamil, Gold #FFC107, ~${typo.tamilPx}px, center): "${b.subtitles.line1Tamil}"
+    * Line 2 (English, White #F8F9FA, ~${typo.englishPx}px): "${b.subtitles.line2English}"
+    * Line 3 (Ref, Stone Gray #A8A29E, ~${typo.refPx}px): "${b.subtitles.line3Ref}" — DUAL RUN: Render Tamil ref part in DroidSansTamil-Bold and English part in DejaVuSans-Bold as one centered horizontal block. Prevents box glyphs (□□□□).
+- Final encode: H.264 via imageio_ffmpeg libx264, not system ffmpeg libopenh264.
 - Verification: Exact Unicode codepoints: ${codepoints}
-- Auto-Scaled Typography (${typo.tierLabel}):
-  * Font Sizes: Tamil: ${typo.tamilFontSizeCanvas} | English: ${typo.englishFontSizeCanvas} | Ref: ${typo.refFontSizeCanvas}
-  * Density: Tamil ${typo.tamilCharCount} chars | English ${typo.englishCharCount} chars (Scaled to ${typo.scalePercent}%${typo.reductionPercent > 0 ? ` [reduced by ${typo.reductionPercent}%]` : ''})
-  * Canvas Bounds: ${typo.safeMarginWidth}
-  * Wrapping: ${typo.recommendedWrap}
-  * Integrity Guarantee: ZERO LOSS IN OVERLAY CONTENT — complete praise text rendered without truncation.
-
-POST-PRODUCTION COMPOSITING (CODE OVERLAY):
-Overlay this 1080x1920 alpha PNG onto the generated 9:16 MP4 video using code (FFmpeg / MoviePy).`;
+- Typography Specs:
+    * Font Sizes: Tamil: ${typo.tamilFontSizeCanvas} | English: ${typo.englishFontSizeCanvas} | Ref: ${typo.refFontSizeCanvas}
+    * Safe Bounds: ${typo.safeMarginWidth}
+    * Wrapping: ${typo.recommendedWrap}
+    * Content Guarantee: ZERO LOSS OF OVERLAY CONTENT — complete praise text rendered without truncation.`;
 }
 
 /**

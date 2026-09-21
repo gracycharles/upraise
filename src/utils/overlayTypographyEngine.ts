@@ -144,41 +144,33 @@ export function computeOverlayTypography(
   const lineHeight = tier === 'compact' ? '1.30' : tier === 'medium' ? '1.25' : '1.22';
 
   // Specific directive for the Video Gen prompt addition (Text Overlay & Single Master Output)
+  const buildOverlayDirective = (scaledNote: string) => `POST-PRODUCTION OVERLAY — DO NOT BURN IN VIDEO MODEL:
+- Generate clean 9:16 plate ONLY, no text.
+- I will composite PNG in code with PIL.
+- Overlay constraints:
+    * Safe width = 760px, left/right padding 160px — NO text outside.
+    * Auto-scale: start Tamil 58px, reduce until width <=760, min 28px.
+    * If still >760, wrap to 2 lines at natural word break.
+    * No black box, only 2px shadow (0,0,0,180).
+    * Tamil font: DroidSansTamil-Bold, English: DejaVuSans-Bold, Ref: split fonts.
+    * Center at Y 50%, X clamped to safe bounds.
+- Content to composite in PNG overlay (${scaledNote}):
+    * Line 1 (Tamil, Gold #FFC107, ~${tamilPx}px, center): "${line1Tamil}"
+    * Line 2 (English, White #F8F9FA, ~${englishPx}px): "${line2English}"
+    * Line 3 (Ref, Stone Gray #A8A29E, ~${refPx}px): "${line3Ref}" — DUAL RUN: Render Tamil ref part in DroidSansTamil-Bold and English part in DejaVuSans-Bold as one centered horizontal block. Prevents box glyphs (□□□□).
+- Final encode: H.264 via imageio_ffmpeg libx264, not system ffmpeg libopenh264.
+
+🎯 FINAL DELIVERABLE MANDATE (STRICTLY 10 SECONDS, 100% LIP SYNC & FULL-BLEED 1080x1920):
+Deliver ONE SINGLE 1080x1920 (9:16) MP4 file (STRICTLY 10.0 SECONDS DURATION) combining ALL 3 COMPONENTS:
+[1] Clean 9:16 Vertical Portrait Video Footage (Strictly 10s native, 1080x1920 FULL-BLEED content — strictly NO letterboxing, NO pillarboxing, NO black borders/vignette; Lanczos upscale 720x1280 sources to fill 1080x1920 completely; subject in lower 1/3rd chest-up, centered horizontally with ~15% headroom above head for outdoor sky/stars; outdoor biblical background e.g. Bethlehem hillside at sunset→starry night, NOT interior/kitchen; CLEAN PLATE ONLY, NO TEXT BURNED IN)
+[2] Synchronized Character Voiceover & Ambient Worship Pad Audio (100% even lip movement for every single spoken word)
+[3] Centered Transparent Subtitle PNG Overlay (Composited via PIL inside 760px safe width, zero box glyphs, only 2px shadow (0,0,0,180), encoded with imageio_ffmpeg libx264)`;
+
   let promptAdditionDirective: string;
   if (reductionPercent > 0) {
-    promptAdditionDirective = `POST-PRODUCTION TEXT OVERLAY SPECIFICATION (CODE COMPOSITING):
-- DO NOT render or burn any text directly into the video pixels. Keep the generated 9:16 video plate clean.
-- Composite a separate 1080x1920 transparent PNG text overlay onto the generated 9:16 MP4:
-  * Line 1 (Tamil, Gold #FFC107, ~${tamilPx}px, center): "${line1Tamil}"
-  * Line 2 (English, White #F8F9FA, ~${englishPx}px): "${line2English}"
-  * Line 3 (Ref, Stone Gray #A8A29E, ~${refPx}px): "${line3Ref}" — DUAL RUN: Render Tamil ref part in Tamil font (DroidSansTamil/Noto Sans Tamil) and English part in Latin font (DejaVuSans) as one centered horizontal block. Prevents box glyphs (□□□□).
-  * TTF Selection & Content Auto-Sizing: Generator selects TTF fonts freely (e.g. DroidSansTamil Bold, DejaVuSans Bold) and auto-scales font sizes dynamically based on content size/length so all text fits cleanly inside 760px safe inner width with zero clipping or text loss.
-  * Typography, Placement & Safe Bounds: Centered at Y:50% strictly within 760px safe inner width (160px left & right padding margins) so YouTube Shorts player UI never overlaps text.
-  * Orthographic Glyph Guarantee: Full OpenType complex script shaping enabled. Ensure glyphs like 'வு' (Va + U vowel sign U+0BB5 U+0BC1), 'ன' (U+0BA9), 'ளி' (U+0BB3 U+0BBF) are correctly rendered as unified conjunct ligatures, never split or unrendered.
-  * Auto-Scaled (${tier.toUpperCase()} tier, -${reductionPercent}% reduced for safe fit with zero content loss).
-
-🎯 FINAL DELIVERABLE MANDATE (STRICTLY 10 SECONDS, 100% LIP SYNC & FULL-BLEED 1080x1920):
-Deliver ONE SINGLE 1080x1920 (9:16) MP4 file (STRICTLY 10.0 SECONDS DURATION) combining ALL 3 COMPONENTS:
-[1] 9:16 Vertical Portrait Video Footage (Strictly 10s native, 1080x1920 FULL-BLEED content — strictly NO letterboxing, NO pillarboxing, NO black borders/vignette; Lanczos upscale 720x1280 sources to fill 1080x1920 completely; subject in lower 1/3rd chest-up, centered horizontally with ~15% headroom above head for outdoor sky/stars; outdoor biblical background e.g. Bethlehem hillside at sunset→starry night, NOT interior/kitchen)
-[2] Synchronized Character Voiceover & Ambient Worship Pad Audio (100% even lip movement for every single spoken word)
-[3] Centered Transparent Subtitle PNG Overlay (Confined within 760px safe width, zero box glyphs)`;
+    promptAdditionDirective = buildOverlayDirective(`Auto-Scaled ${tier.toUpperCase()} tier, -${reductionPercent}% reduced for safe 760px fit with zero content loss`);
   } else {
-    promptAdditionDirective = `POST-PRODUCTION TEXT OVERLAY SPECIFICATION (CODE COMPOSITING):
-- DO NOT render or burn any text directly into the video pixels. Keep the generated 9:16 video plate clean.
-- Composite a separate 1080x1920 transparent PNG text overlay onto the generated 9:16 MP4:
-  * Line 1 (Tamil, Gold #FFC107, ~${tamilPx}px, center): "${line1Tamil}"
-  * Line 2 (English, White #F8F9FA, ~${englishPx}px): "${line2English}"
-  * Line 3 (Ref, Stone Gray #A8A29E, ~${refPx}px): "${line3Ref}" — DUAL RUN: Render Tamil ref part in Tamil font (DroidSansTamil/Noto Sans Tamil) and English part in Latin font (DejaVuSans) as one centered horizontal block. Prevents box glyphs (□□□□).
-  * TTF Selection & Content Auto-Sizing: Generator selects TTF fonts freely (e.g. DroidSansTamil Bold, DejaVuSans Bold) and auto-scales font sizes dynamically based on content size/length so all text fits cleanly inside 760px safe inner width with zero clipping or text loss.
-  * Typography, Placement & Safe Bounds: Centered at Y:50% strictly within 760px safe inner width (160px left & right padding margins) so YouTube Shorts player UI never overlaps text.
-  * Orthographic Glyph Guarantee: Full OpenType complex script shaping enabled. Ensure glyphs like 'வு' (Va + U vowel sign U+0BB5 U+0BC1), 'ன' (U+0BA9), 'ளி' (U+0BB3 U+0BBF) are correctly rendered as unified conjunct ligatures, never split or unrendered.
-  * Standard Scale (~${tamilPx}px Tamil / ~${englishPx}px English centered, zero content loss).
-
-🎯 FINAL DELIVERABLE MANDATE (STRICTLY 10 SECONDS, 100% LIP SYNC & FULL-BLEED 1080x1920):
-Deliver ONE SINGLE 1080x1920 (9:16) MP4 file (STRICTLY 10.0 SECONDS DURATION) combining ALL 3 COMPONENTS:
-[1] 9:16 Vertical Portrait Video Footage (Strictly 10s native, 1080x1920 FULL-BLEED content — strictly NO letterboxing, NO pillarboxing, NO black borders/vignette; Lanczos upscale 720x1280 sources to fill 1080x1920 completely; subject in lower 1/3rd chest-up, centered horizontally with ~15% headroom above head for outdoor sky/stars; outdoor biblical background e.g. Bethlehem hillside at sunset→starry night, NOT interior/kitchen)
-[2] Synchronized Character Voiceover & Ambient Worship Pad Audio (100% even lip movement for every single spoken word)
-[3] Centered Transparent Subtitle PNG Overlay (Confined within 760px safe width, zero box glyphs)`;
+    promptAdditionDirective = buildOverlayDirective(`Standard Scale ~${tamilPx}px Tamil / ~${englishPx}px English centered, zero content loss`);
   }
 
   // Compositing specs text

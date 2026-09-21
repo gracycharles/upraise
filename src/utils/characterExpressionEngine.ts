@@ -22,9 +22,9 @@ interface CuratedExpression {
 
 const CURATED_EXPRESSIONS: Record<number, CuratedExpression> = {
   1: { // அப்பா பிதாவே ஸ்தோத்திரம் (ரோம. 8:15)
-    expression: "Glistening, tear-moistened eyes gazing upward with profound childlike gratitude; soft, peaceful brow; lips gently parted in breathless adoration.",
+    expression: "Radiant, affectionate gaze gazing upward with profound childlike trust and serene gratitude; soft, peaceful brow; gentle, heartfelt smile of filial adoration.",
     gesturePosture: "Right hand pressed firmly over coarse-weave linen tunic above his heart; humble, reverent upward tilt of the chin in intimate prayer.",
-    theologicalMood: "Intimate filial adoration and spiritual adoption as a child of God, overwhelmed by the Father's tender mercy.",
+    theologicalMood: "Intimate filial adoration and spiritual adoption as a child of God, resting safely in the Father's tender love.",
     sceneAtmosphere: "Golden dawn sunlight beams through ancient Jerusalem limestone arches, dust motes suspended in peaceful stillness."
   },
   2: { // அன்பின் பிதாவே ஸ்தோத்திரம் (1 யோவா. 3:1)
@@ -40,7 +40,7 @@ const CURATED_EXPRESSIONS: Record<number, CuratedExpression> = {
     sceneAtmosphere: "Shore of the Sea of Galilee at golden hour, rippling twilight water reflecting purple and amber horizon."
   },
   4: { // அன்பின் தேவனே ஸ்தோத்திரம் (1 யோவா. 4:8)
-    expression: "Deep, tranquil peace across a gentle countenance; eyes closed in quiet surrender before softly opening with moist, reverent tears.",
+    expression: "Deep, tranquil peace across a gentle countenance; eyes closed in quiet surrender before softly opening with serene, radiant warmth and heartfelt contentment.",
     gesturePosture: "Kneeling on the earthen garden ground, palms gently folded beneath her chin in heartfelt, unhurried prayer.",
     theologicalMood: "Resting completely in the holy truth that God is love itself, finding supreme solace in His divine presence.",
     sceneAtmosphere: "Terraced hillside garden in Bethany with ancient olive trees, soft afternoon sun casting long, gentle shadows."
@@ -70,7 +70,7 @@ const CURATED_EXPRESSIONS: Record<number, CuratedExpression> = {
     sceneAtmosphere: "Bethlehem hillside path at sunset, warm breeze carrying scents of cedar and wild thyme, skies streaked with gold."
   },
   9: { // அற்புதங்களை செய்பவரே ஸ்தோத்திரம் (யாத். 15:11)
-    expression: "Electrified gaze of victory and deliverance; eyes shining with tears of triumph; triumphant yet deeply humbled expression.",
+    expression: "Electrified gaze of victory and deliverance; eyes shining with triumphant joy and wonder; exultant, confident smile celebrating God's glorious power.",
     gesturePosture: "Right fist gently clenched over heart, left hand raised high in thankful praise, posture upright with renewed vigor.",
     theologicalMood: "Exultant praise to the Lord who is majestic in holiness, awesome in praises, performing wonders beyond human strength.",
     sceneAtmosphere: "Shoreline of the Red Sea during evening breeze, majestic waves lapping ancient sands under an amber sky."
@@ -124,13 +124,13 @@ const CURATED_EXPRESSIONS: Record<number, CuratedExpression> = {
     sceneAtmosphere: "Quiet garden in Bethany at twilight, gentle lavender sky, evening breeze carrying fragrance of blooming pomegranates."
   },
   149: { // உமது கிருபை பெரியது ஸ்தோத்திரம் (சங். 86:13)
-    expression: "Overwhelmed, tear-filled eyes looking up with humble astonishment; trembling smile of deep deliverance; hand pressed over heart in profound awe of boundless mercy.",
+    expression: "Radiant, reverent eyes looking upward with humble astonishment; peaceful and grateful smile of deep deliverance; hand pressed over heart in profound awe of boundless mercy.",
     gesturePosture: "Kneeling reverently upon coarse Judean stone, one hand resting on the ground for support, head tilted upward in breathless thanksgiving.",
     theologicalMood: "Humbled by the vastness of divine mercy that has delivered his soul from the lowest depths, celebrating God's great and personal lovingkindness.",
-    sceneAtmosphere: "Ancient limestone sanctuary chamber at golden hour, amber rays illuminating dust motes and highlighting tears of gratitude."
+    sceneAtmosphere: "Ancient limestone sanctuary chamber at golden hour, amber rays illuminating dust motes and highlighting serene features of gratitude."
   },
   200: { // என்னை காண்கிற தேவனே ஸ்தோத்திரம் (ஆதி. 16:13)
-    expression: "Stunned astonishment in solitude; trembling lips whispering in disbelief; eyes brimming with tears of no longer being forgotten.",
+    expression: "Stunned astonishment in solitude; trembling lips whispering in disbelief; eyes brimming with tears of relief and wonder at no longer being forgotten.",
     gesturePosture: "Kneeling beside a solitary desert spring, trembling fingers touching the water, looking upward in breathtaking revelation.",
     theologicalMood: "The sacred cry of El Roi: 'You-Are-the-God-Who-Sees; for she said, Have I also here seen Him who sees me?'",
     sceneAtmosphere: "Arid desert wilderness of Shur at golden hour, shimmering spring water reflecting solitary tears transformed into worship."
@@ -179,22 +179,22 @@ export function generateCharacterExpression(blueprint: ShortsBlueprint): Charact
   // 2. Boundless Mercy, Grace, Lovingkindness & Compassion
   if (title.includes('கிருபை') || title.includes('இரக்க') || title.includes('காருண்ய') || text.includes('கிருபை') || text.includes('இரக்கம்')) {
     return {
-      expression: "Tears of relief glistening on a softened, comforted countenance; brow releasing all tension; lips curved in gentle, heartfelt gratitude.",
+      expression: "Serene, tranquil countenance; brow releasing all tension; lips curved in gentle, heartfelt gratitude for unmerited mercy; warm, comforted gaze.",
       gesturePosture: "Right hand pressed firmly against the chest over linen tunic, head bowed in humble thanksgiving before lifting peacefully toward heaven.",
-      theologicalMood: "Overwhelmed by God's abundant mercy and steadfast covenant love that endures forever, delivering the soul from despair.",
+      theologicalMood: "Overwhelmed by God's abundant mercy and steadfast covenant love that endures forever, delivering the soul into lasting peace.",
       sceneAtmosphere: "Serene morning mist on the Mount of Olives, soft dawn light washing over ancient olive groves in peaceful stillness.",
-      inculcatedPromptAddition: "Character has tear-glistening eyes filled with gratitude for great mercy, relaxed brow, hand pressed over heart in adoration."
+      inculcatedPromptAddition: "Character has peaceful eyes filled with serene gratitude for great mercy, relaxed brow, hand pressed over heart in adoration."
     };
   }
 
-  // 3. Compassion, Comfort, Tears & Forgiveness
+  // 3. Compassion, Comfort, Tears & Forgiveness (Scripture specifically mentioning grief, weeping, mourning or wiping tears)
   if (title.includes('மன்னி') || title.includes('ஆறுதல்') || title.includes('கண்ணீர்') || title.includes('தேற்று') || text.includes('மன்னி') || text.includes('ஆறுதல்') || text.includes('கண்ணீரை')) {
     return {
-      expression: "Tears of sorrow transforming into profound consolation; gentle, reassuring smile; eyes reflecting inner restoration and peace.",
+      expression: "Grief and sorrow transforming into profound consolation; gentle, reassuring smile; eyes reflecting inner restoration and tranquil relief.",
       gesturePosture: "Holding a linen prayer shawl securely wrapped around shoulders, head resting peacefully against a cool stone wall before looking upward.",
-      theologicalMood: "Experiencing deep spiritual healing, forgiveness, and the tender consolation of God who wipes away all tears.",
+      theologicalMood: "Experiencing deep spiritual healing, forgiveness, and the tender consolation of God who wipes away every tear.",
       sceneAtmosphere: "Soft twilight ambiance in a secluded 30 AD stone garden, warm golden lamp light gently illuminating peaceful features.",
-      inculcatedPromptAddition: "Character has tearful, deeply comforted eyes, relaxed brow of spiritual forgiveness, hand over heart in heartfelt prayer."
+      inculcatedPromptAddition: "Character has deeply comforted eyes, relaxed brow of spiritual forgiveness, hand over heart in heartfelt prayer."
     };
   }
 
@@ -223,11 +223,11 @@ export function generateCharacterExpression(blueprint: ShortsBlueprint): Charact
   // 6. Healing, Deliverance, Salvation & Restoration
   if (title.includes('குணமாக்கு') || title.includes('விடுவி') || title.includes('இரட்சி') || title.includes('பரிகாரி') || title.includes('பெலன்') || text.includes('குணமாக்கு') || text.includes('விடுவிக்கிறார்')) {
     return {
-      expression: "Radiant joy breaking through past sorrow; tear-streaked cheeks illuminated by a joyful, triumphant smile; eyes shining with renewed life.",
+      expression: "Radiant joy and boundless vitality; triumphant, healthy smile; bright, energetic eyes shining with renewed life and vigorous thanksgiving.",
       gesturePosture: "Standing tall with upright posture, both hands lifted gracefully toward heaven in unbounded praise for deliverance.",
       theologicalMood: "Uncontainable joy of physical and spiritual restoration, celebrating victory and miraculous deliverance.",
       sceneAtmosphere: "Brilliant morning sun bursting over Galilean hills, fresh morning breeze gently billowing linen tunic and head mantle.",
-      inculcatedPromptAddition: "Character shows triumphant joy, radiant smile, glistening tears of physical deliverance, arms raised in victory."
+      inculcatedPromptAddition: "Character shows triumphant joy, radiant smile, bright energetic eyes of physical deliverance, arms raised in victory."
     };
   }
 
@@ -244,11 +244,11 @@ export function generateCharacterExpression(blueprint: ShortsBlueprint): Charact
 
   // 8. Intimate Fatherly Love, Praise & Adoration (Default)
   return {
-    expression: "Deeply reverent, loving countenance; soft, warm gaze filled with filial intimacy; eyes moist with genuine devotional love.",
+    expression: "Deeply reverent, loving countenance; soft, warm gaze filled with filial intimacy; tranquil, thankful smile with serene, clear eyes.",
     gesturePosture: "Right hand placed over heart above coarse linen tunic, head tilted slightly upward in intimate conversation with God.",
     theologicalMood: "Intimate communion with God, expressing childlike affection and heartfelt thanksgiving for His goodness.",
     sceneAtmosphere: "Authentic 30 AD stone courtyard, morning sunlight casting warm amber hues across ancient limestone architecture.",
-    inculcatedPromptAddition: "Character shows intimate loving reverence, moist eyes filled with gratitude, hand placed over heart in prayerful devotion."
+    inculcatedPromptAddition: "Character shows intimate loving reverence, serene eyes filled with gratitude, hand placed over heart in prayerful devotion."
   };
 }
 

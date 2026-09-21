@@ -67,11 +67,11 @@ export async function generateAlphaOverlayBlob(blueprint: ShortsBlueprint): Prom
   const maxWidth = 760; // Strict YouTube Shorts safe width (160px padding on left & right to prevent UI overlay/edge clipping)
   const centerY = 960;  // 50% vertical safe zone
 
-  // No drop-shadow: Keep overlay crisp and unobtrusive so background video is clearly visible
-  ctx.shadowColor = 'transparent';
-  ctx.shadowBlur = 0;
+  // No black box, only 2px shadow (0,0,0,180) per production constraints
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.706)'; // (0,0,0,180)
+  ctx.shadowBlur = 2;
   ctx.shadowOffsetX = 0;
-  ctx.shadowOffsetY = 0;
+  ctx.shadowOffsetY = 2;
 
   // Robust font stack supporting Tamil complex script ligatures ('வு', 'ளி', 'னா', 'நி', etc.)
   const tamilFontStack = `"Noto Sans Tamil", "Mukta Malar", "Catamaran", "Latha", "Tamil Sangam MN", "Arial Unicode MS", sans-serif`;

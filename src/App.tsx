@@ -62,6 +62,66 @@ export default function App() {
     };
   }, []);
 
+  // Lock viewport: disable zoom-in, zoom-out, and horizontal shaking/drifting
+  useEffect(() => {
+    // Prevent Safari/WebKit gesture zoom
+    const handleGesture = (e: Event) => {
+      e.preventDefault();
+    };
+
+    // Prevent desktop trackpad ctrl+wheel zoom
+    const handleWheel = (e: WheelEvent) => {
+      if (e.ctrlKey) {
+        e.preventDefault();
+      }
+    };
+
+    // Prevent multi-touch pinch zooming
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches && e.touches.length > 1) {
+        e.preventDefault();
+      }
+    };
+
+    // Prevent double-tap zoom on mobile
+    let lastTouchTime = 0;
+    const handleTouchEnd = (e: TouchEvent) => {
+      const currentTime = Date.now();
+      if (currentTime - lastTouchTime <= 300) {
+        const target = e.target as HTMLElement;
+        if (!['INPUT', 'TEXTAREA', 'SELECT'].includes(target?.tagName || '')) {
+          e.preventDefault();
+        }
+      }
+      lastTouchTime = currentTime;
+    };
+
+    // Prevent zoom keyboard shortcuts (Ctrl/Cmd + '+', '-', '0', '=')
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && ['+', '-', '=', '0', '_'].includes(e.key)) {
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    document.addEventListener('gesturestart', handleGesture);
+    document.addEventListener('gesturechange', handleGesture);
+    document.addEventListener('gestureend', handleGesture);
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    document.addEventListener('touchend', handleTouchEnd, { passive: false });
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+      document.removeEventListener('gesturestart', handleGesture);
+      document.removeEventListener('gesturechange', handleGesture);
+      document.removeEventListener('gestureend', handleGesture);
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleTouchEnd);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   // Filter blueprints based on user search query and batch
   const filteredBlueprints = useMemo(() => {
     let list = INITIAL_BLUEPRINTS;
@@ -167,7 +227,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-950 text-stone-100 flex flex-col font-sans selection:bg-amber-500/30 selection:text-amber-200">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-stone-950 text-stone-100 flex flex-col font-sans selection:bg-amber-500/30 selection:text-amber-200">
       
       {/* Primary Header */}
       <Header
