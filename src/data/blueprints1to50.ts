@@ -581,21 +581,21 @@ export const BLUEPRINTS_1_TO_50: ShortsBlueprint[] = [
     tamilTitle: "அவர் எப்பொழுதும் கடிந்து கொள்ளார் ஸ்தோத்திரம்",
     tamilText: "அவர் எப்பொழுதும் கடிந்து கொள்ளார் ஸ்தோத்திரம்.",
     tamilRef: "சங். 103:9",
-    englishText: "Praise to You, He will not always chide, nor keep His anger forever.",
+    englishText: "Praise to You, He will not always strive.",
     englishRef: "Psalms 103:9",
     character: "A repentant son embracing forgiveness in tears of relief",
     location: "Courtyard path in a peaceful village at golden hour",
     videoPrompt: "A cinematic 8k video set in 30 AD Judea. A young man kneeling on dusty ground looks up with tears of overwhelming gratitude as gentle golden evening sunlight breaks upon his face. His sorrow turns to profound relief as he experiences God's boundless grace. Authentic coarse robes, emotional depth, photorealistic. --ar 9:16 --v 6.0",
     voiceProfile: "Tender, emotionally overwhelmed with gratitude and relief, soft and intimate cadence.",
-    audioScript: "[Soft emotional sigh] அவர் எப்பொழுதும் கடிந்து கொள்ளார் ஸ்தோத்திரம். ... Praise to You, He will not always chide.",
+    audioScript: "[Soft emotional sigh] அவர் எப்பொழுதும் கடிந்து கொள்ளார் ஸ்தோத்திரம். ... Praise to You, He will not always strive.",
     backgroundAudio: "Tender, warm F-major worship pad with soft gentle acoustic piano at -18dB.",
     subtitles: {
       line1Tamil: "அவர் எப்பொழுதும் கடிந்து கொள்ளார் ஸ்தோத்திரம்.",
-      line2English: "He will not always chide, nor keep His anger forever.",
+      line2English: "Praise to You, He will not always strive.",
       line3Ref: "📖 சங். 103:9 | Psalms 103:9"
     },
     seo: {
-      title: "Short #24 | அவர் எப்பொழுதும் கடிந்து கொள்ளார் | He Will Not Always Chide",
+      title: "Short #24 | அவர் எப்பொழுதும் கடிந்து கொள்ளார் | He Will Not Always Strive",
       description: "Short #24: அவர் எப்பொழுதும் கடிந்து கொள்ளார் ஸ்தோத்திரம் (Psalm 103:9). God's mercies are greater than our sins.",
       tags: ["Mercy of God", "Psalm 103:9", "Grace and Forgiveness", "Tamil Devotion", "Daily Praise"],
       hashtags: ["#Psalm1039", "#GodsMercy", "#Grace", "#TamilChristian", "#Praise"]

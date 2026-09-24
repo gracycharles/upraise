@@ -47,7 +47,7 @@ export const BatchExportModal: React.FC<BatchExportModalProps> = ({
       case 'video-only': return '1) Video Generation Alone';
       case 'youtube-only': return '2) YouTube Alone (SEO & Tags)';
       case 'expressions-only': return '3) Character Expressions & Inculcated Scene Prompts';
-      case 'nkjv-only': return '4) NKJV Canonical Verses & Titles';
+      case 'nkjv-only': return '4) Scripture Canonical Verses & Titles';
       case 'english-only': return 'English Titles Only';
       case 'tamil-only': return 'Tamil Descriptions Only';
       case 'verification-only': return 'Scripture Reference & Translation Verification';
@@ -66,7 +66,7 @@ Schedule: 2 Original Bilingual (Tamil & English) Praise Videos Daily
 Atmosphere: 30 AD Authentic Judean & Galilean Cinematic Visuals
 Video Pipeline: 9:16 Clean Plate Video + Separate 1080x1920 Alpha Overlay PNG Pipeline (Zero Text in Video, Exact Unicode, No Drop-Shadow)
 Key Anchor: "Praise be to You, Abba, Father."
-Bible Translation: NKJV (New King James Version)
+Bible Translation: Faithful Holy Scripture Translation
 Export Mode: ${getExportModeLabel(exportMode)}
 Batch: ${selectedBatch} (${filteredBlueprints.length} Blueprints)
 ================================================================================\n\n`;
@@ -76,7 +76,7 @@ Batch: ${selectedBatch} (${filteredBlueprints.length} Blueprints)
     : exportMode === 'tamil-only'
     ? filteredBlueprints.map(b => getFormattedYouTubeDescription(b)).join('\n\n----------------------------------------\n\n')
     : exportMode === 'nkjv-only'
-    ? filteredBlueprints.map(b => `Short #${b.id} | ${b.tamilTitle}\nTitle (NKJV): ${b.englishText}\nScripture: ${b.englishRef} (NKJV)\nVerse: "${b.nkjvText || b.englishText}"`).join('\n\n')
+    ? filteredBlueprints.map(b => `Short #${b.id} | ${b.tamilTitle}\nTitle: ${b.englishText}\nScripture: ${b.englishRef}\nVerse: "${b.nkjvText || b.englishText}"`).join('\n\n')
     : exportMode === 'expressions-only'
     ? filteredBlueprints.map(b => `Short #${b.id}: ${b.tamilTitle} | ${b.englishText}
 Character: ${b.character} (${b.location})
@@ -303,7 +303,7 @@ ${formatYouTubeOnlyText(b)}`;
               }`}
             >
               <BookOpen className="w-3 h-3" />
-              <span>4) NKJV Verses</span>
+              <span>4) Scripture Verses</span>
             </button>
             <button
               onClick={() => setExportMode('verification-only')}

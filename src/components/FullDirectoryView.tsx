@@ -202,7 +202,7 @@ export const FullDirectoryView: React.FC<FullDirectoryViewProps> = ({
                       copyItemText(e, getFormattedYouTubeDescription(bp), `dir-tam-${item.id}`);
                     }}
                     className="flex items-center gap-1 px-2 py-1 rounded bg-amber-950/40 hover:bg-amber-900/50 text-amber-300 text-[10px] font-semibold border border-amber-500/30 transition-all"
-                    title="Copy 3-part description (Tamil praise with ref, NKJV scripture verse, personal prayer/affirmation)"
+                    title="Copy 3-part description (Tamil praise with ref, scripture verse, personal prayer/affirmation)"
                   >
                     {copiedKey === `dir-tam-${item.id}` ? (
                       <>

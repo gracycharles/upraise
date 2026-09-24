@@ -215,7 +215,7 @@ export const CANONICAL_BATCH_1_TO_50: Record<number, CanonicalPraiseItem> = {
     englishRef: "Psalms 103:9",
     praiseTitle: "Praise to You, He Will Not Always Strive",
     verseText: "He will not always strive, nor will He keep His anger forever.",
-    theologicalContext: "NKJV Psalm 103:9 affirms God's mercy: 'He will not always strive' (அவர் எப்பொழுதும் கடிந்து கொள்ளார்)."
+    theologicalContext: "Psalm 103:9 affirms God's mercy: 'He will not always strive' (அவர் எப்பொழுதும் கடிந்து கொள்ளார்)."
   },
   25: {
     id: 25,

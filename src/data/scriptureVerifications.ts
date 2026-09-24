@@ -145,8 +145,8 @@ export function getScriptureVerification(blueprint: ShortsBlueprint): ScriptureV
   const nkjv = getNKJVData(blueprint);
 
   if (curated && curated.citedVerseAnalysis && curated.exactTitleMatch && curated.verdict) {
-    const nkjvLine = `NKJV Translation: "${nkjv.verseText}"\n`;
-    const fullText = `Scripture Reference Check (NKJV)\n ${curated.citedVerseAnalysis}\n${nkjvLine} Exact Title Match: ${curated.exactTitleMatch}\n${curated.verdict}`;
+    const nkjvLine = `Scripture Verse: "${nkjv.verseText}"\n`;
+    const fullText = `Scripture Reference Check\n ${curated.citedVerseAnalysis}\n${nkjvLine} Exact Title Match: ${curated.exactTitleMatch}\n${curated.verdict}`;
     return {
       citedVerseAnalysis: curated.citedVerseAnalysis,
       exactTitleMatch: curated.exactTitleMatch,
@@ -170,20 +170,20 @@ export function getScriptureVerification(blueprint: ShortsBlueprint): ScriptureV
     cleanTitle.includes('இருக்கிறவரே');
 
   const contextNote = nkjv.theologicalContext ? ` ${nkjv.theologicalContext}` : '';
-  const citedVerseAnalysis = `${blueprint.englishRef} (${blueprint.tamilRef}) [NKJV]: "${nkjv.verseText}". In Tamil canonical text: "${blueprint.tamilText.replace(/ ஸ்தோத்திரம்\.?$/, '')}".${contextNote} In its biblical context, this scripture provides the direct ${isDirectPraisePhrase ? 'scriptural declaration and act' : 'doctrinal and theological basis'} for attributing this praise to God.`;
+  const citedVerseAnalysis = `${blueprint.englishRef} (${blueprint.tamilRef}): "${nkjv.verseText}". In Tamil canonical text: "${blueprint.tamilText.replace(/ ஸ்தோத்திரம்\.?$/, '')}".${contextNote} In its biblical context, this scripture provides the direct ${isDirectPraisePhrase ? 'scriptural declaration and act' : 'doctrinal and theological basis'} for attributing this praise to God.`;
 
   let exactTitleMatch: string;
   let verdict: string;
 
   if (blueprint.tamilText.includes(cleanTitle)) {
-    exactTitleMatch = `The cited verse ${blueprint.englishRef} (${blueprint.tamilRef}) contains the verbatim biblical phrase "${cleanTitle}" in the Tamil canonical text and aligns faithfully with the NKJV rendering "${cleanEnglish}".`;
-    verdict = `The NKJV translation is accurate. ${blueprint.englishRef} is the exact verbatim scriptural passage where this biblical expression occurs.`;
+    exactTitleMatch = `The cited verse ${blueprint.englishRef} (${blueprint.tamilRef}) contains the verbatim biblical phrase "${cleanTitle}" in the Tamil canonical text and aligns faithfully with the biblical English rendering "${cleanEnglish}".`;
+    verdict = `The biblical translation is accurate. ${blueprint.englishRef} is the exact verbatim scriptural passage where this biblical expression occurs.`;
   } else {
-    exactTitleMatch = `While ${blueprint.englishRef} provides the theological and situational foundation, this literal praise attribute "${cleanTitle}" ("${cleanEnglish}") is canonically rooted in the biblical testimony of God's character in the NKJV.`;
-    verdict = `The NKJV translation is accurate. ${blueprint.englishRef} is a valid theological reference for this divine attribute, faithfully representing the biblical truth in devotional worship.`;
+    exactTitleMatch = `While ${blueprint.englishRef} provides the theological and situational foundation, this literal praise attribute "${cleanTitle}" ("${cleanEnglish}") is canonically rooted in the biblical testimony of God's character in Holy Scripture.`;
+    verdict = `The biblical translation is accurate. ${blueprint.englishRef} is a valid theological reference for this divine attribute, faithfully representing the biblical truth in devotional worship.`;
   }
 
-  const fullVerificationText = `Scripture Reference Check (NKJV)\n ${citedVerseAnalysis}\n Exact Title Match: ${exactTitleMatch}\n${verdict}`;
+  const fullVerificationText = `Scripture Reference Check\n ${citedVerseAnalysis}\n Exact Title Match: ${exactTitleMatch}\n${verdict}`;
 
   return {
     citedVerseAnalysis,

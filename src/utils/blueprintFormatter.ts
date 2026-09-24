@@ -38,8 +38,12 @@ export function formatVideoGenerationOnlyText(b: ShortsBlueprint): string {
 
   return `Short #${b.id}: ${b.tamilTitle}
 Tamil Text: ${b.tamilText} (${b.tamilRef})
-Biblical English (NKJV): ${b.englishText} (${b.englishRef})
-${b.nkjvText ? `📖 Scripture Verse (NKJV): "${b.nkjvText}"\n` : ''}⏱ Target Duration: Strictly 10 seconds (9:16 Vertical Portrait - 1080x1920)
+Biblical English Translation: ${b.englishText} (${b.englishRef})
+${b.nkjvText ? `📖 Scripture Verse: "${b.nkjvText}"\n` : ''}⏱ Target Duration: Strictly 10 seconds (9:16 Vertical Portrait - 1080x1920)
+
+📺 ON-SCREEN TEXT OVERLAY CONTENT & TRANSLATION (BURN-IN SUBTITLES):
+${typo.promptAdditionDirective}
+- Verification: Exact Unicode codepoints: ${codepoints}
 
 On-Screen Biblical Character:
 ${b.character}
@@ -76,10 +80,7 @@ ${b.videoPrompt}
    - Place ALL Tamil + English + Reference lines between y=900 and y=1300 MAX. FORBID y>1350.
    - After rendering, assert y_max + text_height < 1350. If fail, shift up.
    - Center horizontally at x=540 anchor="mm" for single lines.
-   - Background behind text must have 20% extra dark vignette if needed for readability, but text itself stays in safe zone.
-
-${typo.promptAdditionDirective}
-- Verification: Exact Unicode codepoints: ${codepoints}`;
+   - Background behind text must have 20% extra dark vignette if needed for readability, but text itself stays in safe zone.`;
 }
 
 /**
@@ -105,11 +106,12 @@ export function formatVideoPromptOnlyText(b: ShortsBlueprint): string {
   const codepoints = getUnicodeCodepoints(b.subtitles.line1Tamil);
   const typo = computeOverlayTypography(b.subtitles.line1Tamil, b.subtitles.line2English, b.subtitles.line3Ref);
 
-  return `🎥 SIMULTANEOUS VIDEO & AUDIO GENERATION PROMPT (9:16 VERTICAL - PORTRAIT 1080x1920):
-${b.videoPrompt}
-
+  return `📺 ON-SCREEN TEXT OVERLAY CONTENT & TRANSLATION:
 ${typo.promptAdditionDirective}
-- Verification: Exact Unicode codepoints: ${codepoints}`;
+- Verification: Exact Unicode codepoints: ${codepoints}
+
+🎥 SIMULTANEOUS VIDEO & AUDIO GENERATION PROMPT (9:16 VERTICAL - PORTRAIT 1080x1920):
+${b.videoPrompt}`;
 }
 
 /**
@@ -212,8 +214,8 @@ export function generateDynamicBlueprint(item: PraiseItem): ShortsBlueprint {
     seo: {
       title: `Short #${item.id} | ${cleanTamil} | Praise to You, ${cleanTitle} | Gracy’s Biblical Echoes`,
       description: '',
-      tags: [cleanTitle, engRef, "NKJV", "Gracy's Biblical Echoes", "GracysBiblicalEchoes", "Tamil Praise", "30 AD Bible", "1000 Praises", "Tamil", "TamilNadu", "Chennai", "TamilVlog", "Tanglish", "TamilYouTuber"],
-      hashtags: ["#GracysBiblicalEchoes", "#BiblicalEchoes", "#1000Praises", "#TamilChristian", "#BibleVerse", "#Shorts", "#NKJV"]
+      tags: [cleanTitle, engRef, "Gracy's Biblical Echoes", "GracysBiblicalEchoes", "Tamil Praise", "30 AD Bible", "1000 Praises", "Tamil", "TamilNadu", "Chennai", "TamilVlog", "Tanglish", "TamilYouTuber"],
+      hashtags: ["#GracysBiblicalEchoes", "#BiblicalEchoes", "#1000Praises", "#TamilChristian", "#BibleVerse", "#Shorts"]
     }
   };
 
