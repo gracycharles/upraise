@@ -214,8 +214,33 @@ export function generateDynamicBlueprint(item: PraiseItem): ShortsBlueprint {
     seo: {
       title: `Short #${item.id} | ${cleanTamil} | Praise to You, ${cleanTitle} | Gracy’s Biblical Echoes`,
       description: '',
-      tags: [cleanTitle, engRef, "Gracy's Biblical Echoes", "GracysBiblicalEchoes", "Tamil Praise", "30 AD Bible", "1000 Praises", "Tamil", "TamilNadu", "Chennai", "TamilVlog", "Tanglish", "TamilYouTuber"],
-      hashtags: ["#GracysBiblicalEchoes", "#BiblicalEchoes", "#1000Praises", "#TamilChristian", "#BibleVerse", "#Shorts"]
+      tags: [
+        cleanTitle, 
+        engRef, 
+        "India",
+        "morning devotion",
+        "Christian devotion",
+        "praise",
+        "praises",
+        "Morning Devotion",
+        "Christian Devotion",
+        "Morning Prayer",
+        "Daily Devotion",
+        "Christian Devotional",
+        "Tamil Christian",
+        "Tamil Praise",
+        "Gracy's Biblical Echoes", 
+        "GracysBiblicalEchoes", 
+        "30 AD Bible", 
+        "1000 Praises", 
+        "Tamil", 
+        "TamilNadu", 
+        "Chennai", 
+        "TamilVlog", 
+        "Tanglish", 
+        "TamilYouTuber"
+      ],
+      hashtags: ["#GracysBiblicalEchoes", "#BiblicalEchoes", "#1000Praises", "#TamilChristian", "#India", "#MorningDevotion", "#ChristianDevotion", "#Praise", "#Praises", "#BibleVerse", "#Shorts"]
     }
   };
 

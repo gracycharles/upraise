@@ -21,6 +21,20 @@ const RAW_BLUEPRINTS: ShortsBlueprint[] = [
 ];
 
 const TARGET_TAMIL_ALGORITHM_TAGS = [
+  'India',
+  'morning devotion',
+  'Christian devotion',
+  'praise',
+  'praises',
+  'Morning Devotion',
+  'Christian Devotion',
+  'Morning Prayer',
+  'Daily Devotion',
+  'Christian Devotional',
+  'Tamil Christian',
+  'Tamil Praise',
+  '1000 Praises',
+  "Gracy's Biblical Echoes",
   'Tamil',
   'TamilNadu',
   'Chennai',
@@ -67,7 +81,8 @@ function enrichBlueprintWithExpressionsAndNKJV(raw: ShortsBlueprint): ShortsBlue
       ...raw.seo,
       title: `${raw.tamilTitle} | ${conciseTitle} | 1000 Praises #${raw.id} | Gracy's Biblical Echoes`,
       description: getFormattedYouTubeDescription(raw),
-      tags: mergedTags
+      tags: mergedTags,
+      hashtags: Array.from(new Set([...(raw.seo?.hashtags || []), '#India', '#MorningDevotion', '#ChristianDevotion', '#Praise', '#Praises', '#TamilChristian', '#Shorts']))
     }
   };
 
