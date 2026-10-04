@@ -102,9 +102,9 @@ export async function generateAlphaOverlayBlob(blueprint: ShortsBlueprint): Prom
   const totalBlockH = totalTamilH + gap1 + totalEnglishH + gap2 + totalRefH;
   let startY = centerY - (totalBlockH / 2);
 
-  // 20% dark vignette rectangle for readability [160, 920, 920, 1280]
-  const vigYStart = Math.min(920, startY - 24);
-  const vigYEnd = Math.max(1240, startY + totalBlockH + 24);
+  // 20% dark vignette rectangle for readability [160, 880, 920, 1290]
+  const vigYStart = Math.min(880, startY - 24);
+  const vigYEnd = Math.max(1290, startY + totalBlockH + 24);
   ctx.save();
   ctx.shadowColor = 'transparent';
   ctx.fillStyle = 'rgba(0, 0, 0, 0.20)';

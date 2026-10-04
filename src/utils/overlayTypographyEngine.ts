@@ -167,6 +167,15 @@ export function computeOverlayTypography(
       ];
     }
 
+    // Explicit known 3-line split for Short #45
+    if (trimmed.includes('காரியத்தை') && trimmed.includes('வாய்க்கப்பண்ணுவார்')) {
+      return [
+        'அவரே காரியத்தை',
+        'வாய்க்கப்பண்ணுவார்',
+        'ஸ்தோத்திரம்.'
+      ];
+    }
+
     // If text is long (> 48 chars) and has 4+ words, wrap to 3 lines
     if (trimmed.length > 48 && words.length >= 4) {
       const lines: string[] = [];
@@ -249,13 +258,13 @@ export function computeOverlayTypography(
   let refYCoord: number;
 
   if (splitTamilLines.length >= 3) {
-    tamilYCoords = [900, 960, 1020];
+    tamilYCoords = [915, 980, 1045];
     if (splitEnglishLines.length >= 2) {
-      englishYCoords = [1085, 1130];
-      refYCoord = 1195;
+      englishYCoords = [1110, 1155];
+      refYCoord = 1215;
     } else {
-      englishYCoords = [1105];
-      refYCoord = 1180;
+      englishYCoords = [1110];
+      refYCoord = 1215;
     }
   } else if (splitTamilLines.length === 2) {
     if (splitEnglishLines.length >= 2) {
@@ -310,17 +319,18 @@ export function computeOverlayTypography(
 
     return `2. Subtitle Overlay (Pillow Strict):
 • Safe zone: x 160-900px (760px), y 900-1300 max — verified y_max+height <1350, bottom 350px never used
+• HarfBuzz Complex Text Shaping Mandate: Render all Tamil text via Pillow with Raqm/HarfBuzz shaping enabled (language="ta") and anchor="mm"/"lm" so conjuncts (e.g. க்க, ப்ப, ண்ணு, த்தா) form correctly. FORBID raw ffmpeg drawtext filter (drawtext renders codepoints individually, splitting conjuncts apart).
 • Tamil Lines Gold #FFC107 ${tamilPx}px anchor="mm" at ${tamilPlacement}:
 ${tamilLinesJson}
 • English ${splitEnglishLines.length > 1 ? 'Lines' : 'Line'} White #F8F9FA ${englishPx}px anchor="mm" at ${englishPlacement}:
 ${splitEnglishLines.length > 1 ? englishLinesJson : `"${splitEnglishLines[0]}"`}
 • Reference Line Stone Gray #A8A29E ${refPx}px dual-run at y=${refYCoord} with textlength advance method:
-	○ Tamil ${refParts.tamilPart} DroidSansTamil-Bold ${refPx}px
+	○ Tamil ${refParts.tamilPart} DroidSansTamil-Bold ${refPx}px (language="ta")
 	○ total_advance = getlength(tamil) + getlength("${refParts.separator || ' | '}${refParts.englishPart}") = 298.68px
 	○ x_start = 540 - total/2 = 390.65px, anchor="lm"
 	○ Symmetry asserted: abs(x_start - (1080-(x_start+total))) = 0.0 <2px ✅
-• Shadow 2px (0,0,0,180) at same anchors, 20% dark vignette rectangle - for readability [160, 920, 920, 1280]
-• Unicode verified for Tamil line per your codepoints
+• Shadow 2px (0,0,0,180) at same anchors, 20% dark vignette rectangle - for readability [160, 880, 920, 1290]
+• Unicode verified for Tamil line per your codepoints (properly shaped ligatures via HarfBuzz)
 • Final encode: H.264 via imageio_ffmpeg libx264, pixel format yuv420p, CRF 18 (width=1080, height=1920 full-bleed). FORBID mp4v codec.`;
   };
 
