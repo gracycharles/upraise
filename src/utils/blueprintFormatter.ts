@@ -47,9 +47,10 @@ ${typo.promptAdditionDirective}
 
 On-Screen Biblical Character:
 ${b.character}
-${expr ? `🎭 Character Inculcation:
+${expr ? `🎭 Character Cinematography & Inculcation:
+- Camera Framing & Shot: ${expr.cameraFraming || 'Dynamic Cinematic Framing (9:16 Vertical)'}
+- Physical Posture & Action: ${expr.gesturePosture}
 - Facial Expression: ${expr.expression}
-- Posture & Hand Gestures: ${expr.gesturePosture}
 - Emotional & Theological Context: ${expr.theologicalMood}
 ` : ''}
 Setting:
@@ -61,7 +62,7 @@ ${b.videoPrompt}
 🎬 KEY PRODUCTION MANDATES:
 1. STRICT 10-SECOND DURATION & 9:16 VERTICAL FORMAT: Video duration MUST be strictly 10.0 seconds in 9:16 vertical portrait format (1080x1920 resolution for YouTube Shorts).
 2. SIMULTANEOUS SYNCHRONIZED VIDEO & AUDIO (100% EVEN LIP SYNC & ZERO HALLUCINATION): Generate video visuals and character voiceover simultaneously. Lip movements MUST be 100% synchronized and even throughout all 10 seconds, articulating every single word. Speak ONLY the exact scripted text below (no intro/outro, no unscripted commentary):
-   - Voice Profile: ${b.voiceProfile}
+   - Character Voice & Tone: Naturally matching ${b.character} — ${b.voiceProfile}. Video generator selects the natural vocal timbre, resonance, and tone suited to this character.
    - Exact Spoken Script (Strictly 10.0s): "${b.audioScript}"
    - Background Audio: ${b.backgroundAudio} (Mixed at -18dB)
 3. TRUE 1080x1920 CONTENT & H.264 MANDATE (NO BLACK BARS / FULL-BLEED):
@@ -70,10 +71,11 @@ ${b.videoPrompt}
    - If source is 720x1280, upscale with Lanczos to 1080x1920 to fill the frame completely — full-bleed vertical portrait.
    - Encode with imageio_ffmpeg libx264 (pixel format yuv420p, CRF 18). FORBID mp4v codec (which fails preview in Shorts player).
    - Verify with ffprobe: width=1080, height=1920, pix_fmt=yuv420p, codec_name=h264.
-4. SHORTS FRAMING MANDATE:
-   - Subject placed in lower 1/3rd to 2/3rds of vertical frame, with ~15% headroom above head for outdoor sky/background visibility.
-   - Medium close-up chest-up, centered horizontally, face clearly visible.
-   - Background must be outdoor authentic 1st-century biblical landscape, NOT interior/kitchen, with no black vignette borders.
+4. SHORTS FRAMING & CINEMATOGRAPHY MANDATE:
+   - Dynamic camera framing matching the prompt (ranging across Wide Environmental, Low-Angle Reverent, Medium-Wide 3/4, Side Profile Tracking, Over-the-Shoulder, and Eye-Level Medium).
+   - Subject framed naturally with ~15% headroom for vertical 9:16 safe-zone, face clearly visible during synchronized speech articulation.
+   - Forbid repetitive hand-on-chest or static poses; ensure active physical interaction with the historic environment.
+   - Background must be outdoor authentic 1st-century biblical landscape with natural atmospheric lighting, NOT interior/kitchen, with no black vignette borders.
 5. YOUTUBE SHORTS SAFE-ZONE TEXT MANDATE (CRITICAL - NO OVERLAP):
    - YouTube Shorts UI occludes: bottom 350px (title, description, channel info), right 180px (like, comment, share, subscribe), top 120px (search).
    - SUBTITLE SAFE AREA = x: 160-900px (760px safe width), y: 750-1250px (center band only).
@@ -118,8 +120,9 @@ ${b.videoPrompt}`;
  * Formats the Audio & Voiceover Prompt alone with zero-hallucination mandate
  */
 export function formatAudioOnlyText(b: ShortsBlueprint): string {
-  return `🎙 AUDIO & VOICEOVER PROMPT (STRICT ZERO-HALLUCINATION SCRIPT & 100% EVEN LIP SYNC):
-- Voice Profile: ${b.voiceProfile}
+  return `🎙 AUDIO & VOICEOVER PROMPT (CHARACTER-MATCHED VOCALIZATION & 100% EVEN LIP SYNC):
+- On-Screen Character: ${b.character}
+- Voice Profile & Tone: Naturally matching ${b.character} — ${b.voiceProfile} (Video generator has creative control to choose the natural vocal timbre, resonance, and cadence)
 - Voiceover Script (Strictly 10.0s): "${b.audioScript}"
 - CRITICAL AUDIO & LIP SYNC DIRECTIVE: Read ONLY the exact scripted text above paced evenly across strictly 10 seconds. Lip movement MUST be 100% even and continuous for every single spoken syllable, articulating every word fully without leaving any word unarticulated or frozen while audio plays. NO EXTRA WORDS, NO INTRO/OUTRO, NO THEOLOGICAL COMMENTARY. Speak only the exact Tamil praise followed by the exact English praise line as scripted. Zero hallucinated sentences.
 - Background Audio: ${b.backgroundAudio}`;
@@ -153,6 +156,7 @@ export function getCharacterExpressionText(b: ShortsBlueprint): string {
   if (!b.characterExpression) return '';
   const expr = b.characterExpression;
   return `Character: ${b.character}
+Camera Framing & Shot: ${expr.cameraFraming || 'Dynamic Cinematic Framing (9:16 Vertical)'}
 Facial Expression: ${expr.expression}
 Posture & Gesture: ${expr.gesturePosture}
 Theological Context: ${expr.theologicalMood}
@@ -203,7 +207,7 @@ export function generateDynamicBlueprint(item: PraiseItem): ShortsBlueprint {
     character: "Devout Galilean disciple or biblical witness in first-century Judea",
     location: "Authentic first-century biblical landscape in Galilee or Jerusalem",
     videoPrompt: "",
-    voiceProfile: `Devout, reverent voice authentically matching the on-screen biblical witness with solemn adoration, emotional depth, and prayerful cadence.`,
+    voiceProfile: `Devout, reverent voice authentically matching the on-screen biblical character with solemn adoration, emotional depth, and prayerful cadence.`,
     audioScript: `[Pause] ${cleanTamil} ... Praise to You, ${cleanTitle}.`,
     backgroundAudio: "Sacred acoustic D-major worship pad with ambient string undertones at -18dB.",
     subtitles: {
@@ -254,7 +258,7 @@ export function generateDynamicBlueprint(item: PraiseItem): ShortsBlueprint {
     ...baseBlueprint,
     englishText: resolvedEnglish,
     audioScript: `[Pause] ${cleanTamil} ... ${resolvedEnglish}.`,
-    voiceProfile: `Devout, reverent voice authentically matching the on-screen biblical character with solemn adoration, emotional depth, and prayerful cadence.`,
+    voiceProfile: baseBlueprint.voiceProfile || `Devout, reverent voice authentically matching the on-screen biblical character with solemn adoration, emotional depth, and prayerful cadence.`,
     nkjvText: nkjv.verseText,
     translationVersion: 'NKJV',
     characterExpression: expr,

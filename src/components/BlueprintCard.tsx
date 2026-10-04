@@ -214,6 +214,262 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
 
       <div className="p-5 sm:p-6 space-y-6">
         
+        {/* 📝 On-Screen Text Overlay & Translation (Top Placement - Burn-In Subtitles Preview) */}
+        <section className="space-y-3">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
+              <div className="p-1.5 rounded-md bg-teal-500/10 text-teal-400">
+                <Subtitles className="w-4 h-4" />
+              </div>
+              <h3 className="text-xs sm:text-sm font-bold text-stone-200 tracking-wide uppercase font-mono flex items-center gap-2 flex-wrap">
+                <span>📝 On-Screen Text Overlay & Translation (9:16 Center Safe Zone)</span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-teal-950/80 border border-teal-500/40 text-teal-300 font-mono font-semibold">
+                  Clean Alpha PNG / Burn-In
+                </span>
+                <span className={`text-[10px] px-2 py-0.5 rounded-full border font-mono ${typo.uiBadgeClass}`}>
+                  {typo.uiBadgeText}
+                </span>
+              </h3>
+            </div>
+            <div className="flex items-center gap-2 flex-wrap">
+              <button
+                onClick={handleDownloadAlphaPng}
+                disabled={isGeneratingPng}
+                className="text-xs font-semibold px-2.5 py-1 rounded bg-amber-500/15 border border-amber-500/30 text-amber-300 hover:bg-amber-500/25 transition-all flex items-center gap-1.5 disabled:opacity-50"
+                title="Download 1080x1920 clean transparent alpha text overlay PNG"
+              >
+                <Download className="w-3.5 h-3.5 text-amber-400" />
+                <span>{isGeneratingPng ? 'Generating...' : 'Download Alpha PNG'}</span>
+              </button>
+              <button
+                onClick={() => copyToClipboard(formatSubtitlesOnlyText(blueprint), 'subs')}
+                className="text-xs font-semibold px-2.5 py-1 rounded bg-teal-500/15 border border-teal-500/30 text-teal-300 hover:bg-teal-500/25 transition-all flex items-center gap-1.5"
+                title="Copy 3-line overlay, sizing directives & Unicode specs"
+              >
+                {copiedSection === 'subs' ? (
+                  <>
+                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                    <span className="text-emerald-400 font-bold">Copied Specs!</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-3.5 h-3.5 text-teal-400" />
+                    <span>Copy Overlay Specs</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+
+          <div className="bg-stone-950 p-4 rounded-xl border border-stone-800 space-y-3.5 text-xs">
+            {/* Visual 9:16 Center Safe Zone Preview (Clean, No Drop-Shadow) */}
+            <div className="p-4 sm:p-5 rounded-lg bg-black/90 border border-stone-800 text-center space-y-3 shadow-inner">
+              <div className="flex items-center justify-between border-b border-stone-800/80 pb-1.5 text-[10px] font-mono text-stone-400">
+                <span className="flex items-center gap-1.5 text-amber-400 font-semibold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block animate-pulse"></span>
+                  9:16 Center Safe Zone (Lifted Y: 900-1300px • 350px Bottom Clearance)
+                </span>
+                <span className="text-stone-300">
+                  Canvas Auto-Fit: <strong className="text-amber-300 font-mono">~{typo.tamilPx}px</strong> ({typo.scalePercent}% scale)
+                </span>
+              </div>
+
+              <div className="space-y-1.5">
+                <div className="text-[10px] font-mono text-amber-500/70 tracking-wider">
+                  Line 1 • Gold #FFC107 ({typo.splitTamilLines.length} {typo.splitTamilLines.length > 1 ? 'Lines' : 'Line'} Wrapped &lt;760px):
+                </div>
+                {typo.splitTamilLines.map((line, idx) => (
+                  <div key={idx} className={`text-amber-400 tracking-wide font-tamil-overlay ${typo.uiTamilClass}`}>
+                    {line}
+                  </div>
+                ))}
+              </div>
+
+              <div className="space-y-1.5 pt-1">
+                <div className="text-[10px] font-mono text-emerald-400/80 tracking-wider font-semibold">
+                  Line 2 • White #F8F9FA ({typo.splitEnglishLines.length} {typo.splitEnglishLines.length > 1 ? 'Lines' : 'Line'} Wrapped &lt;760px):
+                </div>
+                {typo.splitEnglishLines.map((line, idx) => (
+                  <div key={idx} className={`text-white font-serif italic ${typo.uiEnglishClass}`}>
+                    "{line}"
+                  </div>
+                ))}
+              </div>
+
+              <div className="space-y-1 pt-1">
+                <div className="text-[10px] font-mono text-stone-500 tracking-wider">Line 3 • Stone Gray #A8A29E (Dual Reference):</div>
+                <div className={`text-stone-400 font-mono ${typo.uiRefClass}`}>
+                  {blueprint.subtitles.line3Ref}
+                </div>
+              </div>
+            </div>
+
+            {/* 🔤 Exact On-Screen Translation Breakdown (Line-by-Line Zero-Loss Inspection) */}
+            <div className="p-3.5 rounded-lg bg-emerald-950/20 border border-emerald-500/30 space-y-2.5">
+              <div className="flex flex-wrap items-center justify-between gap-1.5">
+                <div className="flex items-center gap-2">
+                  <Languages className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-emerald-300">
+                    On-Screen Burn-In Translation & Biblical Grounding:
+                  </span>
+                </div>
+                <span className="text-[10px] font-mono text-emerald-400 font-semibold bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/40">
+                  Zero Loss of Text • 1:1 Biblical Context
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+                {/* Tamil Spoken & Burned Line */}
+                <div className="p-2.5 rounded bg-black/60 border border-stone-800 space-y-1">
+                  <div className="flex items-center justify-between text-[10px] font-mono text-amber-400">
+                    <span>Line 1 (Tamil Praise Spoken & Burned - {typo.splitTamilLines.length} {typo.splitTamilLines.length > 1 ? 'Lines' : 'Line'}):</span>
+                    <span className="text-stone-500 font-sans">{blueprint.tamilRef}</span>
+                  </div>
+                  <div className="space-y-0.5">
+                    {typo.splitTamilLines.map((line, idx) => (
+                      <p key={idx} className="font-tamil-overlay text-amber-300 font-semibold text-sm">
+                        {line}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+
+                {/* English Translated Line */}
+                <div className="p-2.5 rounded bg-black/60 border border-emerald-500/30 space-y-1">
+                  <div className="flex items-center justify-between text-[10px] font-mono text-emerald-400">
+                    <span>Line 2 (English Translation Burned - {typo.splitEnglishLines.length} {typo.splitEnglishLines.length > 1 ? 'Lines' : 'Line'}):</span>
+                    <button
+                      onClick={() => copyToClipboard(blueprint.subtitles.line2English, 'copy-overlay-trans')}
+                      className="text-emerald-400 hover:text-emerald-300 flex items-center gap-1 font-mono transition-colors"
+                      title="Copy English Overlay Translation"
+                    >
+                      {copiedSection === 'copy-overlay-trans' ? (
+                        <>
+                          <Check className="w-3 h-3 text-emerald-400" />
+                          <span>Copied!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3 h-3" />
+                          <span>Copy Translation</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                  <div className="space-y-0.5">
+                    {typo.splitEnglishLines.map((line, idx) => (
+                      <p key={idx} className="font-serif italic text-white font-medium text-sm">
+                        "{line}"
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-[11px] text-stone-300 flex flex-wrap items-center justify-between gap-1 pt-1 border-t border-emerald-500/20 font-sans">
+                <span>
+                  <strong className="text-emerald-300 font-mono">Scripture Grounding:</strong> Faithful biblical rendering of {blueprint.englishRef} preserving the full context of the Tamil praise with zero dropped words.
+                </span>
+                <span className="font-mono text-stone-400 text-[10px] shrink-0">
+                  {blueprint.subtitles.line3Ref}
+                </span>
+              </div>
+            </div>
+
+            {/* Auto-Scaled Sizing Directive & Content Preservation Guarantee */}
+            <div className={`p-3 rounded-lg border space-y-2 ${typo.reductionPercent > 0 ? 'bg-amber-950/20 border-amber-500/30' : 'bg-stone-900/90 border-stone-800'}`}>
+              <div className="flex items-center justify-between text-[11px]">
+                <span className="font-mono font-bold flex items-center gap-1.5 text-amber-300">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block"></span>
+                  📐 Video Gen Overlay Directive: {typo.tierLabel}
+                </span>
+                <span className="font-mono text-[10px] text-emerald-400 font-semibold flex items-center gap-1">
+                  <CheckCircle2 className="w-3 h-3" />
+                  100% Content Intact (Zero Loss)
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px]">
+                <div className="p-2 rounded bg-black/60 border border-stone-800">
+                  <span className="block text-[10px] text-stone-400 font-mono uppercase">Tamil Font Scale</span>
+                  <span className="font-mono text-amber-300 font-bold text-xs">~{typo.tamilFontSizeCanvas}</span>
+                  <span className="block text-[10px] text-stone-500 mt-0.5">{typo.tamilCharCount} chars ({typo.scalePercent}% scale)</span>
+                </div>
+                <div className="p-2 rounded bg-black/60 border border-stone-800">
+                  <span className="block text-[10px] text-stone-400 font-mono uppercase">English Font Scale</span>
+                  <span className="font-mono text-stone-100 font-bold text-xs">~{typo.englishFontSizeCanvas}</span>
+                  <span className="block text-[10px] text-stone-500 mt-0.5">{typo.englishCharCount} chars</span>
+                </div>
+                <div className="p-2 rounded bg-black/60 border border-stone-800">
+                  <span className="block text-[10px] text-stone-400 font-mono uppercase">Safe Margin & Style</span>
+                  <span className="font-mono text-teal-300 font-semibold text-[11px]">Max 760px Safe Zone</span>
+                  <span className="block text-[10px] text-stone-500 mt-0.5">{typo.recommendedWrap}</span>
+                </div>
+              </div>
+
+              <p className="text-[11px] text-stone-300 leading-relaxed font-sans pt-1">
+                {typo.reductionPercent > 0 ? (
+                  <>
+                    <strong className="text-amber-300">Reduced Font Scale for Video Gen:</strong> High character density detected ({typo.tamilCharCount} Tamil / {typo.englishCharCount} English chars). The video generator and overlay compositor are instructed to scale the font by <strong className="text-amber-300">{typo.reductionPercent}%</strong> to prevent margin clipping, while strictly guaranteeing <strong className="text-emerald-400">zero content loss</strong> (no words omitted or truncated).
+                  </>
+                ) : (
+                  <>
+                    <strong className="text-stone-200">Standard Font Scale:</strong> Standard character density. Full praise text fits comfortably on single lines within the 80% center safe margins with zero loss.
+                  </>
+                )}
+              </p>
+            </div>
+
+            {/* Exact Unicode Codepoint Verification (வ vs ன distinction) */}
+            <div className="p-3 rounded-lg bg-stone-900/90 border border-stone-800 space-y-2">
+              <div className="flex items-center justify-between text-[11px]">
+                <span className="text-teal-300 font-mono font-bold flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-teal-400 inline-block"></span>
+                  Exact Unicode Codepoints (Tamil Line 1):
+                </span>
+                <button
+                  onClick={() => copyToClipboard(codepoints, 'codepoints')}
+                  className="text-[10px] font-mono text-stone-400 hover:text-teal-300 transition-colors flex items-center gap-1"
+                >
+                  {copiedSection === 'codepoints' ? (
+                    <>
+                      <Check className="w-3 h-3 text-emerald-400" />
+                      <span className="text-emerald-400 font-bold">Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3 h-3" />
+                      <span>Copy Codepoints</span>
+                    </>
+                  )}
+                </button>
+              </div>
+              <p className="font-mono text-[11px] text-stone-300 bg-stone-950 p-2.5 rounded border border-stone-800/80 select-all break-all leading-relaxed">
+                {codepoints}
+              </p>
+              <div className="p-2 rounded bg-teal-950/40 border border-teal-500/20 text-[11px] text-teal-200/90 leading-relaxed font-sans">
+                <strong className="text-teal-300 font-mono">Orthographic Accuracy & Letter Distinction:</strong> In Tamil, <strong>வ (U+0BB5)</strong> and <strong>ன (U+0BA9)</strong> are distinct Unicode codepoints. Video models sometimes confuse similar glyphs in latent space causing the <em>தேவவே</em> bug. By explicitly prompting the model with exact Unicode and letter-distinction directives, <strong>தேவனே</strong> is rendered 100% letter-perfect without drop-shadow obscuring the scene.
+              </div>
+            </div>
+
+            {/* Compositing Specs Footnotes */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px] text-stone-400">
+              <div className="p-2 rounded bg-stone-900 border border-stone-800">
+                <span className="block text-[10px] text-stone-500 font-mono uppercase">Typography & Style</span>
+                <span className="font-mono text-stone-200 font-semibold">Model Selected & Styled</span>
+              </div>
+              <div className="p-2 rounded bg-stone-900 border border-stone-800">
+                <span className="block text-[10px] text-stone-500 font-mono uppercase">Compositing Mode</span>
+                <span className="font-mono text-teal-300 font-semibold">Direct Burn-In / Clean Alpha</span>
+              </div>
+              <div className="p-2 rounded bg-stone-900 border border-stone-800">
+                <span className="block text-[10px] text-stone-500 font-mono uppercase">Positioning & Shadow</span>
+                <span className="font-mono text-amber-300 font-semibold">Y: 50% Center (No Drop-Shadow)</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Bilingual Scripture Display */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           
@@ -325,246 +581,6 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
           </div>
 
         </div>
-
-        {/* 📝 On-Screen Text Overlay & Translation (Top Placement - Burn-In Subtitles Preview) */}
-        <section className="space-y-3">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="flex items-center gap-2 flex-wrap">
-              <div className="p-1.5 rounded-md bg-teal-500/10 text-teal-400">
-                <Subtitles className="w-4 h-4" />
-              </div>
-              <h3 className="text-xs sm:text-sm font-bold text-stone-200 tracking-wide uppercase font-mono flex items-center gap-2 flex-wrap">
-                <span>📝 On-Screen Text Overlay & Translation (9:16 Center Safe Zone)</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-teal-950/80 border border-teal-500/40 text-teal-300 font-mono font-semibold">
-                  Clean Alpha PNG / Burn-In
-                </span>
-                <span className={`text-[10px] px-2 py-0.5 rounded-full border font-mono ${typo.uiBadgeClass}`}>
-                  {typo.uiBadgeText}
-                </span>
-              </h3>
-            </div>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={handleDownloadAlphaPng}
-                disabled={isGeneratingPng}
-                className="text-xs font-semibold px-2.5 py-1 rounded bg-amber-500/15 border border-amber-500/30 text-amber-300 hover:bg-amber-500/25 transition-all flex items-center gap-1.5 disabled:opacity-50"
-                title="Download 1080x1920 clean transparent alpha text overlay PNG"
-              >
-                <Download className="w-3.5 h-3.5 text-amber-400" />
-                <span>{isGeneratingPng ? 'Generating...' : 'Download Alpha PNG'}</span>
-              </button>
-              <button
-                onClick={() => copyToClipboard(formatSubtitlesOnlyText(blueprint), 'subs')}
-                className="text-xs font-semibold px-2.5 py-1 rounded bg-teal-500/15 border border-teal-500/30 text-teal-300 hover:bg-teal-500/25 transition-all flex items-center gap-1.5"
-                title="Copy 3-line overlay, sizing directives & Unicode specs"
-              >
-                {copiedSection === 'subs' ? (
-                  <>
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
-                    <span className="text-emerald-400 font-bold">Copied Specs!</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-3.5 h-3.5 text-teal-400" />
-                    <span>Copy Overlay Specs</span>
-                  </>
-                )}
-              </button>
-            </div>
-          </div>
-
-          <div className="bg-stone-950 p-4 rounded-xl border border-stone-800 space-y-3.5 text-xs">
-            {/* Visual 9:16 Center Safe Zone Preview (Clean, No Drop-Shadow) */}
-            <div className="p-4 sm:p-5 rounded-lg bg-black/90 border border-stone-800 text-center space-y-3 shadow-inner">
-              <div className="flex items-center justify-between border-b border-stone-800/80 pb-1.5 text-[10px] font-mono text-stone-400">
-                <span className="flex items-center gap-1.5 text-amber-400 font-semibold">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block animate-pulse"></span>
-                  9:16 Center Safe Zone (Lifted Y: 900-1300px • 350px Bottom Clearance)
-                </span>
-                <span className="text-stone-300">
-                  Canvas Auto-Fit: <strong className="text-amber-300 font-mono">~{typo.tamilPx}px</strong> ({typo.scalePercent}% scale)
-                </span>
-              </div>
-
-              <div className="space-y-1.5">
-                <div className="text-[10px] font-mono text-amber-500/70 tracking-wider">Line 1 • Gold #FFC107:</div>
-                <div className={`text-amber-400 tracking-wide font-tamil-overlay ${typo.uiTamilClass}`}>
-                  {blueprint.subtitles.line1Tamil}
-                </div>
-              </div>
-
-              <div className="space-y-1.5 pt-1">
-                <div className="text-[10px] font-mono text-emerald-400/80 tracking-wider font-semibold">Line 2 • White #F8F9FA (English Translation):</div>
-                <div className={`text-white font-serif italic ${typo.uiEnglishClass}`}>
-                  "{blueprint.subtitles.line2English}"
-                </div>
-              </div>
-
-              <div className="space-y-1 pt-1">
-                <div className="text-[10px] font-mono text-stone-500 tracking-wider">Line 3 • Stone Gray #A8A29E (Dual Reference):</div>
-                <div className={`text-stone-400 font-mono ${typo.uiRefClass}`}>
-                  {blueprint.subtitles.line3Ref}
-                </div>
-              </div>
-            </div>
-
-            {/* 🔤 Exact On-Screen Translation Breakdown (Line-by-Line Zero-Loss Inspection) */}
-            <div className="p-3.5 rounded-lg bg-emerald-950/20 border border-emerald-500/30 space-y-2.5">
-              <div className="flex flex-wrap items-center justify-between gap-1.5">
-                <div className="flex items-center gap-2">
-                  <Languages className="w-3.5 h-3.5 text-emerald-400" />
-                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-emerald-300">
-                    On-Screen Burn-In Translation & Biblical Grounding:
-                  </span>
-                </div>
-                <span className="text-[10px] font-mono text-emerald-400 font-semibold bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/40">
-                  Zero Loss of Text • 1:1 Biblical Context
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
-                {/* Tamil Spoken & Burned Line */}
-                <div className="p-2.5 rounded bg-black/60 border border-stone-800 space-y-1">
-                  <div className="flex items-center justify-between text-[10px] font-mono text-amber-400">
-                    <span>Line 1 (Tamil Praise Spoken & Burned):</span>
-                    <span className="text-stone-500 font-sans">{blueprint.tamilRef}</span>
-                  </div>
-                  <p className="font-tamil-overlay text-amber-300 font-semibold text-sm">
-                    {blueprint.subtitles.line1Tamil}
-                  </p>
-                </div>
-
-                {/* English Translated Line */}
-                <div className="p-2.5 rounded bg-black/60 border border-emerald-500/30 space-y-1">
-                  <div className="flex items-center justify-between text-[10px] font-mono text-emerald-400">
-                    <span>Line 2 (English Translation Burned):</span>
-                    <button
-                      onClick={() => copyToClipboard(blueprint.subtitles.line2English, 'copy-overlay-trans')}
-                      className="text-emerald-400 hover:text-emerald-300 flex items-center gap-1 font-mono transition-colors"
-                      title="Copy English Overlay Translation"
-                    >
-                      {copiedSection === 'copy-overlay-trans' ? (
-                        <>
-                          <Check className="w-3 h-3 text-emerald-400" />
-                          <span>Copied!</span>
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="w-3 h-3" />
-                          <span>Copy Translation</span>
-                        </>
-                      )}
-                    </button>
-                  </div>
-                  <p className="font-serif italic text-white font-medium text-sm">
-                    "{blueprint.subtitles.line2English}"
-                  </p>
-                </div>
-              </div>
-
-              <div className="text-[11px] text-stone-300 flex flex-wrap items-center justify-between gap-1 pt-1 border-t border-emerald-500/20 font-sans">
-                <span>
-                  <strong className="text-emerald-300 font-mono">Scripture Grounding:</strong> Faithful biblical rendering of {blueprint.englishRef} preserving the full context of the Tamil praise with zero dropped words.
-                </span>
-                <span className="font-mono text-stone-400 text-[10px] shrink-0">
-                  {blueprint.subtitles.line3Ref}
-                </span>
-              </div>
-            </div>
-
-            {/* Auto-Scaled Sizing Directive & Content Preservation Guarantee */}
-            <div className={`p-3 rounded-lg border space-y-2 ${typo.reductionPercent > 0 ? 'bg-amber-950/20 border-amber-500/30' : 'bg-stone-900/90 border-stone-800'}`}>
-              <div className="flex items-center justify-between text-[11px]">
-                <span className="font-mono font-bold flex items-center gap-1.5 text-amber-300">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block"></span>
-                  📐 Video Gen Overlay Directive: {typo.tierLabel}
-                </span>
-                <span className="font-mono text-[10px] text-emerald-400 font-semibold flex items-center gap-1">
-                  <CheckCircle2 className="w-3 h-3" />
-                  100% Content Intact (Zero Loss)
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px]">
-                <div className="p-2 rounded bg-black/60 border border-stone-800">
-                  <span className="block text-[10px] text-stone-400 font-mono uppercase">Tamil Font Scale</span>
-                  <span className="font-mono text-amber-300 font-bold text-xs">~{typo.tamilFontSizeCanvas}</span>
-                  <span className="block text-[10px] text-stone-500 mt-0.5">{typo.tamilCharCount} chars ({typo.scalePercent}% scale)</span>
-                </div>
-                <div className="p-2 rounded bg-black/60 border border-stone-800">
-                  <span className="block text-[10px] text-stone-400 font-mono uppercase">English Font Scale</span>
-                  <span className="font-mono text-stone-100 font-bold text-xs">~{typo.englishFontSizeCanvas}</span>
-                  <span className="block text-[10px] text-stone-500 mt-0.5">{typo.englishCharCount} chars</span>
-                </div>
-                <div className="p-2 rounded bg-black/60 border border-stone-800">
-                  <span className="block text-[10px] text-stone-400 font-mono uppercase">Safe Margin & Style</span>
-                  <span className="font-mono text-teal-300 font-semibold text-[11px]">Max 760px Safe Zone</span>
-                  <span className="block text-[10px] text-stone-500 mt-0.5">{typo.recommendedWrap}</span>
-                </div>
-              </div>
-
-              <p className="text-[11px] text-stone-300 leading-relaxed font-sans pt-1">
-                {typo.reductionPercent > 0 ? (
-                  <>
-                    <strong className="text-amber-300">Reduced Font Scale for Video Gen:</strong> High character density detected ({typo.tamilCharCount} Tamil / {typo.englishCharCount} English chars). The video generator and overlay compositor are instructed to scale the font by <strong className="text-amber-300">{typo.reductionPercent}%</strong> to prevent margin clipping, while strictly guaranteeing <strong className="text-emerald-400">zero content loss</strong> (no words omitted or truncated).
-                  </>
-                ) : (
-                  <>
-                    <strong className="text-stone-200">Standard Font Scale:</strong> Standard character density. Full praise text fits comfortably on single lines within the 80% center safe margins with zero loss.
-                  </>
-                )}
-              </p>
-            </div>
-
-            {/* Exact Unicode Codepoint Verification (வ vs ன distinction) */}
-            <div className="p-3 rounded-lg bg-stone-900/90 border border-stone-800 space-y-2">
-              <div className="flex items-center justify-between text-[11px]">
-                <span className="text-teal-300 font-mono font-bold flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-teal-400 inline-block"></span>
-                  Exact Unicode Codepoints (Tamil Line 1):
-                </span>
-                <button
-                  onClick={() => copyToClipboard(codepoints, 'codepoints')}
-                  className="text-[10px] font-mono text-stone-400 hover:text-teal-300 transition-colors flex items-center gap-1"
-                >
-                  {copiedSection === 'codepoints' ? (
-                    <>
-                      <Check className="w-3 h-3 text-emerald-400" />
-                      <span className="text-emerald-400 font-bold">Copied!</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-3 h-3" />
-                      <span>Copy Codepoints</span>
-                    </>
-                  )}
-                </button>
-              </div>
-              <p className="font-mono text-[11px] text-stone-300 bg-stone-950 p-2.5 rounded border border-stone-800/80 select-all break-all leading-relaxed">
-                {codepoints}
-              </p>
-              <div className="p-2 rounded bg-teal-950/40 border border-teal-500/20 text-[11px] text-teal-200/90 leading-relaxed font-sans">
-                <strong className="text-teal-300 font-mono">Orthographic Accuracy & Letter Distinction:</strong> In Tamil, <strong>வ (U+0BB5)</strong> and <strong>ன (U+0BA9)</strong> are distinct Unicode codepoints. Video models sometimes confuse similar glyphs in latent space causing the <em>தேவவே</em> bug. By explicitly prompting the model with exact Unicode and letter-distinction directives, <strong>தேவனே</strong> is rendered 100% letter-perfect without drop-shadow obscuring the scene.
-              </div>
-            </div>
-
-            {/* Compositing Specs Footnotes */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px] text-stone-400">
-              <div className="p-2 rounded bg-stone-900 border border-stone-800">
-                <span className="block text-[10px] text-stone-500 font-mono uppercase">Typography & Style</span>
-                <span className="font-mono text-stone-200 font-semibold">Model Selected & Styled</span>
-              </div>
-              <div className="p-2 rounded bg-stone-900 border border-stone-800">
-                <span className="block text-[10px] text-stone-500 font-mono uppercase">Compositing Mode</span>
-                <span className="font-mono text-teal-300 font-semibold">Direct Burn-In / Clean Alpha</span>
-              </div>
-              <div className="p-2 rounded bg-stone-900 border border-stone-800">
-                <span className="block text-[10px] text-stone-500 font-mono uppercase">Positioning & Shadow</span>
-                <span className="font-mono text-amber-300 font-semibold">Y: 50% Center (No Drop-Shadow)</span>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* 📖 Scripture Reference & Translation Verification (Initially Collapsed) */}
         {verification && (
@@ -718,6 +734,20 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
               </button>
             </div>
 
+            <div className="p-2.5 rounded-lg bg-cyan-950/30 border border-cyan-500/30 flex items-center justify-between gap-2 text-xs">
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-wider flex items-center gap-1.5 shrink-0">
+                  <span>🎥</span> Shot Framing & Angle:
+                </span>
+                <span className="text-stone-200 font-mono font-medium">
+                  {blueprint.characterExpression.cameraFraming || "Low-Angle Heroic / Reverent Shot (9:16 Vertical)"}
+                </span>
+              </div>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-cyan-300 font-semibold shrink-0">
+                Varied Cinematography
+              </span>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1 text-xs">
               <div className="bg-stone-900/80 p-3 rounded-lg border border-stone-800 space-y-1">
                 <span className="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
@@ -817,11 +847,36 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
               </p>
             </div>
 
-            <div>
-              <div className="text-[10px] font-mono text-stone-400 uppercase tracking-wider mb-1 flex items-center justify-between">
-                <span>2. 9:16 Video Plate Prompt (Visuals & Scene Direction):</span>
-                <span className="text-amber-400 font-semibold">Scene & Character Direction • 8K 30 AD</span>
+            <div className="space-y-2">
+              <div className="flex flex-wrap items-center justify-between gap-1.5 text-[10px] font-mono">
+                <span className="text-stone-400 uppercase tracking-wider">
+                  2. 9:16 Video Plate Prompt (Visuals & Scene Direction):
+                </span>
+                <span className="text-amber-400 font-semibold bg-amber-950/40 px-2 py-0.5 rounded border border-amber-500/30">
+                  Scene & Character Direction • 8K 30 AD
+                </span>
               </div>
+
+              {/* Dynamic Camera Framing & Physical Posture Diversity Indicators */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                <div className="p-2 rounded bg-black/50 border border-stone-800 space-y-0.5">
+                  <span className="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-wider block">
+                    🎥 Camera Framing & Shot Type:
+                  </span>
+                  <p className="text-stone-200 text-xs font-mono">
+                    {blueprint.characterExpression?.cameraFraming || "Low-Angle Heroic / Reverent Shot (9:16 Vertical)"}
+                  </p>
+                </div>
+                <div className="p-2 rounded bg-black/50 border border-stone-800 space-y-0.5">
+                  <span className="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider block">
+                    🎭 Physical Action & Posture (Varied):
+                  </span>
+                  <p className="text-stone-200 text-xs">
+                    {blueprint.characterExpression?.gesturePosture}
+                  </p>
+                </div>
+              </div>
+
               <p className="font-mono text-xs text-stone-200 select-all leading-relaxed bg-stone-900/90 p-3 rounded-lg border border-stone-800">
                 {blueprint.videoPrompt}
               </p>
@@ -851,28 +906,31 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                 <ChevronDown className="w-4 h-4 text-stone-400 ml-1" />
               )}
             </button>
-            <button
-              onClick={() => copyToClipboard(formatAudioOnlyText(blueprint), 'audio')}
-              className="text-xs font-medium flex items-center gap-1 text-stone-400 hover:text-emerald-400 transition-colors px-2 py-1 rounded hover:bg-stone-900"
-            >
-              {copiedSection === 'audio' ? (
-                <>
-                  <Check className="w-3 h-3 text-emerald-400" />
-                  <span className="text-emerald-400 font-semibold">Copied Audio Prompt</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="w-3 h-3" />
-                  <span>Copy Audio Prompt</span>
-                </>
-              )}
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => copyToClipboard(formatAudioOnlyText(blueprint), 'audio')}
+                className="text-xs font-medium flex items-center gap-1 text-stone-400 hover:text-emerald-400 transition-colors px-2 py-1 rounded hover:bg-stone-900"
+              >
+                {copiedSection === 'audio' ? (
+                  <>
+                    <Check className="w-3 h-3 text-emerald-400" />
+                    <span className="text-emerald-400 font-semibold">Copied Audio Prompt</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-3 h-3" />
+                    <span>Copy Audio Prompt</span>
+                  </>
+                )}
+              </button>
+            </div>
           </div>
           {isAudioOpen && (
             <div className="p-4 pt-0 border-t border-stone-800/80 space-y-2.5 text-xs text-stone-300">
               <div className="pt-3">
-                <span className="text-stone-500 font-mono uppercase text-[10px] block">Voice Profile:</span>
+                <span className="text-stone-500 font-mono uppercase text-[10px] block">Character-Matched Voice & Tone:</span>
                 <p className="text-stone-200 font-medium">{blueprint.voiceProfile}</p>
+                <p className="text-[11px] text-stone-400 mt-0.5">Naturally suited to {blueprint.character} (AI video generator selects authentic vocal inflection and timbre).</p>
               </div>
               <div className="p-2.5 rounded-lg bg-stone-900/80 border border-stone-800 space-y-2">
                 <div>

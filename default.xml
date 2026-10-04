@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deployment>
+  <application>
+    <name>Gracy's Biblical Echoes</name>
+    <description>30 AD Historical Biblical Shorts Production Studio &amp; 1000 Praises Directory</description>
+    <version>1.0.0</version>
+    <platform>github-pages</platform>
+    <entrypoint>index.html</entrypoint>
+    <base-href>./</base-href>
+  </application>
+  <routing>
+    <mode>spa</mode>
+    <fallback>index.html</fallback>
+    <clean-urls>true</clean-urls>
+  </routing>
+  <mime-types>
+    <mime-mapping>
+      <extension>json</extension>
+      <mime-type>application/json</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+      <extension>svg</extension>
+      <mime-type>image/svg+xml</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+      <extension>webp</extension>
+      <mime-type>image/webp</mime-type>
+    </mime-mapping>
+  </mime-types>
+</deployment>

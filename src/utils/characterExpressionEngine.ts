@@ -1,4 +1,20 @@
 import { ShortsBlueprint, CharacterExpression } from '../types';
+import { VIDEO_VARIATIONS_40_TO_300 } from '../data/videoVariations';
+
+const CAMERA_SHOT_ROTATIONS = [
+  "Low-Angle Heroic / Reverent Shot (Looking upward as golden dawn sky illuminates the character)",
+  "Wide Environmental Establishing Shot (9:16 full-body framing showcasing character within historic biblical landscape)",
+  "Medium-Wide Three-Quarter Framing (Waist-up capturing dynamic physical interaction with the historic environment)",
+  "Side-Profile Tracking Dolly Shot (Smooth cinematic tracking following character's purposeful movement)",
+  "Over-The-Shoulder Perspective View (Slow arcing reveal from panoramic horizon to character's reverent profile)",
+  "Eye-Level Medium Cinematic Framing (Authentic 35mm natural depth of field and intimate historical presence)",
+  "High-Angle Downward Tilt (Camera descending gently from above into sunlit courtyard or waterside)",
+  "Dynamic Slow Arcing Orbit (Dramatic 45-degree cinematic camera move revealing character and expansive backdrop)"
+];
+
+export function getDynamicCameraFraming(id: number): string {
+  return CAMERA_SHOT_ROTATIONS[id % CAMERA_SHOT_ROTATIONS.length];
+}
 
 /**
  * Character Expression & Scene Inculcation Engine
@@ -154,11 +170,27 @@ const CURATED_EXPRESSIONS: Record<number, CuratedExpression> = {
  * for any praise based on its theological themes and scriptural emotion.
  */
 export function generateCharacterExpression(blueprint: ShortsBlueprint): CharacterExpression {
+  // Check bespoke cinematography & postural variations for Shorts #40 to #300
+  if (blueprint.id >= 40 && blueprint.id <= 300 && VIDEO_VARIATIONS_40_TO_300[blueprint.id]) {
+    const v = VIDEO_VARIATIONS_40_TO_300[blueprint.id];
+    return {
+      expression: v.expression,
+      gesturePosture: v.gesturePosture,
+      theologicalMood: v.theologicalMood,
+      sceneAtmosphere: v.sceneAtmosphere,
+      cameraFraming: v.cameraFraming,
+      inculcatedPromptAddition: `Shot: ${v.cameraFraming} | Action: ${v.gesturePosture} | Expression: ${v.expression}`
+    };
+  }
+
+  const cameraShot = getDynamicCameraFraming(blueprint.id);
+
   if (CURATED_EXPRESSIONS[blueprint.id]) {
     const c = CURATED_EXPRESSIONS[blueprint.id];
     return {
       ...c,
-      inculcatedPromptAddition: `Emotional Expression: ${c.expression} Physical Posture: ${c.gesturePosture} Atmosphere: ${c.sceneAtmosphere}`
+      cameraFraming: cameraShot,
+      inculcatedPromptAddition: `Shot: ${cameraShot} | Action: ${c.gesturePosture} | Expression: ${c.expression}`
     };
   }
 
@@ -172,7 +204,8 @@ export function generateCharacterExpression(blueprint: ShortsBlueprint): Charact
       gesturePosture: "Arms held slightly open or extended in gentle service, slight respectful bow of the head, embodying sacrificial love and humility.",
       theologicalMood: "Living in the unity of the Spirit, bearing one another's burdens and loving one another as Christ loved us.",
       sceneAtmosphere: "Warm, communal courtyard in ancient Galilee at twilight, soft lantern glow illuminating fellowship and peaceful community.",
-      inculcatedPromptAddition: "Character has tender compassionate eyes, gentle humble smile of brotherly love, open hands of Christian fellowship and service."
+      cameraFraming: cameraShot,
+      inculcatedPromptAddition: `Shot: ${cameraShot} | Action: Open arms of Christian fellowship and service | Expression: Gentle humble smile of brotherly love`
     };
   }
 
@@ -180,10 +213,11 @@ export function generateCharacterExpression(blueprint: ShortsBlueprint): Charact
   if (title.includes('கிருபை') || title.includes('இரக்க') || title.includes('காருண்ய') || text.includes('கிருபை') || text.includes('இரக்கம்')) {
     return {
       expression: "Serene, tranquil countenance; brow releasing all tension; lips curved in gentle, heartfelt gratitude for unmerited mercy; warm, comforted gaze.",
-      gesturePosture: "Right hand pressed firmly against the chest over linen tunic, head bowed in humble thanksgiving before lifting peacefully toward heaven.",
+      gesturePosture: "Arms gently extended forward at waist height, open palms facing heaven in humble thanksgiving before lifting face peacefully toward the sky.",
       theologicalMood: "Overwhelmed by God's abundant mercy and steadfast covenant love that endures forever, delivering the soul into lasting peace.",
       sceneAtmosphere: "Serene morning mist on the Mount of Olives, soft dawn light washing over ancient olive groves in peaceful stillness.",
-      inculcatedPromptAddition: "Character has peaceful eyes filled with serene gratitude for great mercy, relaxed brow, hand pressed over heart in adoration."
+      cameraFraming: cameraShot,
+      inculcatedPromptAddition: `Shot: ${cameraShot} | Action: Open palms extended toward heaven in gratitude | Expression: Serene gratitude for great mercy`
     };
   }
 
@@ -191,10 +225,11 @@ export function generateCharacterExpression(blueprint: ShortsBlueprint): Charact
   if (title.includes('மன்னி') || title.includes('ஆறுதல்') || title.includes('கண்ணீர்') || title.includes('தேற்று') || text.includes('மன்னி') || text.includes('ஆறுதல்') || text.includes('கண்ணீரை')) {
     return {
       expression: "Grief and sorrow transforming into profound consolation; gentle, reassuring smile; eyes reflecting inner restoration and tranquil relief.",
-      gesturePosture: "Holding a linen prayer shawl securely wrapped around shoulders, head resting peacefully against a cool stone wall before looking upward.",
+      gesturePosture: "Holding a linen prayer shawl securely wrapped around shoulders, resting one hand against an ancient stone pillar before looking upward.",
       theologicalMood: "Experiencing deep spiritual healing, forgiveness, and the tender consolation of God who wipes away every tear.",
       sceneAtmosphere: "Soft twilight ambiance in a secluded 30 AD stone garden, warm golden lamp light gently illuminating peaceful features.",
-      inculcatedPromptAddition: "Character has deeply comforted eyes, relaxed brow of spiritual forgiveness, hand over heart in heartfelt prayer."
+      cameraFraming: cameraShot,
+      inculcatedPromptAddition: `Shot: ${cameraShot} | Action: Adjusting prayer shawl, hand resting on stone pillar | Expression: Deeply comforted eyes of forgiveness`
     };
   }
 
@@ -205,7 +240,8 @@ export function generateCharacterExpression(blueprint: ShortsBlueprint): Charact
       gesturePosture: "Both hands cupped and held outward in receiving and sharing, head slightly lifted toward heaven in grateful praise.",
       theologicalMood: "Beholding God's miraculous multiplication and boundless provision, trusting the Lord who supplies every need according to His riches.",
       sceneAtmosphere: "Sunlit Galilean hillside overlooking the shimmering sea, fresh breeze rustling green barley fields under bright skies.",
-      inculcatedPromptAddition: "Character shows joyful amazement at divine provision, bright smiling eyes, hands cupped in grateful receipt and blessing."
+      cameraFraming: cameraShot,
+      inculcatedPromptAddition: `Shot: ${cameraShot} | Action: Hands cupped in grateful receipt and sharing | Expression: Joyful amazement at divine provision`
     };
   }
 
@@ -216,7 +252,8 @@ export function generateCharacterExpression(blueprint: ShortsBlueprint): Charact
       gesturePosture: "Kneeling on one knee upon ancient flagstones, palms held outward in total reverence and surrender to the Supreme King.",
       theologicalMood: "Trembling before the transcendent holiness and majestic glory of the Almighty God of Israel.",
       sceneAtmosphere: "Dramatic golden light rays cutting through ancient stone colonnades, atmospheric dust particles suspended in ethereal stillness.",
-      inculcatedPromptAddition: "Character exhibits breathtaking holy awe, wide luminous eyes filled with wonder, reverent posture kneeling on stone flagstones."
+      cameraFraming: cameraShot,
+      inculcatedPromptAddition: `Shot: ${cameraShot} | Action: Reverent posture kneeling on stone flagstones with open palms | Expression: Breathtaking holy awe`
     };
   }
 
@@ -227,7 +264,8 @@ export function generateCharacterExpression(blueprint: ShortsBlueprint): Charact
       gesturePosture: "Standing tall with upright posture, both hands lifted gracefully toward heaven in unbounded praise for deliverance.",
       theologicalMood: "Uncontainable joy of physical and spiritual restoration, celebrating victory and miraculous deliverance.",
       sceneAtmosphere: "Brilliant morning sun bursting over Galilean hills, fresh morning breeze gently billowing linen tunic and head mantle.",
-      inculcatedPromptAddition: "Character shows triumphant joy, radiant smile, bright energetic eyes of physical deliverance, arms raised in victory."
+      cameraFraming: cameraShot,
+      inculcatedPromptAddition: `Shot: ${cameraShot} | Action: Arms raised in victory and unhindered vitality | Expression: Radiant smile of physical deliverance`
     };
   }
 
@@ -235,32 +273,49 @@ export function generateCharacterExpression(blueprint: ShortsBlueprint): Charact
   if (title.includes('கன்மலை') || title.includes('அடைக்கலம்') || title.includes('மேய்ப்ப') || title.includes('கேடக') || title.includes('கோட்டை') || title.includes('வழி') || text.includes('கன்மலை') || text.includes('மேய்ப்')) {
     return {
       expression: "Deep, resolute calmness; serene and tranquil gaze looking steadily into the horizon; unshakable confidence and peaceful inner rest.",
-      gesturePosture: "Standing firmly anchored against an ancient rock or holding a wooden shepherd's staff, shoulders relaxed, breathing peacefully.",
+      gesturePosture: "Standing firmly anchored against an ancient rock or resting both hands upon a polished wooden shepherd's staff, shoulders relaxed.",
       theologicalMood: "Steadfast faith resting secure under the shadow of the Almighty, trusting Jehovah as Shepherd and Rock.",
       sceneAtmosphere: "Pastoral Galilean hillside at sunset, soft golden grass swaying in twilight breeze under a calm lavender and amber sky.",
-      inculcatedPromptAddition: "Character has calm, resolute eyes of unwavering trust, peaceful steady posture leaning on shepherd staff, tranquil demeanor."
+      cameraFraming: cameraShot,
+      inculcatedPromptAddition: `Shot: ${cameraShot} | Action: Resting hands on shepherd staff, steady posture | Expression: Calm resolute eyes of unwavering trust`
     };
   }
 
-  // 8. Intimate Fatherly Love, Praise & Adoration (Default)
+  // 8. Intimate Fatherly Love, Praise & Adoration (Default - Varied Non-Chest Gestures)
+  const defaultGestures = [
+    "Both arms gently extended outward at waist height, open palms facing upward in humble adoration.",
+    "Resting one hand upon a rugged olivewood staff, standing with calm, unshakable dignity against the morning wind.",
+    "Standing with serene upright posture, hands loosely clasped at waist level in peaceful, quiet contemplation.",
+    "Reaching one hand outward toward the morning sunlight, letting warm rays wash over open fingers in thankful prayer."
+  ];
+
   return {
     expression: "Deeply reverent, loving countenance; soft, warm gaze filled with filial intimacy; tranquil, thankful smile with serene, clear eyes.",
-    gesturePosture: "Right hand placed over heart above coarse linen tunic, head tilted slightly upward in intimate conversation with God.",
+    gesturePosture: defaultGestures[blueprint.id % defaultGestures.length],
     theologicalMood: "Intimate communion with God, expressing childlike affection and heartfelt thanksgiving for His goodness.",
     sceneAtmosphere: "Authentic 30 AD stone courtyard, morning sunlight casting warm amber hues across ancient limestone architecture.",
-    inculcatedPromptAddition: "Character shows intimate loving reverence, serene eyes filled with gratitude, hand placed over heart in prayerful devotion."
+    cameraFraming: cameraShot,
+    inculcatedPromptAddition: `Shot: ${cameraShot} | Action: Dignified prayerful posture with open hands | Expression: Intimate loving reverence and clear serene eyes`
   };
 }
 
 /**
- * Weaves the character expression and scene direction seamlessly into the video prompt.
+ * Weaves the character expression, dynamic camera framing, and varied scene direction seamlessly into the video prompt.
  */
 export function buildInculcatedVideoPrompt(blueprint: ShortsBlueprint, expr: CharacterExpression): string {
-  return `A cinematic 8k video set in 30 AD Judea/Galilee (9:16 vertical, 10s native). Historical biblical character: ${blueprint.character}. 
-SCENE & DIRECTION:
+  const cameraShot = expr.cameraFraming || getDynamicCameraFraming(blueprint.id);
+  const cleanVoice = blueprint.voiceProfile ? blueprint.voiceProfile.replace(/\.+$/, '').trim() : '';
+  const voiceDirective = cleanVoice 
+    ? `${cleanVoice}. Video generator selects the natural acoustic timbre, cadence, and inflection organically matching this character.`
+    : `Organic vocalization naturally matching ${blueprint.character}.`;
+  return `A cinematic 8k video set in 30 AD Judea/Galilee (9:16 vertical portrait, 10s native duration). 
+HISTORICAL BIBLICAL CHARACTER: ${blueprint.character}. 
+CINEMATOGRAPHY & CAMERA DIRECTION:
+- Camera Framing & Shot Type: ${cameraShot}
+- Physical Posture & Action: ${expr.gesturePosture}
 - Facial Expression: ${expr.expression}
-- Posture & Gesture: ${expr.gesturePosture}
-- Setting & Atmosphere: In ${blueprint.location}. ${expr.sceneAtmosphere}
+- Vocal Tone & Character Speech: Naturally matching ${blueprint.character} — ${voiceDirective}
+- Setting & Environment: In ${blueprint.location}. ${expr.sceneAtmosphere}
 - Emotional & Theological Context: ${expr.theologicalMood}
-Historical authenticity: 1st-century coarse-weave linen garments, natural skin textures, shallow depth of field, dramatic cinematic lighting, photorealistic.`;
+CINEMATIC MANDATE: Active, dynamic 1st-century biblical staging. Avoid static poses and avoid hand-on-chest clichés; ensure rich, varied camera movement and natural physical interaction with the historic environment. Photorealistic 8k, authentic coarse-weave linen garments, natural skin textures, shallow depth of field.`;
 }

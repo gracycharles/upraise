@@ -76,12 +76,16 @@ export async function generateAlphaOverlayBlob(blueprint: ShortsBlueprint): Prom
   // Robust font stack supporting Tamil complex script ligatures ('வு', 'ளி', 'னா', 'நி', etc.)
   const tamilFontStack = `"Noto Sans Tamil", "Mukta Malar", "Catamaran", "Latha", "Tamil Sangam MN", "Arial Unicode MS", sans-serif`;
 
-  // Measure fonts
+  // Measure fonts and use pre-split safe lines (<760px)
   ctx.font = `bold ${typo.tamilPx}px ${tamilFontStack}`;
-  const tamilLines = wrapText(line1TamilNormalized, maxWidth);
+  const tamilLines = typo.splitTamilLines && typo.splitTamilLines.length > 0 
+    ? typo.splitTamilLines 
+    : wrapText(line1TamilNormalized, maxWidth);
 
   ctx.font = `italic ${typo.englishPx}px "Cinzel", "Georgia", "Times New Roman", serif`;
-  const englishLines = wrapText(line2EnglishNormalized, maxWidth);
+  const englishLines = typo.splitEnglishLines && typo.splitEnglishLines.length > 0 
+    ? typo.splitEnglishLines 
+    : wrapText(line2EnglishNormalized, maxWidth);
 
   const refLine = line3RefNormalized;
 
@@ -97,6 +101,15 @@ export async function generateAlphaOverlayBlob(blueprint: ShortsBlueprint): Prom
 
   const totalBlockH = totalTamilH + gap1 + totalEnglishH + gap2 + totalRefH;
   let startY = centerY - (totalBlockH / 2);
+
+  // 20% dark vignette rectangle for readability [160, 920, 920, 1280]
+  const vigYStart = Math.min(920, startY - 24);
+  const vigYEnd = Math.max(1240, startY + totalBlockH + 24);
+  ctx.save();
+  ctx.shadowColor = 'transparent';
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.20)';
+  ctx.fillRect(160, vigYStart, 760, vigYEnd - vigYStart);
+  ctx.restore();
 
   // 1. Render Tamil lines (Golden-Amber)
   ctx.fillStyle = '#FFC107';

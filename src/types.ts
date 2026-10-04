@@ -35,6 +35,7 @@ export interface CharacterExpression {
   theologicalMood: string;
   sceneAtmosphere: string;
   inculcatedPromptAddition: string;
+  cameraFraming?: string;
 }
 
 export interface ScriptureVerification {

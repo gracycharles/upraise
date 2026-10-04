@@ -26,6 +26,8 @@ const TARGET_TAMIL_ALGORITHM_TAGS = [
   'Christian devotion',
   'praise',
   'praises',
+  'India morning devotion',
+  'Christian devotion praise',
   'Morning Devotion',
   'Christian Devotion',
   'Morning Prayer',
@@ -59,13 +61,11 @@ function enrichBlueprintWithExpressionsAndNKJV(raw: ShortsBlueprint): ShortsBlue
   // Spoken Tamil: Line 1 Tamil overlay
   // Spoken English: Line 2 English overlay
   const unifiedAudioScript = `[Pause] ${tamilTextClean} ... ${englishTextNKJV}.`;
-  // Character-and-scene-matched voice profile: Voice, tone, gender, age, and intonation authentically match the on-screen biblical character and historical scene.
-  const characterMatchingVoice = raw.voiceProfile || `Devout, reverent voice authentically matching the on-screen biblical character with solemn adoration, emotional depth, and prayerful cadence.`;
 
   const enriched: ShortsBlueprint = {
     ...raw,
     englishText: englishTextNKJV,
-    voiceProfile: characterMatchingVoice,
+    voiceProfile: raw.voiceProfile || `Devout, reverent voice authentically matching the on-screen biblical character with solemn adoration, emotional depth, and prayerful cadence.`,
     audioScript: unifiedAudioScript,
     nkjvText: nkjv.verseText,
     translationVersion: 'NKJV',
