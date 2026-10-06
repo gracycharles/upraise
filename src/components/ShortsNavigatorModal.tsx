@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
-import { Search, X, Hash, ChevronRight, Check, Grid, List, Sparkles } from 'lucide-react';
-import { ShortsBlueprint } from '../types';
+import { Search, X, Hash, ChevronRight, Check, Grid, List, Sparkles, Film, Youtube } from 'lucide-react';
+import { ShortsBlueprint, CompletionStatusMap } from '../types';
 
 interface ShortsNavigatorModalProps {
   isOpen: boolean;
@@ -8,19 +8,27 @@ interface ShortsNavigatorModalProps {
   blueprints: ShortsBlueprint[];
   currentId: number;
   onSelectShort: (blueprint: ShortsBlueprint) => void;
+  completionStatusMap?: CompletionStatusMap;
+  onToggleVideoGenerated?: (id: number) => void;
+  onToggleYouTubeDeployed?: (id: number) => void;
 }
 
 type BatchTab = 'all' | '1-50' | '51-100' | '101-150' | '151-200' | '201-250' | '251-300';
+type StatusTab = 'all' | 'video-done' | 'yt-deployed' | 'video-pending' | 'yt-pending';
 
 export const ShortsNavigatorModal: React.FC<ShortsNavigatorModalProps> = ({
   isOpen,
   onClose,
   blueprints,
   currentId,
-  onSelectShort
+  onSelectShort,
+  completionStatusMap = {},
+  onToggleVideoGenerated,
+  onToggleYouTubeDeployed
 }) => {
   const [query, setQuery] = useState('');
   const [activeBatch, setActiveBatch] = useState<BatchTab>('all');
+  const [activeStatus, setActiveStatus] = useState<StatusTab>('all');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [jumpInput, setJumpInput] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -81,8 +89,18 @@ export const ShortsNavigatorModal: React.FC<ShortsNavigatorModalProps> = ({
       );
     }
 
+    if (activeStatus === 'video-done') {
+      list = list.filter(b => completionStatusMap[b.id]?.videoGenerated);
+    } else if (activeStatus === 'yt-deployed') {
+      list = list.filter(b => completionStatusMap[b.id]?.youtubeDeployed);
+    } else if (activeStatus === 'video-pending') {
+      list = list.filter(b => !completionStatusMap[b.id]?.videoGenerated);
+    } else if (activeStatus === 'yt-pending') {
+      list = list.filter(b => !completionStatusMap[b.id]?.youtubeDeployed);
+    }
+
     return list;
-  }, [blueprints, activeBatch, query]);
+  }, [blueprints, activeBatch, activeStatus, query, completionStatusMap]);
 
   const handleJumpSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -209,6 +227,63 @@ export const ShortsNavigatorModal: React.FC<ShortsNavigatorModalProps> = ({
                 {tab === 'all' ? `All (${blueprints.length})` : `#${tab}`}
               </button>
             ))}
+          </div>
+
+          {/* Status Filter Buttons (Video Generated & YouTube Deployed) */}
+          <div className="flex flex-wrap items-center gap-1.5 pt-1.5 border-t border-stone-850">
+            <span className="text-[11px] font-mono text-stone-400 mr-1 uppercase">Status:</span>
+            <button
+              onClick={() => setActiveStatus('all')}
+              className={`px-2 py-0.5 rounded-md text-xs font-semibold transition-all ${
+                activeStatus === 'all'
+                  ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
+                  : 'bg-stone-900 text-stone-400 hover:text-stone-200 border border-stone-800'
+              }`}
+            >
+              All Statuses
+            </button>
+            <button
+              onClick={() => setActiveStatus('video-done')}
+              className={`px-2 py-0.5 rounded-md text-xs font-semibold flex items-center gap-1 transition-all ${
+                activeStatus === 'video-done'
+                  ? 'bg-indigo-500/25 text-indigo-300 border border-indigo-500/50 font-bold'
+                  : 'bg-stone-900 text-indigo-300/80 hover:text-indigo-200 border border-stone-800'
+              }`}
+            >
+              <Film className="w-3 h-3 text-indigo-400" />
+              <span>🎬 Video Done</span>
+            </button>
+            <button
+              onClick={() => setActiveStatus('yt-deployed')}
+              className={`px-2 py-0.5 rounded-md text-xs font-semibold flex items-center gap-1 transition-all ${
+                activeStatus === 'yt-deployed'
+                  ? 'bg-red-500/25 text-red-300 border border-red-500/50 font-bold'
+                  : 'bg-stone-900 text-red-300/80 hover:text-red-200 border border-stone-800'
+              }`}
+            >
+              <Youtube className="w-3 h-3 text-red-400" />
+              <span>▶️ YouTube Deployed</span>
+            </button>
+            <button
+              onClick={() => setActiveStatus('video-pending')}
+              className={`px-2 py-0.5 rounded-md text-xs font-semibold transition-all ${
+                activeStatus === 'video-pending'
+                  ? 'bg-stone-800 text-amber-300 border border-stone-600 font-bold'
+                  : 'bg-stone-900 text-stone-400 hover:text-stone-200 border border-stone-800'
+              }`}
+            >
+              ⏳ Needs Video
+            </button>
+            <button
+              onClick={() => setActiveStatus('yt-pending')}
+              className={`px-2 py-0.5 rounded-md text-xs font-semibold transition-all ${
+                activeStatus === 'yt-pending'
+                  ? 'bg-stone-800 text-amber-300 border border-stone-600 font-bold'
+                  : 'bg-stone-900 text-stone-400 hover:text-stone-200 border border-stone-800'
+              }`}
+            >
+              ⏳ Needs YouTube
+            </button>
             <span className="ml-auto text-xs text-stone-400 font-mono">
               Showing {filtered.length} shorts
             </span>
@@ -252,6 +327,21 @@ export const ShortsNavigatorModal: React.FC<ShortsNavigatorModalProps> = ({
                     <span className="text-[10px] text-stone-400 group-hover:text-amber-300 truncate w-full text-center mt-0.5 font-tamil-overlay">
                       {b.tamilTitle.split(' ')[0]}
                     </span>
+                    {/* Two colored status markers */}
+                    <div className="flex items-center gap-1 mt-1">
+                      {completionStatusMap[b.id]?.videoGenerated && (
+                        <span 
+                          className="w-2 h-2 rounded-full bg-indigo-400 shadow-sm shadow-indigo-500/50" 
+                          title={`Short #${b.id}: Video Generated`}
+                        />
+                      )}
+                      {completionStatusMap[b.id]?.youtubeDeployed && (
+                        <span 
+                          className="w-2 h-2 rounded-full bg-red-400 shadow-sm shadow-red-500/50" 
+                          title={`Short #${b.id}: YouTube Deployed`}
+                        />
+                      )}
+                    </div>
                     {isCurrent && (
                       <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-amber-400 ring-2 ring-stone-900" />
                     )}
@@ -302,6 +392,22 @@ export const ShortsNavigatorModal: React.FC<ShortsNavigatorModalProps> = ({
                     </div>
 
                     <div className="flex items-center gap-2 shrink-0">
+                      {/* Status Badges */}
+                      <div className="flex items-center gap-1.5">
+                        {completionStatusMap[b.id]?.videoGenerated && (
+                          <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 flex items-center gap-1">
+                            <Film className="w-3 h-3 text-indigo-400" />
+                            <span>Video</span>
+                          </span>
+                        )}
+                        {completionStatusMap[b.id]?.youtubeDeployed && (
+                          <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/20 border border-red-500/40 text-red-300 flex items-center gap-1">
+                            <Youtube className="w-3 h-3 text-red-400" />
+                            <span>YouTube</span>
+                          </span>
+                        )}
+                      </div>
+
                       {isCurrent ? (
                         <span className="flex items-center gap-1 text-xs font-semibold text-amber-400 bg-amber-500/15 px-2 py-0.5 rounded-full border border-amber-500/30">
                           <Check className="w-3.5 h-3.5" />

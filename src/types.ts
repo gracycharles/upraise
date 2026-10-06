@@ -77,3 +77,10 @@ export interface ShortsBlueprint {
 }
 
 export type ViewTab = 'studio' | 'directory';
+
+export interface ShortCompletionStatus {
+  videoGenerated: boolean;
+  youtubeDeployed: boolean;
+}
+
+export type CompletionStatusMap = Record<number, ShortCompletionStatus>;

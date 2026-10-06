@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { PraiseItem, ShortsBlueprint } from '../types';
+import { PraiseItem, ShortsBlueprint, CompletionStatusMap } from '../types';
 import { ALL_PRAISES } from '../data/tamildata';
-import { CheckCircle2, Sparkles, ArrowRight, BookOpen, Search, Video, Hash, Copy, Check } from 'lucide-react';
+import { CheckCircle2, Sparkles, ArrowRight, BookOpen, Search, Video, Hash, Copy, Check, Film, Youtube } from 'lucide-react';
 import { 
   generateDynamicBlueprint, 
   formatVideoGenerationOnlyText, 
@@ -15,11 +15,17 @@ import {
 interface FullDirectoryViewProps {
   verifiedBlueprints: ShortsBlueprint[];
   onSelectBlueprint: (blueprint: ShortsBlueprint) => void;
+  completionStatusMap?: CompletionStatusMap;
+  onToggleVideoGenerated?: (id: number) => void;
+  onToggleYouTubeDeployed?: (id: number) => void;
 }
 
 export const FullDirectoryView: React.FC<FullDirectoryViewProps> = ({
   verifiedBlueprints,
   onSelectBlueprint,
+  completionStatusMap = {},
+  onToggleVideoGenerated,
+  onToggleYouTubeDeployed
 }) => {
   const [filterQuery, setFilterQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState<string>('all');
@@ -162,6 +168,35 @@ export const FullDirectoryView: React.FC<FullDirectoryViewProps> = ({
                       <Sparkles className="w-3 h-3 text-amber-400" />
                       Dynamic
                     </span>
+                  )}
+
+                  {/* Completion Markers */}
+                  {completionStatusMap[item.id]?.videoGenerated && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onToggleVideoGenerated && onToggleVideoGenerated(item.id);
+                      }}
+                      className="flex items-center gap-1 text-[10px] font-bold text-indigo-300 bg-indigo-500/20 px-2 py-0.5 rounded-full border border-indigo-500/40 hover:bg-indigo-500/30 transition-colors"
+                      title={`Short #${item.id}: Video Generated (Click to toggle)`}
+                    >
+                      <Film className="w-3 h-3 text-indigo-400" />
+                      <span>Video</span>
+                    </button>
+                  )}
+
+                  {completionStatusMap[item.id]?.youtubeDeployed && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onToggleYouTubeDeployed && onToggleYouTubeDeployed(item.id);
+                      }}
+                      className="flex items-center gap-1 text-[10px] font-bold text-red-300 bg-red-500/20 px-2 py-0.5 rounded-full border border-red-500/40 hover:bg-red-500/30 transition-colors"
+                      title={`Short #${item.id}: YouTube Deployed (Click to toggle)`}
+                    >
+                      <Youtube className="w-3 h-3 text-red-400" />
+                      <span>YouTube</span>
+                    </button>
                   )}
                 </div>
                 <span className="text-xs font-semibold text-stone-400 font-mono">

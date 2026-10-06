@@ -18,9 +18,11 @@ import {
   ChevronLeft,
   ChevronRight,
   Download,
-  Languages
+  Languages,
+  Film,
+  Youtube
 } from 'lucide-react';
-import { ShortsBlueprint } from '../types';
+import { ShortsBlueprint, ShortCompletionStatus } from '../types';
 import { 
   formatBlueprintAsText, 
   formatVideoGenerationOnlyText, 
@@ -47,6 +49,9 @@ interface BlueprintCardProps {
   onNavigatePrev?: () => void;
   onNavigateNext?: () => void;
   onOpenNavigator?: () => void;
+  completionStatus?: ShortCompletionStatus;
+  onToggleVideoGenerated?: (id: number) => void;
+  onToggleYouTubeDeployed?: (id: number) => void;
 }
 
 const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({ 
@@ -56,7 +61,10 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
   nextId,
   onNavigatePrev,
   onNavigateNext,
-  onOpenNavigator
+  onOpenNavigator,
+  completionStatus,
+  onToggleVideoGenerated,
+  onToggleYouTubeDeployed
 }) => {
   const [copiedSection, setCopiedSection] = useState<string | null>(null);
   const [isVerificationOpen, setIsVerificationOpen] = useState<boolean>(false);
@@ -105,13 +113,72 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
     >
       {/* Top Banner with Short # and Quick Actions */}
       <div className="bg-stone-950/80 border-b border-stone-800 px-5 py-4 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <span className="px-3 py-1 bg-amber-500/15 border border-amber-500/30 text-amber-400 font-mono font-bold text-sm rounded-lg shadow-sm">
             Short #{blueprint.id}
           </span>
           <h2 className="text-base sm:text-lg font-bold text-stone-100 font-serif tracking-wide">
             {blueprint.tamilTitle}
           </h2>
+
+          {/* TWO COLORED MARKERS (Video Generated & YouTube Deployed) */}
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            {/* Marker 1: Video Generated (Indigo/Violet) */}
+            <button
+              onClick={() => onToggleVideoGenerated && onToggleVideoGenerated(blueprint.id)}
+              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
+                completionStatus?.videoGenerated
+                  ? 'bg-indigo-500/20 text-indigo-300 border-indigo-500/50 hover:bg-indigo-500/30 shadow-sm shadow-indigo-500/20 font-bold'
+                  : 'bg-stone-900/90 text-stone-400 border-stone-800 hover:text-indigo-300 hover:border-indigo-500/40 hover:bg-indigo-950/30'
+              }`}
+              title={
+                completionStatus?.videoGenerated
+                  ? `Short #${blueprint.id}: Video Generated (Click to unmark)`
+                  : `Short #${blueprint.id}: Mark as Video Generated`
+              }
+            >
+              {completionStatus?.videoGenerated ? (
+                <>
+                  <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
+                  <Check className="w-3.5 h-3.5 text-indigo-400" />
+                  <span>Video Generated</span>
+                </>
+              ) : (
+                <>
+                  <Film className="w-3.5 h-3.5 text-stone-500" />
+                  <span>Mark Video</span>
+                </>
+              )}
+            </button>
+
+            {/* Marker 2: YouTube Deployed (YouTube Red) */}
+            <button
+              onClick={() => onToggleYouTubeDeployed && onToggleYouTubeDeployed(blueprint.id)}
+              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
+                completionStatus?.youtubeDeployed
+                  ? 'bg-red-500/20 text-red-300 border-red-500/50 hover:bg-red-500/30 shadow-sm shadow-red-500/20 font-bold'
+                  : 'bg-stone-900/90 text-stone-400 border-stone-800 hover:text-red-300 hover:border-red-500/40 hover:bg-red-950/30'
+              }`}
+              title={
+                completionStatus?.youtubeDeployed
+                  ? `Short #${blueprint.id}: YouTube Deployed (Click to unmark)`
+                  : `Short #${blueprint.id}: Mark as YouTube Deployed`
+              }
+            >
+              {completionStatus?.youtubeDeployed ? (
+                <>
+                  <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse"></span>
+                  <Check className="w-3.5 h-3.5 text-red-400" />
+                  <span>YouTube Deployed</span>
+                </>
+              ) : (
+                <>
+                  <Youtube className="w-3.5 h-3.5 text-stone-500" />
+                  <span>Mark YT</span>
+                </>
+              )}
+            </button>
+          </div>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
