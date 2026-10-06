@@ -82,7 +82,7 @@ ${b.videoPrompt}
    - Place ALL Tamil + English + Reference lines between y=900 and y=1300 MAX. FORBID y>1350.
    - After rendering, assert y_max + text_height < 1350. If fail, shift up.
    - Center horizontally at x=540 anchor="mm" for single lines.
-   - Background behind text must have 20% extra dark vignette if needed for readability, but text itself stays in safe zone.`;
+   - Background behind text: 35% opacity dark plate [140, 860, 940, 1360] rounded 18px covering all of the text overlay with extra padding, zero text spill, bottom 350px UI clear.`;
 }
 
 /**

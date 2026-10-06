@@ -330,43 +330,61 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
 
           <div className="bg-stone-950 p-4 rounded-xl border border-stone-800 space-y-3.5 text-xs">
             {/* Visual 9:16 Center Safe Zone Preview (Clean, No Drop-Shadow) */}
-            <div className="p-4 sm:p-5 rounded-lg bg-black/90 border border-stone-800 text-center space-y-3 shadow-inner">
+            <div className="p-4 sm:p-5 rounded-lg bg-black/95 border border-stone-800 text-center space-y-3 shadow-inner">
               <div className="flex items-center justify-between border-b border-stone-800/80 pb-1.5 text-[10px] font-mono text-stone-400">
                 <span className="flex items-center gap-1.5 text-amber-400 font-semibold">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block animate-pulse"></span>
-                  9:16 Center Safe Zone (Lifted Y: 900-1300px • HarfBuzz Shaped • 350px Bottom Clearance)
+                  9:16 Center Safe Zone (Y: 860-1360px • 35% Dark Plate [140, 860, 940, 1360] • 350px Bottom Clearance)
                 </span>
                 <span className="text-stone-300">
                   Canvas Auto-Fit: <strong className="text-amber-300 font-mono">~{typo.tamilPx}px</strong> ({typo.scalePercent}% scale)
                 </span>
               </div>
 
-              <div className="space-y-1.5">
-                <div className="text-[10px] font-mono text-amber-500/70 tracking-wider">
-                  Line 1 • Gold #FFC107 ({typo.splitTamilLines.length} {typo.splitTamilLines.length > 1 ? 'Lines' : 'Line'} Wrapped &lt;760px):
+              {/* Authentic 35% Dark Plate [140, 860, 940, 1360] with 18px Rounded Corners — Full Coverage, Zero Text Spill */}
+              <div className="relative mx-auto my-2 max-w-2xl w-full rounded-[18px] bg-black/85 border border-stone-700/80 p-5 sm:p-7 shadow-2xl text-center space-y-3.5 backdrop-blur-sm">
+                <div className="flex items-center justify-between text-[10px] font-mono text-stone-400 pb-1.5 border-b border-stone-800/80">
+                  <span className="flex items-center gap-1.5 text-teal-300 font-semibold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span>
+                    Dark Plate [140, 860, 940, 1360] • 35% Opacity • Rounded 18px
+                  </span>
+                  <span className="text-emerald-400 font-medium">
+                    Full Text Coverage • Breathing Room Below (+70px)
+                  </span>
                 </div>
-                {typo.splitTamilLines.map((line, idx) => (
-                  <div key={idx} className={`text-amber-400 tracking-wide font-tamil-overlay ${typo.uiTamilClass}`}>
-                    {line}
-                  </div>
-                ))}
-              </div>
 
-              <div className="space-y-1.5 pt-1">
-                <div className="text-[10px] font-mono text-emerald-400/80 tracking-wider font-semibold">
-                  Line 2 • White #F8F9FA ({typo.splitEnglishLines.length} {typo.splitEnglishLines.length > 1 ? 'Lines' : 'Line'} Wrapped &lt;760px):
+                {/* Tamil Lines (Gold #FFC107) */}
+                <div className="space-y-1.5 pt-1">
+                  <div className="text-[10px] font-mono text-amber-500/70 tracking-wider">
+                    Line 1 • Gold #FFC107 ({typo.splitTamilLines.length} {typo.splitTamilLines.length > 1 ? 'Lines' : 'Line'} Wrapped &lt;760px):
+                  </div>
+                  {typo.splitTamilLines.map((line, idx) => (
+                    <div key={idx} className={`text-amber-400 tracking-wide font-tamil-overlay ${typo.uiTamilClass} break-words`}>
+                      {line}
+                    </div>
+                  ))}
                 </div>
-                {typo.splitEnglishLines.map((line, idx) => (
-                  <div key={idx} className={`text-white font-serif italic ${typo.uiEnglishClass}`}>
-                    "{line}"
-                  </div>
-                ))}
-              </div>
 
-              <div className="space-y-1 pt-1">
-                <div className="text-[10px] font-mono text-stone-500 tracking-wider">Line 3 • Stone Gray #A8A29E (Dual Reference):</div>
-                <div className={`text-stone-400 font-mono ${typo.uiRefClass}`}>
-                  {blueprint.subtitles.line3Ref}
+                {/* English Lines (White #F8F9FA) */}
+                <div className="space-y-1.5 pt-1">
+                  <div className="text-[10px] font-mono text-emerald-400/80 tracking-wider font-semibold">
+                    Line 2 • White #F8F9FA ({typo.splitEnglishLines.length} {typo.splitEnglishLines.length > 1 ? 'Lines' : 'Line'} Wrapped &lt;760px):
+                  </div>
+                  {typo.splitEnglishLines.map((line, idx) => (
+                    <div key={idx} className={`text-white font-serif italic ${typo.uiEnglishClass} break-words`}>
+                      "{line}"
+                    </div>
+                  ))}
+                </div>
+
+                {/* Reference Line (Stone Gray #A8A29E) */}
+                <div className="space-y-1 pt-1 pb-1">
+                  <div className="text-[10px] font-mono text-stone-400 tracking-wider">
+                    Line 3 • Stone Gray #A8A29E (Dual Reference • +70px Bottom Clearance):
+                  </div>
+                  <div className={`text-stone-300 font-mono ${typo.uiRefClass} break-words`}>
+                    {blueprint.subtitles.line3Ref}
+                  </div>
                 </div>
               </div>
             </div>

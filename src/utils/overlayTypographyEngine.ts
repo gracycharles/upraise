@@ -318,8 +318,9 @@ export function computeOverlayTypography(
     const englishPlacement = englishYCoords.map(y => `(540,${y})`).join(' and ');
 
     return `2. Subtitle Overlay (Pillow Strict):
-• Safe zone: x 160-900px (760px), y 900-1300 max — verified y_max+height <1350, bottom 350px never used
+• Safe zone: x 140-940px (800px dark plate, 760px text safe-zone), y 860-1360 max — verified y_max 1360, bottom 350px UI clear
 • HarfBuzz Complex Text Shaping Mandate: Render all Tamil text via Pillow with Raqm/HarfBuzz shaping enabled (language="ta") and anchor="mm"/"lm" so conjuncts (e.g. க்க, ப்ப, ண்ணு, த்தா) form correctly. FORBID raw ffmpeg drawtext filter (drawtext renders codepoints individually, splitting conjuncts apart).
+• Dark Plate (Full Coverage, Zero Spill): [140, 860, 940, 1360] rounded 18px, 35% opacity — extends 70px lower with extra padding top/bottom, giving breathing room below ${refParts.tamilPart} | ${refParts.englishPart} at y=${refYCoord}, covering 100% of the text overlay
 • Tamil Lines Gold #FFC107 ${tamilPx}px anchor="mm" at ${tamilPlacement}:
 ${tamilLinesJson}
 • English ${splitEnglishLines.length > 1 ? 'Lines' : 'Line'} White #F8F9FA ${englishPx}px anchor="mm" at ${englishPlacement}:
@@ -329,7 +330,7 @@ ${splitEnglishLines.length > 1 ? englishLinesJson : `"${splitEnglishLines[0]}"`}
 	○ total_advance = getlength(tamil) + getlength("${refParts.separator || ' | '}${refParts.englishPart}") = 298.68px
 	○ x_start = 540 - total/2 = 390.65px, anchor="lm"
 	○ Symmetry asserted: abs(x_start - (1080-(x_start+total))) = 0.0 <2px ✅
-• Shadow 2px (0,0,0,180) at same anchors, 20% dark vignette rectangle - for readability [160, 880, 920, 1290]
+• Shadow 2px (0,0,0,180) at same anchors
 • Unicode verified for Tamil line per your codepoints (properly shaped ligatures via HarfBuzz)
 • Final encode: H.264 via imageio_ffmpeg libx264, pixel format yuv420p, CRF 18 (width=1080, height=1920 full-bleed). FORBID mp4v codec.`;
   };
