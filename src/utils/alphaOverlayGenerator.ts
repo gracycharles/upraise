@@ -128,7 +128,7 @@ export async function generateAlphaOverlayBlob(blueprint: ShortsBlueprint): Prom
 
   const refY = typo.refYCoord || 1215;
 
-  // Measure widths to ensure the dark plate 100% covers all text lines with zero spill
+  // Measure text widths for safe bounds assertion and centering
   let maxLineWidth = 0;
   ctx.font = `bold ${typo.tamilPx}px ${tamilFontStack}`;
   for (const line of tamilLines) {
@@ -156,25 +156,11 @@ export async function generateAlphaOverlayBlob(blueprint: ShortsBlueprint): Prom
     if (w > maxLineWidth) maxLineWidth = w;
   }
 
-  // User Specification:
-  // Base Dark Plate: [140, 860, 940, 1360] rounded 18px, 35% opacity
-  // Extends 70px lower (to y=1360) with extra padding top/bottom giving breathing room below reference line at y=1215
-  // Dynamic extension asserts that under any circumstance the black background covers all of the text overlay with zero spill.
-  const firstTextY = Math.min(...tamilYCoords) - (typo.tamilPx * 0.8);
-  const lastTextY = refY + (typo.refPx * 0.8);
-  const plateYStart = Math.min(860, Math.floor(firstTextY - 24));
-  const plateYEnd = Math.max(1360, Math.ceil(lastTextY + 50)); // generous breathing room below ref (extends to at least 1360)
-
-  const paddedWidth = Math.max(800, Math.ceil(maxLineWidth + 60));
-  const plateWidth = Math.min(1000, paddedWidth);
-  const plateXStart = Math.min(140, Math.floor(540 - (plateWidth / 2)));
-
-  // Render 35% opacity dark plate [140, 860, 940, 1360] with 18px rounded corners
-  ctx.save();
-  ctx.shadowColor = 'transparent';
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.35)'; // 35% opacity
-  drawRoundedRect(ctx, plateXStart, plateYStart, plateWidth, plateYEnd - plateYStart, 18);
-  ctx.restore();
+  // Text drop shadow (rgba(0,0,0,0.85), 2px offset) for high contrast and legibility directly over video
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.85)';
+  ctx.shadowBlur = 4;
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 2;
 
   // 1. Render Tamil lines (Golden-Amber #FFC107)
   ctx.fillStyle = '#FFC107';

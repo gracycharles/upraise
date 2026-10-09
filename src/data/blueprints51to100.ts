@@ -56,17 +56,17 @@ export const BLUEPRINTS_51_TO_100: ShortsBlueprint[] = [
     tamilTitle: "அவருடைய மகத்துவம் முடிவு வரை நிற்கும் ஸ்தோத்திரம்",
     tamilText: "அவருடைய மகத்துவம் முடிவு வரை நிற்கும் ஸ்தோத்திரம்.",
     tamilRef: "தானி. 6:26",
-    englishText: "Praise to You, His dominion shall be even unto the end.",
+    englishText: "Praise to You, His Dominion Endures to the End",
     englishRef: "Daniel 6:26",
     character: "Elder scribe recording the prophecy on leather scroll under starlight",
     location: "Stone scriptorium overlooking the Judean desert at night",
     videoPrompt: "A cinematic 8k video set in biblical antiquity. An aged scribe dips a reed pen in ink beside a flickering clay lamp. He looks up from the sacred parchment toward the star-strewn desert sky, his eyes wide with holy wonder at the enduring majesty of God unto all generations. Historic authenticity, dramatic lighting, photorealistic. --ar 9:16 --v 6.0",
     voiceProfile: "Wise, enduring, solemn voice declaring everlasting dominion.",
-    audioScript: "அவருடைய மகத்துவம் முடிவு வரை நிற்கும் ஸ்தோத்திரம். ... Praise to You, His dominion shall be even unto the end.",
+    audioScript: "[Pause] அவருடைய மகத்துவம் முடிவு வரை நிற்கும் ஸ்தோத்திரம்.... Praise to You, His Dominion Endures to the End.",
     backgroundAudio: "Solemn, expansive D-minor to D-major pad at -18dB.",
     subtitles: {
       line1Tamil: "அவருடைய மகத்துவம் முடிவு வரை நிற்கும் ஸ்தோத்திரம்.",
-      line2English: "His dominion shall be even unto the end.",
+      line2English: "Praise to You, His Dominion Endures to the End",
       line3Ref: "📖 தானி. 6:26 | Daniel 6:26"
     },
     seo: {

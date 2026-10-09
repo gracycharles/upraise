@@ -306,8 +306,8 @@ export function buildInculcatedVideoPrompt(blueprint: ShortsBlueprint, expr: Cha
   const cameraShot = expr.cameraFraming || getDynamicCameraFraming(blueprint.id);
   const cleanVoice = blueprint.voiceProfile ? blueprint.voiceProfile.replace(/\.+$/, '').trim() : '';
   const voiceDirective = cleanVoice 
-    ? `${cleanVoice}. Video generator selects the natural acoustic timbre, cadence, and inflection organically matching this character.`
-    : `Organic vocalization naturally matching ${blueprint.character}.`;
+    ? `${cleanVoice}. Clear British young female voice tone or authentic biblical witness character voice with pure native Tamil pronunciation.`
+    : `British young female voice tone or organic vocalization matching ${blueprint.character} with authentic native Tamil pronunciation.`;
   return `A cinematic 8k video set in 30 AD Judea/Galilee (9:16 vertical portrait, 10s native duration). 
 HISTORICAL BIBLICAL CHARACTER: ${blueprint.character}. 
 CINEMATOGRAPHY & CAMERA DIRECTION:
@@ -317,5 +317,6 @@ CINEMATOGRAPHY & CAMERA DIRECTION:
 - Vocal Tone & Character Speech: Naturally matching ${blueprint.character} — ${voiceDirective}
 - Setting & Environment: In ${blueprint.location}. ${expr.sceneAtmosphere}
 - Emotional & Theological Context: ${expr.theologicalMood}
-CINEMATIC MANDATE: Active, dynamic 1st-century biblical staging. Avoid static poses and avoid hand-on-chest clichés; ensure rich, varied camera movement and natural physical interaction with the historic environment. Photorealistic 8k, authentic coarse-weave linen garments, natural skin textures, shallow depth of field.`;
+CINEMATIC MANDATE: Active, dynamic 1st-century biblical staging. Avoid static poses and avoid hand-on-chest clichés; ensure rich, varied camera movement and natural physical interaction with the historic environment. Photorealistic 8k, authentic coarse-weave linen garments, natural skin textures, shallow depth of field.
+AUDIO & LIP-SYNC MANDATE: Native Tamil speaker with authentic Tamil Nadu phonetics and correct conjunct pronunciation (e.g. க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ). 100% synchronized, continuous lip-sync throughout all 10.0 seconds articulating both Tamil praise and English translation.`;
 }
