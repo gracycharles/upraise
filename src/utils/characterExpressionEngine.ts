@@ -306,8 +306,8 @@ export function buildInculcatedVideoPrompt(blueprint: ShortsBlueprint, expr: Cha
   const cameraShot = expr.cameraFraming || getDynamicCameraFraming(blueprint.id);
   const cleanVoice = blueprint.voiceProfile ? blueprint.voiceProfile.replace(/\.+$/, '').trim() : '';
   const voiceDirective = cleanVoice 
-    ? `${cleanVoice}. Clear British young female voice tone or authentic biblical witness character voice with pure native Tamil pronunciation.`
-    : `British young female voice tone or organic vocalization matching ${blueprint.character} with authentic native Tamil pronunciation.`;
+    ? `${cleanVoice}. Authentic character voice naturally matching ${blueprint.character} with pure native Tamil pronunciation.`
+    : `Organic vocalization naturally matching ${blueprint.character} with authentic native Tamil pronunciation.`;
   return `A cinematic 8k video set in 30 AD Judea/Galilee (9:16 vertical portrait, 10s native duration). 
 HISTORICAL BIBLICAL CHARACTER: ${blueprint.character}. 
 CINEMATOGRAPHY & CAMERA DIRECTION:

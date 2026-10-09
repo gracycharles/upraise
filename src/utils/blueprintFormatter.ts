@@ -63,7 +63,7 @@ ${b.videoPrompt}
 1. STRICT 10-SECOND DURATION & 9:16 VERTICAL FORMAT: Video duration MUST be strictly 10.0 seconds in 9:16 vertical portrait format (1080x1920 resolution for YouTube Shorts).
 2. NATIVE TAMIL AUDIO PRONUNCIATION & 100% EVEN LIP SYNC (ZERO HALLUCINATION):
    - Native Tamil Speaker & Authentic Phonetics: Base video & voiceover MUST be generated with authentic native Tamil speaker phonetics (pure Tamil Nadu pronunciation). Ensure exact conjunct and consonant pronunciation for all Tamil words (including conjuncts like க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ). Syllable stress and inflection must be 100% natural and authentic Tamil, never butchered, anglicized, or mispronounced.
-   - Character Voice & Tone: Clear, reverent British young female voice tone or authentic biblical witness character voice matching ${b.character} — ${b.voiceProfile}.
+   - Character Voice & Tone: Authentic character voice naturally matching ${b.character} — ${b.voiceProfile}.
    - 100% Synchronized Lip Sync (Strictly 10.0s): Generate video visuals and character voiceover simultaneously. Lip movements MUST be 100% synchronized, continuous, and even throughout all 10 seconds, articulating every single word and syllable of both the Tamil praise (first half) and English translation (second half). No frozen lips, no audio-visual lag. Speak ONLY the exact scripted text: "${b.audioScript}".
    - Background Audio: ${b.backgroundAudio} (Mixed at -18dB).
 3. TRUE 1080x1920 RESOLUTION & PRE-SCALE BURN-IN MANDATE (NO OFF-SCREEN CROP):
@@ -122,7 +122,7 @@ ${b.videoPrompt}`;
 export function formatAudioOnlyText(b: ShortsBlueprint): string {
   return `🎙 AUDIO & VOICEOVER PROMPT (NATIVE TAMIL PRONUNCIATION & 100% EVEN LIP SYNC):
 - On-Screen Character: ${b.character}
-- Voice Profile & Tone: British young female voice tone or devout biblical witness character voice — ${b.voiceProfile}
+- Voice Profile & Tone: Authentic character voice matching ${b.character} — ${b.voiceProfile}
 - Voiceover Script (Strictly 10.0s): "${b.audioScript}"
 - CRITICAL TAMIL PRONUNCIATION MANDATE: Must be voiced by an authentic native Tamil speaker with pure Tamil Nadu phonetics. Correct conjunct pronunciation (e.g. க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ) and natural syllable stress. Zero anglicized or broken phonetics.
 - CRITICAL AUDIO & LIP SYNC DIRECTIVE: Read ONLY the exact scripted text above paced evenly across strictly 10 seconds. Lip movement MUST be 100% even and continuous for every single spoken syllable, articulating every word fully without leaving any word unarticulated or frozen while audio plays. NO EXTRA WORDS, NO INTRO/OUTRO, NO THEOLOGICAL COMMENTARY. Speak only the exact Tamil praise followed by the exact English praise line as scripted. Zero hallucinated sentences.
@@ -208,7 +208,7 @@ export function generateDynamicBlueprint(item: PraiseItem): ShortsBlueprint {
     character: "Devout Galilean disciple or biblical witness in first-century Judea",
     location: "Authentic first-century biblical landscape in Galilee or Jerusalem",
     videoPrompt: "",
-    voiceProfile: `Devout British young female voice tone or reverent biblical witness voice matching the on-screen character with authentic native Tamil pronunciation, solemn adoration, and prayerful cadence.`,
+    voiceProfile: `Devout, reverent voice authentically matching the on-screen biblical character with authentic native Tamil pronunciation, solemn adoration, and prayerful cadence.`,
     audioScript: `[Pause] ${cleanTamil} ... Praise to You, ${cleanTitle}.`,
     backgroundAudio: "Sacred acoustic D-major worship pad with ambient string undertones at -18dB.",
     subtitles: {
@@ -259,7 +259,7 @@ export function generateDynamicBlueprint(item: PraiseItem): ShortsBlueprint {
     ...baseBlueprint,
     englishText: resolvedEnglish,
     audioScript: `[Pause] ${cleanTamil} ... ${resolvedEnglish}.`,
-    voiceProfile: baseBlueprint.voiceProfile || `Devout British young female voice tone or reverent biblical witness voice matching the on-screen character with authentic native Tamil pronunciation, solemn adoration, and prayerful cadence.`,
+    voiceProfile: baseBlueprint.voiceProfile || `Devout, reverent voice authentically matching the on-screen biblical character with authentic native Tamil pronunciation, solemn adoration, and prayerful cadence.`,
     nkjvText: nkjv.verseText,
     translationVersion: 'NKJV',
     characterExpression: expr,
