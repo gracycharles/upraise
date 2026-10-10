@@ -1026,8 +1026,13 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                     "{blueprint.audioScript}"
                   </p>
                 </div>
-                <div className="p-2 rounded bg-emerald-950/40 border border-emerald-500/20 text-[11px] text-emerald-300/90 leading-relaxed font-sans">
-                  <strong className="text-emerald-200 font-semibold">CRITICAL DIRECTIVE:</strong> Read ONLY the exact scripted lines above. Zero unscripted words, no intro/outro, no background theological commentary, and no spontaneous exegesis.
+                <div className="p-2 rounded bg-emerald-950/40 border border-emerald-500/20 text-[11px] text-emerald-300/90 leading-relaxed font-sans space-y-1">
+                  <div>
+                    <strong className="text-emerald-200 font-semibold">CADENCE & PAUSE DIRECTIVE:</strong> In spoken Tamil audio, introduce a distinct, reverent pause (as if an unwritten comma exists) immediately prior to speaking <em>"ஸ்தோத்திரம்"</em>. The on-screen text overlay retains the clean biblical script without an extra comma, while the audio delivery breathes reverently.
+                  </div>
+                  <div>
+                    <strong className="text-emerald-200 font-semibold">CRITICAL DIRECTIVE:</strong> Read ONLY the exact scripted lines. Zero unscripted words, no intro/outro, and 100% synchronized continuous lip sync.
+                  </div>
                 </div>
               </div>
               <div>

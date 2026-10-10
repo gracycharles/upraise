@@ -318,5 +318,5 @@ CINEMATOGRAPHY & CAMERA DIRECTION:
 - Setting & Environment: In ${blueprint.location}. ${expr.sceneAtmosphere}
 - Emotional & Theological Context: ${expr.theologicalMood}
 CINEMATIC MANDATE: Active, dynamic 1st-century biblical staging. Avoid static poses and avoid hand-on-chest clichés; ensure rich, varied camera movement and natural physical interaction with the historic environment. Photorealistic 8k, authentic coarse-weave linen garments, natural skin textures, shallow depth of field.
-AUDIO & LIP-SYNC MANDATE: Native Tamil speaker with authentic Tamil Nadu phonetics and correct conjunct pronunciation (e.g. க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ). 100% synchronized, continuous lip-sync throughout all 10.0 seconds articulating both Tamil praise and English translation.`;
+AUDIO & LIP-SYNC MANDATE: Native Tamil speaker with authentic Tamil Nadu phonetics and correct conjunct pronunciation (e.g. க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ). Natural reverent pause before "ஸ்தோத்திரம்" in spoken audio/lip-sync (as if a gentle comma exists, while text overlay remains clean). 100% synchronized, continuous lip-sync throughout all 10.0 seconds articulating both Tamil praise and English translation.`;
 }
