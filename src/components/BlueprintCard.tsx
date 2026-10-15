@@ -1030,6 +1030,11 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                   <div>
                     <strong className="text-emerald-200 font-semibold">CHARACTER-MATCHED VOICE DIRECTIVE:</strong> The AI video generator selects an authentic voice naturally matching {blueprint.character} ({blueprint.voiceProfile}).
                   </div>
+                  {/lovingkindness/i.test(`${blueprint.englishText} ${blueprint.audioScript} ${blueprint.voiceProfile} ${blueprint.subtitles.line2English}`) && (
+                    <div className="p-1.5 rounded bg-amber-950/50 border border-amber-500/30 text-amber-200 text-[11px]">
+                      <strong className="text-amber-300 font-bold uppercase">Pronunciation Directive:</strong> For words such as <em>"lovingkindness"</em>, the pronunciation must be strictly <strong>LOV-ING-KIND-NESS</strong> and not LOV-ING-KYND-NESS.
+                    </div>
+                  )}
                   <div>
                     <strong className="text-emerald-200 font-semibold">CADENCE & PAUSE DIRECTIVE:</strong> In spoken Tamil audio, introduce a distinct, reverent pause (as if an unwritten comma exists) immediately prior to speaking <em>"ஸ்தோத்திரம்"</em>. The on-screen text overlay retains the clean biblical script without an extra comma, while the audio delivery breathes reverently.
                   </div>

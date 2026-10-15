@@ -305,9 +305,18 @@ export function generateCharacterExpression(blueprint: ShortsBlueprint): Charact
 export function buildInculcatedVideoPrompt(blueprint: ShortsBlueprint, expr: CharacterExpression): string {
   const cameraShot = expr.cameraFraming || getDynamicCameraFraming(blueprint.id);
   const cleanVoice = blueprint.voiceProfile ? blueprint.voiceProfile.replace(/\.+$/, '').trim() : '';
+  const hasLovingkindness = /lovingkindness/i.test(
+    `${blueprint.englishText || ''} ${blueprint.audioScript || ''} ${blueprint.voiceProfile || ''} ${blueprint.subtitles?.line2English || ''} ${blueprint.videoPrompt || ''} ${expr.theologicalMood || ''}`
+  );
+  const lovingkindnessNote = hasLovingkindness 
+    ? ' (Pronunciation: pronounce "lovingkindness" strictly as LOV-ING-KIND-NESS, not LOV-ING-KYND-NESS).' 
+    : '';
   const voiceDirective = cleanVoice 
-    ? `${cleanVoice}. Authentic character voice naturally matching ${blueprint.character} with pure native Tamil pronunciation.`
-    : `Organic vocalization naturally matching ${blueprint.character} with authentic native Tamil pronunciation.`;
+    ? `${cleanVoice}${lovingkindnessNote}. Authentic character voice naturally matching ${blueprint.character} with pure native Tamil pronunciation.`
+    : `Organic vocalization naturally matching ${blueprint.character} with authentic native Tamil pronunciation.${lovingkindnessNote}`;
+  const pronunciationMandate = hasLovingkindness 
+    ? ' PRONUNCIATION MANDATE: For words such as "lovingkindness", the pronunciation must be strictly LOV-ING-KIND-NESS and NOT LOV-ING-KYND-NESS.' 
+    : '';
   return `A cinematic 8k video set in 30 AD Judea/Galilee (9:16 vertical portrait, 10s native duration). 
 HISTORICAL BIBLICAL CHARACTER: ${blueprint.character}. 
 CINEMATOGRAPHY & CAMERA DIRECTION:
@@ -319,5 +328,5 @@ CINEMATOGRAPHY & CAMERA DIRECTION:
 - Emotional & Theological Context: ${expr.theologicalMood}
 CINEMATIC MANDATE: Active, dynamic 1st-century biblical staging. Avoid static poses and avoid hand-on-chest clichés; ensure rich, varied camera movement and natural physical interaction with the historic environment. Photorealistic 8k, authentic coarse-weave linen garments, natural skin textures, shallow depth of field.
 TEARS & OCULAR MANDATE: Strictly forbid watery eyes, puffy red crying eyes, weeping, or streaming/uncontrollable tears across all scenes. All characters must predominantly maintain clear, steady, serene, radiant eyes with dignified composure, tranquil adoration, and genuine spiritual peace. Tears are permitted ONLY where the biblical scripture explicitly commands weeping, sorrow, mourning, or wiping tears (e.g. delivered from tears, wiping tears, tears in a bottle, weeping in the night). Even where contextually warranted, tears must NEVER flow uncontrollably, never stream down the face, and never distort the countenance; at most, a single subtle, quiet teardrop resting calmly upon serene, composed cheeks without flowing, swiftly giving way to peaceful comfort and dry, clear eyes.
-AUDIO & LIP-SYNC MANDATE: The video generator must choose the voice dynamically based on the character (${blueprint.character}), authentically reflecting their age, gender, and historic biblical presence. Spoken Tamil must be voiced by an authentic native Tamil speaker with pure Tamil Nadu phonetics and correct conjunct pronunciation (e.g. க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ). Natural reverent pause before "ஸ்தோத்திரம்" in spoken audio/lip-sync (as if a gentle comma exists, while text overlay remains clean). 100% synchronized, continuous lip-sync throughout all 10.0 seconds articulating both Tamil praise and English translation.`;
+AUDIO & LIP-SYNC MANDATE: The video generator must choose the voice dynamically based on the character (${blueprint.character}), authentically reflecting their age, gender, and historic biblical presence.${pronunciationMandate} Spoken Tamil must be voiced by an authentic native Tamil speaker with pure Tamil Nadu phonetics and correct conjunct pronunciation (e.g. க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ). Natural reverent pause before "ஸ்தோத்திரம்" in spoken audio/lip-sync (as if a gentle comma exists, while text overlay remains clean). 100% synchronized, continuous lip-sync throughout all 10.0 seconds articulating both Tamil praise and English translation.`;
 }

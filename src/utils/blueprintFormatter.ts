@@ -63,7 +63,7 @@ ${b.videoPrompt}
 1. STRICT 10-SECOND DURATION & 9:16 VERTICAL FORMAT: Video duration MUST be strictly 10.0 seconds in 9:16 vertical portrait format (1080x1920 resolution for YouTube Shorts).
 2. NATIVE TAMIL AUDIO PRONUNCIATION & 100% EVEN LIP SYNC (ZERO HALLUCINATION):
    - Native Tamil Speaker & Authentic Phonetics: Base video & voiceover MUST be generated with authentic native Tamil speaker phonetics (pure Tamil Nadu pronunciation). Ensure exact conjunct and consonant pronunciation for all Tamil words (including conjuncts like க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ). Syllable stress and inflection must be 100% natural and authentic Tamil, never butchered, anglicized, or mispronounced.
-   - Character Voice & Tone: Authentic character voice naturally matching ${b.character} — ${b.voiceProfile}. The video generator must choose the voice dynamically based on the on-screen character.
+   - Character Voice & Tone: Authentic character voice naturally matching ${b.character} — ${b.voiceProfile}. The video generator must choose the voice dynamically based on the on-screen character.${/lovingkindness/i.test(`${b.englishText || ''} ${b.audioScript || ''} ${b.voiceProfile || ''} ${b.subtitles?.line2English || ''} ${b.videoPrompt || ''}`) ? '\n   - Special Pronunciation Directive ("Lovingkindness"): For words such as "lovingkindness", the pronunciation must be strictly LOV-ING-KIND-NESS and NOT LOV-ING-KYND-NESS.' : ''}
    - Natural Reverent Pause Before ஸ்தோத்திரம் (Audio Cadence): In the spoken Tamil audio, the speaker must introduce a distinct, natural, reverent pause (as if an unwritten comma exists) immediately before speaking "ஸ்தோத்திரம்" (e.g., "[Tamil phrase] [subtle reverent pause] ஸ்தோத்திரம்"). This breath/cadence pause applies exclusively to audio voiceover generation and lip-sync cadence; the on-screen text overlay remains clean without introducing an extra comma.
    - 100% Synchronized Lip Sync (Strictly 10.0s): Generate video visuals and character voiceover simultaneously. Lip movements MUST be 100% synchronized, continuous, and even throughout all 10 seconds, articulating every single word and syllable of both the Tamil praise (first half) and English translation (second half). No frozen lips, no audio-visual lag. Speak ONLY the exact scripted text: "${b.audioScript}".
    - Background Audio: ${b.backgroundAudio} (Mixed at -18dB).
@@ -121,11 +121,18 @@ ${b.videoPrompt}`;
  * Formats the Audio & Voiceover Prompt alone with zero-hallucination mandate
  */
 export function formatAudioOnlyText(b: ShortsBlueprint): string {
+  const hasLovingkindness = /lovingkindness/i.test(
+    `${b.englishText || ''} ${b.audioScript || ''} ${b.voiceProfile || ''} ${b.subtitles?.line2English || ''} ${b.videoPrompt || ''}`
+  );
+  const lovingkindnessDirective = hasLovingkindness
+    ? '\n- CRITICAL PRONUNCIATION MANDATE ("LOVINGKINDNESS"): For words such as "lovingkindness", the pronunciation must be strictly LOV-ING-KIND-NESS and NOT LOV-ING-KYND-NESS.'
+    : '';
+
   return `🎙 AUDIO & VOICEOVER PROMPT (NATIVE TAMIL PRONUNCIATION & 100% EVEN LIP SYNC):
 - On-Screen Character: ${b.character}
 - Voice Profile & Tone: Authentic character voice matching ${b.character} — ${b.voiceProfile}
 - Voiceover Script (Strictly 10.0s): "${b.audioScript}"
-- CHARACTER-MATCHED VOICE SELECTION: The video generator must choose the voice dynamically based on the character, authentically matching ${b.character} in age, gender, and timbre.
+- CHARACTER-MATCHED VOICE SELECTION: The video generator must choose the voice dynamically based on the character, authentically matching ${b.character} in age, gender, and timbre.${lovingkindnessDirective}
 - CRITICAL TAMIL PRONUNCIATION MANDATE: Spoken Tamil must be voiced by an authentic native Tamil speaker with pure Tamil Nadu phonetics. Correct conjunct pronunciation (e.g. க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ) and natural syllable stress. Zero anglicized or broken phonetics.
 - NATURAL REVERENT PAUSE BEFORE ஸ்தோத்திரம்: When voicing the Tamil praise, introduce a distinct, gentle reverent pause (as if an unwritten comma exists) right before saying "ஸ்தோத்திரம்". The on-screen text overlay retains the original clean script without a comma, but the audio pacing and lip-sync articulation must honor this sacred comma-like pause.
 - CRITICAL AUDIO & LIP SYNC DIRECTIVE: Read ONLY the exact scripted text above paced evenly across strictly 10 seconds. Lip movement MUST be 100% even and continuous for every single spoken syllable, articulating every word fully without leaving any word unarticulated or frozen while audio plays. NO EXTRA WORDS, NO INTRO/OUTRO, NO THEOLOGICAL COMMENTARY. Speak only the exact Tamil praise followed by the exact English praise line as scripted. Zero hallucinated sentences.
