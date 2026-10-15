@@ -42,7 +42,19 @@ const TARGET_TAMIL_ALGORITHM_TAGS = [
   'Chennai',
   'TamilVlog',
   'Tanglish',
-  'TamilYouTuber'
+  'TamilYouTuber',
+  'English Tamil devotion',
+  'Tamil and English Bible devotion',
+  'Tamil English Bible',
+  'English Tamil Bible',
+  'Tamil to English Bible',
+  'English to Tamil Bible',
+  'Tamil Bible verse',
+  'English Bible verse',
+  'daily bible verse',
+  'Daily Bible Verse',
+  'Bible verse',
+  'Bible Verse'
 ];
 
 function enrichBlueprintWithExpressionsAndNKJV(raw: ShortsBlueprint): ShortsBlueprint {
