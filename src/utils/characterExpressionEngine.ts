@@ -110,19 +110,19 @@ const CURATED_EXPRESSIONS: Record<number, CuratedExpression> = {
     sceneAtmosphere: "Ancient stone library alcove in Babylon/Jerusalem, candlelight flickering across worn stone walls and scrolls."
   },
   31: { // தமது வசனத்தை அனுப்பி குணமாக்குகிறார் (சங். 107:20)
-    expression: "Tearful relief of healing; eyes that once bore pain now glowing with vitality and stunned gratefulness; tremulous smile.",
+    expression: "Deep, radiant relief of healing; clear, vibrant eyes that once bore pain now glowing with vitality and stunned gratefulness; peaceful, thankful smile.",
     gesturePosture: "Looking down at hands once withered or trembling, now steady; pressing both hands to cheeks in thankful wonder.",
     theologicalMood: "Personal physical and spiritual healing by the sent Word of the Lord, redeemed from destruction.",
     sceneAtmosphere: "Sunlit stone domestic room in Capernaum, warm light streaming through a clay-brick window onto the restored character."
   },
   32: { // அவர் அக்கிரமங்களை மன்னிக்கிறவர் (சங். 103:3)
-    expression: "Overwhelming tears of contrition giving way to unburdened peace; brow unwinding from guilt; deeply relieved countenance.",
+    expression: "Deeply unburdened peace; brow unwinding from guilt; serene, tranquil countenance reflecting total forgiveness with clear, steady, peaceful eyes.",
     gesturePosture: "Head deeply bowed to the ground, then slowly lifting face toward the sky as heavy spiritual burden lifts.",
     theologicalMood: "The liberation of divine forgiveness: all sins washed white as snow, restored to communion with God.",
     sceneAtmosphere: "Quiet corner of the Temple Mount, soft shadows meeting morning sunlight, symbolic of darkness banished by grace."
   },
   33: { // அவர் நோய்களையெல்லாம் குணமாக்குகிறவர் (சங். 103:3)
-    expression: "Ecstatic yet reverent joy; tears streaming down radiant cheeks; wide eyes witnessing one's own miraculous restoration.",
+    expression: "Ecstatic yet reverent joy; clear, glowing countenance; wide, luminous eyes witnessing one's own miraculous restoration with vibrant smile.",
     gesturePosture: "Standing on feet with full balance, lifting palms toward heaven, taking a deep, unrestricted breath of vitality.",
     theologicalMood: "Wholehearted thanksgiving to Jehovah Rapha who heals all our diseases and redeems life from the pit.",
     sceneAtmosphere: "Pool of Bethesda stone colonnade, sunlight breaking through the colonnades upon a leaping, thankful believer."
@@ -134,7 +134,7 @@ const CURATED_EXPRESSIONS: Record<number, CuratedExpression> = {
     sceneAtmosphere: "Solitary stone study room illuminated by warm olive-oil lamp light, tranquility of evening stillness."
   },
   69: { // ஆறுதலின் தேவனே ஸ்தோத்திரம் (ரோம. 15:5)
-    expression: "Face streaked with dried tears of grief, now blossoming with unexpected deep consolation; gentle, comforting smile.",
+    expression: "Quiet consolation and peaceful relief; calm brow and a gentle, comforted smile of restored heart and serene dignity.",
     gesturePosture: "Holding a linen prayer shawl securely wrapped around shoulders, head resting peacefully against a cool stone wall.",
     theologicalMood: "Experiencing the God of all comfort, who comforts us in all our tribulations with tender compassion.",
     sceneAtmosphere: "Quiet garden in Bethany at twilight, gentle lavender sky, evening breeze carrying fragrance of blooming pomegranates."
@@ -146,10 +146,10 @@ const CURATED_EXPRESSIONS: Record<number, CuratedExpression> = {
     sceneAtmosphere: "Ancient limestone sanctuary chamber at golden hour, amber rays illuminating dust motes and highlighting serene features of gratitude."
   },
   200: { // என்னை காண்கிற தேவனே ஸ்தோத்திரம் (ஆதி. 16:13)
-    expression: "Stunned astonishment in solitude; trembling lips whispering in disbelief; eyes brimming with tears of relief and wonder at no longer being forgotten.",
+    expression: "Stunned astonishment in solitude; trembling lips whispering in worship; clear, reverent eyes filled with peaceful relief and awe at no longer being forgotten.",
     gesturePosture: "Kneeling beside a solitary desert spring, trembling fingers touching the water, looking upward in breathtaking revelation.",
     theologicalMood: "The sacred cry of El Roi: 'You-Are-the-God-Who-Sees; for she said, Have I also here seen Him who sees me?'",
-    sceneAtmosphere: "Arid desert wilderness of Shur at golden hour, shimmering spring water reflecting solitary tears transformed into worship."
+    sceneAtmosphere: "Arid desert wilderness of Shur at golden hour, shimmering spring water reflecting solitary prayer transformed into worship."
   },
   267: { // ஒருவரில் ஒருவர் அன்பாயிருங்கள் ஸ்தோத்திரம் (யோவா. 13:34)
     expression: "Radiant, compassionate gaze with a tender and humble smile; eyes shining with self-giving affection and gentle sincerity.",
@@ -318,5 +318,6 @@ CINEMATOGRAPHY & CAMERA DIRECTION:
 - Setting & Environment: In ${blueprint.location}. ${expr.sceneAtmosphere}
 - Emotional & Theological Context: ${expr.theologicalMood}
 CINEMATIC MANDATE: Active, dynamic 1st-century biblical staging. Avoid static poses and avoid hand-on-chest clichés; ensure rich, varied camera movement and natural physical interaction with the historic environment. Photorealistic 8k, authentic coarse-weave linen garments, natural skin textures, shallow depth of field.
-AUDIO & LIP-SYNC MANDATE: Native Tamil speaker with authentic Tamil Nadu phonetics and correct conjunct pronunciation (e.g. க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ). Natural reverent pause before "ஸ்தோத்திரம்" in spoken audio/lip-sync (as if a gentle comma exists, while text overlay remains clean). 100% synchronized, continuous lip-sync throughout all 10.0 seconds articulating both Tamil praise and English translation.`;
+TEARS & OCULAR MANDATE: Strictly forbid watery eyes, puffy red crying eyes, weeping, or streaming/uncontrollable tears across all scenes. All characters must predominantly maintain clear, steady, serene, radiant eyes with dignified composure, tranquil adoration, and genuine spiritual peace. Tears are permitted ONLY where the biblical scripture explicitly commands weeping, sorrow, mourning, or wiping tears (e.g. delivered from tears, wiping tears, tears in a bottle, weeping in the night). Even where contextually warranted, tears must NEVER flow uncontrollably, never stream down the face, and never distort the countenance; at most, a single subtle, quiet teardrop resting calmly upon serene, composed cheeks without flowing, swiftly giving way to peaceful comfort and dry, clear eyes.
+AUDIO & LIP-SYNC MANDATE: The video generator must choose the voice dynamically based on the character (${blueprint.character}), authentically reflecting their age, gender, and historic biblical presence. Spoken Tamil must be voiced by an authentic native Tamil speaker with pure Tamil Nadu phonetics and correct conjunct pronunciation (e.g. க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ). Natural reverent pause before "ஸ்தோத்திரம்" in spoken audio/lip-sync (as if a gentle comma exists, while text overlay remains clean). 100% synchronized, continuous lip-sync throughout all 10.0 seconds articulating both Tamil praise and English translation.`;
 }

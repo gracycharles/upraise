@@ -1015,7 +1015,7 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
               <div className="pt-3">
                 <span className="text-stone-500 font-mono uppercase text-[10px] block">Character-Matched Voice & Tone:</span>
                 <p className="text-stone-200 font-medium">{blueprint.voiceProfile}</p>
-                <p className="text-[11px] text-stone-400 mt-0.5">Naturally suited to {blueprint.character} (AI video generator selects authentic vocal inflection and timbre).</p>
+                <p className="text-[11px] text-stone-400 mt-0.5">Naturally suited to {blueprint.character} (AI video generator selects authentic vocal inflection and timbre matching the on-screen character).</p>
               </div>
               <div className="p-2.5 rounded-lg bg-stone-900/80 border border-stone-800 space-y-2">
                 <div>
@@ -1027,6 +1027,9 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                   </p>
                 </div>
                 <div className="p-2 rounded bg-emerald-950/40 border border-emerald-500/20 text-[11px] text-emerald-300/90 leading-relaxed font-sans space-y-1">
+                  <div>
+                    <strong className="text-emerald-200 font-semibold">CHARACTER-MATCHED VOICE DIRECTIVE:</strong> The AI video generator selects an authentic voice naturally matching {blueprint.character} ({blueprint.voiceProfile}).
+                  </div>
                   <div>
                     <strong className="text-emerald-200 font-semibold">CADENCE & PAUSE DIRECTIVE:</strong> In spoken Tamil audio, introduce a distinct, reverent pause (as if an unwritten comma exists) immediately prior to speaking <em>"ஸ்தோத்திரம்"</em>. The on-screen text overlay retains the clean biblical script without an extra comma, while the audio delivery breathes reverently.
                   </div>

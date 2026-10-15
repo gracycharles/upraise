@@ -53,8 +53,12 @@ const TARGET_TAMIL_ALGORITHM_TAGS = [
   'English Bible verse',
   'daily bible verse',
   'Daily Bible Verse',
+  'Daily Bible verse',
+  'Tamil Bible verses',
+  'English Bible verses',
   'Bible verse',
-  'Bible Verse'
+  'Bible Verse',
+  'Bible verses'
 ];
 
 function enrichBlueprintWithExpressionsAndNKJV(raw: ShortsBlueprint): ShortsBlueprint {

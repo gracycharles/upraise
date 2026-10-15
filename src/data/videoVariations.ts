@@ -109,7 +109,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "53": {
     "cameraFraming": "Wide Environmental Establishing Shot (9:16 full-body framing showcasing character within historic biblical landscape)",
     "gesturePosture": "Holding a reed pen poised above a sacred sheepskin parchment scroll, pausing to gaze up into the star-filled heavens with reverence.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Deep nocturnal cobalt sky sprinkled with brilliant celestial stars, soft flickering flame from olive-oil lamp.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, His dominion shall be even unto the end\" with biblical authenticity and active historical staging."
   },
@@ -151,7 +151,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "59": {
     "cameraFraming": "Low-Angle Heroic / Reverent Shot (Looking upward as golden dawn sky illuminates the character)",
     "gesturePosture": "Pouring fresh water from an earthen pitcher into a stone basin, sharing refreshment with weary pilgrims.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Stately biblical terrace with panoramic horizon, gentle afternoon light casting rich, authentic historical textures.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, His anger endureth but a moment\" with biblical authenticity and active historical staging."
   },
@@ -193,7 +193,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "65": {
     "cameraFraming": "Wide Environmental Establishing Shot (9:16 full-body framing showcasing character within historic biblical landscape)",
     "gesturePosture": "Seated beneath an ancient shading terebinth tree, hands resting peacefully on knees, nodding with calm spiritual wisdom.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Deep nocturnal cobalt sky sprinkled with brilliant celestial stars, soft flickering flame from olive-oil lamp.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, Father of spirits\" with biblical authenticity and active historical staging."
   },
@@ -235,7 +235,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "71": {
     "cameraFraming": "High-Angle Downward Tilt (Camera descending gently from above into sunlit courtyard or waterside)",
     "gesturePosture": "Placing pure frankincense upon a golden stone censer, watching sweet white smoke curl heavenward with solemn adoration.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Stately biblical terrace with panoramic horizon, gentle afternoon light casting rich, authentic historical textures.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, God of Abraham\" with biblical authenticity and active historical staging."
   },
@@ -277,7 +277,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "77": {
     "cameraFraming": "Eye-Level Medium Cinematic Framing (Authentic 35mm natural depth of field and intimate historical presence)",
     "gesturePosture": "Placing pure frankincense upon a golden stone censer, watching sweet white smoke curl heavenward with solemn adoration.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Sweeping panoramic view of rolling Judean hills, soft breezes rustling golden grasses under an expansive azure sky.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, abundantly satisfied with the fatness of Thy house\" with biblical authenticity and active historical staging."
   },
@@ -319,7 +319,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "83": {
     "cameraFraming": "Low-Angle Heroic / Reverent Shot (Looking upward as golden dawn sky illuminates the character)",
     "gesturePosture": "Pouring fresh water from an earthen pitcher into a stone basin, sharing refreshment with weary pilgrims.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Crisp early dawn atmosphere, dew glistening on olive leaves, first pink and gold sun rays cutting through mist.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, the Lord God is my strength\" with biblical authenticity and active historical staging."
   },
@@ -361,7 +361,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "89": {
     "cameraFraming": "Wide Environmental Establishing Shot (9:16 full-body framing showcasing character within historic biblical landscape)",
     "gesturePosture": "Walking with purposeful, measured steps along a dusty stone pathway, opening hands outward in blessing and hospitality.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Sweeping panoramic view of rolling Judean hills, soft breezes rustling golden grasses under an expansive azure sky.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to the holy Name of Jesus\" with biblical authenticity and active historical staging."
   },
@@ -403,7 +403,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "95": {
     "cameraFraming": "Low-Angle Heroic / Reverent Shot (Looking upward as golden dawn sky illuminates the character)",
     "gesturePosture": "Pouring fresh water from an earthen pitcher into a stone basin, sharing refreshment with weary pilgrims.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Warm amber golden hour lighting, long atmospheric shadows across weathered limestone, soft evening wind.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to the God and Father of our Lord Jesus Christ\" with biblical authenticity and active historical staging."
   },
@@ -487,7 +487,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "107": {
     "cameraFraming": "Wide Environmental Establishing Shot (9:16 full-body framing showcasing character within historic biblical landscape)",
     "gesturePosture": "Resting both hands comfortably upon a tall olivewood shepherd's staff, standing amidst green pastures under soft golden sunlight.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Stately biblical terrace with panoramic horizon, gentle afternoon light casting rich, authentic historical textures.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, Give ear, O Shepherd of Israel, Thou that leadest Joseph like a flock\" with biblical authenticity and active historical staging."
   },
@@ -529,7 +529,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "113": {
     "cameraFraming": "Low-Angle Heroic / Reverent Shot (Looking upward as golden dawn sky illuminates the character)",
     "gesturePosture": "Walking with purposeful, measured steps along a dusty stone pathway, opening hands outward in blessing and hospitality.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Warm amber golden hour lighting, long atmospheric shadows across weathered limestone, soft evening wind.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, And He that sat upon the throne said, Behold, I make all things new\" with biblical authenticity and active historical staging."
   },
@@ -571,7 +571,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "119": {
     "cameraFraming": "Dynamic Slow Arcing Orbit (Dramatic 45-degree cinematic camera move revealing character and expansive backdrop)",
     "gesturePosture": "Pouring fresh water from an earthen pitcher into a stone basin, sharing refreshment with weary pilgrims.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Warm amber golden hour lighting, long atmospheric shadows across weathered limestone, soft evening wind.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, Behold, I have graven thee upon the palms of My hands; thy walls are continually before Me\" with biblical authenticity and active historical staging."
   },
@@ -655,7 +655,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "131": {
     "cameraFraming": "High-Angle Downward Tilt (Camera descending gently from above into sunlit courtyard or waterside)",
     "gesturePosture": "Pouring fresh water from an earthen pitcher into a stone basin, sharing refreshment with weary pilgrims.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Stately biblical terrace with panoramic horizon, gentle afternoon light casting rich, authentic historical textures.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, But unto every one of us is given grace according to the measure of the gift of Christ\" with biblical authenticity and active historical staging."
   },
@@ -697,7 +697,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "137": {
     "cameraFraming": "Low-Angle Heroic / Reverent Shot (Looking upward as golden dawn sky illuminates the character)",
     "gesturePosture": "Walking with purposeful, measured steps along a dusty stone pathway, opening hands outward in blessing and hospitality.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Sweeping panoramic view of rolling Judean hills, soft breezes rustling golden grasses under an expansive azure sky.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, Who is like unto the Lord our God, Who dwelleth on high\" with biblical authenticity and active historical staging."
   },
@@ -739,7 +739,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "143": {
     "cameraFraming": "Wide Environmental Establishing Shot (9:16 full-body framing showcasing character within historic biblical landscape)",
     "gesturePosture": "Pouring fresh water from an earthen pitcher into a stone basin, sharing refreshment with weary pilgrims.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Stately biblical terrace with panoramic horizon, gentle afternoon light casting rich, authentic historical textures.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, No weapon that is formed against thee shall prosper; and every tongue that shall rise against thee in judgment thou shalt condemn\" with biblical authenticity and active historical staging."
   },
@@ -823,7 +823,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "155": {
     "cameraFraming": "Wide Environmental Establishing Shot (9:16 full-body framing showcasing character within historic biblical landscape)",
     "gesturePosture": "Cradling an armful of golden ripe wheat stalks, rubbing a grain husk between thumb and forefinger with thankful wonder.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Stately biblical terrace with panoramic horizon, gentle afternoon light casting rich, authentic historical textures.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, Thou crownest the year with Thy goodness; and Thy paths drop fatness\" with biblical authenticity and active historical staging."
   },
@@ -865,7 +865,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "161": {
     "cameraFraming": "Wide Environmental Establishing Shot (9:16 full-body framing showcasing character within historic biblical landscape)",
     "gesturePosture": "Walking with purposeful, measured steps along a dusty stone pathway, opening hands outward in blessing and hospitality.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Sweeping panoramic view of rolling Judean hills, soft breezes rustling golden grasses under an expansive azure sky.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, Thy sun shall no more go down; neither shall thy moon withdraw itself: for the Lord shall be thine everlasting light, and the days of thy mourning shall be ended\" with biblical authenticity and active historical staging."
   },
@@ -907,7 +907,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "167": {
     "cameraFraming": "Wide Environmental Establishing Shot (9:16 full-body framing showcasing character within historic biblical landscape)",
     "gesturePosture": "Pouring fresh water from an earthen pitcher into a stone basin, sharing refreshment with weary pilgrims.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Crisp early dawn atmosphere, dew glistening on olive leaves, first pink and gold sun rays cutting through mist.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, He will not suffer thy foot to be moved: He that keepeth thee will not slumber\" with biblical authenticity and active historical staging."
   },
@@ -991,7 +991,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "179": {
     "cameraFraming": "Wide Environmental Establishing Shot (9:16 full-body framing showcasing character within historic biblical landscape)",
     "gesturePosture": "Pouring golden olive oil and coarse wheat flour into a clay bowl with unhurried contentment and domestic faith.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Deep nocturnal cobalt sky sprinkled with brilliant celestial stars, soft flickering flame from olive-oil lamp.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, Thy word is a lamp unto my feet, and a light unto my path\" with biblical authenticity and active historical staging."
   },
@@ -1033,7 +1033,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "185": {
     "cameraFraming": "Wide Environmental Establishing Shot (9:16 full-body framing showcasing character within historic biblical landscape)",
     "gesturePosture": "Walking with purposeful, measured steps along a dusty stone pathway, opening hands outward in blessing and hospitality.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Deep nocturnal cobalt sky sprinkled with brilliant celestial stars, soft flickering flame from olive-oil lamp.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, When there were no depths, I was brought forth; when there were no fountains abounding with water\" with biblical authenticity and active historical staging."
   },
@@ -1075,7 +1075,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "191": {
     "cameraFraming": "Low-Angle Heroic / Reverent Shot (Looking upward as golden dawn sky illuminates the character)",
     "gesturePosture": "Pouring fresh water from an earthen pitcher into a stone basin, sharing refreshment with weary pilgrims.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Deep nocturnal cobalt sky sprinkled with brilliant celestial stars, soft flickering flame from olive-oil lamp.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, Surely the Lord God will do nothing, but He revealeth His secret unto His servants the prophets\" with biblical authenticity and active historical staging."
   },
@@ -1117,7 +1117,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "197": {
     "cameraFraming": "Low-Angle Heroic / Reverent Shot (Looking upward as golden dawn sky illuminates the character)",
     "gesturePosture": "Walking with purposeful, measured steps along a dusty stone pathway, opening hands outward in blessing and hospitality.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Crisp early dawn atmosphere, dew glistening on olive leaves, first pink and gold sun rays cutting through mist.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, Which is His body, the fulness of Him that filleth all in all\" with biblical authenticity and active historical staging."
   },
@@ -1159,7 +1159,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "203": {
     "cameraFraming": "Wide Environmental Establishing Shot (9:16 full-body framing showcasing character within historic biblical landscape)",
     "gesturePosture": "Walking with purposeful strides along an ancient stone highway, holding walking staff and greeting the morning sun with a wave.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Warm amber golden hour lighting, long atmospheric shadows across weathered limestone, soft evening wind.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, Christ who strengtheneth me\" with biblical authenticity and active historical staging."
   },
@@ -1201,7 +1201,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "209": {
     "cameraFraming": "Wide Environmental Establishing Shot (9:16 full-body framing showcasing character within historic biblical landscape)",
     "gesturePosture": "Pouring golden olive oil and coarse wheat flour into a clay bowl with unhurried contentment and domestic faith.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Deep nocturnal cobalt sky sprinkled with brilliant celestial stars, soft flickering flame from olive-oil lamp.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, Lord my God who enlighteneth my darkness\" with biblical authenticity and active historical staging."
   },
@@ -1243,7 +1243,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "215": {
     "cameraFraming": "Dynamic Slow Arcing Orbit (Dramatic 45-degree cinematic camera move revealing character and expansive backdrop)",
     "gesturePosture": "Lifting a loaf of warm, freshly broken barley bread together with fellow disciples at a low wooden table in holy unity.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Stately biblical terrace with panoramic horizon, gentle afternoon light casting rich, authentic historical textures.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, who said: If ye ask anything in My name, I will do it\" with biblical authenticity and active historical staging."
   },
@@ -1285,7 +1285,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "221": {
     "cameraFraming": "Medium-Wide Three-Quarter Framing (Waist-up capturing dynamic physical interaction with the historic environment)",
     "gesturePosture": "Lifting a loaf of warm, freshly broken barley bread together with fellow disciples at a low wooden table in holy unity.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Sweeping panoramic view of rolling Judean hills, soft breezes rustling golden grasses under an expansive azure sky.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, for the needy shall not alway be forgotten\" with biblical authenticity and active historical staging."
   },
@@ -1327,7 +1327,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "227": {
     "cameraFraming": "Wide Environmental Establishing Shot (9:16 full-body framing showcasing character within historic biblical landscape)",
     "gesturePosture": "Pouring fresh water from an earthen pitcher into a stone basin, sharing refreshment with weary pilgrims.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Crisp early dawn atmosphere, dew glistening on olive leaves, first pink and gold sun rays cutting through mist.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, true Light that lighteth every person\" with biblical authenticity and active historical staging."
   },
@@ -1369,7 +1369,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "233": {
     "cameraFraming": "Wide Environmental Establishing Shot (9:16 full-body framing showcasing character within historic biblical landscape)",
     "gesturePosture": "Cradling an armful of golden ripe wheat stalks, rubbing a grain husk between thumb and forefinger with thankful wonder.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Sweeping panoramic view of rolling Judean hills, soft breezes rustling golden grasses under an expansive azure sky.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, who makest all grace abound unto all sufficiency\" with biblical authenticity and active historical staging."
   },
@@ -1411,7 +1411,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "239": {
     "cameraFraming": "Low-Angle Heroic / Reverent Shot (Looking upward as golden dawn sky illuminates the character)",
     "gesturePosture": "Pouring fresh water from an earthen pitcher into a stone basin, sharing refreshment with weary pilgrims.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Stately biblical terrace with panoramic horizon, gentle afternoon light casting rich, authentic historical textures.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, defender of the poor and fatherless\" with biblical authenticity and active historical staging."
   },
@@ -1453,7 +1453,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "245": {
     "cameraFraming": "Low-Angle Heroic / Reverent Shot (Looking upward as golden dawn sky illuminates the character)",
     "gesturePosture": "Lifting a loaf of warm, freshly broken barley bread together with fellow disciples at a low wooden table in holy unity.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Sweeping panoramic view of rolling Judean hills, soft breezes rustling golden grasses under an expansive azure sky.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, who unitest us in one accord and one love\" with biblical authenticity and active historical staging."
   },
@@ -1579,7 +1579,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "263": {
     "cameraFraming": "Low-Angle Heroic / Reverent Shot (Looking upward as golden dawn sky illuminates the character)",
     "gesturePosture": "Pouring fresh water from an earthen pitcher into a stone basin, sharing refreshment with weary pilgrims.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Stately biblical terrace with panoramic horizon, gentle afternoon light casting rich, authentic historical textures.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, who openeth and no man shutteth\" with biblical authenticity and active historical staging."
   },
@@ -1621,7 +1621,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "269": {
     "cameraFraming": "Side-Profile Tracking Dolly Shot (Smooth cinematic tracking following character's purposeful movement)",
     "gesturePosture": "Walking with purposeful strides along an ancient stone highway, holding walking staff and greeting the morning sun with a wave.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Sweeping panoramic view of rolling Judean hills, soft breezes rustling golden grasses under an expansive azure sky.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, who commandest us to bear one another's burdens\" with biblical authenticity and active historical staging."
   },
@@ -1663,7 +1663,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "275": {
     "cameraFraming": "Side-Profile Tracking Dolly Shot (Smooth cinematic tracking following character's purposeful movement)",
     "gesturePosture": "Walking with purposeful strides along an ancient stone highway, holding walking staff and greeting the morning sun with a wave.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Stately biblical terrace with panoramic horizon, gentle afternoon light casting rich, authentic historical textures.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, who callest us to show hospitality without grudging\" with biblical authenticity and active historical staging."
   },
@@ -1705,7 +1705,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "281": {
     "cameraFraming": "Wide Environmental Establishing Shot (9:16 full-body framing showcasing character within historic biblical landscape)",
     "gesturePosture": "Walking with purposeful, measured steps along a dusty stone pathway, opening hands outward in blessing and hospitality.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Sweeping panoramic view of rolling Judean hills, soft breezes rustling golden grasses under an expansive azure sky.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, who commandest mutual submission in the fear of God\" with biblical authenticity and active historical staging."
   },
@@ -1831,7 +1831,7 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   "299": {
     "cameraFraming": "Side-Profile Tracking Dolly Shot (Smooth cinematic tracking following character's purposeful movement)",
     "gesturePosture": "Placing pure frankincense upon a golden stone censer, watching sweet white smoke curl heavenward with solemn adoration.",
-    "expression": "Humbled and deeply moved countenance; eyes glistening with grateful tears transforming into radiant victory.",
+    "expression": "Humbled and deeply moved countenance; clear, tranquil eyes filled with serene wonder and radiant spiritual peace.",
     "sceneAtmosphere": "Crisp early dawn atmosphere, dew glistening on olive leaves, first pink and gold sun rays cutting through mist.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, for the righteous Lord loveth righteousness\" with biblical authenticity and active historical staging."
   },
