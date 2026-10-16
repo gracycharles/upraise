@@ -47,7 +47,7 @@ export const BLUEPRINTS_1_TO_50: ShortsBlueprint[] = [
     seo: {
       title: "Short #2 | அன்பின் பிதாவே ஸ்தோத்திரம் | Praise to You, Father of Love",
       description: "Short #2 of 1000 Praises: அன்பின் பிதாவே ஸ்தோத்திரம் (1 யோவா. 3:1). Meditate upon the unmatched love of the Father bestowed upon us.",
-      tags: ["Father of Love", "1 John 3:1", "Tamil Devotional", "Gods Love", "Bible Verse", "Christian Shorts"],
+      tags: ["Father of Love", "1 John 3:1", "Tamil Devotional", "Gods Love", "Christian Shorts"],
       hashtags: ["#FatherOfLove", "#1John31", "#GodsLove", "#TamilBible", "#WorshipPad", "#Shorts"]
     }
   },
@@ -547,7 +547,7 @@ export const BLUEPRINTS_1_TO_50: ShortsBlueprint[] = [
     seo: {
       title: "Short #22 | அவர் நியாயகேடில்லாத சத்தியமுள்ள தேவன் | God of Truth",
       description: "Short #22: அவர் நியாயகேடில்லாத சத்தியமுள்ள தேவன் ஸ்தோத்திரம் (Deut. 32:4). He is the faithful and true God without injustice.",
-      tags: ["God of Truth", "Deut 32:4", "Faithful God", "Tamil Praise", "Bible Verses"],
+      tags: ["God of Truth", "Deut 32:4", "Faithful God", "Tamil Praise"],
       hashtags: ["#GodOfTruth", "#Deuteronomy324", "#FaithfulGod", "#TamilChristian", "#Shorts"]
     }
   },

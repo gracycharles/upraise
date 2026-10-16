@@ -20,6 +20,16 @@ const RAW_BLUEPRINTS: ShortsBlueprint[] = [
   ...BLUEPRINTS_251_TO_300
 ];
 
+export const EXCLUDED_YOUTUBE_TAGS = new Set([
+  'tamil bible verse',
+  'english bible verse',
+  'daily bible verse',
+  'tamil bible verses',
+  'english bible verses',
+  'bible verse',
+  'bible verses'
+]);
+
 export function deduplicateTagsCaseInsensitive(tags: string[]): string[] {
   const seen = new Set<string>();
   const result: string[] = [];
@@ -27,6 +37,7 @@ export function deduplicateTagsCaseInsensitive(tags: string[]): string[] {
     const trimmed = tag.trim().replace(/^#/, '');
     if (!trimmed) continue;
     const lower = trimmed.toLowerCase();
+    if (EXCLUDED_YOUTUBE_TAGS.has(lower)) continue;
     if (!seen.has(lower)) {
       seen.add(lower);
       result.push(trimmed);
@@ -61,14 +72,7 @@ export const TARGET_TAMIL_ALGORITHM_TAGS: string[] = [
   'Tamil English Bible',
   'English Tamil Bible',
   'Tamil to English Bible',
-  'English to Tamil Bible',
-  'Tamil Bible verse',
-  'English Bible verse',
-  'daily bible verse',
-  'Tamil Bible verses',
-  'English Bible verses',
-  'Bible verse',
-  'Bible verses'
+  'English to Tamil Bible'
 ];
 
 function enrichBlueprintWithExpressionsAndNKJV(raw: ShortsBlueprint): ShortsBlueprint {

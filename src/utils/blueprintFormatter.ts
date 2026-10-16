@@ -427,14 +427,7 @@ export function generateDynamicBlueprint(item: PraiseItem): ShortsBlueprint {
         "Tamil English Bible",
         "English Tamil Bible",
         "Tamil to English Bible",
-        "English to Tamil Bible",
-        "Tamil Bible verse",
-        "English Bible verse",
-        "daily bible verse",
-        "Tamil Bible verses",
-        "English Bible verses",
-        "Bible verse",
-        "Bible verses"
+        "English to Tamil Bible"
       ]),
       hashtags: ["#GracysBiblicalEchoes", "#BiblicalEchoes", "#1000Praises", "#TamilChristian", "#India", "#MorningDevotion", "#ChristianDevotion", "#Praise", "#Praises", "#BibleVerse", "#Shorts"]
     }
