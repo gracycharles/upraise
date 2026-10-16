@@ -10,6 +10,7 @@ import {
   getFormattedYouTubeDescription,
   getScriptureVerificationText
 } from '../utils/blueprintFormatter';
+import { deduplicateTagsCaseInsensitive } from '../data/blueprints';
 
 interface BatchExportModalProps {
   isOpen: boolean;
@@ -133,8 +134,8 @@ ${formatYouTubeOnlyText(b)}`;
   };
 
   const handleCopyAllTagsCsv = () => {
-    // Collect all tags from the filtered batch, deduplicate while preserving order
-    const allTags = Array.from(new Set(filteredBlueprints.flatMap(b => b.seo.tags)));
+    // Collect all tags from the filtered batch, deduplicate case-insensitively while preserving order
+    const allTags = deduplicateTagsCaseInsensitive(filteredBlueprints.flatMap(b => b.seo.tags));
     navigator.clipboard.writeText(allTags.join(', '));
     setCopiedType('tags');
     setTimeout(() => setCopiedType(null), 2000);

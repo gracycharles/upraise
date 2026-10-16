@@ -20,7 +20,22 @@ const RAW_BLUEPRINTS: ShortsBlueprint[] = [
   ...BLUEPRINTS_251_TO_300
 ];
 
-const TARGET_TAMIL_ALGORITHM_TAGS = [
+export function deduplicateTagsCaseInsensitive(tags: string[]): string[] {
+  const seen = new Set<string>();
+  const result: string[] = [];
+  for (const tag of tags) {
+    const trimmed = tag.trim().replace(/^#/, '');
+    if (!trimmed) continue;
+    const lower = trimmed.toLowerCase();
+    if (!seen.has(lower)) {
+      seen.add(lower);
+      result.push(trimmed);
+    }
+  }
+  return result;
+}
+
+export const TARGET_TAMIL_ALGORITHM_TAGS: string[] = [
   'India',
   'morning devotion',
   'Christian devotion',
@@ -28,8 +43,6 @@ const TARGET_TAMIL_ALGORITHM_TAGS = [
   'praises',
   'India morning devotion',
   'Christian devotion praise',
-  'Morning Devotion',
-  'Christian Devotion',
   'Morning Prayer',
   'Daily Devotion',
   'Christian Devotional',
@@ -52,12 +65,9 @@ const TARGET_TAMIL_ALGORITHM_TAGS = [
   'Tamil Bible verse',
   'English Bible verse',
   'daily bible verse',
-  'Daily Bible Verse',
-  'Daily Bible verse',
   'Tamil Bible verses',
   'English Bible verses',
   'Bible verse',
-  'Bible Verse',
   'Bible verses'
 ];
 
@@ -69,9 +79,9 @@ function enrichBlueprintWithExpressionsAndNKJV(raw: ShortsBlueprint): ShortsBlue
   const englishTextNKJV = (nkjv.praiseTitle || raw.englishText).replace(/\.$/, '').trim();
   const tamilTextClean = (raw.subtitles?.line1Tamil || raw.tamilText || raw.tamilTitle).trim();
 
-  // Combine existing tags with target audience algorithm tags (without hash)
+  // Combine existing tags with target audience algorithm tags (without hash, strictly case-deduplicated)
   const existingTags = (raw.seo?.tags || []).map(t => t.replace(/^#/, '').trim());
-  const mergedTags = Array.from(new Set([...existingTags, ...TARGET_TAMIL_ALGORITHM_TAGS]));
+  const mergedTags = deduplicateTagsCaseInsensitive([...existingTags, ...TARGET_TAMIL_ALGORITHM_TAGS]);
 
   // Audio text and on-screen overlay text must be 100% identical and synchronized:
   // Spoken Tamil: Line 1 Tamil overlay

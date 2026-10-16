@@ -11,6 +11,7 @@ import {
   getFormattedYouTubeDescription,
   getScriptureVerificationText
 } from '../utils/blueprintFormatter';
+import { deduplicateTagsCaseInsensitive } from '../data/blueprints';
 
 interface FullDirectoryViewProps {
   verifiedBlueprints: ShortsBlueprint[];
@@ -296,11 +297,11 @@ export const FullDirectoryView: React.FC<FullDirectoryViewProps> = ({
 
                   <button
                     onClick={(e) => {
-                      const bp = isVerified ? verifiedMap.get(item.id)! : generateDynamicBlueprint(item);
-                      copyItemText(e, bp.seo.tags.join(', '), `dir-tags-${item.id}`);
+                       const bp = isVerified ? verifiedMap.get(item.id)! : generateDynamicBlueprint(item);
+                       copyItemText(e, deduplicateTagsCaseInsensitive(bp.seo.tags).join(', '), `dir-tags-${item.id}`);
                     }}
                     className="flex items-center gap-1 px-2 py-1 rounded bg-purple-950/40 hover:bg-purple-900/50 text-purple-300 text-[10px] font-semibold border border-purple-500/30 transition-all"
-                    title={`Copy Tags (CSV): ${isVerified ? verifiedMap.get(item.id)!.seo.tags.join(', ') : 'Tags'}`}
+                    title={`Copy Tags (CSV): ${isVerified ? deduplicateTagsCaseInsensitive(verifiedMap.get(item.id)!.seo.tags).join(', ') : 'Tags'}`}
                   >
                     {copiedKey === `dir-tags-${item.id}` ? (
                       <>

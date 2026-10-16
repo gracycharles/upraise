@@ -23,6 +23,7 @@ import {
   Youtube
 } from 'lucide-react';
 import { ShortsBlueprint, ShortCompletionStatus } from '../types';
+import { deduplicateTagsCaseInsensitive } from '../data/blueprints';
 import { 
   formatBlueprintAsText, 
   formatVideoGenerationOnlyText, 
@@ -241,7 +242,7 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
 
           {/* Button 4: Copy Tags (CSV) */}
           <button
-            onClick={() => copyToClipboard(blueprint.seo.tags.join(', '), 'top-tags-csv')}
+            onClick={() => copyToClipboard(deduplicateTagsCaseInsensitive(blueprint.seo.tags).join(', '), 'top-tags-csv')}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/30 text-purple-300 text-xs font-semibold shadow-sm transition-all"
             title="Copy tags as comma-separated values ready for YouTube Studio"
           >
@@ -1074,7 +1075,7 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
               )}
             </button>
             <button
-              onClick={() => copyToClipboard(`Title: ${blueprint.seo.title}\n\nDescription:\n${blueprint.seo.description}\n\nTags (CSV):\n${blueprint.seo.tags.join(', ')}\n\nHashtags (CSV):\n${blueprint.seo.hashtags.join(', ')}`, 'seo')}
+              onClick={() => copyToClipboard(`Title: ${blueprint.seo.title}\n\nDescription:\n${blueprint.seo.description}\n\nTags (CSV):\n${deduplicateTagsCaseInsensitive(blueprint.seo.tags).join(', ')}\n\nHashtags (CSV):\n${blueprint.seo.hashtags.join(', ')}`, 'seo')}
               className="text-xs font-medium flex items-center gap-1 text-stone-400 hover:text-purple-400 transition-colors px-2 py-1 rounded hover:bg-stone-900"
             >
               {copiedSection === 'seo' ? (
@@ -1180,7 +1181,7 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                     Tags (Comma-Separated for YouTube Studio):
                   </span>
                   <button
-                    onClick={() => copyToClipboard(blueprint.seo.tags.join(', '), 'tags-csv')}
+                    onClick={() => copyToClipboard(deduplicateTagsCaseInsensitive(blueprint.seo.tags).join(', '), 'tags-csv')}
                     className="text-[11px] font-medium text-amber-400 hover:text-amber-300 flex items-center gap-1 transition-colors"
                     title="Copy tags as comma-separated values ready for YouTube Studio"
                   >
@@ -1198,7 +1199,7 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                   </button>
                 </div>
                 <div className="p-2 rounded bg-black/60 font-mono text-[11px] text-amber-300 select-all border border-stone-800/60">
-                  {blueprint.seo.tags.join(', ')}
+                  {deduplicateTagsCaseInsensitive(blueprint.seo.tags).join(', ')}
                 </div>
               </div>
 

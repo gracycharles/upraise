@@ -1160,8 +1160,8 @@ export const BLUEPRINTS_1_TO_50: ShortsBlueprint[] = [
     englishRef: "Acts 4:12",
     character: "Peter standing boldly before the stone gates of Solomon's Porch",
     location: "Solomon's Porch on the Temple Mount in Jerusalem",
-    videoPrompt: "A cinematic 8k video set in 30 AD Jerusalem. Apostle Peter in a coarse mantle stands boldly against massive marble temple pillars. He points one hand toward heaven with unshakeable conviction, declaring the only name given among men whereby we must be saved. Dust swirls in the sunbeams, crowds listen in hushed awe. Dramatic historical cinema, photorealistic. --ar 9:16 --v 6.0",
-    voiceProfile: "Bold, fearless, ringing with apostolic authority and unwavering passion.",
+    videoPrompt: "A cinematic 8k video set in 30 AD Jerusalem. Apostle Peter in a coarse mantle stands boldly against massive marble temple pillars. He points one hand toward heaven with unshakeable conviction, declaring the only name given among men whereby we must be saved. Dust swirls in the sunbeams, crowds listen in hushed awe. Dramatic historical cinema, photorealistic. PRONUNCIATION MANDATE: The word 'இரட்சிப்பு' must be clearly pronounced with initial 'இ' enunciated as 'I-rat-chip-pu' (இ-ரட்-சிப்-பு), NEVER with first letter 'இ' silent as 'ரட்சிப்பு' (ratchippu). --ar 9:16 --v 6.0",
+    voiceProfile: "Bold, fearless, ringing with apostolic authority and unwavering passion. PRONUNCIATION MANDATE: The word 'இரட்சிப்பு' must be clearly pronounced with initial 'இ' sounded as 'I-rat-chip-pu' (இ-ரட்-சிப்-பு), NEVER with first letter 'இ' silent as 'ரட்சிப்பு' (ratchippu).",
     audioScript: "அவராலேயன்றி வேறொருவராலும் இரட்சிப்பு இல்லை ஸ்தோத்திரம். ... Praise to You, neither is there salvation in any other.",
     backgroundAudio: "Stately, powerful D-minor to D-major triumphant pad at -18dB.",
     subtitles: {
