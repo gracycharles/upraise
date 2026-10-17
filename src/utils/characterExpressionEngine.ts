@@ -312,7 +312,17 @@ export function buildInculcatedVideoPrompt(blueprint: ShortsBlueprint, expr: Cha
   const lovingkindnessNote = hasLovingkindness && !/lovingkindness/i.test(cleanVoice)
     ? ' (Pronunciation: pronounce "lovingkindness" strictly as LOV-ING-KIND-NESS, not LOV-ING-KYND-NESS).' 
     : '';
-  const hasIratchippu = /இரட்ச/.test(
+  const hasRatchanya = /இரட்சண்ய/.test(
+    `${blueprint.tamilText || ''} ${blueprint.tamilTitle || ''} ${blueprint.audioScript || ''} ${blueprint.subtitles?.line1Tamil || ''} ${blueprint.videoPrompt || ''}`
+  );
+  const ratchanyaNote = hasRatchanya && !/ரட்சண்ய/.test(cleanVoice)
+    ? ' (Tamil Pronunciation: Written form stays "இரட்சண்ய", but spoken voice MUST pronounce "இரட்சண்ய" as "ரட்சண்ய" / Ratchanya [Rat-cha-nya Kom-be Sthothiram] — initial vowel silent, NOT Iratchanya).'
+    : '';
+  const ratchanyaMandate = hasRatchanya
+    ? ' CRITICAL PRONUNCIATION MANDATE FOR "இரட்சண்ய" (Ratchanya): Written form stays "இரட்சண்ய", but spoken audio MUST pronounce "இரட்சண்ய" as "ரட்சண்ய" / Ratchanya (Rat-cha-nya Kom-be Sthothiram) — initial vowel silent, NOT Iratchanya.'
+    : '';
+
+  const hasIratchippu = !hasRatchanya && /இரட்சி|இரட்சக|இரட்சிக்க/.test(
     `${blueprint.tamilText || ''} ${blueprint.tamilTitle || ''} ${blueprint.audioScript || ''} ${blueprint.subtitles?.line1Tamil || ''} ${blueprint.videoPrompt || ''}`
   );
   const iratchippuNote = hasIratchippu && !/இரட்ச/.test(cleanVoice)
@@ -324,7 +334,7 @@ export function buildInculcatedVideoPrompt(blueprint: ShortsBlueprint, expr: Cha
   const zhaNote = hasZha && !/ழகர|\/ɻ\//.test(cleanVoice)
     ? ` (Tamil Pronunciation: Authentic native Tamil speaker from Tamil Nadu [Madurai/Thanjavur accent], NOT English accent, NOT Hindi, NOT anglicized. Explicit IPA lock: ழு/ழ = U+0BB4 = /ɻ/ - tongue tip curled far back to hard palate, producing the deep retroflex approximant as in Tamizh, NOT ல/ள. Phonetic guide fed to voice engine: ${zhaPhonetic}; check Tamil at 1-3s for deep Tamil zha resonance).` 
     : '';
-  const combinedPronunciationNotes = `${lovingkindnessNote}${iratchippuNote}${zhaNote}`;
+  const combinedPronunciationNotes = `${lovingkindnessNote}${ratchanyaNote}${iratchippuNote}${zhaNote}`;
   const voiceDirective = cleanVoice 
     ? `${cleanVoice}${combinedPronunciationNotes}. Authentic character voice naturally matching ${blueprint.character} with pure Tamil Nadu native speaker pronunciation.`
     : `Organic vocalization naturally matching ${blueprint.character} with authentic native Tamil speaker from Tamil Nadu (Madurai/Thanjavur accent) pronunciation.${combinedPronunciationNotes}`;
@@ -348,5 +358,5 @@ CINEMATOGRAPHY & CAMERA DIRECTION:
 - Emotional & Theological Context: ${expr.theologicalMood}
 CINEMATIC MANDATE: Active, dynamic 1st-century biblical staging. Avoid static poses and avoid hand-on-chest clichés; ensure rich, varied camera movement and natural physical interaction with the historic environment. Photorealistic 8k, authentic coarse-weave linen garments, natural skin textures, shallow depth of field.
 TEARS & OCULAR MANDATE: Strictly forbid watery eyes, puffy red crying eyes, weeping, or streaming/uncontrollable tears across all scenes. All characters must predominantly maintain clear, steady, serene, radiant eyes with dignified composure, tranquil adoration, and genuine spiritual peace. Tears are permitted ONLY where the biblical scripture explicitly commands weeping, sorrow, mourning, or wiping tears (e.g. delivered from tears, wiping tears, tears in a bottle, weeping in the night). Even where contextually warranted, tears must NEVER flow uncontrollably, never stream down the face, and never distort the countenance; at most, a single subtle, quiet teardrop resting calmly upon serene, composed cheeks without flowing, swiftly giving way to peaceful comfort and dry, clear eyes.
-AUDIO & LIP-SYNC MANDATE: The video generator must choose the voice dynamically based on the character (${blueprint.character}), authentically reflecting their age, gender, and historic biblical presence.${pronunciationMandate}${iratchippuMandate}${zhaMandate} Spoken Tamil must be voiced by an authentic native Tamil speaker from Tamil Nadu (Madurai/Thanjavur accent), NOT English accent, NOT Hindi, NOT anglicized. Pure Tamil Nadu native speaker locked. Correct conjunct pronunciation (e.g. க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ) and natural syllable stress. Natural reverent pause before "ஸ்தோத்திரம்" in spoken audio/lip-sync (as if a gentle comma exists, while text overlay remains clean). 100% synchronized, continuous lip-sync throughout all 10.0 seconds articulating both Tamil praise and English translation.`;
+AUDIO & LIP-SYNC MANDATE: The video generator must choose the voice dynamically based on the character (${blueprint.character}), authentically reflecting their age, gender, and historic biblical presence.${pronunciationMandate}${ratchanyaMandate}${iratchippuMandate}${zhaMandate} Spoken Tamil must be voiced by an authentic native Tamil speaker from Tamil Nadu (Madurai/Thanjavur accent), NOT English accent, NOT Hindi, NOT anglicized. Pure Tamil Nadu native speaker locked. Correct conjunct pronunciation (e.g. க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ) and natural syllable stress. Natural reverent pause before "ஸ்தோத்திரம்" in spoken audio/lip-sync (as if a gentle comma exists, while text overlay remains clean). 100% synchronized, continuous lip-sync throughout all 10.0 seconds articulating both Tamil praise and English translation.`;
 }

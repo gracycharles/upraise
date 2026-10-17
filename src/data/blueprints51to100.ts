@@ -985,8 +985,8 @@ export const BLUEPRINTS_51_TO_100: ShortsBlueprint[] = [
     englishRef: "Psalms 18:2",
     character: "Davidic warrior holding a shofar aloft on the mountain heights",
     location: "Summit of Mount Zion overlooking the valleys of Jerusalem at sunrise",
-    videoPrompt: "A cinematic 8k video set in biblical antiquity. A courageous worshipper stands high upon the stone ramparts of Mount Zion. He holds an ornate ram's horn shofar lifted towards the blazing sunrise, his chest swelling with triumphant adoration for the Horn of salvation. Dramatic cinematic lighting, photorealistic. --ar 9:16 --v 6.0",
-    voiceProfile: "Resonant, triumphant, victorious baritone declaring salvation power.",
+    videoPrompt: "A cinematic 8k video set in biblical antiquity. A courageous worshipper stands high upon the stone ramparts of Mount Zion. He holds an ornate ram's horn shofar lifted towards the blazing sunrise, his chest swelling with triumphant adoration for the Horn of salvation. Dramatic cinematic lighting, photorealistic. PRONUNCIATION MANDATE: Written form stays 'இரட்சண்ய', but spoken voice MUST pronounce 'இரட்சண்ய' as 'ரட்சண்ய' / Ratchanya (Rat-cha-nya Kom-be Sthothiram) — initial vowel silent, NOT Iratchanya. --ar 9:16 --v 6.0",
+    voiceProfile: "Resonant, triumphant, victorious baritone declaring salvation power. PRONUNCIATION MANDATE: Written form stays 'இரட்சண்ய', but spoken voice MUST pronounce 'இரட்சண்ய' as 'ரட்சண்ய' / Ratchanya (Rat-cha-nya Kom-be Sthothiram) — initial vowel silent, NOT Iratchanya.",
     audioScript: "இரட்சண்ய கொம்பே ஸ்தோத்திரம். ... Praise to You, the Horn of my salvation.",
     backgroundAudio: "Triumphant D-major brass and strings worship pad at -18dB.",
     subtitles: {
