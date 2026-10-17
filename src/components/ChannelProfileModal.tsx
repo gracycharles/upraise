@@ -37,10 +37,7 @@ export const CHANNEL_TAGS = [
   "Bilingual Worship Tamil English",
   "English Tamil devotion",
   "Tamil and English Bible devotion",
-  "Tamil English Bible",
-  "English Tamil Bible",
-  "Tamil to English Bible",
-  "English to Tamil Bible"
+  "Tamil English"
 ];
 
 export const YOUTUBE_BANNER_PROMPT = `A cinematic ultra-wide 16:9 YouTube banner set in 30 AD Galilee at golden dawn. An authentic first-century stone overlook viewing the tranquil Sea of Galilee. Gentle morning mist rising from the water, soft amber and honey sunrise lighting, ancient olive trees with weathered silver-green leaves. Distant silhouettes of fishermen casting coarse hemp nets from wooden boats. Peaceful, sacred, historical authenticity, biblical realism, photorealistic, 8k resolution, no text, no modern elements. --ar 16:9 --v 6.0`;

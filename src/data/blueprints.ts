@@ -27,16 +27,35 @@ export const EXCLUDED_YOUTUBE_TAGS = new Set([
   'tamil bible verses',
   'english bible verses',
   'bible verse',
-  'bible verses'
+  'bible verses',
+  'tanglish',
+  'christian devotion praise',
+  'english tamil',
+  'tamil to english',
+  'english to tamil',
+  'english tamil bible',
+  'tamil to english bible',
+  'english to tamil bible'
 ]);
+
+export const YOUTUBE_TAG_REPLACEMENTS: Record<string, string> = {
+  'tamil english bible': 'Tamil English'
+};
 
 export function deduplicateTagsCaseInsensitive(tags: string[]): string[] {
   const seen = new Set<string>();
   const result: string[] = [];
   for (const tag of tags) {
-    const trimmed = tag.trim().replace(/^#/, '');
+    let trimmed = tag.trim().replace(/^#/, '');
     if (!trimmed) continue;
-    const lower = trimmed.toLowerCase();
+    let lower = trimmed.toLowerCase();
+
+    // Map replaced tags (e.g. "Tamil English Bible" -> "Tamil English")
+    if (YOUTUBE_TAG_REPLACEMENTS[lower]) {
+      trimmed = YOUTUBE_TAG_REPLACEMENTS[lower];
+      lower = trimmed.toLowerCase();
+    }
+
     if (EXCLUDED_YOUTUBE_TAGS.has(lower)) continue;
     if (!seen.has(lower)) {
       seen.add(lower);
@@ -53,7 +72,6 @@ export const TARGET_TAMIL_ALGORITHM_TAGS: string[] = [
   'praise',
   'praises',
   'India morning devotion',
-  'Christian devotion praise',
   'Morning Prayer',
   'Daily Devotion',
   'Christian Devotional',
@@ -65,14 +83,10 @@ export const TARGET_TAMIL_ALGORITHM_TAGS: string[] = [
   'TamilNadu',
   'Chennai',
   'TamilVlog',
-  'Tanglish',
   'TamilYouTuber',
   'English Tamil devotion',
   'Tamil and English Bible devotion',
-  'Tamil English Bible',
-  'English Tamil Bible',
-  'Tamil to English Bible',
-  'English to Tamil Bible'
+  'Tamil English'
 ];
 
 function enrichBlueprintWithExpressionsAndNKJV(raw: ShortsBlueprint): ShortsBlueprint {

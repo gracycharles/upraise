@@ -4,6 +4,7 @@ import { generateCharacterExpression, buildInculcatedVideoPrompt } from './chara
 import { getNKJVData } from './nkjvTranslations';
 import { computeOverlayTypography } from './overlayTypographyEngine';
 import { deduplicateTagsCaseInsensitive } from '../data/blueprints';
+import { hasTamilZha, extractZhaPhoneticGuide, getZhaPronunciationMandate } from './tamilPhoneticsEngine';
 
 /**
  * Formats a ShortsBlueprint into the exact template requested by the user
@@ -63,8 +64,8 @@ ${b.videoPrompt}
 🎬 KEY PRODUCTION MANDATES:
 1. STRICT 10-SECOND DURATION & 9:16 VERTICAL FORMAT: Video duration MUST be strictly 10.0 seconds in 9:16 vertical portrait format (1080x1920 resolution for YouTube Shorts).
 2. NATIVE TAMIL AUDIO PRONUNCIATION & 100% EVEN LIP SYNC (ZERO HALLUCINATION):
-   - Native Tamil Speaker & Authentic Phonetics: Base video & voiceover MUST be generated with authentic native Tamil speaker phonetics (pure Tamil Nadu pronunciation). Ensure exact conjunct and consonant pronunciation for all Tamil words (including conjuncts like க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ). Syllable stress and inflection must be 100% natural and authentic Tamil, never butchered, anglicized, or mispronounced.
-   - Character Voice & Tone: Authentic character voice naturally matching ${b.character} — ${b.voiceProfile}. The video generator must choose the voice dynamically based on the on-screen character.${/lovingkindness/i.test(`${b.englishText || ''} ${b.audioScript || ''} ${b.voiceProfile || ''} ${b.subtitles?.line2English || ''} ${b.videoPrompt || ''}`) ? '\n   - Special Pronunciation Directive ("Lovingkindness"): For words such as "lovingkindness", the pronunciation must be strictly LOV-ING-KIND-NESS and NOT LOV-ING-KYND-NESS.' : ''}${/இரட்ச/.test(`${b.tamilText || ''} ${b.tamilTitle || ''} ${b.audioScript || ''} ${b.subtitles?.line1Tamil || ''} ${b.videoPrompt || ''}`) ? '\n   - Special Pronunciation Directive ("இரட்சிப்பு" / IRATCHIPPU): When speaking "இரட்சிப்பு" (or related forms "இரட்சிப்பின்", "இரட்சகர்", "இரட்சிக்க", "இரட்சிப்பை"), the initial Tamil letter "இ" must NOT be silent or omitted as "ரட்சிப்பு" (ratchippu); clearly enunciate the initial vowel as "I-rat-chip-pu" (இ-ரட்-சிப்-பு / Ee-rat-chip-pu).' : ''}
+   - Native Tamil Speaker & Authentic Phonetics: Authentic native Tamil speaker from Tamil Nadu (Madurai/Thanjavur accent), NOT English accent, NOT Hindi, NOT anglicized. Pure Tamil Nadu native speaker locked. Ensure exact conjunct and consonant pronunciation for all Tamil words (including conjuncts like க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ). Syllable stress and inflection must be 100% natural, deep, and authentic Tamil, never butchered, anglicized, or mispronounced.
+   - Character Voice & Tone: Authentic character voice naturally matching ${b.character} — ${b.voiceProfile}. The video generator must choose the voice dynamically based on the on-screen character.${/lovingkindness/i.test(`${b.englishText || ''} ${b.audioScript || ''} ${b.voiceProfile || ''} ${b.subtitles?.line2English || ''} ${b.videoPrompt || ''}`) ? '\n   - Special Pronunciation Directive ("Lovingkindness"): For words such as "lovingkindness", the pronunciation must be strictly LOV-ING-KIND-NESS and NOT LOV-ING-KYND-NESS.' : ''}${/இரட்ச/.test(`${b.tamilText || ''} ${b.tamilTitle || ''} ${b.audioScript || ''} ${b.subtitles?.line1Tamil || ''} ${b.videoPrompt || ''}`) ? '\n   - Special Pronunciation Directive ("இரட்சிப்பு" / IRATCHIPPU): When speaking "இரட்சிப்பு" (or related forms "இரட்சிப்பின்", "இரட்சகர்", "இரட்சிக்க", "இரட்சிப்பை"), the initial Tamil letter "இ" must NOT be silent or omitted as "ரட்சிப்பு" (ratchippu); clearly enunciate the initial vowel as "I-rat-chip-pu" (இ-ரட்-சிப்-பு / Ee-rat-chip-pu).' : ''}${hasTamilZha(`${b.tamilText || ''} ${b.tamilTitle || ''} ${b.audioScript || ''} ${b.subtitles?.line1Tamil || ''} ${b.videoPrompt || ''}`) ? `\n   - Special Pronunciation Directive ("ழகரம்" / Retroflex Approximant /ɻ/ - U+0BB4): MUST pronounce ழு / ழ as Tamil unique retroflex approximant 'zha' (ழகரம் - IPA: /ɻ/, U+0BB4) as in Tamizh (தமிழ்), tongue tip curled far back to hard palate, NOT 'la' (ல) or 'lla' (ள). Explicit phonetic guide fed to voice engine: ${extractZhaPhoneticGuide(`${b.tamilText || ''} ${b.tamilTitle || ''} ${b.audioScript || ''} ${b.subtitles?.line1Tamil || ''}`)}. Check the Tamil audio at 1-3s — ழு / ழ should have that deep Tamil zha resonance.` : ''}
    - Natural Reverent Pause Before ஸ்தோத்திரம் (Audio Cadence): In the spoken Tamil audio, the speaker must introduce a distinct, natural, reverent pause (as if an unwritten comma exists) immediately before speaking "ஸ்தோத்திரம்" (e.g., "[Tamil phrase] [subtle reverent pause] ஸ்தோத்திரம்"). This breath/cadence pause applies exclusively to audio voiceover generation and lip-sync cadence; the on-screen text overlay remains clean without introducing an extra comma.
    - 100% Synchronized Lip Sync (Strictly 10.0s): Generate video visuals and character voiceover simultaneously. Lip movements MUST be 100% synchronized, continuous, and even throughout all 10 seconds, articulating every single word and syllable of both the Tamil praise (first half) and English translation (second half). No frozen lips, no audio-visual lag. Speak ONLY the exact scripted text: "${b.audioScript}".
    - Background Audio: ${b.backgroundAudio} (Mixed at -18dB).
@@ -136,12 +137,15 @@ export function formatAudioOnlyText(b: ShortsBlueprint): string {
     ? '\n- CRITICAL TAMIL PRONUNCIATION MANDATE ("இரட்சிப்பு" / IRATCHIPPU): When speaking "இரட்சிப்பு" (or related forms "இரட்சிப்பின்", "இரட்சகர்", "இரட்சிக்க", "இரட்சிப்பை"), the initial Tamil letter "இ" must NEVER be silent or omitted as "ரட்சிப்பு" (ratchippu). The first vowel "இ" MUST be distinctly articulated as "I-rat-chip-pu" (இ-ரட்-சிப்-பு / Ee-rat-chip-pu) with pure native Tamil diction.'
     : '';
 
+  const allTamilText = `${b.tamilText || ''} ${b.tamilTitle || ''} ${b.audioScript || ''} ${b.subtitles?.line1Tamil || ''} ${b.videoPrompt || ''}`;
+  const zhaDirective = getZhaPronunciationMandate(allTamilText);
+
   return `🎙 AUDIO & VOICEOVER PROMPT (NATIVE TAMIL PRONUNCIATION & 100% EVEN LIP SYNC):
 - On-Screen Character: ${b.character}
 - Voice Profile & Tone: Authentic character voice matching ${b.character} — ${b.voiceProfile}
 - Voiceover Script (Strictly 10.0s): "${b.audioScript}"
-- CHARACTER-MATCHED VOICE SELECTION: The video generator must choose the voice dynamically based on the character, authentically matching ${b.character} in age, gender, and timbre.${lovingkindnessDirective}${iratchippuDirective}
-- CRITICAL TAMIL PRONUNCIATION MANDATE: Spoken Tamil must be voiced by an authentic native Tamil speaker with pure Tamil Nadu phonetics. Correct conjunct pronunciation (e.g. க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ) and natural syllable stress. Zero anglicized or broken phonetics.
+- CHARACTER-MATCHED VOICE SELECTION: The video generator must choose the voice dynamically based on the character, authentically matching ${b.character} in age, gender, and timbre.${lovingkindnessDirective}${iratchippuDirective}${zhaDirective}
+- CRITICAL TAMIL PRONUNCIATION MANDATE: Spoken Tamil must be voiced by an authentic native Tamil speaker from Tamil Nadu (Madurai/Thanjavur accent), NOT English accent, NOT Hindi, NOT anglicized. Pure Tamil Nadu native speaker locked. Correct conjunct pronunciation (e.g. க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ) and natural syllable stress. Zero anglicized or broken phonetics.
 - NATURAL REVERENT PAUSE BEFORE ஸ்தோத்திரம்: When voicing the Tamil praise, introduce a distinct, gentle reverent pause (as if an unwritten comma exists) right before saying "ஸ்தோத்திரம்". The on-screen text overlay retains the original clean script without a comma, but the audio pacing and lip-sync articulation must honor this sacred comma-like pause.
 - CRITICAL AUDIO & LIP SYNC DIRECTIVE: Read ONLY the exact scripted text above paced evenly across strictly 10 seconds. Lip movement MUST be 100% even and continuous for every single spoken syllable, articulating every word fully without leaving any word unarticulated or frozen while audio plays. NO EXTRA WORDS, NO INTRO/OUTRO, NO THEOLOGICAL COMMENTARY. Speak only the exact Tamil praise followed by the exact English praise line as scripted. Zero hallucinated sentences.
 - Background Audio: ${b.backgroundAudio}`;
@@ -406,7 +410,6 @@ export function generateDynamicBlueprint(item: PraiseItem): ShortsBlueprint {
         "praise",
         "praises",
         "India morning devotion",
-        "Christian devotion praise",
         "Morning Prayer",
         "Daily Devotion",
         "Christian Devotional",
@@ -420,16 +423,12 @@ export function generateDynamicBlueprint(item: PraiseItem): ShortsBlueprint {
         "TamilNadu", 
         "Chennai", 
         "TamilVlog", 
-        "Tanglish", 
         "TamilYouTuber",
         "English Tamil devotion",
         "Tamil and English Bible devotion",
-        "Tamil English Bible",
-        "English Tamil Bible",
-        "Tamil to English Bible",
-        "English to Tamil Bible"
+        "Tamil English"
       ]),
-      hashtags: ["#GracysBiblicalEchoes", "#BiblicalEchoes", "#1000Praises", "#TamilChristian", "#India", "#MorningDevotion", "#ChristianDevotion", "#Praise", "#Praises", "#BibleVerse", "#Shorts"]
+      hashtags: ["#GracysBiblicalEchoes", "#BiblicalEchoes", "#1000Praises", "#TamilChristian", "#India", "#MorningDevotion", "#ChristianDevotion", "#Praise", "#Praises", "#Shorts"]
     }
   };
 
