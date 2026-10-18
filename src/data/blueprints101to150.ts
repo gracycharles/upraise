@@ -510,8 +510,8 @@ export const BLUEPRINTS_101_TO_150: ShortsBlueprint[] = [
     englishRef: "Isaiah 59:1",
     character: "Sinking fisherman caught in a sudden swell reaching up as a powerful hand grasps him",
     location: "Choppy waves of the Sea of Galilee during a storm, with a beam of sunlight piercing the clouds",
-    videoPrompt: "A cinematic 8k video set in 30 AD Sea of Galilee. A fisherman struggling in churning white-capped waters reaches up with both hands. Immediately, an outstretched, mighty hand grips his wrist with unstoppable strength, pulling him upward toward the light. Dramatic water spray, dynamic motion, photorealistic rescue. PRONUNCIATION MANDATE: The word 'இரட்சிக்க' must be clearly pronounced with initial 'இ' enunciated as 'I-rat-chik-ka' (இ-ரட்-சிக்-க), NEVER with first letter 'இ' silent as 'ரட்சிக்க' (ratchikka). --ar 9:16 --v 6.0",
-    voiceProfile: "Commanding, victorious, full of unwavering confidence. PRONUNCIATION MANDATE: The word 'இரட்சிக்க' must be clearly pronounced with initial 'இ' sounded as 'I-rat-chik-ka' (இ-ரட்-சிக்-க), NEVER with first letter 'இ' silent as 'ரட்சிக்க' (ratchikka).",
+    videoPrompt: "A cinematic 8k video set in 30 AD Sea of Galilee. A fisherman struggling in churning white-capped waters reaches up with both hands. Immediately, an outstretched, mighty hand grips his wrist with unstoppable strength, pulling him upward toward the light. Dramatic water spray, dynamic motion, photorealistic rescue. PRONUNCIATION MANDATE: Written form stays 'இரட்சிக்க', but spoken voice MUST pronounce it as 'ரட்சிக்க' / Ratchikka (Rat-chik-ka) with initial vowel 'இ' silent, NOT Iratchikka. --ar 9:16 --v 6.0",
+    voiceProfile: "Commanding, victorious, full of unwavering confidence. PRONUNCIATION MANDATE: Written form stays 'இரட்சிக்க', but spoken voice MUST pronounce it as 'ரட்சிக்க' / Ratchikka (Rat-chik-ka) — initial vowel 'இ' silent, NOT Iratchikka.",
     audioScript: "இதோ இரட்சிக்க கூடாதபடி கர்த்தர் குறுகிபோகவில்லை ஸ்தோத்திரம். ... Behold, the Lord's hand is not shortened, that it cannot save.",
     backgroundAudio: "Dramatic orchestral swell resolving into peaceful brass and strings at -18dB.",
     subtitles: {
@@ -860,8 +860,8 @@ export const BLUEPRINTS_101_TO_150: ShortsBlueprint[] = [
     englishRef: "1 John 4:14",
     character: "Beloved disciple John standing on the shores of Galilee bearing joyful witness",
     location: "Shoreline of the Sea of Galilee with fishing boats and gentle rippling waves at sunset",
-    videoPrompt: "A cinematic 8k video set in 30 AD Galilee. An eyewitness disciple in blue linen tunic stands by the peaceful water's edge at sunset, watching fishing boats glide home. He places his hand over his heart with radiant gratitude, remembering the Savior who walked on these very shores. Cinematic warmth, photorealistic. PRONUNCIATION MANDATE: The word 'இரட்சகரே' must be clearly pronounced with initial 'இ' enunciated as 'I-rat-cha-ga-re' (இ-ரட்-ச-க-ரே), NEVER with first letter 'இ' silent as 'ரட்சகரே' (ratchagare). --ar 9:16 --v 6.0",
-    voiceProfile: "Heartfelt, deeply emotional, personal eyewitness testimony. PRONUNCIATION MANDATE: The word 'இரட்சகரே' must be clearly pronounced with initial 'இ' sounded as 'I-rat-cha-ga-re' (இ-ரட்-ச-க-ரே), NEVER with first letter 'இ' silent as 'ரட்சகரே' (ratchagare).",
+    videoPrompt: "A cinematic 8k video set in 30 AD Galilee. An eyewitness disciple in blue linen tunic stands by the peaceful water's edge at sunset, watching fishing boats glide home. He places his hand over his heart with radiant gratitude, remembering the Savior who walked on these very shores. Cinematic warmth, photorealistic. PRONUNCIATION MANDATE: Written form stays 'இரட்சகரே', but spoken voice MUST pronounce it as 'ரட்சகரே' / Ratchagare (Rat-cha-ga-re) with initial vowel 'இ' silent, NOT Iratchagare. --ar 9:16 --v 6.0",
+    voiceProfile: "Heartfelt, deeply emotional, personal eyewitness testimony. PRONUNCIATION MANDATE: Written form stays 'இரட்சகரே', but spoken voice MUST pronounce it as 'ரட்சகரே' / Ratchagare (Rat-cha-ga-re) — initial vowel 'இ' silent, NOT Iratchagare.",
     audioScript: "உலக இரட்சகரே ஸ்தோத்திரம். ... The Father sent the Son to be the Saviour of the world.",
     backgroundAudio: "Warm acoustic guitar and gentle ocean swell with peaceful cello at -18dB.",
     subtitles: {

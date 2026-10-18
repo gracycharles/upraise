@@ -325,8 +325,8 @@ export function buildInculcatedVideoPrompt(blueprint: ShortsBlueprint, expr: Cha
   const hasIratchippu = !hasRatchanya && /இரட்சி|இரட்சக|இரட்சிக்க/.test(
     `${blueprint.tamilText || ''} ${blueprint.tamilTitle || ''} ${blueprint.audioScript || ''} ${blueprint.subtitles?.line1Tamil || ''} ${blueprint.videoPrompt || ''}`
   );
-  const iratchippuNote = hasIratchippu && !/இரட்ச/.test(cleanVoice)
-    ? ' (Tamil Pronunciation: pronounce "இரட்சிப்பு" / "இரட்சிப்பின்" / "இரட்சகர்" with initial vowel "இ" clearly articulated as I-rat-chip-pu [இ-ரட்-சிப்-பு], NEVER silent as "ரட்சிப்பு" [ratchippu]).' 
+  const iratchippuNote = hasIratchippu && !/ரட்ச/.test(cleanVoice)
+    ? ' (Tamil Pronunciation: Written form stays "இரட்சிப்பு" / "இரட்சிப்பின்" / "இரட்சகர்" / "இரட்சிக்க", but spoken voice MUST pronounce with initial vowel "இ" silent as "ரட்சிப்பு" / Ratchippu [Rat-chip-pu], "ரட்சிப்பின்" / Ratchippin [Rat-chip-pin], "ரட்சகர்" / Ratchagar [Rat-cha-gar], "ரட்சிக்க" / Ratchikka [Rat-chik-ka] — initial vowel "இ" silent, NOT Iratchippu/Iratchikka).' 
     : '';
   const allTamilText = `${blueprint.tamilText || ''} ${blueprint.tamilTitle || ''} ${blueprint.audioScript || ''} ${blueprint.subtitles?.line1Tamil || ''} ${blueprint.videoPrompt || ''}`;
   const hasZha = hasTamilZha(allTamilText);
@@ -342,7 +342,7 @@ export function buildInculcatedVideoPrompt(blueprint: ShortsBlueprint, expr: Cha
     ? ' PRONUNCIATION MANDATE: For words such as "lovingkindness", the pronunciation must be strictly LOV-ING-KIND-NESS and NOT LOV-ING-KYND-NESS.' 
     : '';
   const iratchippuMandate = hasIratchippu 
-    ? ' CRITICAL TAMIL PRONUNCIATION MANDATE FOR "இரட்சிப்பு" (Iratchippu / Salvation): When speaking "இரட்சிப்பு" (or related forms "இரட்சிப்பின்", "இரட்சகர்", "இரட்சிக்க", "இரட்சிப்பை"), the initial Tamil vowel "இ" must NEVER be silent or dropped as "ரட்சிப்பு" (ratchippu). The first letter "இ" MUST be distinctly and clearly enunciated as "I-rat-chip-pu" (இ-ரட்-சிப்-பு / Ee-rat-chip-pu) with pure, articulate native Tamil phonetics.' 
+    ? ' CRITICAL TAMIL PRONUNCIATION MANDATE FOR "இரட்சிப்பு" / "இரட்சிப்பின்" / "இரட்சகர்" / "இரட்சிக்க" (Silent Initial "இ"): Written form stays with "இ" ("இரட்சிப்பு", "இரட்சிப்பின்", "இரட்சகர்", "இரட்சிக்க", "இரட்சிப்பை"), but spoken audio MUST pronounce them with initial vowel "இ" silent: pronounce as "ரட்சிப்பு" / Ratchippu (Rat-chip-pu), "ரட்சிப்பின்" / Ratchippin (Rat-chip-pin), "ரட்சகர்" / Ratchagar (Rat-cha-gar), "ரட்சிக்க" / Ratchikka (Rat-chik-ka) — initial vowel "இ" silent, NOT Iratchippu/Iratchikka.' 
     : '';
   const zhaMandate = hasZha 
     ? ` CRITICAL TAMIL RETROFLEX APPROXIMANT MANDATE (ழகரம் / IPA: /ɻ/ / U+0BB4): Authentic native Tamil speaker from Tamil Nadu (Madurai/Thanjavur accent), NOT English accent, NOT Hindi, NOT anglicized. Pure Tamil Nadu native speaker locked. Explicit IPA lock: ழு / ழ = U+0BB4 = /ɻ/ (tongue tip curled far back to hard palate, producing the deep retroflex approximant as in Tamizh தமிழ், NEVER anglicized as 'la' [ல] or 'lla' [ள]). Phonetic guide fed to voice engine: ${zhaPhonetic}. Audio verification: Check the Tamil audio at 1-3s — ழு / ழ should have that deep Tamil zha resonance.` 
