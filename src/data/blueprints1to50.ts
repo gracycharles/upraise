@@ -510,8 +510,8 @@ export const BLUEPRINTS_1_TO_50: ShortsBlueprint[] = [
     englishRef: "Psalms 33:9",
     character: "Simon Peter the Apostle watching the storm instantly calm on the Sea of Galilee",
     location: "Wooden fishing boat on the Sea of Galilee as waters become like glass",
-    videoPrompt: "A cinematic 8k video set in 30 AD Sea of Galilee. Simon Peter the Apostle clings to the rugged wooden gunwale of his boat in stunned wonder. Around him, turbulent waves suddenly flatten into serene, glassy stillness as golden sunlight pierces the clouds. With wide, clear eyes and reverent adoration, he beholds the power of the Lord whose word commands wind and sea. Cinematic historical realism, photorealistic. --ar 9:16 --v 6.0",
-    voiceProfile: "Awe-struck, breathless voice of a witness to miraculous power.",
+    videoPrompt: "A cinematic 8k video set in 30 AD Sea of Galilee. Simon Peter the Apostle clings to the rugged wooden gunwale of his boat in stunned wonder. Around him, turbulent waves suddenly flatten into serene, glassy stillness as golden sunlight pierces the clouds. With wide, clear eyes and reverent adoration, he beholds the power of the Lord whose word commands wind and sea. Cinematic historical realism, photorealistic. PRONUNCIATION MANDATE: Spoken voice MUST pronounce 'நிற்கும்' strictly as 'NIR-kum' (nir-kum) with proper dental 'நி' (short i as in 'nirkum') and native Tamil lip-sync, NOT retroflex. --ar 9:16 --v 6.0",
+    voiceProfile: "Awe-struck, breathless voice of a witness to miraculous power. PRONUNCIATION MANDATE: Spoken voice MUST pronounce 'நிற்கும்' strictly as 'NIR-kum' with proper dental 'நி' (short i as in 'nirkum') and native Tamil lip-sync.",
     audioScript: "[Breath of amazement] அவர் சொல்ல ஆகும் கட்டளையிட நிற்கும் ஸ்தோத்திரம். ... Praise to You, He spoke and it was done.",
     backgroundAudio: "Deep cinematic C-major pad with sudden serene calm after a dramatic swell at -18dB.",
     subtitles: {

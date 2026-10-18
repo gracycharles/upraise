@@ -60,8 +60,8 @@ export const BLUEPRINTS_51_TO_100: ShortsBlueprint[] = [
     englishRef: "Daniel 6:26",
     character: "Prophet Daniel in Babylon praying before an open window toward Jerusalem",
     location: "Upper chamber overlooking ancient Babylon under a brilliant starry sky",
-    videoPrompt: "A cinematic 8k video set in ancient Babylon. Prophet Daniel, an elder statesman with a dignified white-streaked beard and noble linen robe, kneels before an open arched window facing toward Jerusalem. Holding an ancient parchment scroll, he looks up into the starlit heavens in calm, unshakeable confidence in the living God whose kingdom endures to the end. Historic authenticity, dramatic lighting, photorealistic. --ar 9:16 --v 6.0",
-    voiceProfile: "Wise, enduring, solemn voice declaring everlasting dominion.",
+    videoPrompt: "A cinematic 8k video set in ancient Babylon. Prophet Daniel, an elder statesman with a dignified white-streaked beard and noble linen robe, kneels before an open arched window facing toward Jerusalem. Holding an ancient parchment scroll, he looks up into the starlit heavens in calm, unshakeable confidence in the living God whose kingdom endures to the end. Historic authenticity, dramatic lighting, photorealistic. PRONUNCIATION MANDATE: Spoken voice MUST pronounce 'நிற்கும்' strictly as 'NIR-kum' (nir-kum) with proper dental 'நி' (short i as in 'nirkum') and native Tamil lip-sync, NOT retroflex. --ar 9:16 --v 6.0",
+    voiceProfile: "Wise, enduring, solemn voice declaring everlasting dominion. PRONUNCIATION MANDATE: Spoken voice MUST pronounce 'நிற்கும்' strictly as 'NIR-kum' with proper dental 'நி' (short i as in 'nirkum') and native Tamil lip-sync.",
     audioScript: "[Pause] அவருடைய மகத்துவம் முடிவு வரை நிற்கும் ஸ்தோத்திரம்.... Praise to You, His Dominion Endures to the End.",
     backgroundAudio: "Solemn, expansive D-minor to D-major pad at -18dB.",
     subtitles: {
