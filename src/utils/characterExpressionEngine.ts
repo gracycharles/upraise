@@ -343,8 +343,8 @@ export function buildInculcatedVideoPrompt(blueprint: ShortsBlueprint, expr: Cha
   const hasNeytrum = /நேற்றும்|நேற்று/.test(
     `${blueprint.tamilText || ''} ${blueprint.tamilTitle || ''} ${blueprint.audioScript || ''} ${blueprint.subtitles?.line1Tamil || ''} ${blueprint.videoPrompt || ''}`
   );
-  const neytrumNote = hasNeytrum && !/NEYT-trum/i.test(cleanVoice)
-    ? ' (Tamil Pronunciation: pronounce "நேற்றும்" strictly as "NEYT-trum" [nayt-trum / நேட்-றும்] with dental initial "ந" and crisp geminate "ற்று" [t-tru alveolar plosive stop as in kaat-tru காற்று], NEVER soft "rum" or "ne-rum").' 
+  const neytrumNote = hasNeytrum && !/NEYT-TRUM/i.test(cleanVoice)
+    ? ' (Tamil Pronunciation: pronounce "நேற்றும்" strictly as "NEYT-TRUM" [Target IPA: n̪eːʈːum] — ந = dental n with tongue tip on upper teeth, ே = long EY as in "eight", ற்று = hard geminate t-tru alveolar plosive stop as in காற்று kaat-tru with crisp double-T closure, NOT soft r, NOT "ne-rum" / "ney-rum". Cadence: இயேசு கிறிஸ்து NEYT-TRUM IN-drum EN-drum MAARAATHAVAR [300ms natural breath, lips gently close/open] ஸ்தோத்திரம்).' 
     : '';
   const allTamilText = `${blueprint.tamilText || ''} ${blueprint.tamilTitle || ''} ${blueprint.audioScript || ''} ${blueprint.subtitles?.line1Tamil || ''} ${blueprint.videoPrompt || ''}`;
   const hasZha = hasTamilZha(allTamilText);
@@ -369,7 +369,7 @@ export function buildInculcatedVideoPrompt(blueprint: ShortsBlueprint, expr: Cha
     ? ' CRITICAL TAMIL PHONETIC GUIDE FOR "தேவனே" (Dheh-va-ney): Spoken audio MUST pronounce "தேவனே" strictly as "Dheh-va-ney". Stress Notes: Primary stress on the initial syllable "DHEH" (soft dental d with tongue touching upper teeth, long "eh" vowel), a light unstressed connecting middle syllable "-va-", and a reverent vocative elongation on "-ney" (DHEH-va-ney). Avoid hard alveolar/retroflex English "D" or hurried monotone.'
     : '';
   const neytrumMandate = hasNeytrum
-    ? ' CRITICAL TAMIL PRONUNCIATION MANDATE FOR "நேற்றும்" (NEYT-trum): Spoken audio MUST pronounce "நேற்றும்" strictly as "NEYT-trum" (nayt-trum / நேட்-றும்). Articulation & Stress: Initial syllable "NEYT-" begins with proper dental "ந" (tongue tip contacting upper front teeth) with long "ey" vowel followed by alveolar stop "t"; the medial cluster "ற்று" MUST be pronounced with the authentic native Tamil geminate plosive "t-tru" stop (like "kaat-tru" காற்று / "nayt-tru" நேற்று), NOT a soft English "r" and NEVER slurred as "ne-rum". In the phrase "நேற்றும் இன்றும் என்றும்", cadence evenly: NEYT-trum ... IN-drum ... EN-drum.'
+    ? ' CRITICAL TAMIL PRONUNCIATION MANDATE FOR "நேற்றும்" (NEYT-TRUM): Spoken audio MUST pronounce "நேற்றும்" strictly as "NEYT-TRUM" with explicit phonetic lock: ந = dental n (tongue tip on upper teeth, NOT English alveolar), ே = long EY as in "eight", ற்று = hard geminate t-tru alveolar plosive stop as in காற்று kaat-tru (crisp double-T closure, NOT soft r, NOT "ne-rum" / "ney-rum"). Target IPA: [n̪eːʈːum]. Spoken Cadence: "இயேசு கிறிஸ்து NEYT-TRUM IN-drum EN-drum MAARAATHAVAR [300ms natural breath, lips gently close/open] ஸ்தோத்திரம்".'
     : '';
   const zhaMandate = hasZha 
     ? ` CRITICAL TAMIL RETROFLEX APPROXIMANT MANDATE (ழகரம் / IPA: /ɻ/ / U+0BB4): Authentic native Tamil speaker from Tamil Nadu (Madurai/Thanjavur accent), NOT English accent, NOT Hindi, NOT anglicized. Pure Tamil Nadu native speaker locked. Explicit IPA lock: ழு / ழ = U+0BB4 = /ɻ/ (tongue tip curled far back to hard palate, producing the deep retroflex approximant as in Tamizh தமிழ், NEVER anglicized as 'la' [ல] or 'lla' [ள]). Phonetic guide fed to voice engine: ${zhaPhonetic}. Audio verification: Check the Tamil audio at 1-3s — ழு / ழ should have that deep Tamil zha resonance.` 
