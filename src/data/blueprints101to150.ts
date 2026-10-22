@@ -310,8 +310,8 @@ export const BLUEPRINTS_101_TO_150: ShortsBlueprint[] = [
     englishRef: "Revelation 21:5",
     character: "Apostle John on the Isle of Patmos gazing into open heavenly visions with transfigured face",
     location: "Rocky sea cliff of Patmos overlooking the Aegean Sea during a supernatural golden sunset",
-    videoPrompt: "A cinematic 8k video set in 90 AD Isle of Patmos. The elderly Apostle John sits on sea-carved coastal rocks with pen and parchment. The clouds part above the Aegean waters, pouring down cascading shafts of emerald and crystalline golden light. His weathered face is transfigured by glorious celestial vision. Epic majesty, photorealistic. --ar 9:16 --v 6.0",
-    voiceProfile: "Glorious, resonant, celestial voice echoing eternity.",
+    videoPrompt: "A cinematic 8k video set in 90 AD Isle of Patmos. The elderly Apostle John sits on sea-carved coastal rocks with pen and parchment. The clouds part above the Aegean waters, pouring down cascading shafts of emerald and crystalline golden light. His weathered face is transfigured by glorious celestial vision. Epic majesty, photorealistic. PRONUNCIATION MANDATE: Spoken voice MUST pronounce 'சகலத்தையும்' strictly as 'sa-ga-la-thaiyum' (SA-ga-la-thai-yum) with initial voiceless sibilant 'sa' (as in 'sun'), NEVER with 'cha' (/tʃ/ as in 'chair') or 'ja'. Syllable breakdown: sa - ga - la - thai - yum. --ar 9:16 --v 6.0",
+    voiceProfile: "Glorious, resonant, celestial voice echoing eternity. PRONUNCIATION MANDATE: Spoken voice MUST pronounce 'சகலத்தையும்' strictly as 'sa-ga-la-thaiyum' (SA-ga-la-thai-yum) with initial voiceless sibilant 'sa' (as in 'sun'), NEVER with 'cha' (/tʃ/ as in 'chair') or 'ja'. Syllable breakdown: sa - ga - la - thai - yum.",
     audioScript: "இதோ நான் சகலத்தையும் புதிதாக்குகிறேன் என்றவரே ஸ்தோத்திரம். ... Behold, I make all things new.",
     backgroundAudio: "Grand cinematic choir, crystalline chimes, and deep radiant synth pad at -18dB.",
     subtitles: {

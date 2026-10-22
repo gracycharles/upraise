@@ -346,13 +346,19 @@ export function buildInculcatedVideoPrompt(blueprint: ShortsBlueprint, expr: Cha
   const neytrumNote = hasNeytrum && !/NEYT-TRUM/i.test(cleanVoice)
     ? ' (Tamil Pronunciation: pronounce "நேற்றும்" strictly as "NEYT-TRUM" [Target IPA: n̪eːʈːum] — ந = dental n with tongue tip on upper teeth, ே = long EY as in "eight", ற்று = hard geminate t-tru alveolar plosive stop as in காற்று kaat-tru with crisp double-T closure, NOT soft r, NOT "ne-rum" / "ney-rum". Cadence: இயேசு கிறிஸ்து NEYT-TRUM IN-drum EN-drum MAARAATHAVAR [300ms natural breath, lips gently close/open] ஸ்தோத்திரம்).' 
     : '';
+  const hasSagala = /சகல/.test(
+    `${blueprint.tamilText || ''} ${blueprint.tamilTitle || ''} ${blueprint.audioScript || ''} ${blueprint.subtitles?.line1Tamil || ''} ${blueprint.videoPrompt || ''}`
+  );
+  const sagalaNote = hasSagala && !/sa-ga-la/i.test(cleanVoice)
+    ? ' (Tamil Phonetic Guide: pronounce "சகலத்தையும்" strictly as "sa-ga-la-thaiyum" [SA-ga-la-thai-yum] with initial voiceless sibilant "sa" as in "sun", NOT "cha" [/tʃ/] or "ja").'
+    : '';
   const allTamilText = `${blueprint.tamilText || ''} ${blueprint.tamilTitle || ''} ${blueprint.audioScript || ''} ${blueprint.subtitles?.line1Tamil || ''} ${blueprint.videoPrompt || ''}`;
   const hasZha = hasTamilZha(allTamilText);
   const zhaPhonetic = extractZhaPhoneticGuide(allTamilText);
   const zhaNote = hasZha && !/ழகர|\/ɻ\//.test(cleanVoice)
     ? ` (Tamil Pronunciation: Authentic native Tamil speaker from Tamil Nadu [Madurai/Thanjavur accent], NOT English accent, NOT Hindi, NOT anglicized. Explicit IPA lock: ழு/ழ = U+0BB4 = /ɻ/ - tongue tip curled far back to hard palate, producing the deep retroflex approximant as in Tamizh, NOT ல/ள. Phonetic guide fed to voice engine: ${zhaPhonetic}; check Tamil at 1-3s for deep Tamil zha resonance).` 
     : '';
-  const combinedPronunciationNotes = `${lovingkindnessNote}${ratchanyaNote}${iratchippuNote}${nirkumNote}${dhevaneNote}${neytrumNote}${zhaNote}`;
+  const combinedPronunciationNotes = `${lovingkindnessNote}${ratchanyaNote}${iratchippuNote}${nirkumNote}${dhevaneNote}${neytrumNote}${sagalaNote}${zhaNote}`;
   const voiceDirective = cleanVoice 
     ? `${cleanVoice}${combinedPronunciationNotes}. Authentic character voice naturally matching ${blueprint.character} with pure Tamil Nadu native speaker pronunciation.`
     : `Organic vocalization naturally matching ${blueprint.character} with authentic native Tamil speaker from Tamil Nadu (Madurai/Thanjavur accent) pronunciation.${combinedPronunciationNotes}`;
@@ -371,6 +377,9 @@ export function buildInculcatedVideoPrompt(blueprint: ShortsBlueprint, expr: Cha
   const neytrumMandate = hasNeytrum
     ? ' CRITICAL TAMIL PRONUNCIATION MANDATE FOR "நேற்றும்" (NEYT-TRUM): Spoken audio MUST pronounce "நேற்றும்" strictly as "NEYT-TRUM" with explicit phonetic lock: ந = dental n (tongue tip on upper teeth, NOT English alveolar), ே = long EY as in "eight", ற்று = hard geminate t-tru alveolar plosive stop as in காற்று kaat-tru (crisp double-T closure, NOT soft r, NOT "ne-rum" / "ney-rum"). Target IPA: [n̪eːʈːum]. Spoken Cadence: "இயேசு கிறிஸ்து NEYT-TRUM IN-drum EN-drum MAARAATHAVAR [300ms natural breath, lips gently close/open] ஸ்தோத்திரம்".'
     : '';
+  const sagalaMandate = hasSagala
+    ? ' CRITICAL TAMIL PHONETIC GUIDE FOR "சகலத்தையும்" (sa-ga-la-thaiyum): Spoken audio MUST pronounce "சகலத்தையும்" strictly as "sa-ga-la-thaiyum" (SA-ga-la-thai-yum). The initial letter "ச" must be articulated with the soft voiceless sibilant "sa" (as in "sun"), NEVER as "cha" (/tʃ/ as in "chair") and NEVER as "ja". Full syllable breakdown: sa - ga - la - thai - yum.'
+    : '';
   const zhaMandate = hasZha 
     ? ` CRITICAL TAMIL RETROFLEX APPROXIMANT MANDATE (ழகரம் / IPA: /ɻ/ / U+0BB4): Authentic native Tamil speaker from Tamil Nadu (Madurai/Thanjavur accent), NOT English accent, NOT Hindi, NOT anglicized. Pure Tamil Nadu native speaker locked. Explicit IPA lock: ழு / ழ = U+0BB4 = /ɻ/ (tongue tip curled far back to hard palate, producing the deep retroflex approximant as in Tamizh தமிழ், NEVER anglicized as 'la' [ல] or 'lla' [ள]). Phonetic guide fed to voice engine: ${zhaPhonetic}. Audio verification: Check the Tamil audio at 1-3s — ழு / ழ should have that deep Tamil zha resonance.` 
     : '';
@@ -385,5 +394,5 @@ CINEMATOGRAPHY & CAMERA DIRECTION:
 - Emotional & Theological Context: ${expr.theologicalMood}
 CINEMATIC MANDATE: Active, dynamic 1st-century biblical staging. Avoid static poses and avoid hand-on-chest clichés; ensure rich, varied camera movement and natural physical interaction with the historic environment. Photorealistic 8k, authentic coarse-weave linen garments, natural skin textures, shallow depth of field.
 TEARS & OCULAR MANDATE: Strictly forbid watery eyes, puffy red crying eyes, weeping, or streaming/uncontrollable tears across all scenes. All characters must predominantly maintain clear, steady, serene, radiant eyes with dignified composure, tranquil adoration, and genuine spiritual peace. Tears are permitted ONLY where the biblical scripture explicitly commands weeping, sorrow, mourning, or wiping tears (e.g. delivered from tears, wiping tears, tears in a bottle, weeping in the night). Even where contextually warranted, tears must NEVER flow uncontrollably, never stream down the face, and never distort the countenance; at most, a single subtle, quiet teardrop resting calmly upon serene, composed cheeks without flowing, swiftly giving way to peaceful comfort and dry, clear eyes.
-AUDIO & LIP-SYNC MANDATE: The video generator must choose the voice dynamically based on the character (${blueprint.character}), authentically reflecting their age, gender, and historic biblical presence.${pronunciationMandate}${ratchanyaMandate}${iratchippuMandate}${nirkumMandate}${dhevaneMandate}${neytrumMandate}${zhaMandate} Spoken Tamil must be voiced by an authentic native Tamil speaker from Tamil Nadu (Madurai/Thanjavur accent), NOT English accent, NOT Hindi, NOT anglicized. Pure Tamil Nadu native speaker locked. Correct conjunct pronunciation (e.g. க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ) and natural syllable stress. Natural reverent pause before "ஸ்தோத்திரம்" in spoken audio/lip-sync (as if a gentle comma exists, while text overlay remains clean). 100% synchronized, continuous lip-sync throughout all 10.0 seconds articulating both Tamil praise and English translation.`;
+AUDIO & LIP-SYNC MANDATE: The video generator must choose the voice dynamically based on the character (${blueprint.character}), authentically reflecting their age, gender, and historic biblical presence.${pronunciationMandate}${ratchanyaMandate}${iratchippuMandate}${nirkumMandate}${dhevaneMandate}${neytrumMandate}${sagalaMandate}${zhaMandate} Spoken Tamil must be voiced by an authentic native Tamil speaker from Tamil Nadu (Madurai/Thanjavur accent), NOT English accent, NOT Hindi, NOT anglicized. Pure Tamil Nadu native speaker locked. Correct conjunct pronunciation (e.g. க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ) and natural syllable stress. Natural reverent pause before "ஸ்தோத்திரம்" in spoken audio/lip-sync (as if a gentle comma exists, while text overlay remains clean). 100% synchronized, continuous lip-sync throughout all 10.0 seconds articulating both Tamil praise and English translation.`;
 }
