@@ -310,9 +310,9 @@ export const BLUEPRINTS_101_TO_150: ShortsBlueprint[] = [
     englishRef: "Revelation 21:5",
     character: "Apostle John on the Isle of Patmos gazing into open heavenly visions with transfigured face",
     location: "Rocky sea cliff of Patmos overlooking the Aegean Sea during a supernatural golden sunset",
-    videoPrompt: "A cinematic 8k video set in 90 AD Isle of Patmos. The elderly Apostle John sits on sea-carved coastal rocks with pen and parchment. The clouds part above the Aegean waters, pouring down cascading shafts of emerald and crystalline golden light. His weathered face is transfigured by glorious celestial vision. Epic majesty, photorealistic. PRONUNCIATION MANDATE: Hard-locked phonetic: SA-ga-la-thai-yum — initial ச = sharp voiceless /s/ as in SUN / SAGA / SOAP, IPA not [tʃ], never cha/ja. Audio description logs as sagalathaiyum with sharp S [s]. Syllable breakdown: sa - ga - la - thai - yum. --ar 9:16 --v 6.0",
-    voiceProfile: "Glorious, resonant, celestial voice echoing eternity. PRONUNCIATION MANDATE: Hard-locked phonetic: SA-ga-la-thai-yum — initial ச = sharp voiceless /s/ as in SUN / SAGA / SOAP, IPA not [tʃ], never cha/ja. Audio description logs as sagalathaiyum with sharp S [s]. Syllables: sa - ga - la - thai - yum.",
-    audioScript: "இதோ நான் சகலத்தையும் புதிதாக்குகிறேன் என்றவரே ஸ்தோத்திரம். ... Behold, I make all things new.",
+    videoPrompt: "A cinematic 8k video set in 90 AD Isle of Patmos. The elderly Apostle John sits on sea-carved coastal rocks with pen and parchment. The clouds part above the Aegean waters, pouring down cascading shafts of emerald and crystalline golden light. His weathered face is transfigured by glorious celestial vision. Epic majesty, photorealistic. PRONUNCIATION MANDATE & TTS PHONETIC LOCK: Spoken audio MUST pronounce 'சகலத்தையும்' strictly as 'sa-ga-la-thaiyum' (SA-ga-la-thai-yum) with initial voiceless sibilant 'sa' (as in 'sun'), NEVER with 'cha' (/tʃ/ as in 'chair') or 'ja'. CRITICAL: Speech engines default 'ச' to 'cha' ('Chagalathaiyum'); the voiceover dialogue is phonetically locked using Grantha 'ஸ' as 'ஸகலத்தையும்' (or Latin 'sa-ga-la-thaiyum') for speech synthesis and lip-sync. On-screen subtitles retain standard literary 'சகலத்தையும்'. --ar 9:16 --v 6.0",
+    voiceProfile: "Glorious, resonant, celestial voice echoing eternity. PRONUNCIATION MANDATE: Spoken voice MUST pronounce 'சகலத்தையும்' strictly as 'sa-ga-la-thaiyum' (SA-ga-la-thai-yum) with initial voiceless sibilant 'sa' (as in 'sun'), NEVER 'cha' or 'ja'. TTS speech input uses phonetic 'ஸகலத்தையும்' (sa-ga-la-thaiyum) to prevent G2P 'Chagalathaiyum'.",
+    audioScript: "இதோ நான் ஸகலத்தையும் புதிதாக்குகிறேன் என்றவரே ஸ்தோத்திரம். ... Behold, I make all things new.",
     backgroundAudio: "Grand cinematic choir, crystalline chimes, and deep radiant synth pad at -18dB.",
     subtitles: {
       line1Tamil: "இதோ நான் சகலத்தையும் புதிதாக்குகிறேன் என்றவரே ஸ்தோத்திரம்.",
@@ -437,7 +437,7 @@ export const BLUEPRINTS_101_TO_150: ShortsBlueprint[] = [
     location: "Mount of the Great Commission in Galilee with panoramic views of the blue Sea of Galilee",
     videoPrompt: "A cinematic 8k video set in 30 AD Galilee. Eleven Galilean disciples stand together atop a wind-swept mountain overlooking the sparkling blue Sea of Galilee below. Their faces are illuminated with divine fire, peace, and eternal mission as golden sunlight envelopes them. Majestic cinematic realism, emotional triumph. --ar 9:16 --v 6.0",
     voiceProfile: "Sovereign, eternal, comforting and triumphant presence.",
-    audioScript: "இதோ உலகின் முடிவுவரை சகல நாளும் உன்னோடிருக்கிறேன் ஸ்தோத்திரம். ... Lo, I am with you alway, even unto the end of the world.",
+    audioScript: "இதோ உலகின் முடிவுவரை ஸகல நாளும் உன்னோடிருக்கிறேன் ஸ்தோத்திரம். ... Lo, I am with you alway, even unto the end of the world.",
     backgroundAudio: "Epic cinematic strings swelling with majestic acoustic piano in C-major at -18dB.",
     subtitles: {
       line1Tamil: "இதோ உலகின் முடிவுவரை சகல நாளும் உன்னோடிருக்கிறேன் ஸ்தோத்திரம்.",

@@ -1036,6 +1036,31 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                       <strong className="text-amber-300 font-bold uppercase">Pronunciation Directive:</strong> For words such as <em>"lovingkindness"</em>, the pronunciation must be strictly <strong>LOV-ING-KIND-NESS</strong> and not LOV-ING-KYND-NESS.
                     </div>
                   )}
+                  {/சகல|ஸகல/.test(`${blueprint.tamilText} ${blueprint.audioScript} ${blueprint.subtitles?.line1Tamil}`) && (
+                    <div className="p-1.5 rounded bg-emerald-950/60 border border-emerald-500/40 text-emerald-200 text-[11px]">
+                      <strong className="text-emerald-300 font-bold uppercase">Phonetic Lock ("சகலத்தையும்" → "sa-ga-la-thaiyum"):</strong> Spoken voiceover is phonetically locked as <em>"ஸகலத்தையும்"</em> / <em>"sa-ga-la-thaiyum"</em> (initial voiceless sibilant <strong>"sa"</strong> as in <em>SUN</em>, never <em>cha/ja</em> or <em>Chagalathaiyum</em>). Using Grantha <strong>"ஸ"</strong> in the TTS audio script forces speech engines to voice the pure <strong>/s/</strong> sound while on-screen subtitles display standard literary <em>"சகலத்தையும்"</em>.
+                    </div>
+                  )}
+                  {/நேற்றும்|நேற்று/.test(`${blueprint.tamilText} ${blueprint.audioScript} ${blueprint.subtitles?.line1Tamil}`) && (
+                    <div className="p-1.5 rounded bg-amber-950/50 border border-amber-500/30 text-amber-200 text-[11px]">
+                      <strong className="text-amber-300 font-bold uppercase">Pronunciation Lock ("நேற்றும்"):</strong> Pronounced strictly as <strong>NEYT-TRUM</strong> (Target IPA [n̪eːʈːum], dental <em>ந</em>, hard geminate <em>ற்று</em> plosive stop as in <em>காற்று</em> kaat-tru, crisp double-T closure).
+                    </div>
+                  )}
+                  {/நிற்கும்|நிலைநிற்கும்/.test(`${blueprint.tamilText} ${blueprint.audioScript} ${blueprint.subtitles?.line1Tamil}`) && (
+                    <div className="p-1.5 rounded bg-blue-950/50 border border-blue-500/30 text-blue-200 text-[11px]">
+                      <strong className="text-blue-300 font-bold uppercase">Pronunciation Lock ("நிற்கும்"):</strong> Pronounced strictly as <strong>NIR-kum</strong> with proper dental <em>நி</em> and native Tamil lip-sync.
+                    </div>
+                  )}
+                  {/இரட்சண்ய/.test(`${blueprint.tamilText} ${blueprint.audioScript} ${blueprint.subtitles?.line1Tamil}`) && (
+                    <div className="p-1.5 rounded bg-purple-950/50 border border-purple-500/30 text-purple-200 text-[11px]">
+                      <strong className="text-purple-300 font-bold uppercase">Pronunciation Lock ("இரட்சண்ய"):</strong> Written as <em>"இரட்சண்ய"</em>, but spoken audio pronounces as <strong>"ரட்சண்ய" / Ratchanya</strong> (initial vowel <em>"இ"</em> silent).
+                    </div>
+                  )}
+                  {/தேவனே/.test(`${blueprint.tamilText} ${blueprint.audioScript} ${blueprint.subtitles?.line1Tamil}`) && (
+                    <div className="p-1.5 rounded bg-amber-950/50 border border-amber-500/30 text-amber-200 text-[11px]">
+                      <strong className="text-amber-300 font-bold uppercase">Phonetic Guide ("தேவனே"):</strong> Pronounced strictly as <strong>Dheh-va-ney</strong> (primary stress on dental <em>Dheh</em>, light middle <em>va</em>, reverent elongation on vocative <em>ney</em>).
+                    </div>
+                  )}
                   <div>
                     <strong className="text-emerald-200 font-semibold">CADENCE & PAUSE DIRECTIVE:</strong> In spoken Tamil audio, introduce a distinct, reverent pause (as if an unwritten comma exists) immediately prior to speaking <em>"ஸ்தோத்திரம்"</em>. The on-screen text overlay retains the clean biblical script without an extra comma, while the audio delivery breathes reverently.
                   </div>

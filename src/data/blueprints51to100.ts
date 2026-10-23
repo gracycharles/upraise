@@ -637,7 +637,7 @@ export const BLUEPRINTS_51_TO_100: ShortsBlueprint[] = [
     location: "Courtyard in ancient Jerusalem surrounded by white stone arches",
     videoPrompt: "A cinematic 8k video set in 30 AD Jerusalem. A vibrant fellowship of early disciples, men and women in authentic linen tunics, raise their hands together in unison under the azure morning sky. Heavenly light illuminates their smiling, peaceful faces as they receive all spiritual blessings in heavenly places. Joyous communion, photorealistic. --ar 9:16 --v 6.0",
     voiceProfile: "Uplifting, celebratory, church-wide thanksgiving for heavenly riches.",
-    audioScript: "ஆவிக்குரிய சகல ஆசீர்வாதத்தாலும் ஆசீர்வதிப்பவரே ஸ்தோத்திரம். ... Praise to You, blessed with all spiritual blessings.",
+    audioScript: "ஆவிக்குரிய ஸகல ஆசீர்வாதத்தாலும் ஆசீர்வதிப்பவரே ஸ்தோத்திரம். ... Praise to You, blessed with all spiritual blessings.",
     backgroundAudio: "Radiant, celestial C-major worship pad with joyful orchestral strings at -18dB.",
     subtitles: {
       line1Tamil: "ஆவிக்குரிய சகல ஆசீர்வாதத்தாலும் ஆசீர்வதிப்பவரே ஸ்தோத்திரம்.",

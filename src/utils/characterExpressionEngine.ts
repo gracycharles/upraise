@@ -346,11 +346,11 @@ export function buildInculcatedVideoPrompt(blueprint: ShortsBlueprint, expr: Cha
   const neytrumNote = hasNeytrum && !/NEYT-TRUM/i.test(cleanVoice)
     ? ' (Tamil Pronunciation: pronounce "நேற்றும்" strictly as "NEYT-TRUM" [Target IPA: n̪eːʈːum] — ந = dental n with tongue tip on upper teeth, ே = long EY as in "eight", ற்று = hard geminate t-tru alveolar plosive stop as in காற்று kaat-tru with crisp double-T closure, NOT soft r, NOT "ne-rum" / "ney-rum". Cadence: இயேசு கிறிஸ்து NEYT-TRUM IN-drum EN-drum MAARAATHAVAR [300ms natural breath, lips gently close/open] ஸ்தோத்திரம்).' 
     : '';
-  const hasSagala = /சகல/.test(
+  const hasSagala = /சகல|ஸகல/.test(
     `${blueprint.tamilText || ''} ${blueprint.tamilTitle || ''} ${blueprint.audioScript || ''} ${blueprint.subtitles?.line1Tamil || ''} ${blueprint.videoPrompt || ''}`
   );
-  const sagalaNote = hasSagala && !/SA-ga-la/i.test(cleanVoice)
-    ? ' (Tamil Phonetic Guide: pronounce "சகலத்தையும்" with hard-locked phonetic SA-ga-la-thai-yum — initial ச = sharp voiceless /s/ as in SUN / SAGA / SOAP, IPA not [tʃ], never cha/ja. Audio description logs as sagalathaiyum with sharp S [s]).'
+  const sagalaNote = hasSagala && !/sa-ga-la|ஸகல/i.test(cleanVoice)
+    ? ' (Tamil Phonetic Guide: pronounce "சகலத்தையும்" strictly as "sa-ga-la-thaiyum" [SA-ga-la-thai-yum] / "ஸகலத்தையும்" with initial voiceless sibilant "sa" as in "sun", NEVER "cha" [/tʃ/] or "Chagalathaiyum"; voiceover script is phonetically locked using Grantha "ஸ" as "ஸகலத்தையும்" to prevent TTS G2P error).'
     : '';
   const allTamilText = `${blueprint.tamilText || ''} ${blueprint.tamilTitle || ''} ${blueprint.audioScript || ''} ${blueprint.subtitles?.line1Tamil || ''} ${blueprint.videoPrompt || ''}`;
   const hasZha = hasTamilZha(allTamilText);
@@ -378,7 +378,7 @@ export function buildInculcatedVideoPrompt(blueprint: ShortsBlueprint, expr: Cha
     ? ' CRITICAL TAMIL PRONUNCIATION MANDATE FOR "நேற்றும்" (NEYT-TRUM): Spoken audio MUST pronounce "நேற்றும்" strictly as "NEYT-TRUM" with explicit phonetic lock: ந = dental n (tongue tip on upper teeth, NOT English alveolar), ே = long EY as in "eight", ற்று = hard geminate t-tru alveolar plosive stop as in காற்று kaat-tru (crisp double-T closure, NOT soft r, NOT "ne-rum" / "ney-rum"). Target IPA: [n̪eːʈːum]. Spoken Cadence: "இயேசு கிறிஸ்து NEYT-TRUM IN-drum EN-drum MAARAATHAVAR [300ms natural breath, lips gently close/open] ஸ்தோத்திரம்".'
     : '';
   const sagalaMandate = hasSagala
-    ? ' CRITICAL TAMIL HARD-LOCKED PHONETIC MANDATE FOR "சகலத்தையும்" (SA-ga-la-thai-yum): Regenerated with hard-locked phonetic: SA-ga-la-thai-yum — initial ச = sharp voiceless /s/ as in SUN / SAGA / SOAP, IPA not [tʃ], never cha/ja. Spoken audio description must log as sagalathaiyum with sharp S [s]. Syllable breakdown: sa - ga - la - thai - yum.'
+    ? ' CRITICAL TAMIL PHONETIC GUIDE & TTS LOCK FOR "சகலத்தையும்" (sa-ga-la-thaiyum): Spoken audio MUST pronounce "சகலத்தையும்" strictly as "sa-ga-la-thaiyum" (SA-ga-la-thai-yum). The initial letter must be articulated with the soft voiceless sibilant "sa" (as in "sun"), NEVER as "cha" (/tʃ/ as in "chair") or "ja". CRITICAL TTS ENGINE LOCK: Standard AI video/TTS engines default initial "ச" to "cha" (causing the erroneous "Chagalathaiyum"). To force the pure "sa" sound, the spoken voiceover script is phonetically locked with Grantha "ஸ" as "ஸகலத்தையும்" (or Latin "sa-ga-la-thaiyum") for speech synthesis and lip-sync. On-screen subtitles retain standard literary "சகலத்தையும்".'
     : '';
   const zhaMandate = hasZha 
     ? ` CRITICAL TAMIL RETROFLEX APPROXIMANT MANDATE (ழகரம் / IPA: /ɻ/ / U+0BB4): Authentic native Tamil speaker from Tamil Nadu (Madurai/Thanjavur accent), NOT English accent, NOT Hindi, NOT anglicized. Pure Tamil Nadu native speaker locked. Explicit IPA lock: ழு / ழ = U+0BB4 = /ɻ/ (tongue tip curled far back to hard palate, producing the deep retroflex approximant as in Tamizh தமிழ், NEVER anglicized as 'la' [ல] or 'lla' [ள]). Phonetic guide fed to voice engine: ${zhaPhonetic}. Audio verification: Check the Tamil audio at 1-3s — ழு / ழ should have that deep Tamil zha resonance.` 
