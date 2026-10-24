@@ -1061,6 +1061,11 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                       <strong className="text-amber-300 font-bold uppercase">Phonetic Guide ("தேவனே"):</strong> Pronounced strictly as <strong>Dheh-va-ney</strong> (primary stress on dental <em>Dheh</em>, light middle <em>va</em>, reverent elongation on vocative <em>ney</em>).
                     </div>
                   )}
+                  {/முடிவு\s*வரை/.test(`${blueprint.tamilText} ${blueprint.audioScript} ${blueprint.subtitles?.line1Tamil}`) && (
+                    <div className="p-1.5 rounded bg-teal-950/50 border border-teal-500/30 text-teal-200 text-[11px]">
+                      <strong className="text-teal-300 font-bold uppercase">Cadence Lock ("முடிவு வரை" → "mudivu varai"):</strong> Spoken base is locked as two words with a micro-pause so it cannot merge: pronounced distinctly with a clear pause between <em>'mudivu'</em> and <em>'varai'</em>, enunciating each syllable as <strong>'mu-di-vu'</strong> followed by a brief pause then <strong>'va-rai'</strong> (<em>Idho ulagin mudivu [pause] varai sagala... = முடிவு + வரை</em>).
+                    </div>
+                  )}
                   <div>
                     <strong className="text-emerald-200 font-semibold">CADENCE & PAUSE DIRECTIVE:</strong> In spoken Tamil audio, introduce a distinct, reverent pause (as if an unwritten comma exists) immediately prior to speaking <em>"ஸ்தோத்திரம்"</em>. The on-screen text overlay retains the clean biblical script without an extra comma, while the audio delivery breathes reverently.
                   </div>
