@@ -41,6 +41,7 @@ import {
 import { getScriptureVerification } from '../data/scriptureVerifications';
 import { computeOverlayTypography } from '../utils/overlayTypographyEngine';
 import { downloadAlphaOverlayPng } from '../utils/alphaOverlayGenerator';
+import { hasTamilZha, extractZhaPhoneticGuide } from '../utils/tamilPhoneticsEngine';
 
 interface BlueprintCardProps {
   blueprint: ShortsBlueprint;
@@ -357,11 +358,16 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                 {/* Tamil Lines (Gold #FFC107 with drop shadow) */}
                 <div className="space-y-1.5 pt-1">
                   <div className="text-[10px] font-mono text-amber-500/70 tracking-wider">
-                    Line 1 • Gold #FFC107 ({typo.splitTamilLines.length} {typo.splitTamilLines.length > 1 ? 'Lines' : 'Line'} Wrapped &lt;760px):
+                    Tamil Praise • Gold #FFC107 ({typo.splitTamilLines.length}-Line Spread • Safe Side Margins):
                   </div>
                   {typo.splitTamilLines.map((line, idx) => (
-                    <div key={idx} className={`text-amber-400 tracking-wide font-tamil-overlay ${typo.uiTamilClass} break-words drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]`}>
-                      {line}
+                    <div key={idx} className="space-y-0.5">
+                      <span className="text-[9px] font-mono text-stone-500 block">
+                        Line {idx + 1} at (540,{typo.tamilYCoords[idx] || 960 + idx * 80}) anchor mm • {typo.tamilPx}px:
+                      </span>
+                      <div className={`text-amber-400 tracking-wide font-tamil-overlay ${typo.uiTamilClass} break-words drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]`}>
+                        {line}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -369,7 +375,7 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                 {/* English Lines (White #F8F9FA with drop shadow) */}
                 <div className="space-y-1.5 pt-1">
                   <div className="text-[10px] font-mono text-emerald-400/80 tracking-wider font-semibold">
-                    Line 2 • White #F8F9FA ({typo.splitEnglishLines.length} {typo.splitEnglishLines.length > 1 ? 'Lines' : 'Line'} Wrapped &lt;760px):
+                    English Translation • White #F8F9FA ({typo.englishPx}px at {typo.englishYCoords.map(y => `(540,${y})`).join(', ')}):
                   </div>
                   {typo.splitEnglishLines.map((line, idx) => (
                     <div key={idx} className={`text-white font-serif italic ${typo.uiEnglishClass} break-words drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]`}>
@@ -496,11 +502,11 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
               <p className="text-[11px] text-stone-300 leading-relaxed font-sans pt-1">
                 {typo.reductionPercent > 0 ? (
                   <>
-                    <strong className="text-amber-300">Reduced Font Scale for Video Gen:</strong> High character density detected ({typo.tamilCharCount} Tamil / {typo.englishCharCount} English chars). The video generator and overlay compositor are instructed to scale the font by <strong className="text-amber-300">{typo.reductionPercent}%</strong> to prevent margin clipping, while strictly guaranteeing <strong className="text-emerald-400">zero content loss</strong> (no words omitted or truncated).
+                    <strong className="text-amber-300">Auto-Scaled Font Scale for Video Gen:</strong> High character density detected ({typo.tamilCharCount} Tamil / {typo.englishCharCount} English chars). The video generator and overlay compositor are instructed to auto-scale font size to <strong className="text-amber-300">{typo.tamilPx}px</strong> (reduced by {typo.reductionPercent}%) while spreading across lines to guarantee generous side margins (&gt;= 220px on left &amp; right) and strictly ensure <strong className="text-emerald-400">zero content loss</strong>.
                   </>
                 ) : (
                   <>
-                    <strong className="text-stone-200">Standard Font Scale:</strong> Standard character density. Full praise text fits comfortably on single lines within the 80% center safe margins with zero loss.
+                    <strong className="text-stone-200">Two-Line Spread & Side Safe Zone:</strong> Tamil praise is spread across two distinct lines (Line 1 at y=960, Line 2 at y=1040) centered at x=540 with generous 220px–340px side margins, completely eliminating YouTube Shorts edge clipping and button occlusion.
                   </>
                 )}
               </p>
@@ -1036,7 +1042,7 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                       <strong className="text-amber-300 font-bold uppercase">Pronunciation Directive:</strong> For words such as <em>"lovingkindness"</em>, the pronunciation must be strictly <strong>LOV-ING-KIND-NESS</strong> and not LOV-ING-KYND-NESS.
                     </div>
                   )}
-                  {/சகல|ஸகல/.test(`${blueprint.tamilText} ${blueprint.audioScript} ${blueprint.subtitles?.line1Tamil}`) && (
+                  {/சகலத்தையும்|ஸகலத்தையும்/.test(`${blueprint.tamilText} ${blueprint.audioScript} ${blueprint.subtitles?.line1Tamil}`) && (
                     <div className="p-1.5 rounded bg-emerald-950/60 border border-emerald-500/40 text-emerald-200 text-[11px]">
                       <strong className="text-emerald-300 font-bold uppercase">Phonetic Lock ("சகலத்தையும்" → "sa-ga-la-thaiyum"):</strong> Spoken voiceover is phonetically locked as <em>"ஸகலத்தையும்"</em> / <em>"sa-ga-la-thaiyum"</em> (initial voiceless sibilant <strong>"sa"</strong> as in <em>SUN</em>, never <em>cha/ja</em> or <em>Chagalathaiyum</em>). Using Grantha <strong>"ஸ"</strong> in the TTS audio script forces speech engines to voice the pure <strong>/s/</strong> sound while on-screen subtitles display standard literary <em>"சகலத்தையும்"</em>.
                     </div>
@@ -1063,7 +1069,24 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                   )}
                   {/முடிவு\s*வரை/.test(`${blueprint.tamilText} ${blueprint.audioScript} ${blueprint.subtitles?.line1Tamil}`) && (
                     <div className="p-1.5 rounded bg-teal-950/50 border border-teal-500/30 text-teal-200 text-[11px]">
-                      <strong className="text-teal-300 font-bold uppercase">Cadence Lock ("முடிவு வரை" → "mudivu varai"):</strong> Spoken base is locked as two words with a micro-pause so it cannot merge: pronounced distinctly with a clear pause between <em>'mudivu'</em> and <em>'varai'</em>, enunciating each syllable as <strong>'mu-di-vu'</strong> followed by a brief pause then <strong>'va-rai'</strong> (<em>Idho ulagin mudivu [pause] varai sagala... = முடிவு + வரை</em>).
+                      <strong className="text-teal-300 font-bold uppercase">Cadence & Script Lock ("முடிவு வரை" → "mudivu varai"):</strong> Spoken base is locked directly in native Tamil script as two words with a micro-pause so it cannot merge: pronounced distinctly with a clear pause between <em>'mudivu'</em> and <em>'varai'</em>, enunciating each syllable as <strong>'mu-di-vu'</strong> followed by a brief pause then <strong>'va-rai'</strong> (<em>இதோ உலகின் முடிவு வரை சகல... = முடிவு + வரை</em>). Spoken audio is generated directly from authentic Tamil script without English transliteration for pure, natural pronunciation.
+                    </div>
+                  )}
+                  {hasTamilZha(`${blueprint.tamilText} ${blueprint.audioScript} ${blueprint.subtitles?.line1Tamil}`) && (
+                    <div className="p-2 rounded bg-amber-950/60 border border-amber-500/40 text-amber-200 text-[11px] space-y-1">
+                      <div className="flex items-center gap-1.5 text-amber-300 font-bold uppercase tracking-wide">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                        Tamil Retroflex Mandate (ழகரம் / IPA: /ɻ/ / U+0BB4):
+                      </div>
+                      {/உயிர்த்தெழுந்தவரே/.test(`${blueprint.tamilText} ${blueprint.audioScript}`) ? (
+                        <p className="leading-relaxed">
+                          <strong className="text-amber-300 font-semibold">உயிர்த்தெழுந்தவரே</strong>: Tongue tip curled far back to hard palate as in தமிழ் (never <em>la/lla</em> [ல/ள]). Spoken engine guide: <strong>u-yir-th-tha-e-ZHU-n-tha-va-re-e</strong> (where ZHU = /ɻu/ — heard at 1–3s as <em>ezhundha</em> [eɻun̪d̪a], NOT <em>elundha</em>). Target IPA: <code className="bg-black/60 px-1 py-0.5 rounded text-amber-100 font-mono">[ujirt̪t̪eɻun̪d̪aʋareː]</code> with strong retroflex. Crisp geminated <em>த்த</em> in <strong>ஸ்தோத்திரம்</strong> (stho-th-thi-ram) and natural reverent pause.
+                        </p>
+                      ) : (
+                        <p className="leading-relaxed">
+                          Tongue tip curled far back to hard palate as in தமிழ் (never <em>la/lla</em> [ல/ள]). Voice engine guide: <strong>{extractZhaPhoneticGuide(`${blueprint.tamilText} ${blueprint.audioScript}`)}</strong>. Target IPA: <code className="bg-black/60 px-1 py-0.5 rounded text-amber-100 font-mono">/ɻ/ (U+0BB4)</code> retroflex approximant. Spoken audio must articulate geminated <strong>ஸ்தோத்திரம்</strong> (stho-th-thi-ram) with natural reverent pause.
+                        </p>
+                      )}
                     </div>
                   )}
                   <div>

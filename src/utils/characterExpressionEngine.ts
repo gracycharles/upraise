@@ -346,23 +346,23 @@ export function buildInculcatedVideoPrompt(blueprint: ShortsBlueprint, expr: Cha
   const neytrumNote = hasNeytrum && !/NEYT-TRUM/i.test(cleanVoice)
     ? ' (Tamil Pronunciation: pronounce "நேற்றும்" strictly as "NEYT-TRUM" [Target IPA: n̪eːʈːum] — ந = dental n with tongue tip on upper teeth, ே = long EY as in "eight", ற்று = hard geminate t-tru alveolar plosive stop as in காற்று kaat-tru with crisp double-T closure, NOT soft r, NOT "ne-rum" / "ney-rum". Cadence: இயேசு கிறிஸ்து NEYT-TRUM IN-drum EN-drum MAARAATHAVAR [300ms natural breath, lips gently close/open] ஸ்தோத்திரம்).' 
     : '';
-  const hasSagala = /சகல|ஸகல/.test(
+  const hasSagala = /சகலத்தையும்|ஸகலத்தையும்/.test(
     `${blueprint.tamilText || ''} ${blueprint.tamilTitle || ''} ${blueprint.audioScript || ''} ${blueprint.subtitles?.line1Tamil || ''} ${blueprint.videoPrompt || ''}`
   );
   const sagalaNote = hasSagala && !/sa-ga-la|ஸகல/i.test(cleanVoice)
-    ? ' (Tamil Phonetic Guide: pronounce "சகலத்தையும்" strictly as "sa-ga-la-thaiyum" [SA-ga-la-thai-yum] / "ஸகலத்தையும்" with initial voiceless sibilant "sa" as in "sun", NEVER "cha" [/tʃ/] or "Chagalathaiyum"; voiceover script is phonetically locked using Grantha "ஸ" as "ஸகலத்தையும்" to prevent TTS G2P error).'
+    ? ' (Tamil Phonetic Guide: pronounce "சகலத்தையும்" strictly as "sa-ga-la-thaiyum" [SA-ga-la-thai-yum] / "ஸகலத்தையும்" with initial voiceless sibilant "sa" as in "sun", NEVER "cha" [/tʃ/] or "Chagalathaiyum"; voiceover script is phonetically locked using Grantha "ஸ" as "ஸகலத்தையும்" to prevent TTS G2P error).' 
     : '';
   const hasMudivuVarai = /முடிவு\s*வரை/.test(
     `${blueprint.tamilText || ''} ${blueprint.tamilTitle || ''} ${blueprint.audioScript || ''} ${blueprint.subtitles?.line1Tamil || ''} ${blueprint.videoPrompt || ''}`
   );
   const mudivuVaraiNote = hasMudivuVarai && !/mudivu varai/i.test(cleanVoice)
-    ? ' (Tamil Cadence Lock: Spoken base locked as two words with a micro-pause: "mudivu varai" [முடிவு வரை] so it cannot merge — pronounced distinctly with a clear pause between "mudivu" and "varai", enunciating each syllable as "mu-di-vu" followed by a brief pause then "va-rai").'
+    ? ' (Tamil Cadence & Script Lock: Spoken base locked directly in native Tamil script as two words with a micro-pause: "mudivu varai" [முடிவு வரை] so it cannot merge — pronounced distinctly with a clear pause between "mudivu" and "varai", enunciating each syllable as "mu-di-vu" followed by a brief pause then "va-rai"; spoken directly from native Tamil script avoiding English transliteration).'
     : '';
   const allTamilText = `${blueprint.tamilText || ''} ${blueprint.tamilTitle || ''} ${blueprint.audioScript || ''} ${blueprint.subtitles?.line1Tamil || ''} ${blueprint.videoPrompt || ''}`;
   const hasZha = hasTamilZha(allTamilText);
   const zhaPhonetic = extractZhaPhoneticGuide(allTamilText);
   const zhaNote = hasZha && !/ழகர|\/ɻ\//.test(cleanVoice)
-    ? ` (Tamil Pronunciation: Authentic native Tamil speaker from Tamil Nadu [Madurai/Thanjavur accent], NOT English accent, NOT Hindi, NOT anglicized. Explicit IPA lock: ழு/ழ = U+0BB4 = /ɻ/ - tongue tip curled far back to hard palate, producing the deep retroflex approximant as in Tamizh, NOT ல/ள. Phonetic guide fed to voice engine: ${zhaPhonetic}; check Tamil at 1-3s for deep Tamil zha resonance).` 
+    ? ` (Tamil Pronunciation: Authentic native Tamil speaker from Tamil Nadu [Madurai/Thanjavur accent], NOT English accent, NOT Hindi, NOT anglicized. Explicit IPA lock: ழு/ழ = U+0BB4 = /ɻ/ - tongue tip curled far back to hard palate, producing the deep retroflex approximant as in Tamizh, NOT la/lla [ல/ள]. Phonetic guide: ${zhaPhonetic}; check Tamil at 1-3s for deep Tamil zha resonance [eɻun̪d̪a]. "ஸ்தோத்திரம்" → stho-th-thi-ram with geminated த்த and natural reverent pause).` 
     : '';
   const combinedPronunciationNotes = `${lovingkindnessNote}${ratchanyaNote}${iratchippuNote}${nirkumNote}${dhevaneNote}${neytrumNote}${sagalaNote}${mudivuVaraiNote}${zhaNote}`;
   const voiceDirective = cleanVoice 
@@ -387,10 +387,10 @@ export function buildInculcatedVideoPrompt(blueprint: ShortsBlueprint, expr: Cha
     ? ' CRITICAL TAMIL PHONETIC GUIDE & TTS LOCK FOR "சகலத்தையும்" (sa-ga-la-thaiyum): Spoken audio MUST pronounce "சகலத்தையும்" strictly as "sa-ga-la-thaiyum" (SA-ga-la-thai-yum). The initial letter must be articulated with the soft voiceless sibilant "sa" (as in "sun"), NEVER as "cha" (/tʃ/ as in "chair") or "ja". CRITICAL TTS ENGINE LOCK: Standard AI video/TTS engines default initial "ச" to "cha" (causing the erroneous "Chagalathaiyum"). To force the pure "sa" sound, the spoken voiceover script is phonetically locked with Grantha "ஸ" as "ஸகலத்தையும்" (or Latin "sa-ga-la-thaiyum") for speech synthesis and lip-sync. On-screen subtitles retain standard literary "சகலத்தையும்".'
     : '';
   const mudivuVaraiMandate = hasMudivuVarai
-    ? ' CRITICAL TAMIL CADENCE & PRONUNCIATION MANDATE FOR "முடிவு வரை" (mudivu varai): Spoken base is locked as two distinct words with a micro-pause: "mudivu varai" (முடிவு வரை) so it cannot merge or slur. Spoken audio must pronounce distinctly with a clear pause between "mudivu" and "varai", enunciating each syllable as "mu-di-vu" followed by a brief pause then "va-rai" (Exact phrase spoken: "Idho ulagin mudivu [micro-pause] varai sagala... = முடிவு + வரை").'
+    ? ' CRITICAL TAMIL CADENCE & SCRIPT MANDATE FOR "முடிவு வரை" (mudivu varai): Spoken base is locked directly in native Tamil script as two distinct words with a micro-pause: "mudivu varai" (முடிவு வரை) so it cannot merge or slur. TTS speaks directly from native Tamil script ("இதோ உலகின் முடிவு வரை சகல..."), avoiding English transliteration for authentic pronunciation. Spoken audio must pronounce distinctly with a clear pause between "mudivu" and "varai", enunciating each syllable as "mu-di-vu" followed by a brief pause then "va-rai" (Exact phrase spoken: "Idho ulagin mudivu [micro-pause] varai sagala... = முடிவு + வரை").'
     : '';
   const zhaMandate = hasZha 
-    ? ` CRITICAL TAMIL RETROFLEX APPROXIMANT MANDATE (ழகரம் / IPA: /ɻ/ / U+0BB4): Authentic native Tamil speaker from Tamil Nadu (Madurai/Thanjavur accent), NOT English accent, NOT Hindi, NOT anglicized. Pure Tamil Nadu native speaker locked. Explicit IPA lock: ழு / ழ = U+0BB4 = /ɻ/ (tongue tip curled far back to hard palate, producing the deep retroflex approximant as in Tamizh தமிழ், NEVER anglicized as 'la' [ல] or 'lla' [ள]). Phonetic guide fed to voice engine: ${zhaPhonetic}. Audio verification: Check the Tamil audio at 1-3s — ழு / ழ should have that deep Tamil zha resonance.` 
+    ? ` CRITICAL TAMIL RETROFLEX APPROXIMANT MANDATE (ழகரம் / IPA: /ɻ/ / U+0BB4): Authentic native Tamil speaker from Tamil Nadu (Madurai/Thanjavur accent), NOT English accent, NOT Hindi, NOT anglicized. Pure Tamil Nadu native speaker locked. Explicit IPA lock: ழு / ழ = U+0BB4 = /ɻ/ (tongue tip curled far back to hard palate, producing the deep retroflex approximant as in Tamizh தமிழ், NEVER anglicized as 'la' [ல] or 'lla' [ள]). Phonetic guide fed to voice engine: ${zhaPhonetic}. Audio verification: Check the Tamil audio at 1-3s — ழு / ழ should have that deep Tamil zha resonance (e.g. ezhundha [eɻun̪d̪a] NOT elundha). "ஸ்தோத்திரம்" pronounced as stho-th-thi-ram with geminated த்த and proper ஸ்தோ conjunct closure. Natural reverent pause before "ஸ்தோத்திரம்" in spoken audio/lip-sync cadence, while on-screen text overlay remains clean.` 
     : '';
   return `A cinematic 8k video set in 30 AD Judea/Galilee (9:16 vertical portrait, 10s native duration). 
 HISTORICAL BIBLICAL CHARACTER: ${blueprint.character}. 
