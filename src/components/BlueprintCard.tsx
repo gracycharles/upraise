@@ -41,7 +41,7 @@ import {
 import { getScriptureVerification } from '../data/scriptureVerifications';
 import { computeOverlayTypography } from '../utils/overlayTypographyEngine';
 import { downloadAlphaOverlayPng } from '../utils/alphaOverlayGenerator';
-import { hasTamilZha, extractZhaPhoneticGuide } from '../utils/tamilPhoneticsEngine';
+import { hasTamilZha, extractZhaPhoneticGuide, hasSettrilirundhu, hasTamilNaan } from '../utils/tamilPhoneticsEngine';
 
 interface BlueprintCardProps {
   blueprint: ShortsBlueprint;
@@ -1087,6 +1087,28 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                           Tongue tip curled far back to hard palate as in தமிழ் (never <em>la/lla</em> [ல/ள]). Voice engine guide: <strong>{extractZhaPhoneticGuide(`${blueprint.tamilText} ${blueprint.audioScript}`)}</strong>. Target IPA: <code className="bg-black/60 px-1 py-0.5 rounded text-amber-100 font-mono">/ɻ/ (U+0BB4)</code> retroflex approximant. Spoken audio must articulate geminated <strong>ஸ்தோத்திரம்</strong> (stho-th-thi-ram) with natural reverent pause.
                         </p>
                       )}
+                    </div>
+                  )}
+                  {hasSettrilirundhu(`${blueprint.tamilText} ${blueprint.audioScript} ${blueprint.subtitles?.line1Tamil}`) && (
+                    <div className="p-2 rounded bg-emerald-950/60 border border-emerald-500/40 text-emerald-200 text-[11px] space-y-1">
+                      <div className="flex items-center gap-1.5 text-emerald-300 font-bold uppercase tracking-wide">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                        Pronunciation &amp; TTS Sibilant Lock ("சேற்றிலிருந்து"):
+                      </div>
+                      <p className="leading-relaxed">
+                        Phonetic correction: <span className="line-through text-stone-400 font-mono">/tʃeːtːriliɾun̪d̪ɯ/</span> → <strong className="text-emerald-300 font-mono">[seːtːriliɾun̪d̪u]</strong>. Spoken audio MUST articulate initial <em>"சே"</em> with voiceless sibilant <strong>[s]</strong> as in <em>"sun"</em> / <em>"sail"</em>, NEVER with affricate <em>"che"</em> (<code>/tʃeː/</code> as in "chair") or <em>"ja"</em>. Syllables: <strong>se - et - tri - li - run - dhu</strong>. Hard geminate alveolar stop <em>"ற்றி"</em> [tːri] as in <em>காற்று</em> (kaat-tru). TTS engines that default initial <em>"சே"</em> to <em>"che"</em> use phonetic script <strong>"ஸேற்றிலிருந்து"</strong> (or Latin <em>"seyt-trilirundhu"</em>) in speech buffer, while on-screen text overlay retains literary <em>"சேற்றிலிருந்து"</em>.
+                      </p>
+                    </div>
+                  )}
+                  {hasTamilNaan(`${blueprint.tamilText} ${blueprint.audioScript} ${blueprint.subtitles?.line1Tamil}`) && (
+                    <div className="p-2 rounded bg-cyan-950/60 border border-cyan-500/40 text-cyan-200 text-[11px] space-y-1">
+                      <div className="flex items-center gap-1.5 text-cyan-300 font-bold uppercase tracking-wide">
+                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                        Pronunciation &amp; Lip-Sync Mandate ("நான்" / /naːn/ - 1st Person "I"):
+                      </div>
+                      <p className="leading-relaxed">
+                        Spoken audio and lip-sync MUST articulate <em>"நான்"</em> strictly as <strong className="text-cyan-300 font-mono">/naːn/</strong> with final alveolar nasal <strong>"ன்"</strong>: <strong>mouth open, tongue tip on alveolar ridge behind teeth</strong> (as in <em>SUN</em>, <em>MAN</em>, <em>PEN</em>). Strictly FORBID closed lips as bilabial <em>"M"</em> (<span className="line-through text-stone-400">naam "நாம்"</span> as in <em>MOM</em>), which corrupts the divine singular <em>"I"</em> (Redeemer/Lord) into plural <em>"we"</em>. Long <em>aa</em> + sharp <em>N</em>: <strong>Unnai NAAN Meettu Konden</strong>. Lips must visibly stay parted during articulation.
+                      </p>
                     </div>
                   )}
                   <div>

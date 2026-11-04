@@ -360,8 +360,8 @@ export const BLUEPRINTS_201_TO_250: ShortsBlueprint[] = [
     englishRef: "John 14:14",
     character: "Disciples gathered in fellowship in the Upper Room at twilight",
     location: "Upper Room in ancient Jerusalem with wooden banquet table and candlelight",
-    videoPrompt: "A cinematic 8k video set in 30 AD Jerusalem. Disciples gathered around a rustic cedar table in the Upper Room, holding hands in earnest prayer under the warm glow of oil lamps, eyes filled with radiant faith and unity. The promise of prayer in Jesus' name, photorealistic. --ar 9:16 --v 6.0",
-    voiceProfile: "Firm, loving, majestic covenant promise.",
+    videoPrompt: "A cinematic 8k video set in 30 AD Jerusalem. Disciples gathered around a rustic cedar table in the Upper Room, holding hands in earnest prayer under the warm glow of oil lamps, eyes filled with radiant faith and unity. The promise of prayer in Jesus' name, photorealistic. PRONUNCIATION & LIP-SYNC MANDATE ('நான்' / /naːn/): Spoken voice and lip-sync MUST articulate 'நான்' strictly as /naːn/ with alveolar nasal 'ன்' (mouth open, tongue tip on alveolar ridge behind teeth as in SUN, MAN, PEN), NEVER closed lips as bilabial 'M' (naam 'நாம்' as in MOM). Long aa + sharp N: adhai NAAN seiven. Lips must remain parted during articulation. 'ஸ்தோத்திரம்' as stho-th-thi-ram with geminated த்த and natural reverent pause. --ar 9:16 --v 6.0",
+    voiceProfile: "Firm, loving, majestic covenant promise. PRONUNCIATION & LIP-SYNC MANDATE: 'நான்' strictly pronounced as /naːn/ with mouth open and tongue tip on alveolar ridge behind teeth (as in SUN, MAN, PEN), NOT closed-lip 'M' as in MOM (naam 'நாம்'). Natural reverent pause before 'ஸ்தோத்திரம்'.",
     audioScript: "என் நாமத்தினாலே எதை கேட்டாலும் அதை நான் செய்வேன் என்றவரே ஸ்தோத்திரம். ... Praise to You, who said: If ye ask anything in My name, I will do it.",
     backgroundAudio: "Inspiring orchestral swell with sacred woodwind melody at -18dB.",
     subtitles: {
@@ -835,8 +835,8 @@ export const BLUEPRINTS_201_TO_250: ShortsBlueprint[] = [
     englishRef: "John 6:37",
     character: "An outcast walking towards Jesus with open arms welcoming them",
     location: "Grassy Galilean hillside beside Lake Kinneret at sunset",
-    videoPrompt: "A cinematic 8k video set in 30 AD Galilee. An outcast in tattered garments hesitantly stepping forward onto a grassy hillside, met by warm outstretched welcoming hands and loving divine embrace beneath golden evening light. Never cast out, unconditional love, photorealistic. --ar 9:16 --v 6.0",
-    voiceProfile: "Welcoming, loving, boundless unconditional acceptance.",
+    videoPrompt: "A cinematic 8k video set in 30 AD Galilee. An outcast in tattered garments hesitantly stepping forward onto a grassy hillside, met by warm outstretched welcoming hands and loving divine embrace beneath golden evening light. Never cast out, unconditional love, photorealistic. PRONUNCIATION & LIP-SYNC MANDATE ('நான்' / /naːn/): Spoken voice and lip-sync MUST articulate 'நான்' strictly as /naːn/ with alveolar nasal 'ன்' (mouth open, tongue tip on alveolar ridge behind teeth as in SUN, MAN, PEN), NEVER closed lips as bilabial 'M' (naam 'நாம்' as in MOM). Long aa + sharp N: NAAN purambey thalluvadhillai. Lips must remain parted during articulation. 'ஸ்தோத்திரம்' as stho-th-thi-ram with geminated த்த and natural reverent pause. --ar 9:16 --v 6.0",
+    voiceProfile: "Welcoming, loving, boundless unconditional acceptance. PRONUNCIATION & LIP-SYNC MANDATE: 'நான்' strictly pronounced as /naːn/ with mouth open and tongue tip on alveolar ridge behind teeth (as in SUN, MAN, PEN), NOT closed-lip 'M' as in MOM (naam 'நாம்'). Natural reverent pause before 'ஸ்தோத்திரம்'.",
     audioScript: "என்னிடம் வருபவனை நான் புறம்பே தள்ளுவதில்லை ஸ்தோத்திரம். ... Praise to You, who casteth out none that cometh to Thee.",
     backgroundAudio: "Sacred acoustic cello with warm ethereal vocal hum at -18dB.",
     subtitles: {

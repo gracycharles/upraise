@@ -102,3 +102,54 @@ export function getZhaPronunciationMandate(text: string): string {
   • ஸ்தோத்திரம் Conjunct & Gemination: "ஸ்தோத்திரம்" → stho-th-thi-ram with crisp geminated த்த and proper ஸ்தோ conjunct closure.
   • Reverent Audio Cadence: Natural reverent pause before "ஸ்தோத்திரம்" in spoken audio/lip-sync cadence, while on-screen text overlay remains clean.`;
 }
+
+/**
+ * Checks if text contains சேற்றிலிருந்து (miry clay / Psalm 40:2)
+ */
+export function hasSettrilirundhu(text: string): boolean {
+  return /சேற்றிலிருந்து|ஸேற்றிலிருந்து/.test(text);
+}
+
+/**
+ * Returns the exact phonetic guide and TTS lock for சேற்றிலிருந்து:
+ * /tʃeːtːriliɾun̪d̪ɯ/ → [seːtːriliɾun̪d̪u]
+ */
+export function getSettrilirundhuMandate(text: string): string {
+  if (!hasSettrilirundhu(text)) return '';
+  return `\n- CRITICAL TAMIL PHONETIC GUIDE & TTS SIBILANT LOCK ("சேற்றிலிருந்து" / [seːtːriliɾun̪d̪u]):
+  • Pronunciation Correction: /tʃeːtːriliɾun̪d̪ɯ/ → [seːtːriliɾun̪d̪u]
+  • Initial Consonant: Spoken audio MUST articulate initial "சே" with voiceless sibilant [s] as in "sun" / "sail", NEVER affricate "che" (/tʃ/ as in "chair") or "ja".
+  • Target IPA: [seːtːriliɾun̪d̪u] (syllables: se - et - tri - li - run - dhu).
+  • Geminate Closure: "ற்றி" articulated as hard geminate alveolar plosive stop [tːri] as in "காற்று" (kaat-tru).
+  • Final Dental: "-லிருந்து" articulated with soft dental [liɾun̪d̪u].
+  • TTS Speech Engine Lock: Video generator TTS engines that default initial "சே" to "che" MUST use phonetic script "ஸேற்றிலிருந்து" (Grantha "ஸே" = /seː/) or Latin "seyt-tri-li-run-dhu" in the speech buffer to force the pure [s] consonant.
+  • On-Screen Subtitle: Subtitles retain authentic literary "சேற்றிலிருந்து" with zero visual alteration.`;
+}
+
+/**
+ * Checks if text contains நான் (1st person singular pronoun /naːn/ "I")
+ */
+export function hasTamilNaan(text: string): boolean {
+  return /நான்/.test(text);
+}
+
+/**
+ * Returns the exact phonetic guide and lip-sync mandate for நான் (/naːn/):
+ * Alveolar nasal 'ன்' (tongue tip up on alveolar ridge, mouth open), NEVER bilabial 'ம்' (lips closed as in naam நாம்).
+ */
+export function getNaanPronunciationMandate(text: string): string {
+  if (!hasTamilNaan(text)) return '';
+  const isUnnaiNaan = /உன்னை நான் மீட்டு/.test(text);
+  const contextExample = isUnnaiNaan 
+    ? 'Long aa + sharp N: "Unnai Naan Meettu Konden" (உன்னை நான் மீட்டுக்கொண்டேன்)' 
+    : 'Long aa + sharp N: /naːn/ (நான்)';
+
+  return `\n- CRITICAL TAMIL PRONUNCIATION & LIP-SYNC MANDATE ("நான்" / /naːn/ - 1st Person Singular "I"):
+  • Target IPA: /naːn/ ending in alveolar nasal 'ன்' (U+0BA9), NEVER bilabial nasal 'ம்' (naam /naːm/ - "we"). Confusing "நான்" (I) with "நாம்" (we) corrupts the theological meaning.
+  • Oral Articulation & Tongue Position: Mouth MUST remain open; tongue tip rests firmly on the alveolar ridge behind upper front teeth — exactly as in English "SUN", "MAN", "PEN".
+  • Strictly Forbid Bilabial Closure: FORBID lips from touching or sealing together as in "MOM" / "naam". Lips remain parted/open throughout the final nasal coda.
+  • Vowel & Cadence: ${contextExample} with clear, elongated /aː/ transitioning into a crisp alveolar [n].
+  • 100% Synchronized Lip-Sync: On-screen character lip movements must show mouth open with visible tongue-tip alveolar contact, never closed lips during "நான்".`;
+}
+
+
