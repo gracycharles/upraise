@@ -120,13 +120,13 @@ export async function generateAlphaOverlayBlob(blueprint: ShortsBlueprint): Prom
   // Use exact lifted coordinates calculated by overlayTypographyEngine
   const tamilYCoords = typo.tamilYCoords && typo.tamilYCoords.length >= tamilLines.length
     ? typo.tamilYCoords
-    : tamilLines.map((_, i) => 940 + i * 65);
+    : tamilLines.map((_, i) => 850 + i * 75);
 
   const englishYCoords = typo.englishYCoords && typo.englishYCoords.length >= englishLines.length
     ? typo.englishYCoords
-    : englishLines.map((_, i) => 1110 + i * 45);
+    : englishLines.map((_, i) => 1000 + i * 50);
 
-  const refY = typo.refYCoord || 1215;
+  const refY = typo.refYCoord || 1070;
 
   // Measure text widths for safe bounds assertion and centering
   let maxLineWidth = 0;

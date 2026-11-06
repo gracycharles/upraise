@@ -336,7 +336,7 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
               <div className="flex items-center justify-between border-b border-stone-800/80 pb-1.5 text-[10px] font-mono text-stone-400">
                 <span className="flex items-center gap-1.5 text-amber-400 font-semibold">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block animate-pulse"></span>
-                  9:16 Center Safe Zone (Y: 750-1250px • Clean Transparent Overlay • No Black Background)
+                  9:16 Center Safe Zone (Y: 800-1100px Centered at Y=960 • Clean Transparent Overlay • No Black Background)
                 </span>
                 <span className="text-stone-300">
                   Canvas Auto-Fit: <strong className="text-amber-300 font-mono">~{typo.tamilPx}px</strong> ({typo.scalePercent}% scale)
@@ -363,7 +363,7 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                   {typo.splitTamilLines.map((line, idx) => (
                     <div key={idx} className="space-y-0.5">
                       <span className="text-[9px] font-mono text-stone-500 block">
-                        Line {idx + 1} at (540,{typo.tamilYCoords[idx] || 960 + idx * 80}) anchor mm • {typo.tamilPx}px:
+                        Line {idx + 1} at (540,{typo.tamilYCoords[idx] || 850 + idx * 75}) anchor mm • {typo.tamilPx}px:
                       </span>
                       <div className={`text-amber-400 tracking-wide font-tamil-overlay ${typo.uiTamilClass} break-words drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]`}>
                         {line}
@@ -506,7 +506,7 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                   </>
                 ) : (
                   <>
-                    <strong className="text-stone-200">Two-Line Spread & Side Safe Zone:</strong> Tamil praise is spread across two distinct lines (Line 1 at y=960, Line 2 at y=1040) centered at x=540 with generous 220px–340px side margins, completely eliminating YouTube Shorts edge clipping and button occlusion.
+                    <strong className="text-stone-200">Screen-Centered Spread & Side Safe Zone:</strong> Overlay text is strictly centered vertically and horizontally (canvas center x=540, y=960) with lines ending at y&le;1095 and maintaining &gt;= 825px of clear space above bottom YouTube UI, preventing channel ID/title occlusion and side edge clipping.
                   </>
                 )}
               </p>

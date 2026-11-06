@@ -79,11 +79,13 @@ ${b.videoPrompt}
    - Subject framed naturally with ~15% headroom for vertical 9:16 safe-zone, face clearly visible during synchronized speech articulation.
    - Forbid repetitive hand-on-chest or static poses; ensure active physical interaction with the historic environment.
    - Background must be outdoor authentic 1st-century biblical landscape with natural atmospheric lighting, NOT interior/kitchen, with no black vignette borders.
-5. YOUTUBE SHORTS SAFE-ZONE TEXT OVERLAY MANDATE (CLEAN TRANSPARENT • NO BLACK BACKGROUND):
+5. YOUTUBE SHORTS SAFE-ZONE TEXT OVERLAY MANDATE (CLEAN TRANSPARENT • NO BLACK BACKGROUND • STRICTLY SCREEN-CENTERED BOTH VERTICALLY & HORIZONTALLY):
    - CLEAN TRANSPARENT TEXT OVERLAY (NO BLACK BACKGROUND): Strictly NO black background, NO dark plate, NO black box or vignette behind the text overlay. Overlay is 100% transparent with subtle 2px drop-shadow (0,0,0,180) for contrast directly over the 1080x1920 video frame.
-   - YouTube Shorts UI occludes: bottom 350px (title, description, channel info), right 180px (like, comment, share, subscribe), top 120px (search).
-   - SUBTITLE SAFE AREA = x: 180-900px (Lateral safe-zone with minimum 220px–340px side gaps to eliminate YouTube corner text clipping), y: 750-1250px center band (y_max < 1350). Bottom 350px UI strictly clear.
-   - Two-Line Tamil Spread: Line 1 at (540,960) anchor="mm" Gold #FFC107 62px, Line 2 at (540,1040) anchor="mm" Gold #FFC107 62px, English at (540,1120) White #F8F9FA 38px, Reference at y=1200 Stone Gray #A8A29E 28px dual-run centered via textlength advance.
+   - TRUE SCREEN-CENTERED MANDATE (ZERO BOTTOM DRIFT): All lines (all Tamil praise lines, English translation, and Scripture reference verse) MUST BE STRICTLY CENTERED BOTH VERTICALLY AND HORIZONTALLY in the middle of the 1080x1920 canvas (midpoint anchored at x=540, y=960). Strictly FORBID placing text near or towards the bottom (y > 1100) where YouTube Shorts channel ID, title, and description occlude it.
+   - SUBTITLE SAFE AREA = x: 180-900px (Lateral safe-zone with minimum 220px–340px side margins to eliminate YouTube corner text clipping), y: 800-1100px center band (centered at y=960, y_max <= 1095px). Bottom >= 825px UI space strictly clear.
+   - Screen-Centered Spread:
+     * 2-Line Tamil: Line 1 at (540,850) anchor="mm" Gold #FFC107 62px, Line 2 at (540,925) anchor="mm" Gold #FFC107 62px, English at (540,1000) White #F8F9FA 38px, Reference at y=1070 Stone Gray #A8A29E 28px dual-run centered via textlength advance (entire block spans y: 850–1070, midpoint y=960, leaving 850px clear at bottom).
+     * 3-Line Tamil (e.g. Shorts 156, 157): Line 1 at (540,830), Line 2 at (540,895), Line 3 at (540,960) Gold #FFC107, English at (540,1030) White #F8F9FA, Reference at y=1090 Stone Gray #A8A29E (entire block spans y: 830–1090, midpoint y=960, leaving 830px clear at bottom).
    - Center horizontally at x=540 anchor="mm". All praises spread into 2 lines (or 3 lines for long verses) with auto-scaled font size to guarantee generous side margins (>= 220px on left & right) preventing corner text from disappearing on YouTube.
    - Pillow HarfBuzz Shaping: language="ta", font Noto Sans Tamil Bold, anchor="mm"/"lm" so conjuncts (க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ) form correctly. FORBID raw ffmpeg drawtext filter.`;
 }
