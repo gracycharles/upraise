@@ -1115,7 +1115,7 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                     <strong className="text-emerald-200 font-semibold">CADENCE & PAUSE DIRECTIVE:</strong> In spoken Tamil audio, introduce a distinct, reverent pause (as if an unwritten comma exists) immediately prior to speaking <em>"ஸ்தோத்திரம்"</em>. The on-screen text overlay retains the clean biblical script without an extra comma, while the audio delivery breathes reverently.
                   </div>
                   <div>
-                    <strong className="text-emerald-200 font-semibold">CRITICAL DIRECTIVE:</strong> Read ONLY the exact scripted lines. Zero unscripted words, no intro/outro, and 100% synchronized continuous lip sync.
+                    <strong className="text-emerald-200 font-semibold">LIP SYNC MANDATE:</strong> Lip sync over Tamil audio ALONE (~0–5s). For English text audio (~5–10s), NO LIP SYNC is needed — only voiceover audio plays while the character maintains a serene, reverent countenance with lips at rest in silent adoration. Read ONLY exact scripted lines with zero unscripted words.
                   </div>
                 </div>
               </div>
