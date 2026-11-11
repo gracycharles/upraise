@@ -39,7 +39,7 @@ import {
   getCompletionMetrics
 } from './utils/completionStorage';
 
-type BatchFilter = 'all' | '1-50' | '51-100' | '101-150' | '151-200' | '201-250' | '251-300';
+type BatchFilter = 'all' | '1-50' | '51-100' | '101-150' | '151-200' | '201-250' | '251-300' | '301-350' | '351-400';
 type StudioViewMode = 'focus' | 'list';
 type CompletionFilter = 'all' | 'video-done' | 'yt-deployed' | 'video-pending' | 'yt-pending';
 
@@ -155,7 +155,9 @@ export default function App() {
     if (selectedBatch !== 'all') {
       const id = blueprint.id;
       let targetBatch: BatchFilter = '1-50';
-      if (id > 250) targetBatch = '251-300';
+      if (id > 350) targetBatch = '351-400';
+      else if (id > 300) targetBatch = '301-350';
+      else if (id > 250) targetBatch = '251-300';
       else if (id > 200) targetBatch = '201-250';
       else if (id > 150) targetBatch = '151-200';
       else if (id > 100) targetBatch = '101-150';
@@ -336,6 +338,8 @@ export default function App() {
                       <option value="151-200" className="bg-stone-900 text-stone-100">Batch 4 (#151–200)</option>
                       <option value="201-250" className="bg-stone-900 text-stone-100">Batch 5 (#201–250)</option>
                       <option value="251-300" className="bg-stone-900 text-stone-100">Batch 6 (#251–300)</option>
+                      <option value="301-350" className="bg-stone-900 text-stone-100">Batch 7 (#301–350)</option>
+                      <option value="351-400" className="bg-stone-900 text-stone-100">Batch 8 (#351–400)</option>
                     </select>
                   </div>
 
@@ -349,7 +353,7 @@ export default function App() {
                         max={INITIAL_BLUEPRINTS.length}
                         value={jumpInputVal}
                         onChange={(e) => setJumpInputVal(e.target.value)}
-                        placeholder="1-300"
+                        placeholder={`1-${INITIAL_BLUEPRINTS.length}`}
                         className="w-full bg-stone-950 border border-stone-800 rounded-lg pl-5 pr-1 py-1 text-xs font-mono text-amber-300 placeholder-stone-600 focus:outline-none focus:border-amber-500"
                       />
                     </div>
@@ -365,7 +369,7 @@ export default function App() {
                   <button
                     onClick={() => setIsNavigatorOpen(true)}
                     className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200 hover:text-amber-300 border border-stone-700 text-xs font-semibold transition-all shadow-sm"
-                    title="Browse all 300 shorts in a grid (Shortcut: J or Cmd+K)"
+                    title={`Browse all ${INITIAL_BLUEPRINTS.length} shorts in a grid (Shortcut: J or Cmd+K)`}
                   >
                     <Compass className="w-3.5 h-3.5 text-amber-400" />
                     <span className="hidden sm:inline">Browse</span>

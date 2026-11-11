@@ -23,7 +23,7 @@ export const BatchExportModal: React.FC<BatchExportModalProps> = ({
   onClose,
   blueprints
 }) => {
-  const [selectedBatch, setSelectedBatch] = useState<'all' | '1-50' | '51-100' | '101-150' | '151-200' | '101-200' | '201-250' | '251-300' | '201-300'>('all');
+  const [selectedBatch, setSelectedBatch] = useState<'all' | '1-50' | '51-100' | '101-150' | '151-200' | '101-200' | '201-250' | '251-300' | '201-300' | '301-350' | '351-400'>('all');
   const [exportMode, setExportMode] = useState<'all' | 'video-only' | 'youtube-only' | 'english-only' | 'tamil-only' | 'verification-only' | 'expressions-only' | 'nkjv-only'>('all');
   const [copied, setCopied] = useState(false);
   const [copiedType, setCopiedType] = useState<string | null>(null);
@@ -39,6 +39,8 @@ export const BatchExportModal: React.FC<BatchExportModalProps> = ({
     if (selectedBatch === '201-250') return b.id >= 201 && b.id <= 250;
     if (selectedBatch === '251-300') return b.id >= 251 && b.id <= 300;
     if (selectedBatch === '201-300') return b.id >= 201 && b.id <= 300;
+    if (selectedBatch === '301-350') return b.id >= 301 && b.id <= 350;
+    if (selectedBatch === '351-400') return b.id >= 351 && b.id <= 400;
     return true;
   });
 
@@ -209,9 +211,9 @@ ${formatYouTubeOnlyText(b)}`;
 
         {/* Batch Selection Tabs */}
         <div className="px-5 py-3 border-b border-stone-800 bg-stone-950/40 flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 flex-wrap">
             <span className="text-xs text-stone-400 font-medium mr-1">Select Batch:</span>
-            {(['all', '1-50', '51-100', '101-150', '151-200', '101-200', '201-250', '251-300', '201-300'] as const).map((batch) => (
+            {(['all', '1-50', '51-100', '101-150', '151-200', '101-200', '201-250', '251-300', '201-300', '301-350', '351-400'] as const).map((batch) => (
               <button
                 key={batch}
                 onClick={() => setSelectedBatch(batch)}

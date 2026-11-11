@@ -268,11 +268,15 @@ export function getNKJVData(blueprint: ShortsBlueprint): NKJVVerseData {
 
   // Derive dynamic NKJV rendering
   const modernizedEnglish = modernizeToNKJV(blueprint.englishText);
-  const cleanTitle = blueprint.tamilTitle.replace(/ ஸ்தோத்திரம்\.?$/, '').trim();
+  const cleanEnglish = blueprint.englishText && !/[\u0B80-\u0BFF]/.test(blueprint.englishText)
+    ? blueprint.englishText.replace(/\.$/, '').trim()
+    : (blueprint.subtitles?.line2English && !/[\u0B80-\u0BFF]/.test(blueprint.subtitles.line2English)
+        ? blueprint.subtitles.line2English.replace(/\.$/, '').trim()
+        : 'Praise to You, O Lord');
 
   return {
-    verseText: modernizedEnglish,
-    praiseTitle: `Praise to You, ${cleanTitle}`,
+    verseText: modernizedEnglish || cleanEnglish,
+    praiseTitle: cleanEnglish,
     theologicalContext: `NKJV ${blueprint.englishRef} provides the biblical foundation for this praise.`
   };
 }

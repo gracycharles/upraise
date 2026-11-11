@@ -5,6 +5,8 @@ import { BLUEPRINTS_101_TO_150 } from './blueprints101to150';
 import { BLUEPRINTS_151_TO_200 } from './blueprints151to200';
 import { BLUEPRINTS_201_TO_250 } from './blueprints201to250';
 import { BLUEPRINTS_251_TO_300 } from './blueprints251to300';
+import { BLUEPRINTS_301_TO_350 } from './blueprints301to350';
+import { BLUEPRINTS_351_TO_400 } from './blueprints351to400';
 import { enrichBlueprintWithVerification } from './scriptureVerifications';
 import { generateCharacterExpression, buildInculcatedVideoPrompt } from '../utils/characterExpressionEngine';
 import { getNKJVData } from '../utils/nkjvTranslations';
@@ -17,7 +19,9 @@ const RAW_BLUEPRINTS: ShortsBlueprint[] = [
   ...BLUEPRINTS_101_TO_150,
   ...BLUEPRINTS_151_TO_200,
   ...BLUEPRINTS_201_TO_250,
-  ...BLUEPRINTS_251_TO_300
+  ...BLUEPRINTS_251_TO_300,
+  ...BLUEPRINTS_301_TO_350,
+  ...BLUEPRINTS_351_TO_400
 ];
 
 export const EXCLUDED_YOUTUBE_TAGS = new Set([
@@ -94,7 +98,14 @@ function enrichBlueprintWithExpressionsAndNKJV(raw: ShortsBlueprint): ShortsBlue
   const charExpr = generateCharacterExpression(raw);
   const videoPromptInculcated = buildInculcatedVideoPrompt(raw, charExpr);
   const conciseTitle = getConciseEnglishTitle(raw, raw.id);
-  const englishTextNKJV = (nkjv.praiseTitle || raw.englishText).replace(/\.$/, '').trim();
+  const validPraiseTitle = nkjv.praiseTitle && !/[\u0B80-\u0BFF]/.test(nkjv.praiseTitle)
+    ? nkjv.praiseTitle
+    : (raw.englishText && !/[\u0B80-\u0BFF]/.test(raw.englishText)
+        ? raw.englishText
+        : (raw.subtitles?.line2English && !/[\u0B80-\u0BFF]/.test(raw.subtitles.line2English)
+            ? raw.subtitles.line2English
+            : 'Praise to You, O Lord'));
+  const englishTextNKJV = validPraiseTitle.replace(/\.$/, '').trim();
   const tamilTextClean = (raw.subtitles?.line1Tamil || raw.tamilText || raw.tamilTitle).trim();
 
   // Combine existing tags with target audience algorithm tags (without hash, strictly case-deduplicated)

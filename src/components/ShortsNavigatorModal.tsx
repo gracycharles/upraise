@@ -13,7 +13,7 @@ interface ShortsNavigatorModalProps {
   onToggleYouTubeDeployed?: (id: number) => void;
 }
 
-type BatchTab = 'all' | '1-50' | '51-100' | '101-150' | '151-200' | '201-250' | '251-300';
+type BatchTab = 'all' | '1-50' | '51-100' | '101-150' | '151-200' | '201-250' | '251-300' | '301-350' | '351-400';
 type StatusTab = 'all' | 'video-done' | 'yt-deployed' | 'video-pending' | 'yt-pending';
 
 export const ShortsNavigatorModal: React.FC<ShortsNavigatorModalProps> = ({
@@ -60,7 +60,9 @@ export const ShortsNavigatorModal: React.FC<ShortsNavigatorModalProps> = ({
   useEffect(() => {
     if (currentId > 0 && currentId <= blueprints.length) {
       let b: BatchTab = '1-50';
-      if (currentId > 250) b = '251-300';
+      if (currentId > 350) b = '351-400';
+      else if (currentId > 300) b = '301-350';
+      else if (currentId > 250) b = '251-300';
       else if (currentId > 200) b = '201-250';
       else if (currentId > 150) b = '151-200';
       else if (currentId > 100) b = '101-150';
@@ -214,7 +216,7 @@ export const ShortsNavigatorModal: React.FC<ShortsNavigatorModalProps> = ({
           {/* Batch Filter Buttons */}
           <div className="flex flex-wrap items-center gap-1.5 pt-1">
             <span className="text-[11px] font-mono text-stone-400 mr-1 uppercase">Batch:</span>
-            {(['all', '1-50', '51-100', '101-150', '151-200', '201-250', '251-300'] as BatchTab[]).map((tab) => (
+            {(['all', '1-50', '51-100', '101-150', '151-200', '201-250', '251-300', '301-350', '351-400'] as BatchTab[]).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveBatch(tab)}

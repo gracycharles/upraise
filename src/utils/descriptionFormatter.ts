@@ -50,6 +50,8 @@ export function getFormattedYouTubeDescription(
     line2Verse = canon.verseText.trim();
   } else if ('verification' in item && (item as ShortsBlueprint).verification?.nkjvVerseQuote) {
     line2Verse = ((item as ShortsBlueprint).verification!.nkjvVerseQuote || '').trim();
+  } else if ('englishText' in item && (item as ShortsBlueprint).englishText) {
+    line2Verse = (item as ShortsBlueprint).englishText.trim();
   }
 
   // 3. Line 3: Personal prayer / affirmation / resolution (2 to 3 sentences)
@@ -58,6 +60,8 @@ export function getFormattedYouTubeDescription(
     line3Affirmation = PERSONAL_AFFIRMATIONS_300[id].trim();
   } else if (canon && canon.theologicalContext) {
     line3Affirmation = canon.theologicalContext.trim();
+  } else {
+    line3Affirmation = "Lord God, I lift my heart in reverent praise and adoration for Your steadfast love and unfailing faithfulness. Today, I anchor my soul in Your eternal truth and walk in peaceful trust before You.";
   }
 
   // Combine into structured 3-part layout

@@ -397,23 +397,14 @@ export function getConciseEnglishTitle(
   // 3. Try extracting from subtitles / englishText
   if (typeof item === 'object' && item) {
     const b = item as Partial<ShortsBlueprint>;
-    if (b.subtitles?.line2English) {
+    if (b.subtitles?.line2English && !/[\u0B80-\u0BFF]/.test(b.subtitles.line2English)) {
       return condenseEnglishPraise(b.subtitles.line2English, id);
     }
-    if (b.englishText) {
+    if (b.englishText && !/[\u0B80-\u0BFF]/.test(b.englishText)) {
       return condenseEnglishPraise(b.englishText, id);
     }
   }
 
-  // 4. Look up in ALL_PRAISES if available
-  if (id) {
-    const found = ALL_PRAISES.find(p => p.id === id);
-    if (found) {
-      // Create concise translation from clean Tamil title
-      const cleanTamil = found.text.replace(/ ஸ்தோத்திரம்\.?$/, '').trim();
-      return `Praise to You, ${cleanTamil}`;
-    }
-  }
-
+  // 4. Default reverent English title
   return 'Praise to You, O Lord';
 }
