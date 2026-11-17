@@ -356,14 +356,14 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                 </div>
 
                 {/* Tamil Lines (Gold #FFC107 with drop shadow) */}
-                <div className="space-y-1.5 pt-1">
+                <div className="space-y-2.5 pt-1">
                   <div className="text-[10px] font-mono text-amber-500/70 tracking-wider">
-                    Tamil Praise • Gold #FFC107 ({typo.splitTamilLines.length}-Line Spread • Safe Side Margins):
+                    Tamil Praise • Gold #FFC107 ({typo.splitTamilLines.length}-Line Spread • 72px+ Gap • Safe Side Margins):
                   </div>
                   {typo.splitTamilLines.map((line, idx) => (
                     <div key={idx} className="space-y-0.5">
                       <span className="text-[9px] font-mono text-stone-500 block">
-                        Line {idx + 1} at (540,{typo.tamilYCoords[idx] || 850 + idx * 75}) anchor mm • {typo.tamilPx}px:
+                        Line {idx + 1} at (540,{typo.tamilYCoords[idx] || 848 + idx * 76}) anchor mm • {typo.tamilPx}px:
                       </span>
                       <div className={`text-amber-400 tracking-wide font-tamil-overlay ${typo.uiTamilClass} break-words drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]`}>
                         {line}
@@ -502,11 +502,11 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
               <p className="text-[11px] text-stone-300 leading-relaxed font-sans pt-1">
                 {typo.reductionPercent > 0 ? (
                   <>
-                    <strong className="text-amber-300">Auto-Scaled Font Scale for Video Gen:</strong> High character density detected ({typo.tamilCharCount} Tamil / {typo.englishCharCount} English chars). The video generator and overlay compositor are instructed to auto-scale font size to <strong className="text-amber-300">{typo.tamilPx}px</strong> (reduced by {typo.reductionPercent}%) while spreading across lines to guarantee generous side margins (&gt;= 220px on left &amp; right) and strictly ensure <strong className="text-emerald-400">zero content loss</strong>.
+                    <strong className="text-amber-300">Balanced Font Scale &amp; 72px+ Line Spacing:</strong> High character density detected ({typo.tamilCharCount} Tamil / {typo.englishCharCount} English chars). The overlay compositor auto-scales Tamil to <strong className="text-amber-300">{typo.tamilPx}px</strong> (slightly larger than {typo.englishPx}px English) with 72px+ vertical line spacing so lines breathe cleanly, keeping wide side margins (&gt;= 240px) and <strong className="text-emerald-400">zero content loss</strong>.
                   </>
                 ) : (
                   <>
-                    <strong className="text-stone-200">Screen-Centered Spread & Side Safe Zone:</strong> Overlay text is strictly centered vertically and horizontally (canvas center x=540, y=960) with lines ending at y&le;1095 and maintaining &gt;= 825px of clear space above bottom YouTube UI, preventing channel ID/title occlusion and side edge clipping.
+                    <strong className="text-stone-200">Screen-Centered Spread &amp; 72px+ Breathing Space:</strong> Tamil ({typo.tamilPx}px) is balanced slightly larger than English ({typo.englishPx}px) with 72px–76px line spacing, strictly centered vertically and horizontally (canvas center x=540, y=960) with lines ending at y&le;1124 and &gt;= 796px clear space above bottom YouTube UI.
                   </>
                 )}
               </p>

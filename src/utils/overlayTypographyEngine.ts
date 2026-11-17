@@ -264,66 +264,67 @@ export function computeOverlayTypography(
   let uiBadgeText: string;
   let uiBadgeClass: string;
 
-  // Auto-scaling logic designed to guarantee >= 220px side margins
+  // Auto-scaling logic designed to guarantee >= 240px side margins,
+  // keeping Tamil text slightly bigger than English (clean balance, never oversized)
   if (maxTamilLineChars <= 18) {
-    // Tier 1: Standard Two-Line Spread (e.g. Short #1: "ஆத்தும நேசரே" [13 chars] + "ஸ்தோத்திரம்." [12 chars])
+    // Tier 1: Standard Two-Line Spread (Base 48px Tamil vs 38px English — slightly bigger)
     tier = 'compact';
-    tierLabel = 'Standard Two-Line Spread (62px)';
-    tamilPx = 62;
+    tierLabel = 'Standard Balanced Spread (48px)';
+    tamilPx = 48;
     englishPx = 38;
     refPx = 28;
     scalePercent = 100;
     reductionPercent = 0;
-    recommendedWrap = 'Two-line spread with wide lateral breathing room (300px+ side margins)';
-    uiTamilClass = 'text-base sm:text-lg font-bold';
-    uiEnglishClass = 'text-xs sm:text-sm font-medium';
+    recommendedWrap = 'Two-line spread with generous line breathing room (72px–76px gap) & wide lateral margins';
+    uiTamilClass = 'text-base sm:text-lg font-bold leading-relaxed';
+    uiEnglishClass = 'text-sm sm:text-base font-medium leading-relaxed';
     uiRefClass = 'text-[11px]';
-    uiBadgeText = `Two-Line Spread: 62px • Max line ${maxTamilLineChars} chars • Zero Edge Clipping`;
+    uiBadgeText = `Balanced Spread: 48px Tamil / 38px English • Max line ${maxTamilLineChars} chars • 72px+ Line Gap`;
     uiBadgeClass = 'bg-stone-800 text-stone-200 border-stone-700';
   } else if (maxTamilLineChars <= 24) {
     // Tier 2: Medium Balanced Spread (e.g. 19-24 chars per line)
     tier = 'medium';
-    tierLabel = 'Balanced Two-Line Spread (54px)';
-    tamilPx = 54;
-    englishPx = maxEnglishLineChars <= 36 ? 38 : 32;
-    refPx = 28;
-    scalePercent = 87;
-    reductionPercent = 13;
-    recommendedWrap = 'Balanced 2-line spread with 250px+ safe side margins';
-    uiTamilClass = 'text-sm sm:text-base font-bold';
-    uiEnglishClass = 'text-xs font-medium';
+    tierLabel = 'Medium Balanced Spread (44px)';
+    tamilPx = 44;
+    englishPx = maxEnglishLineChars <= 36 ? 36 : 32;
+    refPx = 26;
+    scalePercent = 92;
+    reductionPercent = 8;
+    recommendedWrap = 'Balanced spread with 72px+ line spacing and 260px+ safe side margins';
+    uiTamilClass = 'text-sm sm:text-base font-bold leading-relaxed';
+    uiEnglishClass = 'text-xs sm:text-sm font-medium leading-relaxed';
     uiRefClass = 'text-[10px]';
-    uiBadgeText = `Auto-Scaled: 54px (-13%) • Max line ${maxTamilLineChars} chars • Side Safe`;
+    uiBadgeText = `Balanced Scale: 44px Tamil / ${englishPx}px English (-8%) • 72px+ Line Gap • Side Safe`;
     uiBadgeClass = 'bg-blue-950/70 text-blue-300 border-blue-500/30';
   } else if (maxTamilLineChars <= 30) {
-    // Tier 3: Long Two-Line Spread (e.g. 25-30 chars per line)
+    // Tier 3: Long Multi-Line Spread (e.g. 25-30 chars per line)
     tier = 'long';
-    tierLabel = 'Long Two-Line Spread (46px)';
-    tamilPx = 46;
-    englishPx = maxEnglishLineChars <= 36 ? 34 : 28;
+    tierLabel = 'Long Balanced Spread (40px)';
+    tamilPx = 40;
+    englishPx = maxEnglishLineChars <= 36 ? 32 : 28;
     refPx = 24;
-    scalePercent = 74;
-    reductionPercent = 26;
-    recommendedWrap = 'Multi-line spread with 230px+ safe side margins; line-height 1.25';
-    uiTamilClass = 'text-xs sm:text-sm font-bold leading-snug';
-    uiEnglishClass = 'text-[11px] sm:text-xs font-medium leading-snug';
+    scalePercent = 83;
+    reductionPercent = 17;
+    recommendedWrap = 'Multi-line spread with 72px+ Tamil line spacing and 240px+ safe side margins';
+    uiTamilClass = 'text-xs sm:text-sm font-bold leading-relaxed';
+    uiEnglishClass = 'text-xs font-medium leading-relaxed';
     uiRefClass = 'text-[10px]';
-    uiBadgeText = `Auto-Scaled: 46px (-26%) • Max line ${maxTamilLineChars} chars • Side Safe`;
+    uiBadgeText = `Auto-Scaled: 40px Tamil / ${englishPx}px English (-17%) • 72px+ Line Gap • Side Safe`;
     uiBadgeClass = 'bg-amber-950/70 text-amber-300 border-amber-500/40 font-semibold';
   } else {
     // Tier 4: Ultra-Long Multi-Line Spread (> 30 chars per line)
     tier = 'ultra-long';
-    tierLabel = 'Ultra-Long Multi-Line Spread (38px)';
-    tamilPx = 38;
-    englishPx = 26;
-    refPx = 20;
-    scalePercent = 61;
-    reductionPercent = 39;
-    recommendedWrap = 'Balanced 3-line wrap; line-height 1.20';
-    uiTamilClass = 'text-[11px] sm:text-xs font-bold leading-tight';
-    uiEnglishClass = 'text-[10px] font-medium leading-tight';
+    tierLabel = 'Ultra-Long Multi-Line Spread (36px)';
+    tamilPx = 36;
+    englishPx = 28;
+    refPx = 22;
+    scalePercent = 75;
+    reductionPercent = 25;
+    recommendedWrap = 'Balanced 3-line wrap with 72px+ Tamil line spacing; zero crowding';
+    uiTamilClass = 'text-[11px] sm:text-xs font-bold leading-relaxed';
+    uiEnglishClass = 'text-[10px] sm:text-[11px] font-medium leading-relaxed';
     uiRefClass = 'text-[9px]';
-    uiBadgeText = `Auto-Scaled: 38px (-39%) • Max line ${maxTamilLineChars} chars • 100% Content Intact`;
+    uiBadgeText = `Auto-Scaled: 36px Tamil / 28px English (-25%) • 72px+ Line Gap • 100% Content Intact`;
     uiBadgeClass = 'bg-red-950/70 text-red-300 border-red-500/40 font-semibold';
   }
 
@@ -342,55 +343,56 @@ export function computeOverlayTypography(
   const tamilFontSizeCanvas = `${tamilPx}px (${Math.round(tamilPx * 0.75)}pt on 1080x1920)`;
   const englishFontSizeCanvas = `${englishPx}px (${Math.round(englishPx * 0.75)}pt on 1080x1920)`;
   const refFontSizeCanvas = `${refPx}px (${Math.round(refPx * 0.75)}pt on 1080x1920)`;
-  const safeMarginWidth = 'Lateral Safe Zone: 220px–340px horizontal padding on left & right (Max text width <= 640px centered at x=540) to guarantee zero corner text clipping on mobile YouTube Shorts';
-  const lineHeight = splitTamilLines.length >= 3 ? '1.20' : '1.25';
+  const safeMarginWidth = 'Lateral Safe Zone: 240px–360px horizontal padding on left & right (centered at x=540) to guarantee zero corner text clipping on mobile YouTube Shorts';
+  const lineHeight = '1.50';
 
-  // Compute dynamic Y coordinates for true vertical and horizontal centering:
+  // Compute dynamic Y coordinates for true vertical and horizontal centering
+  // with generous 72px+ line spacing so lines breathe and never crowd:
   // Canvas is 1080x1920 (center is x=540, y=960).
   // The ENTIRE text stack (Tamil lines + English line(s) + Scripture reference line)
   // is strictly centered vertically around y=960 and horizontally at x=540,
-  // leaving >= 825px of clear space at the bottom to guarantee zero occlusion
-  // by YouTube Shorts bottom UI (channel handle, video title, description, music disc).
+  // leaving >= 795px of clear space at the bottom above YouTube Shorts bottom UI.
   let tamilYCoords: number[];
   let englishYCoords: number[];
   let refYCoord: number;
 
   if (splitTamilLines.length >= 3) {
     if (splitEnglishLines.length >= 2) {
-      // 3 Tamil + 2 English + 1 Ref = 6 lines (span: 805 to 1095, mid: 950, bottom clearance: 825px)
-      tamilYCoords = [805, 865, 925];
-      englishYCoords = [990, 1040];
-      refYCoord = 1095;
+      // 3 Tamil + 2 English + 1 Ref = 6 lines
+      // Tamil 72px gap: 800 / 872 / 944; English: 1012 / 1064; Ref: 1124 (mid: 962, bottom clearance: 796px)
+      tamilYCoords = [800, 872, 944];
+      englishYCoords = [1012, 1064];
+      refYCoord = 1124;
     } else {
       // 3 Tamil + 1 English + 1 Ref = 5 lines (e.g. Shorts 156, 157)
-      // Exactly centered at y=960: (830 + 1090) / 2 = 960 (bottom clearance: 830px)
-      tamilYCoords = [830, 895, 960];
-      englishYCoords = [1030];
-      refYCoord = 1090;
+      // Tamil 72px gap: 816 / 888 / 960; English: 1032; Ref: 1098 (mid: 957, bottom clearance: 822px)
+      tamilYCoords = [816, 888, 960];
+      englishYCoords = [1032];
+      refYCoord = 1098;
     }
   } else if (splitTamilLines.length === 2) {
     if (splitEnglishLines.length >= 2) {
-      // 2 Tamil + 2 English + 1 Ref = 5 lines (span: 825 to 1080, mid: 952.5, bottom clearance: 840px)
-      tamilYCoords = [825, 895];
-      englishYCoords = [965, 1015];
-      refYCoord = 1080;
+      // 2 Tamil + 2 English + 1 Ref = 5 lines
+      // Tamil 74px gap: 822 / 896; English: 968 / 1022; Ref: 1090 (mid: 956, bottom clearance: 830px)
+      tamilYCoords = [822, 896];
+      englishYCoords = [968, 1022];
+      refYCoord = 1090;
     } else {
       // 2 Tamil + 1 English + 1 Ref = 4 lines (standard praise format)
-      // Exactly centered at y=960: (850 + 1070) / 2 = 960 (bottom clearance: 850px)
-      tamilYCoords = [850, 925];
-      englishYCoords = [1000];
-      refYCoord = 1070;
+      // Tamil 76px gap: 848 / 924; English: 998; Ref: 1068 (mid: 958, bottom clearance: 852px)
+      tamilYCoords = [848, 924];
+      englishYCoords = [998];
+      refYCoord = 1068;
     }
   } else {
     // 1 Tamil line fallback
     if (splitEnglishLines.length >= 2) {
-      tamilYCoords = [860];
-      englishYCoords = [935, 985];
-      refYCoord = 1055;
+      tamilYCoords = [856];
+      englishYCoords = [930, 984];
+      refYCoord = 1054;
     } else {
       // 1 Tamil + 1 English + 1 Ref = 3 lines
-      // Exactly centered at y=960: (890 + 1030) / 2 = 960 (bottom clearance: 890px)
-      tamilYCoords = [890];
+      tamilYCoords = [886];
       englishYCoords = [960];
       refYCoord = 1030;
     }
@@ -422,10 +424,10 @@ export function computeOverlayTypography(
     const isTwoLineTamil = splitTamilLines.length === 2;
 
     const tamilHeader = isThreeLineTamil
-      ? `Overlay Three-Line Tamil Gold #FFC107 ${tamilPx}px (Vertically & Horizontally Screen-Centered at y=960, x=540):`
+      ? `Overlay Three-Line Tamil Gold #FFC107 ${tamilPx}px (72px Line Spacing • Vertically & Horizontally Screen-Centered around y=960, x=540):`
       : isTwoLineTamil
-      ? `Overlay Two-Line Tamil Gold #FFC107 ${tamilPx}px (Vertically & Horizontally Screen-Centered at y=960, x=540):`
-      : `Overlay Tamil Gold #FFC107 ${tamilPx}px (Vertically & Horizontally Screen-Centered at y=960, x=540):`;
+      ? `Overlay Two-Line Tamil Gold #FFC107 ${tamilPx}px (74px–76px Line Spacing • Vertically & Horizontally Screen-Centered around y=960, x=540):`
+      : `Overlay Tamil Gold #FFC107 ${tamilPx}px (Vertically & Horizontally Screen-Centered around y=960, x=540):`;
 
     const tamilLinesBullet = splitTamilLines
       .map((line, idx) => `\t○  Line ${idx + 1} at (540,${tamilYCoords[idx]}) anchor mm: ${line}`)
@@ -435,16 +437,17 @@ export function computeOverlayTypography(
     if (splitEnglishLines.length === 1) {
       englishSection = `\t○  English White #F8F9FA ${englishPx}px at (540,${englishYCoords[0]}) anchor mm: "${splitEnglishLines[0]}"`;
     } else {
-      englishSection = `\t○  English White #F8F9FA ${englishPx}px (Two-Line Spread):\n` +
+      englishSection = `\t○  English White #F8F9FA ${englishPx}px (Two-Line Spread • 52px–54px Line Spacing):\n` +
         splitEnglishLines.map((line, idx) => `\t\t- Line ${idx + 1} at (540,${englishYCoords[idx]}) anchor mm: "${line}"`).join('\n');
     }
 
     const refLineDirective = `\t○  Reference Stone Gray #A8A29E ${refPx}px at y=${refYCoord} dual-run centered via textlength advance`;
 
     return `2. Subtitle Overlay (Pillow Strict - Clean Transparent • No Black Background • STRICTLY SCREEN-CENTERED BOTH VERTICALLY & HORIZONTALLY):
-• TRUE SCREEN-CENTERED MANDATE (ZERO BOTTOM DRIFT): The entire text overlay block (all Tamil lines, English translation, and Scripture reference verse) MUST BE STRICTLY CENTERED BOTH VERTICALLY AND HORIZONTALLY on the 1080x1920 canvas (midpoint anchored at x=540, y=960). Strictly FORBID placing text near or towards the bottom (y > 1100) where YouTube Shorts channel ID, title, and description occlude it. Text block spans y: 800px–1095px, maintaining >= 825px of completely clear space above bottom UI.
-• Safe zone: x 180-900px (Lateral safe-zone with generous 220px–340px side margins to eliminate YouTube corner text clipping), y 800-1100px center band (centered at y=960, y_max <= 1095px). Bottom >= 825px UI clear.
-• Lateral Safe Zone & Two-Line/Three-Line Spread Mandate (NO CORNER TEXT CLIPPING): All Tamil praise overlays are spread across 2 lines (or 3 lines for long verses like Shorts 156, 157) centered at x=540 with auto-scaled font size (${tamilPx}px) to guarantee wide side margins (>= 220px on left and right) so corner text NEVER disappears or clips on YouTube Shorts.
+• TRUE SCREEN-CENTERED MANDATE (ZERO BOTTOM DRIFT): The entire text overlay block (all Tamil lines, English translation, and Scripture reference verse) MUST BE STRICTLY CENTERED BOTH VERTICALLY AND HORIZONTALLY on the 1080x1920 canvas (midpoint anchored at x=540, y=960). Strictly FORBID placing text near or towards the bottom (y > 1150) where YouTube Shorts channel ID, title, and description occlude it. Text block spans y: 800px–1124px, maintaining >= 796px of completely clear space above bottom UI.
+• GENEROUS LINE SPACING & BALANCED SCALE MANDATE: Tamil lines MUST have at least 72px vertical gap (e.g. 800 / 872 / 944 for 3-line Tamil) so lines breathe cleanly and NEVER crowd. Tamil font (${tamilPx}px) is intentionally balanced to be only slightly larger than English (${englishPx}px) for harmonious readability and wide side margins.
+• Safe zone: x 180-900px (Lateral safe-zone with generous 240px–360px side margins to eliminate YouTube corner text clipping), y 800-1125px center band (centered at y=960, y_max <= 1124px). Bottom >= 796px UI clear.
+• Lateral Safe Zone & Two-Line/Three-Line Spread Mandate (NO CORNER TEXT CLIPPING): All Tamil praise overlays are spread across 2 lines (or 3 lines for long verses like Shorts 156, 157) centered at x=540 with balanced font size (${tamilPx}px) to guarantee wide side margins (>= 240px on left and right) so corner text NEVER disappears or clips on YouTube Shorts.
 • Clean Transparent Overlay Mandate: Pure transparent background (NO black background, NO dark plate, NO black box/rectangle). Text burned directly onto video canvas with clean drop shadow for high contrast and pristine cinematic visual presentation.
 • True 1080x1920 Pre-Scale & Burn-In Mandate: Input MUST be resized to 1080x1920 first with Lanczos before Pillow burn-in at exact coordinates. FORBID burning on 720x1280 then scaling up (which multiplies y-coordinates by 1.5x and pushes text out of frame into the bottom crop).
 • HarfBuzz Complex Text Shaping Mandate: Render all Tamil text via Pillow with Raqm/HarfBuzz shaping enabled (language="ta") and anchor="mm"/"lm" so conjuncts (e.g. க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ) form correctly. FORBID raw ffmpeg drawtext filter (drawtext renders codepoints individually, splitting conjuncts apart).
@@ -466,17 +469,17 @@ ${refLineDirective}
   if (reductionPercent > 0) {
     promptAdditionDirective = buildOverlayDirective(`Auto-Scaled ${tierLabel}, -${reductionPercent}% reduced for safe lateral fit with zero content loss`);
   } else {
-    promptAdditionDirective = buildOverlayDirective(`Standard Scale ~${tamilPx}px Tamil / ~${englishPx}px English centered, zero content loss`);
+    promptAdditionDirective = buildOverlayDirective(`Balanced Scale ~${tamilPx}px Tamil / ~${englishPx}px English centered, zero content loss`);
   }
 
   // Compositing specs text
   const compositingSpecsText = `Overlay Typography & Lateral Safe Zone (Zero Corner Clipping):
-- Two-Line Spread Layout: ${tierLabel} (Max Tamil Line: ${maxTamilLineChars} chars, Total: ${tamilCharCount} chars)
-- Auto-Scaled Font Sizes: Tamil: ${tamilFontSizeCanvas} | English: ${englishFontSizeCanvas} | Ref: ${refFontSizeCanvas}
+- Balanced Spread Layout: ${tierLabel} (Max Tamil Line: ${maxTamilLineChars} chars, Total: ${tamilCharCount} chars)
+- Balanced Font Sizes (Tamil Slightly Larger): Tamil: ${tamilFontSizeCanvas} | English: ${englishFontSizeCanvas} | Ref: ${refFontSizeCanvas}
 - Side Spacing Guarantee: ${safeMarginWidth}
-- Scaling Factor: ${scalePercent}% of base (${reductionPercent > 0 ? `-${reductionPercent}% auto-reduced for safe margins` : 'standard 62px base'})
-- Line Coordinates (1080x1920): Tamil: ${tamilYCoords.map(y => `y=${y}`).join(', ')} | English: ${englishYCoords.map(y => `y=${y}`).join(', ')} | Ref: y=${refYCoord}
-- Content Integrity: ZERO LOSS OF CONTENT — 100% full praise text preserved verbatim with generous side margins preventing YouTube Shorts UI occlusion.`;
+- Scaling Factor: ${scalePercent}% of base (${reductionPercent > 0 ? `-${reductionPercent}% auto-reduced for safe margins` : 'standard 48px balanced base'})
+- Line Coordinates (1080x1920, 72px+ Tamil Gap): Tamil: ${tamilYCoords.map(y => `y=${y}`).join(', ')} | English: ${englishYCoords.map(y => `y=${y}`).join(', ')} | Ref: y=${refYCoord}
+- Content Integrity: ZERO LOSS OF CONTENT — 100% full praise text preserved verbatim with generous line breathing room and side margins.`;
 
   return {
     tamilCharCount,

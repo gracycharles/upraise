@@ -120,13 +120,13 @@ export async function generateAlphaOverlayBlob(blueprint: ShortsBlueprint): Prom
   // Use exact lifted coordinates calculated by overlayTypographyEngine
   const tamilYCoords = typo.tamilYCoords && typo.tamilYCoords.length >= tamilLines.length
     ? typo.tamilYCoords
-    : tamilLines.map((_, i) => 850 + i * 75);
+    : tamilLines.map((_, i) => 848 + i * 76);
 
   const englishYCoords = typo.englishYCoords && typo.englishYCoords.length >= englishLines.length
     ? typo.englishYCoords
-    : englishLines.map((_, i) => 1000 + i * 50);
+    : englishLines.map((_, i) => 998 + i * 54);
 
-  const refY = typo.refYCoord || 1070;
+  const refY = typo.refYCoord || 1068;
 
   // Measure text widths for safe bounds assertion and centering
   let maxLineWidth = 0;
@@ -168,7 +168,7 @@ export async function generateAlphaOverlayBlob(blueprint: ShortsBlueprint): Prom
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   tamilLines.forEach((line, i) => {
-    const y = tamilYCoords[i] ?? (tamilYCoords[0] + i * 65);
+    const y = tamilYCoords[i] ?? (tamilYCoords[0] + i * 72);
     ctx.fillText(line, 540, y);
   });
 
@@ -178,7 +178,7 @@ export async function generateAlphaOverlayBlob(blueprint: ShortsBlueprint): Prom
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   englishLines.forEach((line, i) => {
-    const y = englishYCoords[i] ?? (englishYCoords[0] + i * 45);
+    const y = englishYCoords[i] ?? (englishYCoords[0] + i * 54);
     ctx.fillText(line, 540, y);
   });
 
