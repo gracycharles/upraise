@@ -152,4 +152,129 @@ export function getNaanPronunciationMandate(text: string): string {
   • 100% Synchronized Lip-Sync: On-screen character lip movements must show mouth open with visible tongue-tip alveolar contact, never closed lips during "நான்".`;
 }
 
+export interface VasanamPhoneticDetails {
+  word: string;
+  wordIPA: string;
+  ttsGranthaWord: string;
+  latinSyllables: string;
+  fullPhraseIPA: string;
+}
+
+const KNOWN_VASANAM_PHRASES: Array<{ pattern: RegExp; details: VasanamPhoneticDetails }> = [
+  {
+    // Short #31
+    pattern: /அவர் தமது வசனத்தை அனுப்பி குணமாக்குகிறார்/,
+    details: {
+      word: 'வசனத்தை',
+      wordIPA: '[ʋa.sa.n̪at̪.t̪ai̯] (root வசனம் = [ʋa.sa.nam])',
+      ttsGranthaWord: 'வஸனத்தை',
+      latinSyllables: 'va-sa-nath-thai',
+      fullPhraseIPA: '/a.ʋaɾ t̪a.ma.d̪u ʋa.sa.n̪at̪.t̪ai̯ a.n̪up.pi ku.ɳa.maːk.ku.ɡi.ɾaːɾ st̪oːt̪.t̪i.ɾam/'
+    }
+  },
+  {
+    // Short #179
+    pattern: /உம்முடைய வசனம் என் கால்களுக்கு தீபம்/,
+    details: {
+      word: 'வசனம்',
+      wordIPA: '[ʋa.sa.nam]',
+      ttsGranthaWord: 'வஸனம்',
+      latinSyllables: 'va-sa-nam',
+      fullPhraseIPA: '/um.mu.ɖai̯.ja ʋa.sa.nam en̪ kaːl.ɡa.ɭuk.ku t̪iː.bam st̪oːt̪.t̪i.ɾam/'
+    }
+  },
+  {
+    // Short #180
+    pattern: /உம்முடைய வசனம் என் பாதைக்கு வெளிச்சம்/,
+    details: {
+      word: 'வசனம்',
+      wordIPA: '[ʋa.sa.nam]',
+      ttsGranthaWord: 'வஸனம்',
+      latinSyllables: 'va-sa-nam',
+      fullPhraseIPA: '/um.mu.ɖai̯.ja ʋa.sa.nam en̪ paː.d̪ai̯k.ku ʋe.ɭit.tʃam st̪oːt̪.t̪i.ɾam/'
+    }
+  },
+  {
+    // Short #216
+    pattern: /என் வசனத்திற்கு நடுங்குபவனையே நோக்கி பார்ப்பேன்/,
+    details: {
+      word: 'வசனத்திற்கு',
+      wordIPA: '[ʋa.sa.n̪at̪.t̪iɾ.ku] (root வசனம் = [ʋa.sa.nam])',
+      ttsGranthaWord: 'வஸனத்திற்கு',
+      latinSyllables: 'va-sa-nath-thir-ku',
+      fullPhraseIPA: '/en̪ ʋa.sa.n̪at̪.t̪iɾ.ku n̪a.ɖuŋ.ɡu.ba.ʋa.n̪ai̯.jeː n̪oːk.ki paːɾp.peːn en.dra.ʋa.ɾeː st̪oːt̪.t̪i.ɾam/'
+    }
+  },
+  {
+    // Short #393
+    pattern: /கிறிஸ்துவின் வசனம் உங்களுக்குள்ளிருப்பதாக/,
+    details: {
+      word: 'வசனம்',
+      wordIPA: '[ʋa.sa.nam]',
+      ttsGranthaWord: 'வஸனம்',
+      latinSyllables: 'va-sa-nam',
+      fullPhraseIPA: '/ki.ɾis.t̪u.ʋin ʋa.sa.nam uŋ.ɡa.ɭuk.kuɭ.ɭi.ɾup.pa.d̪aː.ɡa st̪oːt̪.t̪i.ɾam/'
+    }
+  },
+  {
+    // Short #465 (future data readiness)
+    pattern: /கேள்வி தேவனுடைய வசனத்தினால் வரும்/,
+    details: {
+      word: 'வசனத்தினால்',
+      wordIPA: '[ʋa.sa.n̪at̪.t̪i.n̪aːl] (root வசனம் = [ʋa.sa.nam])',
+      ttsGranthaWord: 'வஸனத்தினால்',
+      latinSyllables: 'va-sa-nath-thi-naal',
+      fullPhraseIPA: '/keːɭ.ʋi t̪eː.ʋa.n̪u.ɖai̯.ja ʋa.sa.n̪at̪.t̪i.n̪aːl ʋa.ɾum st̪oːt̪.t̪i.ɾam/'
+    }
+  }
+];
+
+/**
+ * Checks if text contains வசனம் or its inflections (வசனத்தை, வசனத்திற்கு, வசனத்தினால், etc.)
+ */
+export function hasTamilVasanam(text: string): boolean {
+  return /வசன|வஸன/.test(text);
+}
+
+/**
+ * Resolves exact IPA and TTS lock details for a phrase containing வசனம் / inflections
+ */
+export function getVasanamPhoneticDetails(text: string): VasanamPhoneticDetails | null {
+  if (!hasTamilVasanam(text)) return null;
+  for (const entry of KNOWN_VASANAM_PHRASES) {
+    if (entry.pattern.test(text)) {
+      return entry.details;
+    }
+  }
+  const matchedWord = (text.match(/[\u0B80-\u0BFF]*வசன[\u0B80-\u0BFF]*/) || ['வசனம்'])[0];
+  return {
+    word: matchedWord,
+    wordIPA: matchedWord === 'வசனம்' ? '[ʋa.sa.nam]' : `[ʋa.sa.n̪a...] (root வசனம் = [ʋa.sa.nam])`,
+    ttsGranthaWord: matchedWord.replace('வசன', 'வஸன'),
+    latinSyllables: 'va-sa-nam',
+    fullPhraseIPA: `Full phrase with ${matchedWord} locked to crisp voiceless [s] ([ʋa.sa.nam]) and st̪oːt̪.t̪i.ɾam`
+  };
+}
+
+/**
+ * Returns just the full-phrase IPA string for display or prompt embedding
+ */
+export function getVasanamFullPhraseIPA(text: string): string {
+  return getVasanamPhoneticDetails(text)?.fullPhraseIPA || '';
+}
+
+/**
+ * Generates the full-phrase IPA lock & crisp /s/ TTS mandate for வசனம் ([ʋa.sa.nam])
+ */
+export function getVasanamPronunciationMandate(text: string): string {
+  const details = getVasanamPhoneticDetails(text);
+  if (!details) return '';
+
+  return `\n- CRITICAL TAMIL FULL-PHRASE IPA LOCK & CRISP /s/ MANDATE ("${details.word}" → [ʋa.sa.nam]):
+  • Full-Phrase IPA Lock: ${details.fullPhraseIPA}
+  • Target Word Lock: "${details.word}" = ${details.wordIPA} — medial "ச" MUST be pronounced with a crisp, pure voiceless alveolar/dental sibilant /s/ (as in "sun" / "sand": ${details.latinSyllables}).
+  • Strictly Forbidden Consonants: NEVER pronounce medial "ச" as affricate /tʃ/ ("cha" as in "chair"), NEVER voiced /z/ ("za" as in "zoo"), and NEVER postalveolar /ʃ/ ("sha" as in "shoe"). Pure crisp /s/ ONLY.
+  • TTS Speech Engine Lock: TTS engines that default intervocalic "ச" to /tʃ/, /z/, or /ʃ/ MUST use Grantha phonetic buffer "${details.ttsGranthaWord}" (Grantha "ஸ" = crisp /s/) or IPA [ʋa.sa.nam] in the speech synthesis buffer.
+  • On-Screen Subtitle & Cadence: Subtitles retain authentic literary "${details.word}" with zero visual alteration; maintain natural reverent pause before "ஸ்தோத்திரம்" ([st̪oːt̪.t̪i.ɾam]).`;
+}
 

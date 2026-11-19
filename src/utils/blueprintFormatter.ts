@@ -4,7 +4,7 @@ import { generateCharacterExpression, buildInculcatedVideoPrompt } from './chara
 import { getNKJVData } from './nkjvTranslations';
 import { computeOverlayTypography } from './overlayTypographyEngine';
 import { deduplicateTagsCaseInsensitive } from '../data/blueprints';
-import { hasTamilZha, extractZhaPhoneticGuide, getZhaPronunciationMandate, hasSettrilirundhu, getSettrilirundhuMandate, hasTamilNaan, getNaanPronunciationMandate } from './tamilPhoneticsEngine';
+import { hasTamilZha, extractZhaPhoneticGuide, getZhaPronunciationMandate, hasSettrilirundhu, getSettrilirundhuMandate, hasTamilNaan, getNaanPronunciationMandate, hasTamilVasanam, getVasanamPhoneticDetails, getVasanamPronunciationMandate } from './tamilPhoneticsEngine';
 
 /**
  * Formats a ShortsBlueprint into the exact template requested by the user
@@ -174,12 +174,13 @@ export function formatAudioOnlyText(b: ShortsBlueprint): string {
   const zhaDirective = getZhaPronunciationMandate(allTamilText);
   const settrilirundhuDirective = getSettrilirundhuMandate(allTamilText);
   const naanDirective = getNaanPronunciationMandate(allTamilText);
+  const vasanamDirective = getVasanamPronunciationMandate(allTamilText);
 
   return `🎙 AUDIO & VOICEOVER PROMPT (NATIVE TAMIL PRONUNCIATION & TAMIL-ONLY LIP SYNC):
 - On-Screen Character: ${b.character}
 - Voice Profile & Tone: Authentic character voice matching ${b.character} — ${b.voiceProfile}
 - Voiceover Script (Strictly 10.0s): "${b.audioScript}"
-- CHARACTER-MATCHED VOICE SELECTION: The video generator must choose the voice dynamically based on the character, authentically matching ${b.character} in age, gender, and timbre.${lovingkindnessDirective}${ratchanyaDirective}${iratchippuDirective}${nirkumDirective}${dhevaneDirective}${neytrumDirective}${sagalaDirective}${mudivuVaraiDirective}${zhaDirective}${settrilirundhuDirective}${naanDirective}
+- CHARACTER-MATCHED VOICE SELECTION: The video generator must choose the voice dynamically based on the character, authentically matching ${b.character} in age, gender, and timbre.${lovingkindnessDirective}${ratchanyaDirective}${iratchippuDirective}${nirkumDirective}${dhevaneDirective}${neytrumDirective}${sagalaDirective}${mudivuVaraiDirective}${zhaDirective}${settrilirundhuDirective}${naanDirective}${vasanamDirective}
 - CRITICAL TAMIL PRONUNCIATION MANDATE: Spoken Tamil must be voiced by an authentic native Tamil speaker from Tamil Nadu (Madurai/Thanjavur accent), NOT English accent, NOT Hindi, NOT anglicized. Pure Tamil Nadu native speaker locked. Correct conjunct pronunciation (e.g. க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ) and natural syllable stress. Zero anglicized or broken phonetics.
 - NATURAL REVERENT PAUSE BEFORE ஸ்தோத்திரம்: When voicing the Tamil praise, introduce a distinct, gentle reverent pause (as if an unwritten comma exists) right before saying "ஸ்தோத்திரம்". The on-screen text overlay retains the original clean script without a comma, but the audio pacing and lip-sync articulation must honor this sacred comma-like pause.
 - CRITICAL LIP SYNC MANDATE (TAMIL AUDIO ALONE • NO ENGLISH LIP SYNC): On-screen character lip sync is required OVER TAMIL AUDIO ALONE (~0–5s). Lip movements MUST be 100% synchronized and even throughout the spoken Tamil praise, articulating every single Tamil word and syllable with natural native Tamil mouth movements. For the English text audio (~5–10s), STRICTLY NO LIP SYNC IS NEEDED — only the voiceover audio plays while the on-screen character remains silent with lips at rest in peaceful, reverent contemplation (no mouth movement during the English translation).

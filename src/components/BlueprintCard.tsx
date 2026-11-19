@@ -41,7 +41,7 @@ import {
 import { getScriptureVerification } from '../data/scriptureVerifications';
 import { computeOverlayTypography } from '../utils/overlayTypographyEngine';
 import { downloadAlphaOverlayPng } from '../utils/alphaOverlayGenerator';
-import { hasTamilZha, extractZhaPhoneticGuide, hasSettrilirundhu, hasTamilNaan } from '../utils/tamilPhoneticsEngine';
+import { hasTamilZha, extractZhaPhoneticGuide, hasSettrilirundhu, hasTamilNaan, hasTamilVasanam, getVasanamPhoneticDetails } from '../utils/tamilPhoneticsEngine';
 
 interface BlueprintCardProps {
   blueprint: ShortsBlueprint;
@@ -1111,6 +1111,26 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                       </p>
                     </div>
                   )}
+                  {(() => {
+                    const combinedTamil = `${blueprint.tamilText} ${blueprint.audioScript} ${blueprint.subtitles?.line1Tamil}`;
+                    if (!hasTamilVasanam(combinedTamil)) return null;
+                    const vDetails = getVasanamPhoneticDetails(combinedTamil);
+                    if (!vDetails) return null;
+                    return (
+                      <div className="p-2 rounded bg-indigo-950/60 border border-indigo-500/40 text-indigo-200 text-[11px] space-y-1">
+                        <div className="flex items-center gap-1.5 text-indigo-300 font-bold uppercase tracking-wide">
+                          <span className="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+                          Full-Phrase IPA Lock &amp; Crisp /s/ ("{vDetails.word}" → [ʋa.sa.nam]):
+                        </div>
+                        <p className="leading-relaxed">
+                          Target Word Lock: <em>"{vDetails.word}"</em> = <strong className="text-indigo-300 font-mono">{vDetails.wordIPA}</strong> using a crisp voiceless <strong>/s/</strong> (<em>{vDetails.latinSyllables}</em>, as in <em>sun</em> / <em>sand</em>) — strictly NOT <span className="line-through text-stone-400 font-mono">/tʃ/</span> (<em>ch</em>), <span className="line-through text-stone-400 font-mono">/z/</span>, or <span className="line-through text-stone-400 font-mono">/ʃ/</span> (<em>sh</em>). TTS buffer uses Grantha <strong>"{vDetails.ttsGranthaWord}"</strong> while subtitles retain literary <em>"{vDetails.word}"</em>.
+                        </p>
+                        <div className="bg-black/60 px-2 py-1 rounded border border-indigo-500/20 font-mono text-[10px] text-indigo-100 break-all">
+                          Full-Phrase IPA: {vDetails.fullPhraseIPA}
+                        </div>
+                      </div>
+                    );
+                  })()}
                   <div>
                     <strong className="text-emerald-200 font-semibold">CADENCE & PAUSE DIRECTIVE:</strong> In spoken Tamil audio, introduce a distinct, reverent pause (as if an unwritten comma exists) immediately prior to speaking <em>"ஸ்தோத்திரம்"</em>. The on-screen text overlay retains the clean biblical script without an extra comma, while the audio delivery breathes reverently.
                   </div>
