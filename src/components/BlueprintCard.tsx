@@ -363,7 +363,7 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                   {typo.splitTamilLines.map((line, idx) => (
                     <div key={idx} className="space-y-0.5">
                       <span className="text-[9px] font-mono text-stone-500 block">
-                        Line {idx + 1} at (540,{typo.tamilYCoords[idx] || 848 + idx * 76}) anchor mm • {typo.tamilPx}px:
+                        Line {idx + 1} at (540,{typo.tamilYCoords[idx] || 846 + idx * 76}) anchor mm • {typo.tamilPx}px:
                       </span>
                       <div className={`text-amber-400 tracking-wide font-tamil-overlay ${typo.uiTamilClass} break-words drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]`}>
                         {line}
@@ -506,7 +506,7 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                   </>
                 ) : (
                   <>
-                    <strong className="text-stone-200">Screen-Centered Spread &amp; 72px+ Breathing Space:</strong> Tamil ({typo.tamilPx}px) is balanced slightly larger than English ({typo.englishPx}px) with 72px–76px line spacing, strictly centered vertically and horizontally (canvas center x=540, y=960) with lines ending at y&le;1124 and &gt;= 796px clear space above bottom YouTube UI.
+                    <strong className="text-stone-200">Exact Screen-Centered Combined Block (50% X, 50% Y):</strong> Both Tamil ({typo.tamilPx}px) and English ({typo.englishPx}px) combined (plus reference) are centered symmetrically at exact screen center <strong className="text-amber-300">(x=540, y=960)</strong> with 72px–76px line spacing, leaving the lower 40% of the frame clear.
                   </>
                 )}
               </p>
@@ -555,8 +555,8 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                 <span className="font-mono text-teal-300 font-semibold">Direct Burn-In / Clean Alpha</span>
               </div>
               <div className="p-2 rounded bg-stone-900 border border-stone-800">
-                <span className="block text-[10px] text-stone-500 font-mono uppercase">Positioning & Shadow</span>
-                <span className="font-mono text-amber-300 font-semibold">Y: 50% Center (No Drop-Shadow)</span>
+                <span className="block text-[10px] text-stone-500 font-mono uppercase">Positioning & Alignment</span>
+                <span className="font-mono text-amber-300 font-semibold">Exact Center (50% X, 50% Y • 540,960)</span>
               </div>
             </div>
           </div>

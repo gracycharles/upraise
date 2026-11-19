@@ -346,12 +346,9 @@ export function computeOverlayTypography(
   const safeMarginWidth = 'Lateral Safe Zone: 240px–360px horizontal padding on left & right (centered at x=540) to guarantee zero corner text clipping on mobile YouTube Shorts';
   const lineHeight = '1.50';
 
-  // Compute dynamic Y coordinates for true vertical and horizontal centering
-  // with generous 72px+ line spacing so lines breathe and never crowd:
-  // Canvas is 1080x1920 (center is x=540, y=960).
-  // The ENTIRE text stack (Tamil lines + English line(s) + Scripture reference line)
-  // is strictly centered vertically around y=960 and horizontally at x=540,
-  // leaving >= 795px of clear space at the bottom above YouTube Shorts bottom UI.
+  // Compute dynamic Y coordinates so the ENTIRE combined block (Tamil + English + Ref)
+  // is centered symmetrically at the EXACT geometric screen center (x=540, y=960 = 50% W, 50% H),
+  // with >= 72px Tamil line spacing so lines breathe and never crowd:
   let tamilYCoords: number[];
   let englishYCoords: number[];
   let refYCoord: number;
@@ -359,42 +356,43 @@ export function computeOverlayTypography(
   if (splitTamilLines.length >= 3) {
     if (splitEnglishLines.length >= 2) {
       // 3 Tamil + 2 English + 1 Ref = 6 lines
-      // Tamil 72px gap: 800 / 872 / 944; English: 1012 / 1064; Ref: 1124 (mid: 962, bottom clearance: 796px)
+      // Tamil 72px gap: 800 / 872 / 944; English: 1012 / 1062; Ref: 1120 -> Exact Midpoint: (800 + 1120) / 2 = 960
       tamilYCoords = [800, 872, 944];
-      englishYCoords = [1012, 1064];
-      refYCoord = 1124;
+      englishYCoords = [1012, 1062];
+      refYCoord = 1120;
     } else {
       // 3 Tamil + 1 English + 1 Ref = 5 lines (e.g. Shorts 156, 157)
-      // Tamil 72px gap: 816 / 888 / 960; English: 1032; Ref: 1098 (mid: 957, bottom clearance: 822px)
+      // Tamil 72px gap: 816 / 888 / 960; English: 1032; Ref: 1104 -> Exact Midpoint: (816 + 1104) / 2 = 960
       tamilYCoords = [816, 888, 960];
       englishYCoords = [1032];
-      refYCoord = 1098;
+      refYCoord = 1104;
     }
   } else if (splitTamilLines.length === 2) {
     if (splitEnglishLines.length >= 2) {
       // 2 Tamil + 2 English + 1 Ref = 5 lines
-      // Tamil 74px gap: 822 / 896; English: 968 / 1022; Ref: 1090 (mid: 956, bottom clearance: 830px)
-      tamilYCoords = [822, 896];
-      englishYCoords = [968, 1022];
-      refYCoord = 1090;
+      // Tamil 74px gap: 824 / 898; English: 970 / 1024; Ref: 1096 -> Exact Midpoint: (824 + 1096) / 2 = 960
+      tamilYCoords = [824, 898];
+      englishYCoords = [970, 1024];
+      refYCoord = 1096;
     } else {
       // 2 Tamil + 1 English + 1 Ref = 4 lines (standard praise format)
-      // Tamil 76px gap: 848 / 924; English: 998; Ref: 1068 (mid: 958, bottom clearance: 852px)
-      tamilYCoords = [848, 924];
+      // Tamil 76px gap: 846 / 922; English: 998; Ref: 1074 -> Exact Midpoint: (846 + 1074) / 2 = 960
+      tamilYCoords = [846, 922];
       englishYCoords = [998];
-      refYCoord = 1068;
+      refYCoord = 1074;
     }
   } else {
     // 1 Tamil line fallback
     if (splitEnglishLines.length >= 2) {
-      tamilYCoords = [856];
-      englishYCoords = [930, 984];
-      refYCoord = 1054;
+      // 1 Tamil + 2 English + 1 Ref = 4 lines -> Exact Midpoint: (858 + 1062) / 2 = 960
+      tamilYCoords = [858];
+      englishYCoords = [932, 986];
+      refYCoord = 1062;
     } else {
-      // 1 Tamil + 1 English + 1 Ref = 3 lines
+      // 1 Tamil + 1 English + 1 Ref = 3 lines -> Exact Midpoint: (886 + 1034) / 2 = 960
       tamilYCoords = [886];
       englishYCoords = [960];
-      refYCoord = 1030;
+      refYCoord = 1034;
     }
   }
 
@@ -419,15 +417,15 @@ export function computeOverlayTypography(
   const refParts = parseRefParts(line3Ref);
 
   // Specific directive for the Video Gen prompt addition
-  const buildOverlayDirective = (scaledNote: string) => {
+  const buildOverlayDirective = (_scaledNote: string) => {
     const isThreeLineTamil = splitTamilLines.length >= 3;
     const isTwoLineTamil = splitTamilLines.length === 2;
 
     const tamilHeader = isThreeLineTamil
-      ? `Overlay Three-Line Tamil Gold #FFC107 ${tamilPx}px (72px Line Spacing • Vertically & Horizontally Screen-Centered around y=960, x=540):`
+      ? `Center-Screen Three-Line Tamil Gold #FFC107 ${tamilPx}px (72px Line Spacing • Dead-Center at x=540, middle y=960):`
       : isTwoLineTamil
-      ? `Overlay Two-Line Tamil Gold #FFC107 ${tamilPx}px (74px–76px Line Spacing • Vertically & Horizontally Screen-Centered around y=960, x=540):`
-      : `Overlay Tamil Gold #FFC107 ${tamilPx}px (Vertically & Horizontally Screen-Centered around y=960, x=540):`;
+      ? `Center-Screen Two-Line Tamil Gold #FFC107 ${tamilPx}px (74px–76px Line Spacing • Dead-Center at x=540, middle y=960):`
+      : `Center-Screen Tamil Gold #FFC107 ${tamilPx}px (Dead-Center at x=540, middle y=960):`;
 
     const tamilLinesBullet = splitTamilLines
       .map((line, idx) => `\t○  Line ${idx + 1} at (540,${tamilYCoords[idx]}) anchor mm: ${line}`)
@@ -437,20 +435,19 @@ export function computeOverlayTypography(
     if (splitEnglishLines.length === 1) {
       englishSection = `\t○  English White #F8F9FA ${englishPx}px at (540,${englishYCoords[0]}) anchor mm: "${splitEnglishLines[0]}"`;
     } else {
-      englishSection = `\t○  English White #F8F9FA ${englishPx}px (Two-Line Spread • 52px–54px Line Spacing):\n` +
+      englishSection = `\t○  English White #F8F9FA ${englishPx}px (Two-Line Spread • 50px–54px Line Spacing):\n` +
         splitEnglishLines.map((line, idx) => `\t\t- Line ${idx + 1} at (540,${englishYCoords[idx]}) anchor mm: "${line}"`).join('\n');
     }
 
-    const refLineDirective = `\t○  Reference Stone Gray #A8A29E ${refPx}px at y=${refYCoord} dual-run centered via textlength advance`;
+    const refLineDirective = `\t○  Reference Stone Gray #A8A29E ${refPx}px at (540,${refYCoord}) dual-run centered via textlength advance`;
 
-    return `2. Subtitle Overlay (Pillow Strict - Clean Transparent • No Black Background • STRICTLY SCREEN-CENTERED BOTH VERTICALLY & HORIZONTALLY):
-• TRUE SCREEN-CENTERED MANDATE (ZERO BOTTOM DRIFT): The entire text overlay block (all Tamil lines, English translation, and Scripture reference verse) MUST BE STRICTLY CENTERED BOTH VERTICALLY AND HORIZONTALLY on the 1080x1920 canvas (midpoint anchored at x=540, y=960). Strictly FORBID placing text near or towards the bottom (y > 1150) where YouTube Shorts channel ID, title, and description occlude it. Text block spans y: 800px–1124px, maintaining >= 796px of completely clear space above bottom UI.
-• GENEROUS LINE SPACING & BALANCED SCALE MANDATE: Tamil lines MUST have at least 72px vertical gap (e.g. 800 / 872 / 944 for 3-line Tamil) so lines breathe cleanly and NEVER crowd. Tamil font (${tamilPx}px) is intentionally balanced to be only slightly larger than English (${englishPx}px) for harmonious readability and wide side margins.
-• Safe zone: x 180-900px (Lateral safe-zone with generous 240px–360px side margins to eliminate YouTube corner text clipping), y 800-1125px center band (centered at y=960, y_max <= 1124px). Bottom >= 796px UI clear.
-• Lateral Safe Zone & Two-Line/Three-Line Spread Mandate (NO CORNER TEXT CLIPPING): All Tamil praise overlays are spread across 2 lines (or 3 lines for long verses like Shorts 156, 157) centered at x=540 with balanced font size (${tamilPx}px) to guarantee wide side margins (>= 240px on left and right) so corner text NEVER disappears or clips on YouTube Shorts.
-• Clean Transparent Overlay Mandate: Pure transparent background (NO black background, NO dark plate, NO black box/rectangle). Text burned directly onto video canvas with clean drop shadow for high contrast and pristine cinematic visual presentation.
-• True 1080x1920 Pre-Scale & Burn-In Mandate: Input MUST be resized to 1080x1920 first with Lanczos before Pillow burn-in at exact coordinates. FORBID burning on 720x1280 then scaling up (which multiplies y-coordinates by 1.5x and pushes text out of frame into the bottom crop).
-• HarfBuzz Complex Text Shaping Mandate: Render all Tamil text via Pillow with Raqm/HarfBuzz shaping enabled (language="ta") and anchor="mm"/"lm" so conjuncts (e.g. க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ) form correctly. FORBID raw ffmpeg drawtext filter (drawtext renders codepoints individually, splitting conjuncts apart).
+    return `2. Post-Production Pillow + HarfBuzz Overlay Burn-In (CLEAN VIDEO FIRST → LANCZOS 1080x1920 → BURN AT EXACT CENTER 50% X, 50% Y):
+• DO NOT LET VIDEO GENERATOR PLACE TEXT: Generate the performance 100% clean with ZERO text first (video generators drift text to y~1380-1770). Upscale the clean video to 1080x1920 first with Lanczos, then burn the combined Tamil + English + Reference overlay with Pillow + HarfBuzz at the exact coordinates below.
+• EXACT GEOMETRIC SCREEN-CENTER PLACEMENT: Place BOTH the Tamil text and English translation combined as ONE unified centered block at the EXACT vertical and horizontal midpoint of the 1080x1920 frame: (cx = 540, cy = 960) = (W // 2, H // 2) = 50% horizontal, 50% vertical. Combined stack spans y: ${tamilYCoords[0]}px to ${refYCoord}px, whose exact midpoint is (${tamilYCoords[0]} + ${refYCoord}) / 2 = 960px. Every line is horizontally centered at x=540px with anchor="mm". Keep the lower 40% of the canvas (y: 1130–1920px) completely clear scenic footage.
+• GENEROUS LINE SPACING & BALANCED SCALE: Tamil lines use >= 72px vertical step (e.g. 800 / 872 / 944 for 3-line Tamil) so lines breathe cleanly without crowding. Tamil font (${tamilPx}px) is slightly larger than English (${englishPx}px) for balanced legibility and wide lateral safe margins (x: 180–900px, >= 240px side margins).
+• Clean Transparent Overlay: Pure transparent overlay compositing (no dark plate, no opaque box/rectangle behind text). Crisp 2px drop shadow directly onto the 1080x1920 frame.
+• True 1080x1920 Pre-Scale & Burn-In: Upscale raw video to exact 1080x1920 with Lanczos FIRST before Pillow burn-in at exact center coordinates (cx=540, cy=960) so coordinates are never shifted down by post-burn scaling.
+• HarfBuzz Complex Text Shaping: Render all Tamil text via Pillow with Raqm/HarfBuzz shaping enabled (language="ta") and anchor="mm"/"lm" so conjuncts (e.g. க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ) form correctly (never raw ffmpeg drawtext).
 ${tamilHeader}
 ${tamilLinesBullet}
 ${englishSection}
@@ -460,9 +457,9 @@ ${refLineDirective}
 	○ total_advance = getlength(tamil) + getlength("${refParts.separator || ' | '}${refParts.englishPart}") = 298.68px
 	○ x_start = 540 - total/2 = 390.65px, anchor="lm"
 	○ Symmetry asserted: abs(x_start - (1080-(x_start+total))) = 0.0 <2px ✅
-• Shadow 2px (0,0,0,180) at same anchors (NO black background box)
+• Shadow 2px (0,0,0,180) at same center anchors
 • Unicode verified for Tamil lines per codepoints (properly shaped ligatures via HarfBuzz)
-• Final encode: H.264 via imageio_ffmpeg libx264, pixel format yuv420p, CRF 18 (width=1080, height=1920 full-bleed). FORBID mp4v codec.`;
+• Final encode: H.264 via imageio_ffmpeg libx264, pixel format yuv420p, CRF 18 (width=1080, height=1920 full-bleed).`;
   };
 
   let promptAdditionDirective: string;

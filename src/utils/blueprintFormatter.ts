@@ -43,7 +43,7 @@ Tamil Text: ${b.tamilText} (${b.tamilRef})
 Biblical English Translation: ${b.englishText} (${b.englishRef})
 ${b.nkjvText ? `📖 Scripture Verse: "${b.nkjvText}"\n` : ''}⏱ Target Duration: Strictly 10 seconds (9:16 Vertical Portrait - 1080x1920)
 
-📺 ON-SCREEN TEXT OVERLAY CONTENT & TRANSLATION (BURN-IN SUBTITLES):
+📺 ON-SCREEN CENTERED TITLE OVERLAY (EXACT 50% VERTICAL & 50% HORIZONTAL CENTER):
 ${typo.promptAdditionDirective}
 - Verification: Exact Unicode codepoints: ${codepoints}
 
@@ -70,30 +70,30 @@ ${b.videoPrompt}
    - LIP SYNC OVER TAMIL AUDIO ALONE (NO ENGLISH LIP SYNC): The on-screen character's lip movements MUST be 100% synchronized ONLY during the spoken Tamil praise audio (~0–5s, the first half), articulating every Tamil word, syllable, and conjunct with authentic native Tamil phonetics. For the English translation audio (~5–10s, the second half), STRICTLY NO LIP SYNC IS NEEDED — the spoken English audio plays purely as voiceover narration while the on-screen character maintains a serene, composed, reverent countenance with lips gently at rest in silent adoration or contemplative prayer (DO NOT lip-sync the English speech).
    - Spoken Script Delivery (Strictly 10.0s): Speak ONLY the exact scripted text: "${b.audioScript}". No extra words, no intro/outro, no theological commentary.
    - Background Audio: ${b.backgroundAudio} (Mixed at -18dB).
-3. TRUE 1080x1920 RESOLUTION & PRE-SCALE BURN-IN MANDATE (NO OFF-SCREEN CROP):
-   - Final MP4 canvas MUST BE true 1080x1920 vertical portrait (full-bleed, strictly forbid letterboxing, pillarboxing, or black borders).
-   - CRITICAL PRE-SCALE MANDATE: If source/raw video is 720x1280, upscale to 1080x1920 with Lanczos FIRST before burning on-screen text overlay. NEVER burn text onto 720x1280 and then scale up to 1080x1920 (which multiplies y-coordinates by 1.5x and pushes text out of frame into the bottom YouTube crop).
-   - Encode with imageio_ffmpeg libx264 (pixel format yuv420p, CRF 18). FORBID mp4v codec (which fails preview in Shorts player).
+3. TRUE 1080x1920 RESOLUTION & PRE-SCALE COMPOSITING:
+   - Final MP4 canvas MUST BE true 1080x1920 vertical portrait (full-bleed, zero letterboxing, pillarboxing, or dark borders).
+   - CRITICAL PRE-SCALE MANDATE: If source/raw video is 720x1280, upscale to 1080x1920 with Lanczos FIRST before compositing the text overlay at exact center (540, 960). NEVER burn text onto 720x1280 and scale up afterwards (which multiplies y-coordinates by 1.5x and pushes text out of center).
+   - Encode with imageio_ffmpeg libx264 (pixel format yuv420p, CRF 18). Avoid mp4v codec.
    - Verify with ffprobe: width=1080, height=1920, pix_fmt=yuv420p, codec_name=h264, duration 10.0s.
 4. SHORTS FRAMING & CINEMATOGRAPHY MANDATE:
    - Dynamic camera framing matching the prompt (ranging across Wide Environmental, Low-Angle Reverent, Medium-Wide 3/4, Side Profile Tracking, Over-the-Shoulder, and Eye-Level Medium).
    - Subject framed naturally with ~15% headroom for vertical 9:16 safe-zone, face clearly visible during synchronized speech articulation.
-   - Forbid repetitive hand-on-chest or static poses; ensure active physical interaction with the historic environment.
+   - Avoid repetitive hand-on-chest or static poses; ensure active physical interaction with the historic environment.
    - Background must be outdoor authentic 1st-century biblical landscape with natural atmospheric lighting, NOT interior/kitchen, with no black vignette borders.
-5. YOUTUBE SHORTS SAFE-ZONE TEXT OVERLAY MANDATE (CLEAN TRANSPARENT • NO BLACK BACKGROUND • STRICTLY SCREEN-CENTERED BOTH VERTICALLY & HORIZONTALLY):
-   - CLEAN TRANSPARENT TEXT OVERLAY (NO BLACK BACKGROUND): Strictly NO black background, NO dark plate, NO black box or vignette behind the text overlay. Overlay is 100% transparent with subtle 2px drop-shadow (0,0,0,180) for contrast directly over the 1080x1920 video frame.
-   - TRUE SCREEN-CENTERED MANDATE (ZERO BOTTOM DRIFT): All lines (all Tamil praise lines, English translation, and Scripture reference verse) MUST BE STRICTLY CENTERED BOTH VERTICALLY AND HORIZONTALLY in the middle of the 1080x1920 canvas (midpoint anchored at x=540, y=960). Strictly FORBID placing text near or towards the bottom (y > 1150) where YouTube Shorts channel ID, title, and description occlude it.
-   - SUBTITLE SAFE AREA = x: 180-900px (Lateral safe-zone with minimum 240px–360px side margins to eliminate YouTube corner text clipping), y: 800-1125px center band (centered at y=960, y_max <= 1124px). Bottom >= 796px UI space strictly clear.
-   - Balanced Font Scale & Generous Line Spacing (72px+ Gap): Tamil text is balanced to be slightly larger than English (e.g. 48px Tamil vs 38px English base) with generous 72px–76px vertical spacing between Tamil lines so lines breathe and never crowd:
-     * 2-Line Tamil: Line 1 at (540,848) anchor="mm" Gold #FFC107 48px, Line 2 at (540,924) anchor="mm" Gold #FFC107 48px (76px gap), English at (540,998) White #F8F9FA 38px, Reference at y=1068 Stone Gray #A8A29E 28px dual-run centered via textlength advance (midpoint y=958, leaving 852px clear at bottom).
-     * 3-Line Tamil + 2-Line English: Tamil at (540,800), (540,872), (540,944) (72px gap) Gold #FFC107, English at (540,1012) & (540,1064) White #F8F9FA, Reference at y=1124 Stone Gray #A8A29E (midpoint y=962, leaving 796px clear at bottom).
-     * 3-Line Tamil + 1-Line English: Tamil at (540,816), (540,888), (540,960) (72px gap) Gold #FFC107, English at (540,1032) White #F8F9FA, Reference at y=1098 Stone Gray #A8A29E (midpoint y=957, leaving 822px clear at bottom).
-   - Center horizontally at x=540 anchor="mm". All praises spread into 2 lines (or 3 lines for long verses) with auto-scaled font size to guarantee generous side margins (>= 240px on left & right) preventing corner text from disappearing on YouTube.
-   - Pillow HarfBuzz Shaping: language="ta", font Noto Sans Tamil Bold, anchor="mm"/"lm" so conjuncts (க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ) form correctly. FORBID raw ffmpeg drawtext filter.`;
+5. EXACT CENTER-SCREEN TEXT OVERLAY MANDATE (50% VERTICAL & 50% HORIZONTAL CENTER • COMBINED TAMIL + ENGLISH):
+   - CLEAN TRANSPARENT TITLE OVERLAY (NO OPAQUE BOX): Pure transparent background directly over the 1080x1920 video frame with subtle 2px drop-shadow (0,0,0,180) for legibility.
+   - EXACT VERTICAL & HORIZONTAL CENTER PLACEMENT: BOTH the Tamil text and English translation combined (plus Reference) MUST BE PLACED EXACTLY AT THE GEOMETRIC CENTER OF THE SCREEN: horizontal center x=540 (50% W), vertical midpoint y=960 (50% H). Treat this as a CENTER-SCREEN TITLE CARD — NEVER as lower-third captions. Keep the lower 40% of the video frame (y: 1130–1920px) completely empty scenic space.
+   - SAFE CENTER BAND = x: 180-900px (Lateral safe-zone with >= 240px–360px side margins), y: 800-1120px centered around y=960 (exact midpoint of first & last line is always y=960).
+   - Balanced Font Scale & Generous Line Spacing (72px+ Gap): Tamil text is balanced slightly larger than English (48px Tamil vs 38px English base) with 72px–76px vertical spacing between Tamil lines so lines breathe and never crowd:
+     * 2-Line Tamil: Tamil at (540,846) & (540,922) Gold #FFC107 48px (76px gap), English at (540,998) White #F8F9FA 38px, Reference at (540,1074) Stone Gray #A8A29E 28px -> Exact Midpoint = (846+1074)/2 = 960.
+     * 3-Line Tamil + 2-Line English: Tamil at (540,800), (540,872), (540,944) (72px gap) Gold #FFC107, English at (540,1012) & (540,1062) White #F8F9FA, Reference at (540,1120) Stone Gray #A8A29E -> Exact Midpoint = (800+1120)/2 = 960.
+     * 3-Line Tamil + 1-Line English: Tamil at (540,816), (540,888), (540,960) (72px gap) Gold #FFC107, English at (540,1032) White #F8F9FA, Reference at (540,1104) Stone Gray #A8A29E -> Exact Midpoint = (816+1104)/2 = 960.
+   - Center horizontally at x=540 anchor="mm". All praises spread into 2 lines (or 3 lines for long verses) with balanced font size guaranteeing generous side margins (>= 240px left & right).
+   - Pillow HarfBuzz Shaping: language="ta", font Noto Sans Tamil Bold, anchor="mm"/"lm" so conjuncts (க்க, ப்ப, ண்ணு, த்தா, ஸ்தோ) form correctly (never raw ffmpeg drawtext).`;
 }
 
 /**
- * Formats the Subtitle / Text Overlay layout alone with Unicode specs for post-production compositing
+ * Formats the Center-Screen Text Overlay layout alone with Unicode specs for post-production compositing
  */
 export function formatSubtitlesOnlyText(b: ShortsBlueprint): string {
   const codepoints = getUnicodeCodepoints(b.subtitles.line1Tamil);
@@ -105,6 +105,7 @@ export function formatSubtitlesOnlyText(b: ShortsBlueprint): string {
     * Font Sizes: Tamil: ${typo.tamilFontSizeCanvas} | English: ${typo.englishFontSizeCanvas} | Ref: ${typo.refFontSizeCanvas}
     * Safe Bounds: ${typo.safeMarginWidth}
     * Wrapping: ${typo.recommendedWrap}
+    * Overlay Placement: Exact Geometric Center (50% Horizontal x=540, 50% Vertical y=960)
     * Overlay Background: 100% Clean Transparent (NO black background / NO dark plate)
     * Content Guarantee: ZERO LOSS OF OVERLAY CONTENT — complete praise text rendered without truncation.`;
 }
@@ -116,7 +117,7 @@ export function formatVideoPromptOnlyText(b: ShortsBlueprint): string {
   const codepoints = getUnicodeCodepoints(b.subtitles.line1Tamil);
   const typo = computeOverlayTypography(b.subtitles.line1Tamil, b.subtitles.line2English, b.subtitles.line3Ref);
 
-  return `📺 ON-SCREEN TEXT OVERLAY CONTENT & TRANSLATION (CLEAN TRANSPARENT • NO BLACK BACKGROUND):
+  return `📺 ON-SCREEN CENTERED TITLE OVERLAY (DEAD-CENTER AT 50% X, 50% Y • CLEAN TRANSPARENT • NOT LOWER-THIRD CAPTIONS):
 ${typo.promptAdditionDirective}
 - Verification: Exact Unicode codepoints: ${codepoints}
 
