@@ -1123,7 +1123,7 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                           Full-Phrase IPA Lock &amp; Crisp /s/ ("{vDetails.word}" → [ʋa.sa.nam]):
                         </div>
                         <p className="leading-relaxed">
-                          Target Word Lock: <em>"{vDetails.word}"</em> = <strong className="text-indigo-300 font-mono">{vDetails.wordIPA}</strong> using a crisp voiceless <strong>/s/</strong> (<em>{vDetails.latinSyllables}</em>, as in <em>sun</em> / <em>sand</em>) — strictly NOT <span className="line-through text-stone-400 font-mono">/tʃ/</span> (<em>ch</em>), <span className="line-through text-stone-400 font-mono">/z/</span>, or <span className="line-through text-stone-400 font-mono">/ʃ/</span> (<em>sh</em>). TTS buffer uses Grantha <strong>"{vDetails.ttsGranthaWord}"</strong> while subtitles retain literary <em>"{vDetails.word}"</em>.
+                          Keep native Tamil <strong>"{vDetails.word}"</strong> unchanged (do NOT rewrite with Grantha "ஸ") and pronounce cleanly as <strong className="text-indigo-300 font-mono">{vDetails.wordIPA}</strong> (<em>{vDetails.latinSyllables}</em>) with a crisp voiceless <strong>/s/</strong> (as in <em>sun</em> / <em>sand</em>) — strictly NOT <span className="line-through text-stone-400 font-mono">/ʃ/</span> (<em>sha</em>), <span className="line-through text-stone-400 font-mono">/tʃ/</span> (<em>ch</em>), or <span className="line-through text-stone-400 font-mono">/z/</span>.
                         </p>
                         <div className="bg-black/60 px-2 py-1 rounded border border-indigo-500/20 font-mono text-[10px] text-indigo-100 break-all">
                           Full-Phrase IPA: {vDetails.fullPhraseIPA}

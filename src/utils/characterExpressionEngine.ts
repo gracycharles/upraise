@@ -374,7 +374,7 @@ export function buildInculcatedVideoPrompt(blueprint: ShortsBlueprint, expr: Cha
     : '';
   const vasanamDetails = hasTamilVasanam(allTamilText) ? getVasanamPhoneticDetails(allTamilText) : null;
   const vasanamNote = vasanamDetails && !/ʋa\.sa\.nam/i.test(cleanVoice)
-    ? ` (Tamil Full-Phrase IPA Lock: ${vasanamDetails.fullPhraseIPA} — pronounce "${vasanamDetails.word}" strictly as ${vasanamDetails.wordIPA} using a crisp voiceless /s/ [${vasanamDetails.latinSyllables}], NEVER /tʃ/, /z/, or /ʃ/; TTS speech buffer uses "${vasanamDetails.ttsGranthaWord}" while subtitles retain literary "${vasanamDetails.word}").`
+    ? ` (Tamil Full-Phrase IPA Lock: ${vasanamDetails.fullPhraseIPA} — keep native Tamil "${vasanamDetails.word}" unchanged [do NOT alter with Grantha "ஸ"] and pronounce strictly as ${vasanamDetails.wordIPA} [${vasanamDetails.latinSyllables}] with a crisp voiceless /s/, NEVER "sha" [/ʃ/], /tʃ/, or /z/).`
     : '';
   const combinedPronunciationNotes = `${lovingkindnessNote}${ratchanyaNote}${iratchippuNote}${nirkumNote}${dhevaneNote}${neytrumNote}${sagalaNote}${mudivuVaraiNote}${zhaNote}${settrilirundhuNote}${naanNote}${vasanamNote}`;
   const voiceDirective = cleanVoice 
@@ -411,7 +411,7 @@ export function buildInculcatedVideoPrompt(blueprint: ShortsBlueprint, expr: Cha
     ? ' CRITICAL TAMIL PRONUNCIATION & LIP-SYNC MANDATE FOR "நான்" (/naːn/): Spoken voice and lip movements MUST articulate "நான்" strictly as /naːn/ ending in alveolar nasal "ன்" (tongue tip firmly touching alveolar ridge behind upper front teeth, mouth remaining open as in English "SUN", "MAN", "PEN"). FORBID lips from closing or sealing together as in "MOM" / "naam" (நாம்), which corrupts the singular "I" (Redeemer/Lord) into plural "we". Long aa + sharp N: Unnai NAAN Meettu Konden. Lip movements must visibly keep mouth open with tongue-tip contact during "நான்".'
     : '';
   const vasanamMandate = vasanamDetails
-    ? ` CRITICAL TAMIL FULL-PHRASE IPA LOCK & CRISP /s/ MANDATE FOR "${vasanamDetails.word}" ([ʋa.sa.nam]): Full-phrase IPA is strictly locked as ${vasanamDetails.fullPhraseIPA}. "${vasanamDetails.word}" MUST be pronounced as ${vasanamDetails.wordIPA} (${vasanamDetails.latinSyllables}) using a crisp voiceless /s/ (as in "sun"/"sand"), NEVER affricate /tʃ/ ("ch"), NEVER voiced /z/, and NEVER postalveolar /ʃ/ ("sh"). TTS speech synthesis buffer MUST use Grantha "${vasanamDetails.ttsGranthaWord}" (Grantha "ஸ" = crisp /s/) to prevent intervocalic "ச" mispronunciation, while on-screen subtitles retain authentic literary "${vasanamDetails.word}".`
+    ? ` CRITICAL TAMIL FULL-PHRASE IPA LOCK & CRISP /s/ MANDATE FOR "${vasanamDetails.word}" ([ʋa.sa.nam]): Full-phrase IPA is strictly locked as ${vasanamDetails.fullPhraseIPA}. Keep the spoken Tamil script strictly as authentic native "${vasanamDetails.word}" (do NOT rewrite with Grantha "ஸ", which triggers an unwanted "sha" /ʃ/ sound). Pronounce "${vasanamDetails.word}" cleanly as ${vasanamDetails.wordIPA} (${vasanamDetails.latinSyllables}) with a crisp voiceless /s/ (just clean vasanam as in "sun"/"sand"), strictly NOT "sha" (/ʃ/), NOT "cha" (/tʃ/), and NOT "za" (/z/).`
     : '';
   return `A cinematic 8k video set in 30 AD Judea/Galilee (9:16 vertical portrait, 10s native duration). 
 HISTORICAL BIBLICAL CHARACTER: ${blueprint.character}. 
