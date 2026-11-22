@@ -171,9 +171,9 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   },
   "62": {
     "cameraFraming": "Medium-Wide Three-Quarter Framing (Waist-up capturing dynamic physical interaction with the historic environment)",
-    "gesturePosture": "Lowering a clay water jar by braided hemp rope into the ancient limestone well, lifting cool water with refreshed gratitude.",
+    "gesturePosture": "Standing in the warm sunlit stone courtyard beside an olive tree, extending a simple earthenware cup gently forward in selfless hospitality while lifting an affectionate gaze heavenward.",
     "expression": "Deep, contemplative serenity; brow smoothed of all worldly burdens; tranquil, joyful expression of unwavering trust.",
-    "sceneAtmosphere": "Dignified courtyard shaded by ancient olive trees, soft dappled sunlight playing across coarse linen garments.",
+    "sceneAtmosphere": "Dignified stone courtyard in Emmaus shaded by ancient olive trees, soft dappled afternoon sunlight playing across coarse linen garments.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, how great is His goodness!\" with biblical authenticity and active historical staging."
   },
   "63": {
@@ -710,9 +710,9 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   },
   "139": {
     "cameraFraming": "High-Angle Downward Tilt (Camera descending gently from above into sunlit courtyard or waterside)",
-    "gesturePosture": "Lowering a clay water jar by braided hemp rope into the ancient limestone well, lifting cool water with refreshed gratitude.",
+    "gesturePosture": "Seated reverently on a weathered limestone step beneath an olive tree, lifting both open palms toward the warm sky in sincere, unhurried spoken prayer.",
     "expression": "Awe-struck gaze with wide, luminous eyes witnessing the grandeur of divine faithfulness; quiet, reverent smile.",
-    "sceneAtmosphere": "Warm amber golden hour lighting, long atmospheric shadows across weathered limestone, soft evening wind.",
+    "sceneAtmosphere": "Warm amber golden hour lighting in a quiet Bethany courtyard, long atmospheric shadows across weathered limestone, soft evening wind.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, The Lord is nigh unto all them that call upon Him, to all that call upon Him in truth\" with biblical authenticity and active historical staging."
   },
   "140": {
@@ -892,9 +892,9 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   },
   "165": {
     "cameraFraming": "Wide Environmental Establishing Shot (9:16 full-body framing showcasing character within historic biblical landscape)",
-    "gesturePosture": "Lowering a clay water jar by braided hemp rope into the ancient limestone well, lifting cool water with refreshed gratitude.",
+    "gesturePosture": "Standing amidst sunlit desert wildflowers beside a glistening shallow desert stream, lifting both open arms toward the clear sky in awe of God's outpouring Spirit.",
     "expression": "Vibrant, energized countenance; alert eyes shining with hope and spiritual conviction; dignified and joyful demeanor.",
-    "sceneAtmosphere": "Sweeping panoramic view of rolling Judean hills, soft breezes rustling golden grasses under an expansive azure sky.",
+    "sceneAtmosphere": "Sweeping panoramic view of blooming Judean hills with clear shallow rivulets, soft breezes rustling green grasses under an expansive azure sky.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, For I will pour water upon him that is thirsty, and floods upon the dry ground: I will pour My Spirit upon thy seed\" with biblical authenticity and active historical staging."
   },
   "166": {
@@ -920,9 +920,9 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   },
   "169": {
     "cameraFraming": "Low-Angle Heroic / Reverent Shot (Looking upward as golden dawn sky illuminates the character)",
-    "gesturePosture": "Lowering a clay water jar by braided hemp rope into the ancient limestone well, lifting cool water with refreshed gratitude.",
+    "gesturePosture": "Standing steadfast upon rocky shoreline stones overlooking the Sea of Galilee, extending one steady hand outward and lifting head upward in triumphant gratitude for God's upholding right hand.",
     "expression": "Awe-struck gaze with wide, luminous eyes witnessing the grandeur of divine faithfulness; quiet, reverent smile.",
-    "sceneAtmosphere": "Fresh lakeside breeze carrying scent of fresh water, morning ripples catching dazzling diamond sun glints.",
+    "sceneAtmosphere": "Fresh lakeside breeze over the Sea of Galilee, morning ripples catching dazzling diamond sun glints under parting clouds.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, Thou hast also given me the shield of Thy salvation: and Thy right hand hath holden me up\" with biblical authenticity and active historical staging."
   },
   "170": {
@@ -1011,10 +1011,10 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   },
   "182": {
     "cameraFraming": "Wide Environmental Establishing Shot (9:16 full-body framing showcasing character within historic biblical landscape)",
-    "gesturePosture": "Lowering a clay water jar by braided hemp rope into the ancient limestone well, lifting cool water with refreshed gratitude.",
+    "gesturePosture": "Standing peacefully beside a clear, naturally bubbling desert spring emerging gently over smooth sandstone at ground level, lifting open palms upward in reverent thanksgiving.",
     "expression": "Deep, contemplative serenity; brow smoothed of all worldly burdens; tranquil, joyful expression of unwavering trust.",
-    "sceneAtmosphere": "Fresh lakeside breeze carrying scent of fresh water, morning ripples catching dazzling diamond sun glints.",
-    "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, Spring up, O well; sing ye unto it: Praise to You, O Fountain of Living Water\" with biblical authenticity and active historical staging."
+    "sceneAtmosphere": "Sunlit Moab desert oasis where crystal-clear natural spring water shimmers over smooth sand and desert stones beneath bright azure skies.",
+    "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, O Fountain of Living Water\" with biblical authenticity and active historical staging."
   },
   "183": {
     "cameraFraming": "Low-Angle Heroic / Reverent Shot (Looking upward as golden dawn sky illuminates the character)",
@@ -1088,9 +1088,9 @@ export const VIDEO_VARIATIONS_40_TO_300: Record<number, VideoVariationItem> = {
   },
   "193": {
     "cameraFraming": "Low-Angle Heroic / Reverent Shot (Looking upward as golden dawn sky illuminates the character)",
-    "gesturePosture": "Lowering a clay water jar by braided hemp rope into the ancient limestone well, lifting cool water with refreshed gratitude.",
+    "gesturePosture": "Standing firmly upon dry river stones along the banks of the Jordan River, holding a coarse sheepskin prophet's mantle poised forward as sunlit waters part cleanly on either side.",
     "expression": "Awe-struck gaze with wide, luminous eyes witnessing the grandeur of divine faithfulness; quiet, reverent smile.",
-    "sceneAtmosphere": "Fresh lakeside breeze carrying scent of fresh water, morning ripples catching dazzling diamond sun glints.",
+    "sceneAtmosphere": "Banks of the Jordan River near Jericho bathed in bright dawn light, gentle morning breeze rippling coarse linen robes.",
     "theologicalMood": "Reverent adoration of the Lord celebrating \"Praise to You, Where is the Lord God of Elijah? And when he also had smitten the waters, they parted hither and thither\" with biblical authenticity and active historical staging."
   },
   "194": {
