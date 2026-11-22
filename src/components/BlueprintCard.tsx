@@ -1135,9 +1135,12 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                     <div className="p-2 rounded bg-sky-950/60 border border-sky-500/40 text-sky-200 text-[11px] space-y-1.5">
                       <div className="flex items-center gap-1.5 text-sky-300 font-bold uppercase tracking-wide">
                         <span className="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
-                        Tamil IPA &amp; Articulation Lock ("ஊற்றுத்தண்ணீரே"):
+                        Tamil Transliteration &amp; IPA Lock ("ஊற்றுத்தண்ணீரே" → Ootruthaṇṇeerē):
                       </div>
                       <div className="flex flex-wrap gap-2 text-[10px] font-mono">
+                        <span className="bg-sky-500/20 px-1.5 py-0.5 rounded border border-sky-400/50 text-sky-100 font-bold">
+                          Standard / Phonetic: Ootruthaṇṇeerē
+                        </span>
                         <span className="bg-black/50 px-1.5 py-0.5 rounded border border-sky-500/30 text-sky-100">
                           Phonetic IPA: /uːrːɯt̪ːɐɳːiːreː/
                         </span>
@@ -1146,10 +1149,10 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                         </span>
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-[10px] bg-black/40 p-1.5 rounded border border-sky-500/20">
-                        <div><strong>ஊற்</strong> (<em>ooṟ</em>): <code className="text-sky-300">/uːrː/</code> or <code className="text-sky-300">[uːtr]</code> — long <em>oo</em> + retroflex trill/stop</div>
-                        <div><strong>றுத்</strong> (<em>ṟut</em>): <code className="text-sky-300">/rːɯt̪/</code> — short <em>/ɯ/</em> + dental <em>t</em> on upper teeth</div>
+                        <div><strong>ஊற்</strong> (<em>Oot</em> / <em>ooṟ</em>): <code className="text-sky-300">/uːrː/</code> or <code className="text-sky-300">[uːtr]</code> — long <em>oo</em> + retroflex trill/stop</div>
+                        <div><strong>றுத்</strong> (<em>rut</em> / <em>ṟut</em>): <code className="text-sky-300">/rːɯt̪/</code> — short <em>/ɯ/</em> + dental <em>t</em> on upper teeth</div>
                         <div><strong>தண்</strong> (<em>thaṇ</em>): <code className="text-sky-300">/t̪ɐɳ/</code> — dental <em>th</em> + short <em>a</em> + retroflex <em>ṇ</em></div>
-                        <div><strong>ணீ</strong> (<em>ṇī</em>): <code className="text-sky-300">/ɳiː/</code> — retroflex <em>ṇ</em> + long <em>ee</em> (like <em>see</em>)</div>
+                        <div><strong>ணீ</strong> (<em>ṇee</em> / <em>ṇī</em>): <code className="text-sky-300">/ɳiː/</code> — retroflex <em>ṇ</em> + long <em>ee</em> (like <em>see</em>)</div>
                         <div className="sm:col-span-2"><strong>ரே</strong> (<em>rē</em>): <code className="text-sky-300">/reː/</code> — flapped/trilled <em>r</em> + clean steady pure long <em>/eː/</em> (like <em>say/day</em>)</div>
                       </div>
                       <p className="leading-relaxed text-[10px] text-sky-200/90">

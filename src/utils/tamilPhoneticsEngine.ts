@@ -277,25 +277,28 @@ export function hasOottrutthanneere(text: string): boolean {
   return /ஊற்றுத்தண்ணீரே/.test(text);
 }
 
+export const OOTRUTHANNEERE_TRANSLITERATION = 'Ootruthaṇṇeerē';
+
 /**
- * Generates the exact phonetic, narrow/allophonic IPA, syllable-by-syllable breakdown,
- * and Tamil articulation mandate for ஊற்றுத்தண்ணீரே (/uːrːɯt̪ːɐɳːiːreː/ | [uːtrɯt̪ːɐɳːiːreː]).
+ * Generates the exact transliteration (Ootruthaṇṇeerē), phonetic & narrow/allophonic IPA,
+ * syllable-by-syllable breakdown, and Tamil articulation mandate for ஊற்றுத்தண்ணீரே.
  */
 export function getOottrutthanneerePronunciationMandate(text: string): string {
   if (!hasOottrutthanneere(text)) return '';
 
-  return `\n- CRITICAL TAMIL IPA & ARTICULATION MANDATE ("ஊற்றுத்தண்ணீரே" / /uːrːɯt̪ːɐɳːiːreː/ | [uːtrɯt̪ːɐɳːiːreː]):
+  return `\n- CRITICAL TAMIL TRANSLITERATION, IPA & ARTICULATION MANDATE ("ஊற்றுத்தண்ணீரே" / ${OOTRUTHANNEERE_TRANSLITERATION} | /uːrːɯt̪ːɐɳːiːreː/ | [uːtrɯt̪ːɐɳːiːreː]):
+  • Standard / Phonetic (Everyday) Transliteration: ${OOTRUTHANNEERE_TRANSLITERATION} (Oot-ru-thaṇ-ṇee-rē)
   • Phonetic IPA: /uːrːɯt̪ːɐɳːiːreː/ | Narrow/Allophonic IPA: [uːtrɯt̪ːɐɳːiːreː]
-  • Syllable-by-Syllable Breakdown:
-    1. ஊற் (ooṟ) → /uːrː/ or [uːtr]: Long "oo" (like "boot"), followed by a strong retroflex trill/stop (ṟ).
-    2. றுத் (ṟut) → /rːɯt̪/: Short unrounded back vowel /ɯ/ + dental "t" (tongue against upper teeth).
+  • Syllable-by-Syllable Breakdown (${OOTRUTHANNEERE_TRANSLITERATION}):
+    1. ஊற் (Oot / ooṟ) → /uːrː/ or [uːtr]: Long "oo" (like "boot"), followed by a strong retroflex trill/stop (ṟ).
+    2. றுத் (ru+t / ṟut) → /rːɯt̪/: Short unrounded back vowel /ɯ/ + dental "t" (tongue against upper teeth).
     3. தண் (thaṇ) → /t̪ɐɳ/: Dental "th" + short "a" (like "uh/a" in "about") + retroflex ṇ (tongue curled back).
-    4. ணீ (ṇī) → /ɳiː/: Retroflex ṇ + long "ee" (like "see").
+    4. ணீ (ṇee / ṇī) → /ɳiː/: Retroflex ṇ + long "ee" (like "see").
     5. ரே (rē) → /reː/: Flapped/trilled "r" + long "ay" (like "say", held steady without a strong glide).
   • Key Tamil Articulation Tips:
     - ஊற் / று (ṟṟ): Pronounced as a geminated trill /rː/ or with a [tr]-like release [uːtrɯ] in careful speech — curl tongue back slightly and tap/trill firmly rather than using an English "r".
     - த் (th): Keep tongue on the back of the upper front teeth (dental), closer to a soft "th" or unaspirated "t" rather than English "th" in "think".
     - தண் / ணீ (ṇ): Curl tip of tongue back toward the roof of the mouth for retroflex nasal ṇ.
     - ரே (rē): End on a clean, pure long "e" (/eː/), similar to the vowel in "day" held steady.
-  • Spoken Cadence: "ஊற்றுத்தண்ணீரே [natural reverent pause] ஸ்தோத்திரம்" (/uːrːɯt̪ːɐɳːiːreː st̪oːt̪.t̪i.ɾam/).`;
+  • Spoken Cadence: "ஊற்றுத்தண்ணீரே [natural reverent pause] ஸ்தோத்திரம்" (${OOTRUTHANNEERE_TRANSLITERATION} [pause] sthōththiram | /uːrːɯt̪ːɐɳːiːreː st̪oːt̪.t̪i.ɾam/).`;
 }

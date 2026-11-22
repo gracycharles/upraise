@@ -786,7 +786,7 @@ export const BLUEPRINTS_151_TO_200: ShortsBlueprint[] = [
     character: "Wilderness pilgrim standing beside a naturally bubbling oasis spring with hands lifted in reverent spoken thanksgiving",
     location: "Beer oasis in the desert of Moab where clear spring water shimmers naturally over smooth golden desert stones",
     videoPrompt: "A cinematic 8k video set in biblical times. Beside golden desert sands, crystal-clear natural spring water bubbles gently out of smooth ground-level sandstone into a tranquil oasis pool (no ropes, no buckets, no drawing from a deep well). A pilgrim in coarse-weave earthen linen stands peacefully beside the shimmering spring, lifting open hands in heartfelt spoken praise under warm sunlight. Photorealistic desert oasis. --ar 9:16 --v 6.0",
-    voiceProfile: "Joyful, warm, reverent speaking voice reading clearly (strictly spoken reading only, zero singing).",
+    voiceProfile: "Joyful, warm, reverent speaking voice reading clearly (\"ஊற்றுத்தண்ணீரே\" / Ootruthaṇṇeerē; strictly spoken reading only, zero singing).",
     audioScript: "ஊற்றுத்தண்ணீரே ஸ்தோத்திரம். ... Spring up, O well; sing ye unto it!",
     backgroundAudio: "Sparkling water sounds with celebratory tambourine and acoustic harp in G-major at -18dB.",
     subtitles: {
