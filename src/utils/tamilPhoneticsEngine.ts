@@ -15,7 +15,7 @@ export const KNOWN_ZHA_PHONETICS: Record<string, string> = {
   'அழைக்கிறார்': 'a-zhaik-ki-raar [deep retroflex /ɻ/]',
   'அழைத்தவரே': 'a-ZHAITH-tha-va-rey [where ZHAI = /ɻai/, retroflex /ɻ/, NOT a-laith-tha-va-re]',
   'உயிர்த்தெழுந்தவரே': 'u-yir-th-tha-e-ZHU-n-tha-va-re-e [where ZHU = /ɻu/, IPA: ujirt̪t̪eɻun̪d̪aʋareː with strong retroflex — hear at 1-3s as ezhundha (eɻun̪d̪a) NOT elundha]',
-  'ஊழியக்காரரின்': 'oo-ZHI-yak-kaa-ra-rin [where ZHI = /ɻi/, retroflex /ɻ/, NOT oo-li-yak-kaa-ra-rin]',
+  'ஊழியக்காரரின்': 'oo-li-ya-kkaa-ra-rin / oo-zhi-ya-kkaa-ra-rin [ழி (li / zhi) = Tamil retroflex approximant /ɻ/: curl tongue tip slightly back toward roof of mouth without touching it, soft American r / dark l with a "zh" hint; க்க = doubled strong kaa; ர = light tapped ra; ரி = short ri; ன் = final n]',
   'ஊழியக்காரருக்கு': 'oo-ZHI-yak-kaa-ruk-ku [where ZHI = /ɻi/, retroflex /ɻ/, NOT oo-li-yak-kaa-ruk-ku]',
   'ஊழியக்காரரை': 'oo-ZHI-yak-kaa-ra-rai [where ZHI = /ɻi/, retroflex /ɻ/, NOT oo-li-yak-kaa-ra-rai]',
   'ஊழியக்காரர்மேல்': 'oo-ZHI-yak-kaa-rar-meyl [where ZHI = /ɻi/, retroflex /ɻ/, NOT oo-li-yak-kaa-rar-mel]',
@@ -301,4 +301,35 @@ export function getOottrutthanneerePronunciationMandate(text: string): string {
     - தண் / ணீ (ṇ): Curl tip of tongue back toward the roof of the mouth for retroflex nasal ṇ.
     - ரே (rē): End on a clean, pure long "e" (/eː/), similar to the vowel in "day" held steady.
   • Spoken Cadence: "ஊற்றுத்தண்ணீரே [natural reverent pause] ஸ்தோத்திரம்" (${OOTRUTHANNEERE_TRANSLITERATION} [pause] sthōththiram | /uːrːɯt̪ːɐɳːiːreː st̪oːt̪.t̪i.ɾam/).`;
+}
+
+/**
+ * Checks if text contains ஊழியக்காரரின் ("of the servant" / "of the worker/minister")
+ */
+export function hasOozhiyakkaararin(text: string): boolean {
+  return /ஊழியக்காரரின்/.test(text);
+}
+
+/**
+ * Generates the complete syllable-by-syllable pronunciation guide and word structure
+ * mandate for ஊழியக்காரரின் (oo-li-ya-kkaa-ra-rin / oo-zhi-ya-kkaa-ra-rin).
+ */
+export function getOozhiyakkaararinPronunciationMandate(text: string): string {
+  if (!hasOozhiyakkaararin(text)) return '';
+
+  return `\n- CRITICAL TAMIL PRONUNCIATION & WORD STRUCTURE MANDATE ("ஊழியக்காரரின்" / oo-li-ya-kkaa-ra-rin or oo-zhi-ya-kkaa-ra-rin):
+  • Meaning: "of the servant" or "of the worker/minister".
+  • Pronunciation Guide: oo-li-ya-kkaa-ra-rin (or oo-zhi-ya-kkaa-ra-rin).
+  • Syllable-by-Syllable Breakdown:
+    1. ஊ (oo): Long "oo" sound, like the "oo" in "boot".
+    2. ழி (li / zhi): Distinctive retroflex approximant (/ɻ/) unique to Tamil — curl the tip of your tongue slightly back toward the roof of your mouth without touching it, similar to a soft American "r" or a dark "l" with a "zh" hint.
+    3. ய (ya): Like "ya" in "yard".
+    4. க்க (kkaa): A doubled, strong "kaa" sound, like "car" with a long "aa".
+    5. ர (ra): A light tapped "ra" (like a quick "r" in "butter").
+    6. ரி (ri): Short "ri", like "ri" in "rib".
+    7. ன் (n): Final "n" sound, like the "n" in "sun".
+  • Word Structure:
+    - ஊழியம் (oo-li-yam): Service, ministry, or work.
+    - காரர் (kaa-rar): One who does/performs something (a doer, worker, or servant).
+    - இன் (in): A genitive suffix meaning "of" or "belonging to."`;
 }
