@@ -441,3 +441,33 @@ ${syllableLines}
   • Word Structure:
 ${structureLines}`;
 }
+
+/**
+ * Checks if text contains ஜூவாலைகளாக்குகிறவரே ("O One who makes [His ministers/servants] flames of fire")
+ */
+export function hasJooVaaLaiGaLaakKuGiRaVaRay(text: string): boolean {
+  return /ஜூவாலைகளாக்குகிறவரே/.test(text);
+}
+
+/**
+ * Generates the complete syllable-by-syllable pronunciation guide and meaning mandate
+ * for ஜூவாலைகளாக்குகிறவரே (Joo-vaa-lai-ga-laak-ku-gi-ra-va-ray).
+ */
+export function getJooVaaLaiGaLaakKuGiRaVaRayPronunciationMandate(text: string): string {
+  if (!hasJooVaaLaiGaLaakKuGiRaVaRay(text)) return '';
+
+  return `\n- CRITICAL TAMIL PRONUNCIATION MANDATE ("ஜூவாலைகளாக்குகிறவரே" / Joo-vaa-lai-ga-laak-ku-gi-ra-va-ray):
+  • Pronunciation Guide: Joo-vaa-lai-ga-laak-ku-gi-ra-va-ray
+  • Meaning: "O One who makes (His ministers/servants) flames of fire" (poetic/biblical Tamil address).
+  • Syllable-by-Syllable Breakdown:
+    1. ஜூ (Joo) – like the "joo" in jukebox.
+    2. வா (vaa) – like "vah" (long a).
+    3. லை (lai) – like "lie".
+    4. க (ga) – soft "ga" (in the middle of a word, க sounds like a soft g or h).
+    5. ளாக் (laak) – retroflex "laak" (curl the tip of your tongue slightly back against the roof of your mouth for the ள sound, followed by a hard k).
+    6. கு (ku) – short "koo" (like the oo in book).
+    7. கி (gi) – soft "gi" (like gi in give, or very softly like hi).
+    8. ற (ra) – rolled/trilled "ra" (similar to a Spanish single r).
+    9. வ (va) – "va" (like vuh).
+    10. ரே (ray) – like "ray".`;
+}

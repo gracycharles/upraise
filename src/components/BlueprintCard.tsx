@@ -41,7 +41,7 @@ import {
 import { getScriptureVerification } from '../data/scriptureVerifications';
 import { computeOverlayTypography } from '../utils/overlayTypographyEngine';
 import { downloadAlphaOverlayPng } from '../utils/alphaOverlayGenerator';
-import { hasTamilZha, extractZhaPhoneticGuide, hasSettrilirundhu, hasTamilNaan, hasTamilVasanam, getVasanamPhoneticDetails, hasOottrutthanneere, getOozhiyakkaararDetails } from '../utils/tamilPhoneticsEngine';
+import { hasTamilZha, extractZhaPhoneticGuide, hasSettrilirundhu, hasTamilNaan, hasTamilVasanam, getVasanamPhoneticDetails, hasOottrutthanneere, getOozhiyakkaararDetails, hasJooVaaLaiGaLaakKuGiRaVaRay } from '../utils/tamilPhoneticsEngine';
 
 interface BlueprintCardProps {
   blueprint: ShortsBlueprint;
@@ -1193,6 +1193,34 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                       </div>
                     );
                   })()}
+                  {hasJooVaaLaiGaLaakKuGiRaVaRay(`${blueprint.tamilText} ${blueprint.audioScript} ${blueprint.subtitles?.line1Tamil}`) && (
+                    <div className="p-2 rounded bg-orange-950/60 border border-orange-500/40 text-orange-200 text-[11px] space-y-1.5">
+                      <div className="flex items-center gap-1.5 text-orange-300 font-bold uppercase tracking-wide">
+                        <span className="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                        Tamil Pronunciation Guide ("ஜூவாலைகளாக்குகிறவரே"):
+                      </div>
+                      <div className="flex flex-wrap gap-2 text-[10px] font-mono">
+                        <span className="bg-orange-500/20 px-1.5 py-0.5 rounded border border-orange-400/50 text-orange-100 font-bold">
+                          Joo-vaa-lai-ga-laak-ku-gi-ra-va-ray
+                        </span>
+                        <span className="bg-black/50 px-1.5 py-0.5 rounded border border-orange-500/30 text-orange-100">
+                          Meaning: "O One who makes (His ministers/servants) flames of fire"
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-[10px] bg-black/40 p-1.5 rounded border border-orange-500/20">
+                        <div><strong>ஜூ</strong> (<em>Joo</em>): Like the <em>"joo"</em> in <em>jukebox</em></div>
+                        <div><strong>வா</strong> (<em>vaa</em>): Like <em>"vah"</em> (long <em>a</em>)</div>
+                        <div><strong>லை</strong> (<em>lai</em>): Like <em>"lie"</em></div>
+                        <div><strong>க</strong> (<em>ga</em>): Soft <em>"ga"</em> (mid-word, <em>க</em> sounds like a soft <em>g</em> or <em>h</em>)</div>
+                        <div><strong>ளாக்</strong> (<em>laak</em>): Retroflex <em>"laak"</em> (curl tongue tip slightly back against roof of mouth for <em>ள</em>, followed by hard <em>k</em>)</div>
+                        <div><strong>கு</strong> (<em>ku</em>): Short <em>"koo"</em> (like the <em>oo</em> in <em>book</em>)</div>
+                        <div><strong>கி</strong> (<em>gi</em>): Soft <em>"gi"</em> (like <em>gi</em> in <em>give</em>, or softly like <em>hi</em>)</div>
+                        <div><strong>ற</strong> (<em>ra</em>): Rolled/trilled <em>"ra"</em> (similar to a Spanish single <em>r</em>)</div>
+                        <div><strong>வ</strong> (<em>va</em>): <em>"va"</em> (like <em>vuh</em>)</div>
+                        <div><strong>ரே</strong> (<em>ray</em>): Like <em>"ray"</em></div>
+                      </div>
+                    </div>
+                  )}
                   <div>
                     <strong className="text-emerald-200 font-semibold">CADENCE & PAUSE DIRECTIVE:</strong> In spoken Tamil audio, introduce a distinct, reverent pause (as if an unwritten comma exists) immediately prior to speaking <em>"ஸ்தோத்திரம்"</em>. The on-screen text overlay retains the clean biblical script without an extra comma, while the audio delivery breathes reverently.
                   </div>
