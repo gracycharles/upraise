@@ -1,6 +1,6 @@
 import { ShortsBlueprint, CharacterExpression } from '../types';
 import { VIDEO_VARIATIONS_40_TO_300 } from '../data/videoVariations';
-import { hasTamilZha, extractZhaPhoneticGuide, hasSettrilirundhu, hasTamilNaan, hasTamilVasanam, getVasanamPhoneticDetails, hasOottrutthanneere, hasOozhiyakkaararin } from './tamilPhoneticsEngine';
+import { hasTamilZha, extractZhaPhoneticGuide, hasSettrilirundhu, hasTamilNaan, hasTamilVasanam, getVasanamPhoneticDetails, hasOottrutthanneere, getOozhiyakkaararDetails } from './tamilPhoneticsEngine';
 
 const CAMERA_SHOT_ROTATIONS = [
   "Low-Angle Heroic / Reverent Shot (Looking upward as golden dawn sky illuminates the character)",
@@ -380,9 +380,9 @@ export function buildInculcatedVideoPrompt(blueprint: ShortsBlueprint, expr: Cha
   const oottrutthanneereNote = hasOottrutthanneereCheck && !/uːrːɯt̪ːɐɳːiːreː/i.test(cleanVoice)
     ? ' (Tamil Transliteration & IPA Lock: "ஊற்றுத்தண்ணீரே" [Standard / Phonetic: Ootruthaṇṇeerē] — pronounce strictly as phonetic /uːrːɯt̪ːɐɳːiːreː/ [narrow: uːtrɯt̪ːɐɳːiːreː]; Oot-ru-thaṇ-ṇee-rē: ஊற் /uːrː/ [uːtr] + றுத் /rːɯt̪/ + தண் /t̪ɐɳ/ + ணீ /ɳiː/ + ரே /reː/; geminated trill/tap ṟṟ [NOT English r], dental th/t on upper teeth, retroflex ṇ with tongue curled back, pure steady long ē /eː/).'
     : '';
-  const hasOozhiyakkaararinCheck = hasOozhiyakkaararin(allTamilText);
-  const oozhiyakkaararinNote = hasOozhiyakkaararinCheck && !/oo-li-ya-kkaa-ra-rin/i.test(cleanVoice)
-    ? ' (Tamil Pronunciation & Structure Guide for "ஊழியக்காரரின்" ["of the servant" / "of the worker/minister"]: pronounced roughly as oo-li-ya-kkaa-ra-rin or oo-zhi-ya-kkaa-ra-rin — ஊ [oo like boot] + ழி [li/zhi, Tamil retroflex approximant: curl tongue tip slightly back toward roof of mouth without touching it, soft American r or dark l with a "zh" hint] + ய [ya like yard] + க்க [kkaa doubled strong kaa like car with long aa] + ர [light tapped ra like quick r in butter] + ரி [short ri like rib] + ன் [final n like sun]; structure: ஊழியம் [oo-li-yam: service/ministry/work] + காரர் [kaa-rar: doer/worker/servant] + இன் [in: genitive "of"]).'
+  const oozhiyakkaararDetails = getOozhiyakkaararDetails(allTamilText);
+  const oozhiyakkaararinNote = oozhiyakkaararDetails && !/oo-li-ya-kkaa/i.test(cleanVoice)
+    ? ` (Tamil Pronunciation & Structure Guide for "${oozhiyakkaararDetails.word}" [${oozhiyakkaararDetails.meaning}]: pronounced roughly as ${oozhiyakkaararDetails.pronunciationPrimary} or ${oozhiyakkaararDetails.pronunciationAlt} — ${oozhiyakkaararDetails.syllables.map(s => `${s.tamil} [${s.translit}: ${s.description.replace(/\.$/, '')}]`).join(' + ')}; structure: ${oozhiyakkaararDetails.structure.map(st => `${st.tamil} [${st.translit}: ${st.description.replace(/\.$/, '')}]`).join(' + ')}).`
     : '';
   const combinedPronunciationNotes = `${lovingkindnessNote}${ratchanyaNote}${iratchippuNote}${nirkumNote}${dhevaneNote}${neytrumNote}${sagalaNote}${mudivuVaraiNote}${zhaNote}${settrilirundhuNote}${naanNote}${vasanamNote}${oottrutthanneereNote}${oozhiyakkaararinNote}`;
   const voiceDirective = cleanVoice 
@@ -424,8 +424,8 @@ export function buildInculcatedVideoPrompt(blueprint: ShortsBlueprint, expr: Cha
   const oottrutthanneereMandate = hasOottrutthanneereCheck
     ? ' CRITICAL TAMIL TRANSLITERATION, IPA & ARTICULATION MANDATE FOR "ஊற்றுத்தண்ணீரே" (Standard / Phonetic: Ootruthaṇṇeerē | /uːrːɯt̪ːɐɳːiːreː/ | [uːtrɯt̪ːɐɳːiːreː]): Spoken audio and lip-sync MUST articulate "ஊற்றுத்தண்ணீரே" (Ootruthaṇṇeerē / Oot-ru-thaṇ-ṇee-rē) syllable by syllable as ஊற் (Oot / ooṟ /uːrː/ or [uːtr]: long oo + strong retroflex trill/stop) + றுத் (rut / ṟut /rːɯt̪/: short /ɯ/ + dental t on upper teeth) + தண் (thaṇ /t̪ɐɳ/: dental th + short a + retroflex ṇ curled back) + ணீ (ṇee / ṇī /ɳiː/: retroflex ṇ + long ee) + ரே (rē /reː/: flapped/trilled r + clean steady pure long /eː/). Double ṟṟ must have a geminated trill /rː/ or [tr]-like release [uːtrɯ] (NEVER English r); த் must touch upper front teeth (dental, NOT English th in "think"); ண்/ணீ must curl tongue back to roof of mouth; ரே holds steady pure /eː/.'
     : '';
-  const oozhiyakkaararinMandate = hasOozhiyakkaararinCheck
-    ? ' CRITICAL TAMIL PRONUNCIATION & WORD STRUCTURE MANDATE FOR "ஊழியக்காரரின்" (oo-li-ya-kkaa-ra-rin / oo-zhi-ya-kkaa-ra-rin; "of the servant" or "of the worker/minister"): Spoken audio and lip-sync MUST articulate "ஊழியக்காரரின்" syllable by syllable as ஊ (oo: long "oo" like "boot") + ழி (li / zhi: Tamil retroflex approximant /ɻ/ — curl tongue tip slightly back toward roof of mouth without touching it, similar to a soft American r or dark l with a "zh" hint) + ய (ya: like ya in "yard") + க்க (kkaa: doubled, strong kaa like car with long aa) + ர (ra: light tapped ra like quick r in "butter") + ரி (ri: short ri like "rib") + ன் (n: final n like "sun"). Word structure: ஊழியம் (oo-li-yam: service, ministry, or work) + காரர் (kaa-rar: one who does/performs something — doer, worker, or servant) + இன் (in: genitive suffix meaning "of" or "belonging to").'
+  const oozhiyakkaararinMandate = oozhiyakkaararDetails
+    ? ` CRITICAL TAMIL PRONUNCIATION & WORD STRUCTURE MANDATE FOR "${oozhiyakkaararDetails.word}" (${oozhiyakkaararDetails.pronunciationPrimary} / ${oozhiyakkaararDetails.pronunciationAlt}; ${oozhiyakkaararDetails.meaning}): Spoken audio and lip-sync MUST articulate "${oozhiyakkaararDetails.word}" syllable by syllable as ${oozhiyakkaararDetails.syllables.map(s => `${s.tamil} (${s.translit}: ${s.description.replace(/\.$/, '')})`).join(' + ')}. Word structure: ${oozhiyakkaararDetails.structure.map(st => `${st.tamil} (${st.translit}: ${st.description.replace(/\.$/, '')})`).join(' + ')}.`
     : '';
   return `A cinematic 8k video set in 30 AD Judea/Galilee (9:16 vertical portrait, 10s native duration). 
 HISTORICAL BIBLICAL CHARACTER: ${blueprint.character}. 

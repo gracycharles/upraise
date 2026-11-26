@@ -41,7 +41,7 @@ import {
 import { getScriptureVerification } from '../data/scriptureVerifications';
 import { computeOverlayTypography } from '../utils/overlayTypographyEngine';
 import { downloadAlphaOverlayPng } from '../utils/alphaOverlayGenerator';
-import { hasTamilZha, extractZhaPhoneticGuide, hasSettrilirundhu, hasTamilNaan, hasTamilVasanam, getVasanamPhoneticDetails, hasOottrutthanneere, hasOozhiyakkaararin } from '../utils/tamilPhoneticsEngine';
+import { hasTamilZha, extractZhaPhoneticGuide, hasSettrilirundhu, hasTamilNaan, hasTamilVasanam, getVasanamPhoneticDetails, hasOottrutthanneere, getOozhiyakkaararDetails } from '../utils/tamilPhoneticsEngine';
 
 interface BlueprintCardProps {
   blueprint: ShortsBlueprint;
@@ -1160,37 +1160,39 @@ const BlueprintCardComponent: React.FC<BlueprintCardProps> = ({
                       </p>
                     </div>
                   )}
-                  {hasOozhiyakkaararin(`${blueprint.tamilText} ${blueprint.audioScript} ${blueprint.subtitles?.line1Tamil}`) && (
-                    <div className="p-2 rounded bg-violet-950/60 border border-violet-500/40 text-violet-200 text-[11px] space-y-1.5">
-                      <div className="flex items-center gap-1.5 text-violet-300 font-bold uppercase tracking-wide">
-                        <span className="w-1.5 h-1.5 rounded-full bg-violet-400"></span>
-                        Tamil Pronunciation &amp; Word Structure ("ஊழியக்காரரின்"):
+                  {(() => {
+                    const oz = getOozhiyakkaararDetails(`${blueprint.tamilText} ${blueprint.audioScript} ${blueprint.subtitles?.line1Tamil}`);
+                    if (!oz) return null;
+                    return (
+                      <div className="p-2 rounded bg-violet-950/60 border border-violet-500/40 text-violet-200 text-[11px] space-y-1.5">
+                        <div className="flex items-center gap-1.5 text-violet-300 font-bold uppercase tracking-wide">
+                          <span className="w-1.5 h-1.5 rounded-full bg-violet-400"></span>
+                          Tamil Pronunciation &amp; Word Structure ("{oz.word}"):
+                        </div>
+                        <div className="flex flex-wrap gap-2 text-[10px] font-mono">
+                          <span className="bg-violet-500/20 px-1.5 py-0.5 rounded border border-violet-400/50 text-violet-100 font-bold">
+                            {oz.pronunciationPrimary} (or {oz.pronunciationAlt})
+                          </span>
+                          <span className="bg-black/50 px-1.5 py-0.5 rounded border border-violet-500/30 text-violet-100">
+                            Meaning: {oz.meaning}
+                          </span>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-[10px] bg-black/40 p-1.5 rounded border border-violet-500/20">
+                          {oz.syllables.map((s, idx) => (
+                            <div key={idx} className={idx === oz.syllables.length - 1 && oz.syllables.length % 2 === 1 ? 'sm:col-span-2' : ''}>
+                              <strong>{s.tamil}</strong> (<em>{s.translit}</em>): {s.description}
+                            </div>
+                          ))}
+                        </div>
+                        <div className="text-[10px] text-violet-200/90 bg-black/30 p-1.5 rounded border border-violet-500/20 space-y-0.5">
+                          <div><strong className="text-violet-300">Word Structure:</strong></div>
+                          {oz.structure.map((st, idx) => (
+                            <div key={idx}>• <strong>{st.tamil}</strong> (<em>{st.translit}</em>): {st.description}</div>
+                          ))}
+                        </div>
                       </div>
-                      <div className="flex flex-wrap gap-2 text-[10px] font-mono">
-                        <span className="bg-violet-500/20 px-1.5 py-0.5 rounded border border-violet-400/50 text-violet-100 font-bold">
-                          oo-li-ya-kkaa-ra-rin (or oo-zhi-ya-kkaa-ra-rin)
-                        </span>
-                        <span className="bg-black/50 px-1.5 py-0.5 rounded border border-violet-500/30 text-violet-100">
-                          Meaning: "of the servant" / "of the worker/minister"
-                        </span>
-                      </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-[10px] bg-black/40 p-1.5 rounded border border-violet-500/20">
-                        <div><strong>ஊ</strong> (<em>oo</em>): Long <em>"oo"</em> sound, like the <em>oo</em> in <em>"boot"</em></div>
-                        <div><strong>ழி</strong> (<em>li / zhi</em>): Tamil retroflex approximant (<code className="text-violet-300">/ɻ/</code>) — curl tongue tip slightly back toward roof of mouth without touching it (soft American <em>r</em> or dark <em>l</em> with a <em>"zh"</em> hint)</div>
-                        <div><strong>ய</strong> (<em>ya</em>): Like <em>ya</em> in <em>"yard"</em></div>
-                        <div><strong>க்க</strong> (<em>kkaa</em>): Doubled, strong <em>kaa</em> sound, like <em>car</em> with a long <em>aa</em></div>
-                        <div><strong>ர</strong> (<em>ra</em>): Light tapped <em>ra</em> (like quick <em>r</em> in <em>"butter"</em>)</div>
-                        <div><strong>ரி</strong> (<em>ri</em>): Short <em>ri</em>, like <em>ri</em> in <em>"rib"</em></div>
-                        <div className="sm:col-span-2"><strong>ன்</strong> (<em>n</em>): Final <em>n</em> sound, like the <em>n</em> in <em>"sun"</em></div>
-                      </div>
-                      <div className="text-[10px] text-violet-200/90 bg-black/30 p-1.5 rounded border border-violet-500/20 space-y-0.5">
-                        <div><strong className="text-violet-300">Word Structure:</strong></div>
-                        <div>• <strong>ஊழியம்</strong> (<em>oo-li-yam</em>): Service, ministry, or work.</div>
-                        <div>• <strong>காரர்</strong> (<em>kaa-rar</em>): One who does/performs something (a doer, worker, or servant).</div>
-                        <div>• <strong>இன்</strong> (<em>in</em>): A genitive suffix meaning <em>"of"</em> or <em>"belonging to."</em></div>
-                      </div>
-                    </div>
-                  )}
+                    );
+                  })()}
                   <div>
                     <strong className="text-emerald-200 font-semibold">CADENCE & PAUSE DIRECTIVE:</strong> In spoken Tamil audio, introduce a distinct, reverent pause (as if an unwritten comma exists) immediately prior to speaking <em>"ஸ்தோத்திரம்"</em>. The on-screen text overlay retains the clean biblical script without an extra comma, while the audio delivery breathes reverently.
                   </div>

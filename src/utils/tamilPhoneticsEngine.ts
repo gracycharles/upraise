@@ -16,9 +16,9 @@ export const KNOWN_ZHA_PHONETICS: Record<string, string> = {
   'அழைத்தவரே': 'a-ZHAITH-tha-va-rey [where ZHAI = /ɻai/, retroflex /ɻ/, NOT a-laith-tha-va-re]',
   'உயிர்த்தெழுந்தவரே': 'u-yir-th-tha-e-ZHU-n-tha-va-re-e [where ZHU = /ɻu/, IPA: ujirt̪t̪eɻun̪d̪aʋareː with strong retroflex — hear at 1-3s as ezhundha (eɻun̪d̪a) NOT elundha]',
   'ஊழியக்காரரின்': 'oo-li-ya-kkaa-ra-rin / oo-zhi-ya-kkaa-ra-rin [ழி (li / zhi) = Tamil retroflex approximant /ɻ/: curl tongue tip slightly back toward roof of mouth without touching it, soft American r / dark l with a "zh" hint; க்க = doubled strong kaa; ர = light tapped ra; ரி = short ri; ன் = final n]',
-  'ஊழியக்காரருக்கு': 'oo-ZHI-yak-kaa-ruk-ku [where ZHI = /ɻi/, retroflex /ɻ/, NOT oo-li-yak-kaa-ruk-ku]',
-  'ஊழியக்காரரை': 'oo-ZHI-yak-kaa-ra-rai [where ZHI = /ɻi/, retroflex /ɻ/, NOT oo-li-yak-kaa-ra-rai]',
-  'ஊழியக்காரர்மேல்': 'oo-ZHI-yak-kaa-rar-meyl [where ZHI = /ɻi/, retroflex /ɻ/, NOT oo-li-yak-kaa-rar-mel]',
+  'ஊழியக்காரருக்கு': 'oo-li-ya-kkaa-ra-ruk-ku / oo-zhi-ya-kkaa-ra-ruk-ku [ழி (li / zhi) = Tamil retroflex approximant /ɻ/: curl tongue tip slightly back toward roof of mouth without touching it, soft American r / dark l with a "zh" hint; க்க = doubled strong kaa; ர = light tapped ra; ரு = short ru; க்கு = doubled kku]',
+  'ஊழியக்காரரை': 'oo-li-ya-kkaa-ra-rai / oo-zhi-ya-kkaa-ra-rai [ழி (li / zhi) = Tamil retroflex approximant /ɻ/: curl tongue tip slightly back toward roof of mouth without touching it, soft American r / dark l with a "zh" hint; க்க = doubled strong kaa; ர = light tapped ra; ரை = rai like rye]',
+  'ஊழியக்காரர்மேல்': 'oo-li-ya-kkaa-rar-mēl / oo-zhi-ya-kkaa-rar-mēl [ழி (li / zhi) = Tamil retroflex approximant /ɻ/: curl tongue tip slightly back toward roof of mouth without touching it, soft American r / dark l with a "zh" hint; க்க = doubled strong kaa; ர = light tapped ra; ர் = tapped r; மேல் = long mēl]',
   'எப்பொழுதும்': 'ep-po-zhu-dhum [deep retroflex /ɻ/]',
   'ஏழு': 'E-ZHU [deep retroflex /ɻ/, NOT ey-lu]',
   'ஏழைக்கு': 'e-zhaik-ku [deep retroflex /ɻ/]',
@@ -303,33 +303,141 @@ export function getOottrutthanneerePronunciationMandate(text: string): string {
   • Spoken Cadence: "ஊற்றுத்தண்ணீரே [natural reverent pause] ஸ்தோத்திரம்" (${OOTRUTHANNEERE_TRANSLITERATION} [pause] sthōththiram | /uːrːɯt̪ːɐɳːiːreː st̪oːt̪.t̪i.ɾam/).`;
 }
 
+export interface OozhiyakkaararSyllable {
+  tamil: string;
+  translit: string;
+  description: string;
+}
+
+export interface OozhiyakkaararDetails {
+  word: string;
+  pronunciationPrimary: string;
+  pronunciationAlt: string;
+  meaning: string;
+  syllables: OozhiyakkaararSyllable[];
+  structure: OozhiyakkaararSyllable[];
+}
+
+const BASE_OOZHIYAKKAARAR_SYLLABLES: OozhiyakkaararSyllable[] = [
+  { tamil: 'ஊ', translit: 'oo', description: 'Long "oo" sound, like the "oo" in "boot".' },
+  { tamil: 'ழி', translit: 'li / zhi', description: 'A distinctive retroflex approximant (/ɻ/) unique to Tamil — curl the tip of your tongue slightly back toward the roof of your mouth without touching it, similar to a soft American "r" or a dark "l" with a "zh" hint.' },
+  { tamil: 'ய', translit: 'ya', description: 'Like "ya" in "yard".' },
+  { tamil: 'க்க', translit: 'kkaa', description: 'A doubled, strong "kaa" sound, like "car" with a long "aa".' },
+  { tamil: 'ர', translit: 'ra', description: 'A light tapped "ra" (like a quick "r" in "butter").' }
+];
+
+const BASE_OOZHIYAKKAARAR_STRUCTURE: OozhiyakkaararSyllable[] = [
+  { tamil: 'ஊழியம்', translit: 'oo-li-yam', description: 'Service, ministry, or work.' },
+  { tamil: 'காரர்', translit: 'kaa-rar', description: 'One who does/performs something (a doer, worker, or servant).' }
+];
+
 /**
- * Checks if text contains ஊழியக்காரரின் ("of the servant" / "of the worker/minister")
+ * Checks if text contains ஊழியக்காரரின் or related inflections (ஊழியக்காரரை, ஊழியக்காரருக்கு, ஊழியக்காரர்மேல்)
  */
+export function hasOozhiyakkaarar(text: string): boolean {
+  return /ஊழியக்கார/.test(text);
+}
+
 export function hasOozhiyakkaararin(text: string): boolean {
-  return /ஊழியக்காரரின்/.test(text);
+  return hasOozhiyakkaarar(text);
+}
+
+/**
+ * Resolves exact syllable breakdown and word structure for any ஊழியக்கார* inflection
+ */
+export function getOozhiyakkaararDetails(text: string): OozhiyakkaararDetails | null {
+  if (!hasOozhiyakkaarar(text)) return null;
+
+  if (/ஊழியக்காரரை/.test(text)) {
+    return {
+      word: 'ஊழியக்காரரை',
+      pronunciationPrimary: 'oo-li-ya-kkaa-ra-rai',
+      pronunciationAlt: 'oo-zhi-ya-kkaa-ra-rai',
+      meaning: '"the servants" or "the workers/ministers" (direct object)',
+      syllables: [
+        ...BASE_OOZHIYAKKAARAR_SYLLABLES,
+        { tamil: 'ரை', translit: 'rai', description: 'Light tapped "r" + diphthong "ai" (like "rye").' }
+      ],
+      structure: [
+        ...BASE_OOZHIYAKKAARAR_STRUCTURE,
+        { tamil: 'ஐ', translit: 'ai', description: 'An accusative suffix marking the direct object ("the servants / workers").' }
+      ]
+    };
+  }
+
+  if (/ஊழியக்காரருக்கு/.test(text)) {
+    return {
+      word: 'ஊழியக்காரருக்கு',
+      pronunciationPrimary: 'oo-li-ya-kkaa-ra-ruk-ku',
+      pronunciationAlt: 'oo-zhi-ya-kkaa-ra-ruk-ku',
+      meaning: '"to/unto the servants" or "to the workers/ministers"',
+      syllables: [
+        ...BASE_OOZHIYAKKAARAR_SYLLABLES,
+        { tamil: 'ரு', translit: 'ru', description: 'Short "ru" sound (quick tapped r + short u).' },
+        { tamil: 'க்கு', translit: 'kku', description: 'Doubled "kk" + short rounded "u" sound.' }
+      ],
+      structure: [
+        ...BASE_OOZHIYAKKAARAR_STRUCTURE,
+        { tamil: 'உக்கு', translit: 'ukku', description: 'A dative suffix meaning "to" or "unto."' }
+      ]
+    };
+  }
+
+  if (/ஊழியக்காரர்மேல்/.test(text)) {
+    return {
+      word: 'ஊழியக்காரர்மேல்',
+      pronunciationPrimary: 'oo-li-ya-kkaa-rar-mēl',
+      pronunciationAlt: 'oo-zhi-ya-kkaa-rar-mēl',
+      meaning: '"upon/concerning the servants" or "upon the workers/ministers"',
+      syllables: [
+        ...BASE_OOZHIYAKKAARAR_SYLLABLES,
+        { tamil: 'ர்', translit: 'r', description: 'Final light tapped "r" sound.' },
+        { tamil: 'மேல்', translit: 'mēl', description: 'Long steady "ē" (like "may") + clear final "l".' }
+      ],
+      structure: [
+        ...BASE_OOZHIYAKKAARAR_STRUCTURE,
+        { tamil: 'மேல்', translit: 'mēl', description: 'A postposition meaning "upon" or "concerning."' }
+      ]
+    };
+  }
+
+  return {
+    word: 'ஊழியக்காரரின்',
+    pronunciationPrimary: 'oo-li-ya-kkaa-ra-rin',
+    pronunciationAlt: 'oo-zhi-ya-kkaa-ra-rin',
+    meaning: '"of the servant" or "of the worker/minister"',
+    syllables: [
+      ...BASE_OOZHIYAKKAARAR_SYLLABLES,
+      { tamil: 'ரி', translit: 'ri', description: 'Short "ri", like "ri" in "rib".' },
+      { tamil: 'ன்', translit: 'n', description: 'Final "n" sound, like the "n" in "sun".' }
+    ],
+    structure: [
+      ...BASE_OOZHIYAKKAARAR_STRUCTURE,
+      { tamil: 'இன்', translit: 'in', description: 'A genitive suffix meaning "of" or "belonging to."' }
+    ]
+  };
 }
 
 /**
  * Generates the complete syllable-by-syllable pronunciation guide and word structure
- * mandate for ஊழியக்காரரின் (oo-li-ya-kkaa-ra-rin / oo-zhi-ya-kkaa-ra-rin).
+ * mandate for ஊழியக்காரரின் / ஊழியக்காரரை / ஊழியக்காரருக்கு / ஊழியக்காரர்மேல்.
  */
 export function getOozhiyakkaararinPronunciationMandate(text: string): string {
-  if (!hasOozhiyakkaararin(text)) return '';
+  const details = getOozhiyakkaararDetails(text);
+  if (!details) return '';
 
-  return `\n- CRITICAL TAMIL PRONUNCIATION & WORD STRUCTURE MANDATE ("ஊழியக்காரரின்" / oo-li-ya-kkaa-ra-rin or oo-zhi-ya-kkaa-ra-rin):
-  • Meaning: "of the servant" or "of the worker/minister".
-  • Pronunciation Guide: oo-li-ya-kkaa-ra-rin (or oo-zhi-ya-kkaa-ra-rin).
+  const syllableLines = details.syllables
+    .map((s, idx) => `    ${idx + 1}. ${s.tamil} (${s.translit}): ${s.description}`)
+    .join('\n');
+  const structureLines = details.structure
+    .map((st) => `    - ${st.tamil} (${st.translit}): ${st.description}`)
+    .join('\n');
+
+  return `\n- CRITICAL TAMIL PRONUNCIATION & WORD STRUCTURE MANDATE ("${details.word}" / ${details.pronunciationPrimary} or ${details.pronunciationAlt}):
+  • Meaning: ${details.meaning}.
+  • Pronunciation Guide: ${details.pronunciationPrimary} (or ${details.pronunciationAlt}).
   • Syllable-by-Syllable Breakdown:
-    1. ஊ (oo): Long "oo" sound, like the "oo" in "boot".
-    2. ழி (li / zhi): Distinctive retroflex approximant (/ɻ/) unique to Tamil — curl the tip of your tongue slightly back toward the roof of your mouth without touching it, similar to a soft American "r" or a dark "l" with a "zh" hint.
-    3. ய (ya): Like "ya" in "yard".
-    4. க்க (kkaa): A doubled, strong "kaa" sound, like "car" with a long "aa".
-    5. ர (ra): A light tapped "ra" (like a quick "r" in "butter").
-    6. ரி (ri): Short "ri", like "ri" in "rib".
-    7. ன் (n): Final "n" sound, like the "n" in "sun".
+${syllableLines}
   • Word Structure:
-    - ஊழியம் (oo-li-yam): Service, ministry, or work.
-    - காரர் (kaa-rar): One who does/performs something (a doer, worker, or servant).
-    - இன் (in): A genitive suffix meaning "of" or "belonging to."`;
+${structureLines}`;
 }
